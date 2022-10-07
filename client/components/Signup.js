@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {signup} from '../store'
 import {useDispatch} from 'react-redux'
 
 const Signup = props => {
@@ -10,25 +10,33 @@ const Signup = props => {
 
   const handleSubmit = evt => {
     evt.preventDefault()
+    const firstName = evt.target.firstName.value
+    const lastName = evt.target.lastName.value
     const email = evt.target.email.value
+    const phone = evt.target.countryCode.value + evt.target.phone.value
     const password = evt.target.password.value
-    dispatch(auth(email, password, 'signup'))
+    dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit} name="signup">
         <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
+          <input name="firstName" type="text" placeholder="First Name" />
+          <input name="lastName" type="text" placeholder="Last Name" />
+          <input name="email" type="text" placeholder="Email" />
+          <input name="countryCode" type="text" placeholder="+1" />
+          <input name="phone" type="text" placeholder="Phone" />
+          <input
+            name="password"
+            type="password"
+            placeholder="Create Password"
+          />
+          <input
+            name="confirmPassword"
+            type="password"
+            placeholder="Repeat Password"
+          />
         </div>
         <div>
           <button type="submit">Sign Up</button>
