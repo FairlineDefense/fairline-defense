@@ -1,8 +1,6 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
-import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {Route, Switch} from 'react-router-dom'
+import {Login, Signup, UserHome, PortalNavbar} from './components'
 import {me} from './store'
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
@@ -23,10 +21,13 @@ const Routes = props => {
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       {isLoggedIn && (
-        <Switch>
-          {/* Routes placed here are only available after logging in */}
-          <Route path="/home" component={UserHome} />
-        </Switch>
+        <div>
+          <PortalNavbar />
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            <Route path="/home" component={UserHome} />
+          </Switch>
+        </div>
       )}
       {/* Displays our Login component as a fallback */}
       <Route component={Login} />
