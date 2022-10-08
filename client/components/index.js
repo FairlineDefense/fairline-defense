@@ -7,6 +7,9 @@ export {default as HowItWorks} from './Site/HowItWorks'
 
 // Register
 export {default as Signup} from './Register/Signup'
+export {default as ChoosePlan} from './Register/ChoosePlan'
+export {default as Payment} from './Register/Payment'
+export {default as Shipping} from './Register/Shipping'
 
 // Portal
 export {default as PortalNavbar} from './Portal/Navbar'
