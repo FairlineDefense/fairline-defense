@@ -6,7 +6,9 @@ import {
   UserHome,
   PortalNavbar,
   SiteHome,
-  SiteNavbar
+  Testimonials,
+  Coverages,
+  HowItWorks
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'
@@ -35,6 +37,9 @@ const Routes = props => {
         <div>
           <Switch>
             <Route exact path="/" component={SiteHome} />
+            <Route exact path="/howitworks" component={HowItWorks} />
+            <Route exact path="/coverages" component={Coverages} />
+            <Route exact path="/testimonials" component={Testimonials} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
           </Switch>
