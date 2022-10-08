@@ -33,7 +33,6 @@ const Routes = props => {
         </div>
       ) : (
         <div>
-          <SiteNavbar />
           <Switch>
             <Route exact path="/" component={SiteHome} />
             <Route exact path="/login" component={Login} />
