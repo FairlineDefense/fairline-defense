@@ -8,7 +8,10 @@ import {
   SiteHome,
   Testimonials,
   Coverages,
-  HowItWorks
+  HowItWorks,
+  Membership,
+  Benefits,
+  Feed
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'
@@ -28,9 +31,15 @@ const Routes = props => {
     <Switch>
       {isLoggedIn ? (
         <div>
-          <PortalNavbar />
           <Switch>
+            <Route exact path="/" component={SiteHome} />
+            <Route exact path="/howitworks" component={HowItWorks} />
+            <Route exact path="/coverages" component={Coverages} />
+            <Route exact path="/testimonials" component={Testimonials} />
             <Route path="/home" component={UserHome} />
+            <Route path="/membership" component={Membership} />
+            <Route path="/benefits" component={Benefits} />
+            <Route path="/feed" component={Feed} />
           </Switch>
         </div>
       ) : (

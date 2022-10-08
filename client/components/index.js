@@ -12,6 +12,9 @@ export {default as Signup} from './Register/Signup'
 export {default as PortalNavbar} from './Portal/Navbar'
 export {default as Login} from './Portal/Login'
 export {default as UserHome} from './Portal/UserHome'
+export {default as Membership} from './Portal/Membership'
+export {default as Benefits} from './Portal/Benefits'
+export {default as Feed} from './Portal/Feed'
 
 /**
  * `components/index.js` exists simply as a 'central export' for our components.
