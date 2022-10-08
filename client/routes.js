@@ -1,6 +1,13 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-import {Login, Signup, UserHome, PortalNavbar} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  PortalNavbar,
+  SiteHome,
+  SiteNavbar
+} from './components'
 import {me} from './store'
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
@@ -17,20 +24,23 @@ const Routes = props => {
 
   return (
     <Switch>
-      {/* Routes placed here are available to all visitors */}
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-      {isLoggedIn && (
+      {isLoggedIn ? (
         <div>
           <PortalNavbar />
           <Switch>
-            {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
           </Switch>
         </div>
+      ) : (
+        <div>
+          <SiteNavbar />
+          <Switch>
+            <Route exact path="/" component={SiteHome} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+          </Switch>
+        </div>
       )}
-      {/* Displays our Login component as a fallback */}
-      <Route component={Login} />
     </Switch>
   )
 }
