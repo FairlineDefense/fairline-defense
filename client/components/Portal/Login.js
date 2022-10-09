@@ -1,7 +1,7 @@
 import React from 'react'
 import {auth} from '../../store'
 import {useDispatch} from 'react-redux'
-
+import {Link} from 'react-router-dom'
 const Login = props => {
   const {name, displayName, error} = props
   const dispatch = useDispatch()
@@ -33,7 +33,7 @@ const Login = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      Don't have an account? <Link to="/signup">Register</Link>
     </div>
   )
 }
