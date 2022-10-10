@@ -122,12 +122,14 @@ const Signup = () => {
             </span>
           </section>
 
-          {errorText.length ? <section className="errorText">{errorText}</section> : null}
-          
-          <section class="signupFormButton">
+          {errorText.length ? (
+            <section className="errorText">{errorText}</section>
+          ) : null}
+
+          <section className="signupFormButton">
             <button type="submit">Create an Account</button>
           </section>
-          <section class="signupFormBottom">
+          <section className="signupFormBottom">
             <div>
               <span>Already have an account?</span>
               <span>

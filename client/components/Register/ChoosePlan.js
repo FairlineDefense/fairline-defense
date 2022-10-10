@@ -41,6 +41,7 @@ const ChoosePlan = props => {
 
     &:hover {
       background: rgba(0, 171, 224, 0.2);
+      border-color: var(--blue);
     }
   `
   const Price = styled.p`
@@ -74,6 +75,11 @@ const ChoosePlan = props => {
     font-size: 18px;
     font-weight: 200;
     margin-bottom: 2rem;
+  `
+  const Blue = styled.span`
+    font-size: inherit;
+    font-weight: inherit;
+    color: var(--blue);
   `
 
   let [plan, setPlan] = useState('')
@@ -109,7 +115,9 @@ const ChoosePlan = props => {
           </Button>
         </ButtonWrapper>
         <H2>You are one step away from getting protection you need</H2>
-        <H2>Only for $19.99/Mo or $199/Yr ($40 Savings)</H2>
+        <H2>
+          Only for <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr ($40 Savings)</Blue>
+        </H2>
       </Wrapper>
     </div>
   )
