@@ -7,7 +7,7 @@ import css from './register.css'
 const Signup = () => {
   let user = useSelector(state => state.user)
   const dispatch = useDispatch()
-  let [errorText, setErrorText] = useState(' ')
+  let [errorText, setErrorText] = useState('')
 
   const handleSubmit = evt => {
     evt.preventDefault()
@@ -121,7 +121,9 @@ const Signup = () => {
               Terms & Conditions
             </span>
           </section>
-          {errorText}
+
+          {errorText.length ? <section className="errorText">{errorText}</section> : null}
+          
           <section class="signupFormButton">
             <button type="submit">Create an Account</button>
           </section>

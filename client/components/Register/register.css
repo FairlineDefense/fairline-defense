@@ -117,6 +117,15 @@
   justify-content: space-between;
 }
 
+.errorText {
+  height: 4rem;
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: #FFF;
+  color: #000;
+}
+
 svg {
   position: absolute;
   height: 175px;
