@@ -17,6 +17,7 @@ const Payment = props => {
   return (
     <div>
       <form onSubmit={handleSubmit} name="payment" />
+      Payment
     </div>
   )
 }

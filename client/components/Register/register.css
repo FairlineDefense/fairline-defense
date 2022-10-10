@@ -30,9 +30,16 @@
 .authHeader {
   width: 100vw;
   height: 80px;
+  padding: 2rem 1rem 1rem 1rem;
+}
+
+.authHeader img {
+  height: 60px;
+  width: auto;
 }
 
 .authContent {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

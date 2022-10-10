@@ -52,7 +52,9 @@ const Signup = () => {
       <svg />
       <svg />
       <svg />
-      <header className="authHeader">Fairline</header>
+      <header className="authHeader">
+        <img src="./images/fdlogo.png" />
+      </header>
       <div className="authContent">
         <h2>Get Started</h2>
         <form className="signupForm" onSubmit={handleSubmit} name="signup">

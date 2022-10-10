@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import css from './register.css'
 import styled from 'styled-components'
 import {useState} from 'react'
+import Payment from './Payment'
+
 const ChoosePlan = props => {
   const user = useSelector(state => state.user)
   const {name, displayName, error} = props
@@ -63,15 +65,15 @@ const ChoosePlan = props => {
   `
   const H1 = styled.h1`
     font-size: 32px;
-    font-weight: 400;
+    font-weight: 300;
     margin-bottom: 2rem;
   `
-  const H2 = styled.h1`
+  const H2 = styled.h2`
     font-size: 24px;
     font-weight: 200;
     margin-bottom: 2rem;
   `
-  const H3 = styled.h1`
+  const H3 = styled.h3`
     font-size: 18px;
     font-weight: 200;
     margin-bottom: 2rem;
@@ -92,23 +94,30 @@ const ChoosePlan = props => {
     e.preventDefault()
     setPlan(e.target.value)
   }
+
+  if (plan !== '') {
+    return <Payment plan={plan} />
+  }
+
   return (
     <div className="auth">
       <svg />
       <svg />
       <svg />
-      <header className="authHeader">Fairline</header>
+      <header className="authHeader">
+        <img src="./images/fdlogo.png" />
+      </header>
       <Wrapper>
         <H1>Congratulations!</H1>
         <H2>Your account has been created succsefully!</H2>
         <H1>Start Your Protection</H1>
         <ButtonWrapper>
-          <Button onClick={e => clickHandler} value="19000">
+          <Button onClick={e => clickHandler(e)} value="19000">
             <Price>$19</Price>
             <Term>Per Month</Term>
             <Billing>Billed Monthly</Billing>
           </Button>
-          <Button onClick={e => clickHandler} value="199000">
+          <Button onClick={e => clickHandler(e)} value="199000">
             <Price>$199</Price>
             <Term>Per Year</Term>
             <Billing>Billed Annually</Billing>
