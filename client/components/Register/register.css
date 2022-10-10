@@ -1,0 +1,141 @@
+.auth {
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  color: #fff;
+}
+
+.auth a {
+  color: var(--blue);
+}
+
+.auth a:visited {
+  color: var(--blue);
+}
+
+.auth a:hover {
+  color: var(--blue);
+}
+
+.auth h2 {
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.authHeader {
+  width: 100vw;
+  height: 200px;
+}
+
+.authContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.signupInput {
+  outline: none;
+  border: none;
+  width: 50%;
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.signupInputCC {
+  outline: none;
+  border: none;
+  width: 12%;
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.signupInputPhone {
+  outline: none;
+  border: none;
+  width: 35%;
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.finePrint {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.finePrint span:nth-child(1) {
+  width: 60%;
+  margin-bottom: 3rem;
+}
+
+.signupFormButton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.signupForm button {
+  width: 340px;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  background-color: var(--blue);
+  margin-bottom: 2rem;
+}
+
+.signupFormBottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.signupFormBottom div {
+  width: 340px;
+  display: flex;
+  justify-content: space-between;
+}
+
+svg {
+  position: absolute;
+  height: 175px;
+  transform: rotate(-5deg) skew(-20deg);
+  background: rgba(151, 203, 220, 0.2);
+  left: -10%;
+}
+
+svg:nth-child(1) {
+  width: 540px;
+  top: -50px;
+}
+
+svg:nth-child(2) {
+  width: 590px;
+  top: 200px;
+}
+
+svg:nth-child(3) {
+  width: 200px;
+  top: 460px;
+}

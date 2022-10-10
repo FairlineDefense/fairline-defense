@@ -3,11 +3,11 @@ import {signup} from '../../store'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
-
+import css from './register.css'
 const Signup = () => {
   let user = useSelector(state => state.user)
   const dispatch = useDispatch()
-  let [errorText, setErrorText] = useState('')
+  let [errorText, setErrorText] = useState(' ')
 
   const handleSubmit = evt => {
     evt.preventDefault()
@@ -48,40 +48,94 @@ const Signup = () => {
   )
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name="signup">
-        <div>
-          <input
-            name="firstName"
-            type="text"
-            placeholder="First Name"
-            required
-          />
-          <input name="lastName" type="text" placeholder="Last Name" required />
-          <input name="email" type="text" placeholder="Email" required />
-          <input name="countryCode" type="text" placeholder="+1" required />
-          <input name="phone" type="text" placeholder="Phone" required />
-          <input
-            name="password"
-            type="password"
-            placeholder="Create Password"
-            required
-          />
-          <input
-            name="confirmPassword"
-            type="password"
-            placeholder="Repeat Password"
-            required
-          />
-        </div>
-        <div>
-          <button type="submit">Sign Up</button>
-        </div>
-        {/* {error && error.response && <div> {error.response.data} </div>} */}
-        {errorText}
-      </form>
-      Already have an account? <Link to="/login">Login</Link>
-    </div>
+    <section className="auth">
+      <svg />
+      <svg />
+      <svg />
+      <header className="authHeader">Fairline</header>
+      <div className="authContent">
+        <h2>Get Started</h2>
+        <form className="signupForm" onSubmit={handleSubmit} name="signup">
+          <div className="inputGroup">
+            <input
+              className="signupInput"
+              name="firstName"
+              type="text"
+              placeholder="First Name"
+              required
+            />
+            <input
+              className="signupInput"
+              name="lastName"
+              type="text"
+              placeholder="Last Name"
+              required
+            />
+          </div>
+          <div className="inputGroup">
+            <input
+              className="signupInput"
+              name="email"
+              type="text"
+              placeholder="Email"
+              required
+            />
+            <input
+              className="signupInputCC"
+              name="countryCode"
+              type="text"
+              placeholder="+1"
+              required
+            />
+            <input
+              className="signupInputPhone"
+              name="phone"
+              type="text"
+              placeholder="Phone"
+              required
+            />
+          </div>
+          <div className="inputGroup">
+            <input
+              className="signupInput"
+              name="password"
+              type="password"
+              placeholder="Create Password"
+              required
+            />
+            <input
+              className="signupInput"
+              name="confirmPassword"
+              type="password"
+              placeholder="Repeat Password"
+              required
+            />
+          </div>
+          <section className="finePrint">
+            <span>
+              Min 8 char. with at least one upper case letter, one number, and
+              one special char.: !, @, $, #, &, *.
+            </span>
+            <span>
+              <input type="checkbox" required />I agree to the Fairline Defense
+              Terms & Conditions
+            </span>
+          </section>
+          {errorText}
+          <section class="signupFormButton">
+            <button type="submit">Create an Account</button>
+          </section>
+          <section class="signupFormBottom">
+            <div>
+              <span>Already have an account?</span>
+              <span>
+                <Link to="/login">Login</Link>
+              </span>
+            </div>
+          </section>
+        </form>
+      </div>
+    </section>
   )
 }
 export default Signup
