@@ -52,7 +52,9 @@ const Signup = () => {
       <svg />
       <svg />
       <svg />
-      <header className="authHeader">Fairline</header>
+      <header className="authHeader">
+        <img src="./images/fdlogo.png" />
+      </header>
       <div className="authContent">
         <h2>Get Started</h2>
         <form className="signupForm" onSubmit={handleSubmit} name="signup">
@@ -122,12 +124,14 @@ const Signup = () => {
             </span>
           </section>
 
-          {errorText.length ? <section className="errorText">{errorText}</section> : null}
-          
-          <section class="signupFormButton">
+          {errorText.length ? (
+            <section className="errorText">{errorText}</section>
+          ) : null}
+
+          <section className="signupFormButton">
             <button type="submit">Create an Account</button>
           </section>
-          <section class="signupFormBottom">
+          <section className="signupFormBottom">
             <div>
               <span>Already have an account?</span>
               <span>

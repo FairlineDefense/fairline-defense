@@ -1,11 +1,22 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import Navbar from './Navbar'
+import {VerifyEmail, ChoosePlan} from '../'
 
 const UserHome = () => {
   const user = useSelector(state => state.user)
-  // if user.verified => render verify
-  // if user.plan => render choose plan
+  // if user.emailVerified => render verify
+  // if user.phoneVerified => render verify phone
+  // if user.userPlan => render choose plan
+
+  // if(!user.emailVerified) {
+  //   return <VerifyEmail />
+  // }
+
+  if (!user.plan) {
+    return <ChoosePlan />
+  }
+
   return (
     <div>
       <Navbar />

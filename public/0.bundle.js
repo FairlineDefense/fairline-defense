@@ -1,4 +1,4 @@
-;(window['webpackJsonp'] = window['webpackJsonp'] || []).push([
+;(window.webpackJsonp = window.webpackJsonp || []).push([
   [0],
   {
     /***/ './client/components/Register/register.css':
