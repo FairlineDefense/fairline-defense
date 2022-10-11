@@ -34,10 +34,20 @@ const Payment = props => {
     clientSecret: clientSecret,
     // Fully customizable with appearance API.
     appearance: {
-      /*...*/
-    }
-  }
+      theme: 'stripe',
 
+      variables: {
+        colorText: '#333',
+        colorPrimary: 'var(--blue)',
+        colorBackground: '#ffffff',
+        colorDanger: '#df1b41',
+        fontFamily: 'Poppins, sans-serif',
+        spacingUnit: '4px',
+        borderRadius: '4px',
+    },
+    labels: 'floating',
+  }
+  }
   useEffect(() => {
     try {
       fetchCs()

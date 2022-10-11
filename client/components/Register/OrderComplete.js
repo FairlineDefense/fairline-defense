@@ -11,6 +11,7 @@ import {loadStripe} from '@stripe/stripe-js'
 const OrderComplete = () => {
   const user = useSelector(state => state.user)
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
+  
   const Wrapper = styled.div`
     width: 100%;
     height: 100%;
@@ -52,7 +53,7 @@ const OrderComplete = () => {
         <img src="./images/fdlogo.png" />
       </header>
       <Wrapper>
-        <Elements stripe={stripePromise} >
+        <Elements stripe={stripePromise} options={options}>
         <Shipping />
         </Elements>
       </Wrapper>
