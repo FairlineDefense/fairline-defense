@@ -11,11 +11,10 @@ import styled from 'styled-components'
 const Payment = props => {
   const {priceId, customerId, clickHandler} = props
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
-  let [subscriptionId, setSubscriptionId] = useState('none')
   let [clientSecret, setClientSecret] = useState('none')
+
   // Fetch client secret to render payment form from Stripe
   const fetchCs = async () => {
-    console.log('front end price id', priceId)
     const response = await fetch('payment/create-subscription', {
       method: 'POST',
       headers: {
@@ -26,10 +25,8 @@ const Payment = props => {
         customerId: customerId,
       }),
     })
-    const {clientSecret: clientSecret, subscriptionId: subscriptionId} = await response.json()
-
+    const {clientSecret: clientSecret} = await response.json()
     setClientSecret(clientSecret)
-    setSubscriptionId(subscriptionId)
   }
 
   useEffect(() => {
