@@ -8,23 +8,24 @@ try {
   const customer = await stripe.customers.create({
     email: req.body.email,
     name: `${req.body.firstName} ${req.body.lastName}`,
-    shipping: {
-      address: {
-        city: req.body.city || 'new york',
-        country: req.body.country || 'us',
-        line1: req.body.line1 || '123 3rd ave',
-        postal_code: req.body.postalCode || '10012',
-        state: req.body.state || 'ny',
-      },
-      name: `${req.body.firstName} ${req.body.lastName}`,
-    },
-    address: {
-      city: req.body.city || 'new york',
-      country: req.body.country || 'us',
-      line1: req.body.line1 || '123 3rd ave',
-      postal_code: req.body.postalCode || '10012',
-      state: req.body.state || 'ny',
-    }
+    // phone: req.body.phone
+    // shipping: {
+    //   address: {
+    //     city: req.body.city,
+    //     country: req.body.country,
+    //     line1: req.body.line1,
+    //     postal_code: req.body.postalCode,
+    //     state: req.body.state,
+    //   },
+    //   name: `${req.body.firstName} ${req.body.lastName}`,
+    // },
+    // address: {
+    //   city: req.body.city || 'new york',
+    //   country: req.body.country || 'us',
+    //   line1: req.body.line1 || '123 3rd ave',
+    //   postal_code: req.body.postalCode || '10012',
+    //   state: req.body.state || 'ny',
+    // }
   });
   return res.json({customerId: customer.id})
 } catch (error) {
