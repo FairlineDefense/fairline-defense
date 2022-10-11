@@ -43,9 +43,7 @@ const CheckoutForm = () => {
       <PaymentElement />
       <button disabled={!stripe}>Submit</button>
       {/* Show error message to your customers */}
-      <Elements>
       {errorMessage && <div>{errorMessage}</div>}
-      </Elements>
     </form>
   )
 }
