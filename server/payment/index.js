@@ -4,12 +4,15 @@ const stripe = require('stripe')(process.env.SECRET_KEY)
 module.exports = router
 
 router.post('/intent', async (req, res) => {
-  const amount = req.body.item === 'month' ? 19000 : 199000
-
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: amount,
+  try {
+    const products = {month: 19000, year: 199000}
+    const paymentIntent = await stripe.paymentIntents.create({
+    amount: products[req.body.item],
     currency: 'usd'
   })
-  console.log(req.body, paymentIntent)
-  res.json({client_secret: paymentIntent.client_secret})
+    res.json({client_secret: paymentIntent.client_secret})
+  } catch (error) {
+    console.log(error)
+    return 500
+  }
 })
