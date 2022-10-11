@@ -1,3 +1,4 @@
+const User = require('../db')
 const router = require('express').Router()
 require('dotenv').config()
 const stripe = require('stripe')(process.env.SECRET_KEY)
@@ -8,25 +9,9 @@ try {
   const customer = await stripe.customers.create({
     email: req.body.email,
     name: `${req.body.firstName} ${req.body.lastName}`,
-    // phone: req.body.phone
-    // shipping: {
-    //   address: {
-    //     city: req.body.city,
-    //     country: req.body.country,
-    //     line1: req.body.line1,
-    //     postal_code: req.body.postalCode,
-    //     state: req.body.state,
-    //   },
-    //   name: `${req.body.firstName} ${req.body.lastName}`,
-    // },
-    // address: {
-    //   city: req.body.city || 'new york',
-    //   country: req.body.country || 'us',
-    //   line1: req.body.line1 || '123 3rd ave',
-    //   postal_code: req.body.postalCode || '10012',
-    //   state: req.body.state || 'ny',
-    // }
+    phone: req.body.phone
   });
+  // await User.update({customerId: customer.id, where:{email:req.body.email}}) TBD - How to conceal customer id for our DB
   return res.json({customerId: customer.id})
 } catch (error) {
   console.log(error)
