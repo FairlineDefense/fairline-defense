@@ -10,6 +10,7 @@ export {default as Signup} from './Register/Signup'
 export {default as ChoosePlan} from './Register/ChoosePlan'
 export {default as Payment} from './Register/Payment'
 export {default as Shipping} from './Register/Shipping'
+export {default as OrderComplete} from './Register/OrderComplete'
 
 // Portal
 export {default as PortalNavbar} from './Portal/Navbar'

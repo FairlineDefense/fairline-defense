@@ -1,3 +1,4 @@
+const Dotenv = require('dotenv-webpack')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
@@ -29,5 +30,10 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }
     ]
-  }
+  },
+  plugins: [
+    new Dotenv({
+      systemvars: true
+    })
+  ]
 }
