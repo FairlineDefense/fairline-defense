@@ -91,22 +91,22 @@ const Payment = props => {
     }
   `
   const SelectedButton = styled.button`
-  border: 1px solid var(--blue);
-  border-radius: 5px;
-  outline: none;
-  background: rgba(0, 171, 224, 0.2);
-  color: #fff;
-  height: 6rem;
-  width: 14rem;
-  margin: 1rem 1rem 1rem 1rem;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  cursor: pointer;
-`
+    border: 1px solid var(--blue);
+    border-radius: 5px;
+    outline: none;
+    background: rgba(0, 171, 224, 0.2);
+    color: #fff;
+    height: 6rem;
+    width: 14rem;
+    margin: 1rem 1rem 1rem 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+  `
 
   const Price = styled.p`
     font-size: 32px;
@@ -156,29 +156,29 @@ const Payment = props => {
       <Wrapper>
         <H1>Selected Plan</H1>
         <ButtonWrapper>
-          {item === 'month' ?
-          <>
-          <SelectedButton value="month">
-            <Price>$19</Price>
-            <Billing>Billed Monthly</Billing>
-          </SelectedButton>
-          <Button onClick={e => clickHandler(e)} value="year">
-            <Price>$199</Price>
-            <Billing>Billed Annually</Billing>
-          </Button>
-          </>
-          :
-          <>
-          <Button onClick={e => clickHandler(e)} value="month">
-            <Price>$19</Price>
-            <Billing>Billed Monthly</Billing>
-          </Button>
-          <SelectedButton value="year">
-            <Price>$199</Price>
-            <Billing>Billed Annually</Billing>
-          </SelectedButton>
-          </>
-          }
+          {item === 'month' ? (
+            <>
+              <SelectedButton value="month">
+                <Price>$19</Price>
+                <Billing>Billed Monthly</Billing>
+              </SelectedButton>
+              <Button onClick={e => clickHandler(e)} value="year">
+                <Price>$199</Price>
+                <Billing>Billed Annually</Billing>
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button onClick={e => clickHandler(e)} value="month">
+                <Price>$19</Price>
+                <Billing>Billed Monthly</Billing>
+              </Button>
+              <SelectedButton value="year">
+                <Price>$199</Price>
+                <Billing>Billed Annually</Billing>
+              </SelectedButton>
+            </>
+          )}
         </ButtonWrapper>
         <H1>Credit Card</H1>
         <Elements stripe={stripePromise} options={options}>
