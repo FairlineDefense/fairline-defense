@@ -146,7 +146,7 @@ const Payment = props => {
     color: var(--blue);
   `
 
-  if (clientSecret === 'none') {
+  if (clientSecret === 'none' || !clientSecret) {
     return (
       <div className="auth">
         <svg />
