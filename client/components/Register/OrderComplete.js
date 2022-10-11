@@ -53,7 +53,7 @@ const OrderComplete = () => {
         <img src="./images/fdlogo.png" />
       </header>
       <Wrapper>
-        <Elements stripe={stripePromise} options={options}>
+        <Elements stripe={stripePromise}>
         <Shipping />
         </Elements>
       </Wrapper>
