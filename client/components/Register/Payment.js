@@ -9,22 +9,28 @@ import css from './register.css'
 import styled from 'styled-components'
 
 const Payment = props => {
-  const {item, quantity, clickHandler} = props
-  const order = {item: item, quantity: quantity}
+  const {priceId, customerId, clickHandler} = props
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
-
+  let [subscriptionId, setSubscriptionId] = useState('none')
+  let [clientSecret, setClientSecret] = useState('none')
   // Fetch client secret to render payment form from Stripe
   const fetchCs = async () => {
-    const response = await fetch('/payment/intent', {
+    console.log('front end price id', priceId)
+    const response = await fetch('payment/create-subscription', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(order)
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        priceId: priceId,
+        customerId: customerId,
+      }),
     })
-    const {client_secret: clientSecret} = await response.json()
-    setClientSecret(clientSecret)
-  }
+    const {clientSecret: clientSecret, subscriptionId: subscriptionId} = await response.json()
 
-  let [clientSecret, setClientSecret] = useState('none')
+    setClientSecret(clientSecret)
+    setSubscriptionId(subscriptionId)
+  }
 
   useEffect(() => {
     try {
@@ -32,7 +38,7 @@ const Payment = props => {
     } catch (error) {
       console.log(error)
     }
-  }, [item])
+  }, [priceId])
 
   const options = {
     clientSecret: clientSecret,
@@ -86,7 +92,7 @@ const Payment = props => {
     color: #fff;
     height: 6rem;
     width: 14rem;
-    margin: 1rem 1rem 1rem 1rem;
+    margin: 1rem;
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -108,7 +114,7 @@ const Payment = props => {
     color: #fff;
     height: 6rem;
     width: 14rem;
-    margin: 1rem 1rem 1rem 1rem;
+    margin: 1rem;
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -117,7 +123,6 @@ const Payment = props => {
     align-items: center;
     cursor: pointer;
   `
-
   const Price = styled.p`
     font-size: 32px;
     color: var(--blue);
@@ -166,24 +171,24 @@ const Payment = props => {
       <Wrapper>
         <H1>Selected Plan</H1>
         <ButtonWrapper>
-          {item === 'month' ? (
+          {priceId === 'price_1LrnW0IvvF6ba6jUlHTzjnlt' ? (
             <>
-              <SelectedButton value="month">
+              <SelectedButton value="price_1LrnW0IvvF6ba6jUlHTzjnlt">
                 <Price>$19</Price>
                 <Billing>Billed Monthly</Billing>
               </SelectedButton>
-              <Button onClick={e => clickHandler(e)} value="year">
+              <Button onClick={e => clickHandler(e)} value="price_1LrnXQIvvF6ba6jUHo9iIRDM">
                 <Price>$199</Price>
                 <Billing>Billed Annually</Billing>
               </Button>
             </>
           ) : (
             <>
-              <Button onClick={e => clickHandler(e)} value="month">
+              <Button onClick={e => clickHandler(e)} value="price_1LrnW0IvvF6ba6jUlHTzjnlt">
                 <Price>$19</Price>
                 <Billing>Billed Monthly</Billing>
               </Button>
-              <SelectedButton value="year">
+              <SelectedButton value="price_1LrnXQIvvF6ba6jUHo9iIRDM">
                 <Price>$199</Price>
                 <Billing>Billed Annually</Billing>
               </SelectedButton>
