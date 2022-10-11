@@ -18,7 +18,13 @@ const Signup = () => {
     const password = evt.target.password.value
     const confirmPassword = evt.target.confirmPassword.value
 
-    function validatePassword() {
+    function validateFields() {
+      if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+        return setErrorText('Invalid email address.')
+      }
+      if(!/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(phone)) {
+        return setErrorText('Invalid phone number.')
+      }
       if (password !== confirmPassword) {
         return setErrorText('Passwords do not match.')
       }
@@ -34,7 +40,7 @@ const Signup = () => {
         dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
       }
     }
-    validatePassword()
+    validateFields()
   }
 
   useEffect(
