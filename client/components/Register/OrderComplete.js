@@ -4,58 +4,13 @@ import css from './register.css'
 import styled from 'styled-components'
 import {useState, useEffect} from 'react'
 import {useStripe, useElements} from '@stripe/react-stripe-js';
+import {Elements} from '@stripe/react-stripe-js'
+import Shipping from './Shipping'
+import {loadStripe} from '@stripe/stripe-js'
 
 const OrderComplete = () => {
   const user = useSelector(state => state.user)
-  const dispatch = useDispatch()
-  const stripe = useStripe();
-  const elements = useElements()
-  const [message, setMessage] = useState(null);
-
-  useEffect(() => {
-    if (!stripe) {
-      return;
-    }
-
-    // Retrieve the "payment_intent_client_secret" query parameter appended to
-    // your return_url by Stripe.js
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      'payment_intent_client_secret'
-    );
-
-    // Retrieve the PaymentIntent
-    stripe
-      .retrievePaymentIntent(clientSecret)
-      .then(({paymentIntent}) => {
-        // Inspect the PaymentIntent `status` to indicate the status of the payment
-        // to your customer.
-        //
-        // Some payment methods will [immediately succeed or fail][0] upon
-        // confirmation, while others will first enter a `processing` state.
-        //
-        // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
-        switch (paymentIntent.status) {
-          case 'succeeded':
-            setMessage('Success! Payment received.');
-            break;
-
-          case 'processing':
-            setMessage("Payment processing. We'll update you when payment is received.");
-            break;
-
-          case 'requires_payment_method':
-            // Redirect your user back to your payment page to attempt collecting
-            // payment again
-            setMessage('Payment failed. Please try another payment method.');
-            break;
-
-          default:
-            setMessage('Something went wrong.');
-            break;
-        }
-      });
-  }, [stripe]);
-
+  const stripePromise = loadStripe(process.env.PUBLIC_KEY)
   const Wrapper = styled.div`
     width: 100%;
     height: 100%;
@@ -97,7 +52,9 @@ const OrderComplete = () => {
         <img src="./images/fdlogo.png" />
       </header>
       <Wrapper>
-        {message}
+        <Elements stripe={stripePromise} >
+        <Shipping />
+        </Elements>
       </Wrapper>
     </div>
   )

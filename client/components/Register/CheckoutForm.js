@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js'
-
+import {Elements} from '@stripe/react-stripe-js'
 const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
@@ -43,7 +43,9 @@ const CheckoutForm = () => {
       <PaymentElement />
       <button disabled={!stripe}>Submit</button>
       {/* Show error message to your customers */}
+      <Elements>
       {errorMessage && <div>{errorMessage}</div>}
+      </Elements>
     </form>
   )
 }
