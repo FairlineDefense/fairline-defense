@@ -84,19 +84,21 @@ const ChoosePlan = props => {
     color: var(--blue);
   `
 
-  let [plan, setPlan] = useState('')
-
-  const handleSubmit = evt => {
-    evt.preventDefault()
-  }
+  let [order, setOrder] = useState({item: '', quantity: ''})
 
   const clickHandler = e => {
     e.preventDefault()
-    setPlan(e.target.value)
+    setOrder({...order, item: e.target.value, quantity: '1'})
   }
 
-  if (plan !== '') {
-    return <Payment plan={plan} />
+  if (order.item !== '') {
+    return (
+      <Payment
+        item={order.item}
+        quantity={order.quantity}
+        clickHandler={clickHandler}
+      />
+    )
   }
 
   return (
@@ -112,12 +114,12 @@ const ChoosePlan = props => {
         <H2>Your account has been created succsefully!</H2>
         <H1>Start Your Protection</H1>
         <ButtonWrapper>
-          <Button onClick={e => clickHandler(e)} value="19000">
+          <Button onClick={e => clickHandler(e)} value="month">
             <Price>$19</Price>
             <Term>Per Month</Term>
             <Billing>Billed Monthly</Billing>
           </Button>
-          <Button onClick={e => clickHandler(e)} value="199000">
+          <Button onClick={e => clickHandler(e)} value="year">
             <Price>$199</Price>
             <Term>Per Year</Term>
             <Billing>Billed Annually</Billing>
