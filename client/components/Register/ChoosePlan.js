@@ -88,7 +88,7 @@ const ChoosePlan = props => {
 
   const clickHandler = e => {
     e.preventDefault()
-    setOrder({...order, item: e.target.value, quantity: '1'})
+    setOrder({item: e.target.value, quantity: '1'})
   }
 
   if (order.item !== '') {

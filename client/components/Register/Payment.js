@@ -10,13 +10,10 @@ import styled from 'styled-components'
 
 const Payment = props => {
   const {item, quantity, clickHandler} = props
-  const dispatch = useDispatch()
   const order = {item: item, quantity: quantity}
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
-  const handleSubmit = evt => {
-    evt.preventDefault()
-  }
 
+  // Fetch client secret to render payment form from Stripe
   const fetchCs = async () => {
     const response = await fetch('/payment/intent', {
       method: 'POST',
@@ -29,10 +26,17 @@ const Payment = props => {
 
   let [clientSecret, setClientSecret] = useState('none')
 
+  useEffect(() => {
+    try {
+      fetchCs()
+    } catch (error) {
+      console.log(error)
+    }
+  }, [item])
+
   const options = {
-    // passing the client secret obtained in step 2
     clientSecret: clientSecret,
-    // Fully customizable with appearance API.
+    // Appearance of Stripe form:
     appearance: {
       theme: 'stripe',
 
@@ -48,11 +52,7 @@ const Payment = props => {
     labels: 'floating',
   }
   }
-  useEffect(() => {
-    try {
-      fetchCs()
-    } catch (error) {}
-  }, [])
+
   const Wrapper = styled.div`
     width: 100%;
     height: 100%;
