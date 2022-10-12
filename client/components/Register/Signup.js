@@ -67,23 +67,54 @@ const SignupWrapper = styled.div`
   align-items: center;
   padding: 5rem;
 `
+const SignupForm = styled.form`
+display: flex;
+flex-direction: column;
+justify-content: center;
+width: 720px;
+`
 const FinePrint = styled.div`
 display: flex;
 flex-direction: column;
-margin: .5rem .5rem 3rem .5rem;
+padding: .5rem;
+margin-bottom: 3rem;
 width: 100%;
 `
 const PasswordFormat = styled.div`
   margin-bottom: 2rem;
   width: 60%;
+  font-size: 14px;
 `
 const TermsAndConditions = styled.div`
 display: flex;
 flex-direction: row;
 width: 100%;
+font-size: 16px;
 `
 const Checkbox = styled.input`
 margin-right: .5rem;
+`
+const OpenFinePrint = styled.span`
+text-decoration: underline;
+cursor: pointer;
+`
+const SignupButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+const SignupFormButton = styled.button`
+width: 340px;
+font-weight: 200;
+padding: 1rem 2rem 1rem 2rem;
+border-radius: 50px;
+outline: none;
+border: none;
+color: #fff;
+font-size: 20px;
+background-color: var(--blue);
+margin-bottom: 2rem;
+cursor: pointer;
 `
   return (
     <section className="auth">
@@ -95,7 +126,7 @@ margin-right: .5rem;
       </header>
       <SignupWrapper>
         <H1>Get Started</H1>
-        <form className="signupForm" onSubmit={handleSubmit} name="signup">
+        <SignupForm onSubmit={handleSubmit} name="signup">
           <div className="inputGroup">
             <input
               className="signupInput"
@@ -157,7 +188,7 @@ margin-right: .5rem;
               one special char.: !, @, $, #, &, *.
             </PasswordFormat>
             <TermsAndConditions>
-              <Checkbox type="checkbox" required></Checkbox>I agree to the Fairline Defense Terms & Conditions
+              <Checkbox type="checkbox" required></Checkbox>I agree to the&nbsp;<OpenFinePrint>Fairline Defense Terms & Conditions</OpenFinePrint>
               </TermsAndConditions>
             </FinePrint>
 
@@ -165,9 +196,9 @@ margin-right: .5rem;
             <section className="errorText">{errorText}</section>
           ) : null}
 
-          <section className="signupFormButton">
-            <button type="submit">Create an Account</button>
-          </section>
+          <SignupButtonWrapper>
+            <SignupFormButton type="submit">Create an Account</SignupFormButton>
+          </SignupButtonWrapper>
           <section className="signupFormBottom">
             <div>
               <span>Already have an account?</span>
@@ -176,7 +207,7 @@ margin-right: .5rem;
               </span>
             </div>
           </section>
-        </form>
+        </SignupForm>
       </SignupWrapper>
     </section>
   )
