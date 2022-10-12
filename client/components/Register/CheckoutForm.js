@@ -29,7 +29,7 @@ width: 100%;
   padding: 1rem 2rem 1rem 2rem;
   font-size: 20px;
   font-weight: 100;
-  margin: 1rem;
+  margin: 2rem;
   outline: none;
   border: none;
   `
