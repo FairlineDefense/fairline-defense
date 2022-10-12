@@ -62,7 +62,7 @@ const Payment = props => {
     display: flex;
     flex-direction: column;
   `
-  const HeadingWrapper = styled.div`
+  const CenteredWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -155,9 +155,9 @@ const Payment = props => {
         <header className="authHeader">
           <img src="./images/fdlogo.png" />
         </header>
-        <HeadingWrapper>
+        <CenteredWrapper>
           Loading
-          </HeadingWrapper>
+          </CenteredWrapper>
       </div>
     )
   }
@@ -171,9 +171,9 @@ const Payment = props => {
         <img src="./images/fdlogo.png" />
       </header>
       <Wrapper>
-        <HeadingWrapper>
+        <CenteredWrapper>
         <H1>Selected Plan</H1>
-        </HeadingWrapper>
+        </CenteredWrapper>
         <ButtonWrapper>
           {priceId === 'price_1LrnW0IvvF6ba6jUlHTzjnlt' ? (
             <>
@@ -199,12 +199,12 @@ const Payment = props => {
             </>
           )}
         </ButtonWrapper>
-        <HeadingWrapper><H1>Credit Card</H1></HeadingWrapper>
+        <CenteredWrapper><H1>Credit Card</H1></CenteredWrapper>
         
         <Elements stripe={stripePromise} options={options}>
-        <HeadingWrapper>
+        <CenteredWrapper>
           <CheckoutForm />
-        </HeadingWrapper>
+        </CenteredWrapper>
         </Elements>
       </Wrapper>
     </div>
