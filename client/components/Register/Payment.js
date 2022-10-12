@@ -60,9 +60,12 @@ const Payment = props => {
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+  `
+  const HeadingWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
   `
   const H1 = styled.h1`
     font-size: 32px;
@@ -77,9 +80,9 @@ const Payment = props => {
   const ButtonWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    width: 500px;
+    width: 100%;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
   `
   const Button = styled.button`
     border: 1px solid #fff;
@@ -152,7 +155,9 @@ const Payment = props => {
         <header className="authHeader">
           <img src="./images/fdlogo.png" />
         </header>
-        <Wrapper>Loading</Wrapper>
+        <HeadingWrapper>
+          Loading
+          </HeadingWrapper>
       </div>
     )
   }
@@ -166,7 +171,9 @@ const Payment = props => {
         <img src="./images/fdlogo.png" />
       </header>
       <Wrapper>
+        <HeadingWrapper>
         <H1>Selected Plan</H1>
+        </HeadingWrapper>
         <ButtonWrapper>
           {priceId === 'price_1LrnW0IvvF6ba6jUlHTzjnlt' ? (
             <>
@@ -192,9 +199,12 @@ const Payment = props => {
             </>
           )}
         </ButtonWrapper>
-        <H1>Credit Card</H1>
+        <HeadingWrapper><H1>Credit Card</H1></HeadingWrapper>
+        
         <Elements stripe={stripePromise} options={options}>
+        <HeadingWrapper>
           <CheckoutForm />
+        </HeadingWrapper>
         </Elements>
       </Wrapper>
     </div>

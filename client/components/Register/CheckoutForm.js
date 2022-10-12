@@ -8,6 +8,19 @@ const CheckoutForm = () => {
 
   const [errorMessage, setErrorMessage] = useState(null)
 
+
+ const FormWrapper = styled.div`
+ width: 800px;
+ text-align: center;
+ `
+  const Form = styled.form`
+  font-size: 18px;
+  font-weight: 200;
+  width: 100%;
+  `
+  const Span = styled.span`
+width: 100%;
+  `
   const Button = styled.button`
   background-color: var(--blue);
   color: #FFF;
@@ -19,19 +32,6 @@ const CheckoutForm = () => {
   margin: 1rem;
   outline: none;
   border: none;
-  `
-
-  const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
-  font-weight: 200;
-  width: 100%;
-  `
-  const Span = styled.span`
-  display: flex;
-  justify-content: center;
-  width: 100%;
   `
 
   const handleSubmit = async event => {
@@ -66,6 +66,7 @@ const CheckoutForm = () => {
   }
 
   return (
+    <FormWrapper>
     <Form onSubmit={handleSubmit}>
       <Span>
       <PaymentElement />
@@ -75,8 +76,8 @@ const CheckoutForm = () => {
       </Span>
       {/* Show error message to your customers */}
       {errorMessage && <div>{errorMessage}</div>}
-
     </Form>
+    </FormWrapper>
   )
 }
 
