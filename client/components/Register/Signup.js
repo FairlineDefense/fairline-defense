@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import css from './register.css'
+import styled from 'styled-components'
 const Signup = () => {
   let user = useSelector(state => state.user)
   const dispatch = useDispatch()
@@ -52,7 +53,38 @@ const Signup = () => {
     },
     [user]
   )
-
+const H1 = styled.h1`
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 30px;
+  margin-bottom: 2rem;
+`
+const SignupWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem;
+`
+const FinePrint = styled.div`
+display: flex;
+flex-direction: column;
+margin: .5rem .5rem 3rem .5rem;
+width: 100%;
+`
+const PasswordFormat = styled.div`
+  margin-bottom: 2rem;
+  width: 60%;
+`
+const TermsAndConditions = styled.div`
+display: flex;
+flex-direction: row;
+width: 100%;
+`
+const Checkbox = styled.input`
+margin-right: .5rem;
+`
   return (
     <section className="auth">
       <svg />
@@ -61,8 +93,8 @@ const Signup = () => {
       <header className="authHeader">
         <img src="./images/fdlogo.png" />
       </header>
-      <div className="authContent">
-        <h2>Get Started</h2>
+      <SignupWrapper>
+        <H1>Get Started</H1>
         <form className="signupForm" onSubmit={handleSubmit} name="signup">
           <div className="inputGroup">
             <input
@@ -84,21 +116,21 @@ const Signup = () => {
             <input
               className="signupInput"
               name="email"
-              type="text"
+              type="email"
               placeholder="Email"
               required
             />
             <input
               className="signupInputCC"
               name="countryCode"
-              type="text"
+              type="tel"
               placeholder="+1"
               required
             />
             <input
               className="signupInputPhone"
               name="phone"
-              type="text"
+              type="tel"
               placeholder="Phone"
               required
             />
@@ -119,16 +151,15 @@ const Signup = () => {
               required
             />
           </div>
-          <section className="finePrint">
-            <span>
+          <FinePrint>
+            <PasswordFormat>
               Min 8 char. with at least one upper case letter, one number, and
               one special char.: !, @, $, #, &, *.
-            </span>
-            <span>
-              <input type="checkbox" required />I agree to the Fairline Defense
-              Terms & Conditions
-            </span>
-          </section>
+            </PasswordFormat>
+            <TermsAndConditions>
+              <Checkbox type="checkbox" required></Checkbox>I agree to the Fairline Defense Terms & Conditions
+              </TermsAndConditions>
+            </FinePrint>
 
           {errorText.length ? (
             <section className="errorText">{errorText}</section>
@@ -146,7 +177,7 @@ const Signup = () => {
             </div>
           </section>
         </form>
-      </div>
+      </SignupWrapper>
     </section>
   )
 }
