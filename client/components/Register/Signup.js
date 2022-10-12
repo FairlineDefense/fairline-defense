@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import css from './register.css'
+import styled from 'styled-components'
 const Signup = () => {
   let user = useSelector(state => state.user)
   const dispatch = useDispatch()
@@ -18,7 +19,13 @@ const Signup = () => {
     const password = evt.target.password.value
     const confirmPassword = evt.target.confirmPassword.value
 
-    function validatePassword() {
+    function validateFields() {
+      if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+        return setErrorText('Invalid email address.')
+      }
+      if(!/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(phone)) {
+        return setErrorText('Invalid phone number.')
+      }
       if (password !== confirmPassword) {
         return setErrorText('Passwords do not match.')
       }
@@ -34,7 +41,7 @@ const Signup = () => {
         dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
       }
     }
-    validatePassword()
+    validateFields()
   }
 
   useEffect(
@@ -46,7 +53,69 @@ const Signup = () => {
     },
     [user]
   )
-
+const H1 = styled.h1`
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 30px;
+  margin-bottom: 2rem;
+`
+const SignupWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem;
+`
+const SignupForm = styled.form`
+display: flex;
+flex-direction: column;
+justify-content: center;
+width: 720px;
+`
+const FinePrint = styled.div`
+display: flex;
+flex-direction: column;
+padding: .5rem;
+margin-bottom: 3rem;
+width: 100%;
+`
+const PasswordFormat = styled.div`
+  margin-bottom: 2rem;
+  width: 60%;
+  font-size: 14px;
+`
+const TermsAndConditions = styled.div`
+display: flex;
+flex-direction: row;
+width: 100%;
+font-size: 16px;
+`
+const Checkbox = styled.input`
+margin-right: .5rem;
+`
+const OpenFinePrint = styled.span`
+text-decoration: underline;
+cursor: pointer;
+`
+const SignupButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+const SignupFormButton = styled.button`
+width: 340px;
+font-weight: 200;
+padding: 1rem 2rem 1rem 2rem;
+border-radius: 50px;
+outline: none;
+border: none;
+color: #fff;
+font-size: 20px;
+background-color: var(--blue);
+margin-bottom: 2rem;
+cursor: pointer;
+`
   return (
     <section className="auth">
       <svg />
@@ -55,9 +124,9 @@ const Signup = () => {
       <header className="authHeader">
         <img src="./images/fdlogo.png" />
       </header>
-      <div className="authContent">
-        <h2>Get Started</h2>
-        <form className="signupForm" onSubmit={handleSubmit} name="signup">
+      <SignupWrapper>
+        <H1>Get Started</H1>
+        <SignupForm onSubmit={handleSubmit} name="signup">
           <div className="inputGroup">
             <input
               className="signupInput"
@@ -78,21 +147,21 @@ const Signup = () => {
             <input
               className="signupInput"
               name="email"
-              type="text"
+              type="email"
               placeholder="Email"
               required
             />
             <input
               className="signupInputCC"
               name="countryCode"
-              type="text"
+              type="tel"
               placeholder="+1"
               required
             />
             <input
               className="signupInputPhone"
               name="phone"
-              type="text"
+              type="tel"
               placeholder="Phone"
               required
             />
@@ -113,24 +182,23 @@ const Signup = () => {
               required
             />
           </div>
-          <section className="finePrint">
-            <span>
+          <FinePrint>
+            <PasswordFormat>
               Min 8 char. with at least one upper case letter, one number, and
               one special char.: !, @, $, #, &, *.
-            </span>
-            <span>
-              <input type="checkbox" required />I agree to the Fairline Defense
-              Terms & Conditions
-            </span>
-          </section>
+            </PasswordFormat>
+            <TermsAndConditions>
+              <Checkbox type="checkbox" required></Checkbox>I agree to the&nbsp;<OpenFinePrint>Fairline Defense Terms & Conditions</OpenFinePrint>
+              </TermsAndConditions>
+            </FinePrint>
 
           {errorText.length ? (
             <section className="errorText">{errorText}</section>
           ) : null}
 
-          <section className="signupFormButton">
-            <button type="submit">Create an Account</button>
-          </section>
+          <SignupButtonWrapper>
+            <SignupFormButton type="submit">Create an Account</SignupFormButton>
+          </SignupButtonWrapper>
           <section className="signupFormBottom">
             <div>
               <span>Already have an account?</span>
@@ -139,8 +207,8 @@ const Signup = () => {
               </span>
             </div>
           </section>
-        </form>
-      </div>
+        </SignupForm>
+      </SignupWrapper>
     </section>
   )
 }
