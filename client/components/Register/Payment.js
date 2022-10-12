@@ -44,15 +44,14 @@ const Payment = props => {
       theme: 'stripe',
 
       variables: {
-        colorText: '#333',
-        colorPrimary: 'var(--blue)',
+        colorText: '#FFF',
+        colorPrimary: '#FFF',
         colorBackground: '#ffffff',
         colorDanger: '#df1b41',
         fontFamily: 'Poppins, sans-serif',
         spacingUnit: '4px',
         borderRadius: '4px',
     },
-    labels: 'floating',
   }
   }
 
@@ -60,14 +59,17 @@ const Payment = props => {
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+  `
+  const CenteredWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
   `
   const H1 = styled.h1`
     font-size: 32px;
     font-weight: 300;
-    margin-bottom: 1rem;
+    margin: 1rem 0rem 2rem 0rem;
   `
   const H2 = styled.h2`
     font-size: 24px;
@@ -77,9 +79,9 @@ const Payment = props => {
   const ButtonWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    width: 500px;
+    width: 100%;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
   `
   const Button = styled.button`
     border: 1px solid #fff;
@@ -152,7 +154,9 @@ const Payment = props => {
         <header className="authHeader">
           <img src="./images/fdlogo.png" />
         </header>
-        <Wrapper>Loading</Wrapper>
+        <CenteredWrapper>
+          Loading
+          </CenteredWrapper>
       </div>
     )
   }
@@ -166,7 +170,9 @@ const Payment = props => {
         <img src="./images/fdlogo.png" />
       </header>
       <Wrapper>
+        <CenteredWrapper>
         <H1>Selected Plan</H1>
+        </CenteredWrapper>
         <ButtonWrapper>
           {priceId === 'price_1LrnW0IvvF6ba6jUlHTzjnlt' ? (
             <>
@@ -192,9 +198,12 @@ const Payment = props => {
             </>
           )}
         </ButtonWrapper>
-        <H1>Credit Card</H1>
+        <CenteredWrapper><H1>Credit Card</H1></CenteredWrapper>
+        
         <Elements stripe={stripePromise} options={options}>
+        <CenteredWrapper>
           <CheckoutForm />
+        </CenteredWrapper>
         </Elements>
       </Wrapper>
     </div>
