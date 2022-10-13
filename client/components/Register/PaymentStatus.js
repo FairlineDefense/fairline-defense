@@ -8,7 +8,7 @@ import {Elements} from '@stripe/react-stripe-js'
 import Shipping from './Shipping'
 import {loadStripe} from '@stripe/stripe-js'
 
-const OrderComplete = () => {
+const PaymentStatus = () => {
   const user = useSelector(state => state.user)
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
   
@@ -60,5 +60,5 @@ const OrderComplete = () => {
     </div>
   )
 }
-export default OrderComplete
+export default PaymentStatus
 

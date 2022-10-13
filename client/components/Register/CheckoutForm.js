@@ -49,7 +49,7 @@ width: 100%;
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: process.env.ORDER_COMPLETE_URL
+        return_url: process.env.PAYMENT_STATUS_URL
       }
     })
 
