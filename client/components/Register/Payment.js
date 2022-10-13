@@ -44,14 +44,18 @@ const Payment = props => {
       theme: 'stripe',
 
       variables: {
-        colorText: '#FFF',
-        colorPrimary: '#FFF',
-        colorBackground: '#ffffff',
-        colorDanger: '#df1b41',
+        colorText: '#0C192E',
+        colorPrimaryText: '#FFF',
+        colorTextSecondary: '#FFF',
+        colorTextPlaceholder: '#AAB1B9',
+        colorPrimary: '#00abe1',
+        colorBackground: '#FFF',
+        colorDanger: '#FF1E3E',
         fontFamily: 'Poppins, sans-serif',
-        spacingUnit: '4px',
-        borderRadius: '4px',
+        spacingUnit: '5px',
+        borderRadius: '5px',
     },
+    labels: 'floating',
   }
   }
 

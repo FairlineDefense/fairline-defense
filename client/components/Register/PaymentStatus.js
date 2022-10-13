@@ -11,7 +11,7 @@ import {loadStripe} from '@stripe/stripe-js'
 const PaymentStatus = () => {
   const user = useSelector(state => state.user)
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
-  
+
   const Wrapper = styled.div`
     width: 100%;
     height: 100%;
