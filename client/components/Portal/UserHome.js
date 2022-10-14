@@ -13,9 +13,9 @@ const UserHome = () => {
   //   return <VerifyEmail />
   // }
 
-  if (!user.phoneVerified) {
-    return <VerifyPhone />
-  }
+  // if (!user.phoneVerified) {
+  //   return <VerifyPhone />
+  // }
 
   if (!user.plan) {
     return <ChoosePlan />

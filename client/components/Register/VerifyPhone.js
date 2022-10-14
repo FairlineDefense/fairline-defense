@@ -8,8 +8,9 @@ import { useState } from 'react'
 const VerifyPhone = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-  let [code,setCode] = useState({'0': null,'1': null,'2': null,'3': null,'4': null,'5': null,'6': null,})
-  
+
+  let [code,setCode] = useState(['', '', '', '', '', ''])
+
   const clickHandler = (e) => {
     e.preventDefault(e)
     // if(!user.emailVerifed){
@@ -20,8 +21,12 @@ const VerifyPhone = () => {
 
   const changeHandler = (e) => {
     e.preventDefault()
-    setCode({...code, [e.target.name]: Number(e.target.value)})
-    console.log(code)
+    let index = Number(e.target.name)
+    let value = String(e.target.value)
+    // if(code[index] !== ''){
+    //   index = index + 1
+    //    }
+    setCode(code[index] = value)
   }
 
     const Wrapper = styled.div`
@@ -60,13 +65,6 @@ const VerifyPhone = () => {
     border: none;
     background-color: #CCC;
     font-size: 32px;
-
-    &:focus {
-      background-color: #FFF;
-    }
-    &:active {
-      background-color: #FFF;
-    }
     `
     const Heading = styled.span`
       font-size: 32px;
@@ -121,12 +119,12 @@ const VerifyPhone = () => {
               </SubHeading>
             </CenteredWrapper>
               <Form>
-                <Input type="text" name="0" onChange={(e)=>changeHandler(e)} value={code['0']}></Input>
-                <Input type="text" name="1" onChange={(e)=>changeHandler(e)} value={code['1']}></Input>
-                <Input type="text" name="2" onChange={(e)=>changeHandler(e)} value={code['2']}></Input>
-                <Input type="text" name="3" onChange={(e)=>changeHandler(e)} value={code['3']}></Input>
-                <Input type="text" name="4" onChange={(e)=>changeHandler(e)} value={code['4']}></Input>
-                <Input type="text" name="5" onChange={(e)=>changeHandler(e)} value={code['5']}></Input>
+                <Input type="text" name="0" onChange={(e)=>changeHandler(e)} value={code[0]}></Input>
+                <Input type="text" name="1" onChange={(e)=>changeHandler(e)} value={code[1]}></Input>
+                <Input type="text" name="2" onChange={(e)=>changeHandler(e)} value={code[2]}></Input>
+                <Input type="text" name="3" onChange={(e)=>changeHandler(e)} value={code[3]}></Input>
+                <Input type="text" name="4" onChange={(e)=>changeHandler(e)} value={code[4]}></Input>
+                <Input type="text" name="5" onChange={(e)=>changeHandler(e)} value={code[5]}></Input>
               </Form>
           <CenteredWrapper>
             <SubHeading>
