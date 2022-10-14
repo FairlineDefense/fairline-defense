@@ -10,9 +10,9 @@ const VerifyEmail = () => {
 
   const clickHandler = (e) => {
     e.preventDefault(e)
-    if(!user.emailVerifed){
-      return
-    }
+    // if(!user.emailVerifed){
+    //   return
+    // }
     history.push('/home')
   }
 
@@ -62,6 +62,10 @@ const VerifyEmail = () => {
     outline: none;
     border: none;
     cursor: pointer;
+
+    &::disabled {
+    background-color: #2A4C78;
+  }
     `
 
     return (
