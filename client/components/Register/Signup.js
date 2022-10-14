@@ -3,6 +3,8 @@ import {signup} from '../../store'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
+import RegisterHeader from './RegisterHeader'
+
 import css from './register.css'
 import styled from 'styled-components'
 const Signup = () => {
@@ -72,6 +74,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 width: 720px;
+position: relative;
 `
 const FinePrint = styled.div`
 display: flex;
@@ -121,9 +124,7 @@ cursor: pointer;
       <svg />
       <svg />
       <svg />
-      <header className="authHeader">
-        <img src="./images/fdlogo.png" />
-      </header>
+     <RegisterHeader />
       <SignupWrapper>
         <H1>Get Started</H1>
         <SignupForm onSubmit={handleSubmit} name="signup">
