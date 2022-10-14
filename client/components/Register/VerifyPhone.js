@@ -3,17 +3,25 @@ import {useDispatch, useSelector} from 'react-redux'
 import EmailSVG from './EmailSVG'
 import styled from 'styled-components'
 import history from '../../history'
+import { useState } from 'react'
 
 const VerifyPhone = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-
+  let [code,setCode] = useState({'0': null,'1': null,'2': null,'3': null,'4': null,'5': null,'6': null,})
+  
   const clickHandler = (e) => {
     e.preventDefault(e)
     // if(!user.emailVerifed){
     //   return
     // }
     history.push('/home')
+  }
+
+  const changeHandler = (e) => {
+    e.preventDefault()
+    setCode({...code, [e.target.name]: Number(e.target.value)})
+    console.log(code)
   }
 
     const Wrapper = styled.div`
@@ -53,7 +61,7 @@ const VerifyPhone = () => {
     background-color: #CCC;
     font-size: 32px;
 
-    &:content {
+    &:focus {
       background-color: #FFF;
     }
     &:active {
@@ -113,12 +121,12 @@ const VerifyPhone = () => {
               </SubHeading>
             </CenteredWrapper>
               <Form>
-                <Input name="0" maxLength={1}></Input>
-                <Input name="1" maxLength={1}></Input>
-                <Input name="2" maxLength={1}></Input>
-                <Input name="3" maxLength={1}></Input>
-                <Input name="4" maxLength={1}></Input>
-                <Input name="5" maxLength={1}></Input>
+                <Input type="text" name="0" onChange={(e)=>changeHandler(e)} value={code['0']}></Input>
+                <Input type="text" name="1" onChange={(e)=>changeHandler(e)} value={code['1']}></Input>
+                <Input type="text" name="2" onChange={(e)=>changeHandler(e)} value={code['2']}></Input>
+                <Input type="text" name="3" onChange={(e)=>changeHandler(e)} value={code['3']}></Input>
+                <Input type="text" name="4" onChange={(e)=>changeHandler(e)} value={code['4']}></Input>
+                <Input type="text" name="5" onChange={(e)=>changeHandler(e)} value={code['5']}></Input>
               </Form>
           <CenteredWrapper>
             <SubHeading>
