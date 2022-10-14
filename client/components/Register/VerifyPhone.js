@@ -32,9 +32,33 @@ const VerifyPhone = () => {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin: 4rem;
+      margin: 3rem;
       width: 340px;
       text-align: center;
+    `
+    const Form = styled.form`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 340px;
+    `
+    const Input = styled.input`
+    border-radius: 5px;
+    text-align: center;
+    width: 2.75rem;
+    height: 4rem;
+    outline: none;
+    border: none;
+    background-color: #CCC;
+    font-size: 32px;
+
+    &:content {
+      background-color: #FFF;
+    }
+    &:active {
+      background-color: #FFF;
+    }
     `
     const Heading = styled.span`
       font-size: 32px;
@@ -85,11 +109,17 @@ const VerifyPhone = () => {
             A verification code has been sent to
             </SubHeading>
             <SubHeading>
-              <SemiBold>
                 {user.phone}
-              </SemiBold>
               </SubHeading>
             </CenteredWrapper>
+              <Form>
+                <Input name="0" maxLength={1}></Input>
+                <Input name="1" maxLength={1}></Input>
+                <Input name="2" maxLength={1}></Input>
+                <Input name="3" maxLength={1}></Input>
+                <Input name="4" maxLength={1}></Input>
+                <Input name="5" maxLength={1}></Input>
+              </Form>
           <CenteredWrapper>
             <SubHeading>
             Please enter the verification code received by SMS.
