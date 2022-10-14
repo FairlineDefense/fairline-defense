@@ -12,7 +12,9 @@ import {
   Membership,
   Benefits,
   Feed,
-  PaymentStatus
+  PaymentStatus,
+  VerifyEmail,
+  VerifyPhone,
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'
