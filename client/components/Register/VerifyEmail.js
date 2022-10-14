@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import EmailSVG from './EmailSVG'
 import styled from 'styled-components'
 import history from '../../history'
+import RegisterHeader from './RegisterHeader'
 
 const VerifyEmail = () => {
   const user = useSelector(state => state.user)
@@ -73,9 +74,7 @@ const VerifyEmail = () => {
         <svg />
         <svg />
         <svg />
-        <header className="authHeader">
-          <img src="./images/fdlogo.png" />
-        </header>
+        <RegisterHeader />
         <Wrapper>
           <Heading>Verify Your Email</Heading>
             <CenteredWrapper>

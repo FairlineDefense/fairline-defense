@@ -4,6 +4,7 @@ import css from './register.css'
 import styled from 'styled-components'
 import {useState} from 'react'
 import Payment from './Payment'
+import RegisterHeader from './RegisterHeader'
 
 const ChoosePlan = props => {
   const user = useSelector(state => state.user)
@@ -123,9 +124,7 @@ const ChoosePlan = props => {
       <svg />
       <svg />
       <svg />
-      <header className="authHeader">
-        <img src="./images/fdlogo.png" />
-      </header>
+      <RegisterHeader />
       <Wrapper>
         <H1>Congratulations!</H1>
         <H2>Your account has been created succsefully!</H2>

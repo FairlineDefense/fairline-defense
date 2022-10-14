@@ -4,6 +4,7 @@ import EmailSVG from './EmailSVG'
 import styled from 'styled-components'
 import history from '../../history'
 import { useState } from 'react'
+import RegisterHeader from './RegisterHeader'
 
 const VerifyPhone = () => {
   const user = useSelector(state => state.user)
@@ -103,9 +104,7 @@ const VerifyPhone = () => {
         <svg />
         <svg />
         <svg />
-        <header className="authHeader">
-          <img src="./images/fdlogo.png" />
-        </header>
+        <RegisterHeader />
         <Wrapper>
           <Heading>Verify Your Phone Number</Heading>
             <CenteredWrapper>

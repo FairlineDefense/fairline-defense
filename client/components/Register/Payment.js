@@ -7,6 +7,7 @@ import {useState, useEffect} from 'react'
 import CheckoutForm from './CheckoutForm'
 import css from './register.css'
 import styled from 'styled-components'
+import RegisterHeader from './RegisterHeader'
 
 const Payment = props => {
   const {priceId, customerId, clickHandler} = props
@@ -170,9 +171,7 @@ const Payment = props => {
       <svg />
       <svg />
       <svg />
-      <header className="authHeader">
-        <img src="./images/fdlogo.png" />
-      </header>
+      <RegisterHeader />
       <Wrapper>
         <CenteredWrapper>
         <H1>Selected Plan</H1>
