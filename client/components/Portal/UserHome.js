@@ -1,7 +1,7 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import Navbar from './Navbar'
-import {VerifyEmail, ChoosePlan} from '../'
+import {VerifyEmail, VerifyPhone, ChoosePlan} from '../'
 
 const UserHome = () => {
   const user = useSelector(state => state.user)
@@ -12,6 +12,10 @@ const UserHome = () => {
   // if(!user.emailVerified) {
   //   return <VerifyEmail />
   // }
+
+  if (!user.phoneVerified) {
+    return <VerifyPhone />
+  }
 
   if (!user.plan) {
     return <ChoosePlan />
