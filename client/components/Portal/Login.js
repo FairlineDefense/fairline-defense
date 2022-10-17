@@ -49,7 +49,6 @@ const LoginWrapper = styled.div`
 const LoginForm = styled.form`
 display: flex;
 flex-direction: column;
-justify-content: center;
 width: 340px;
 position: relative;
 @media (max-width: 768px) {
@@ -89,6 +88,16 @@ width: 340px;
 display: flex;
 justify-content: space-between;
 `
+const ForgotPassword = styled.span`
+width: 100%;
+display: flex;
+justify-content: flex-end;
+margin-bottom: 1rem;
+
+&&a {
+color: var(--blue);
+}
+`
   return (
     <section className="auth">
     <svg />
@@ -107,6 +116,7 @@ justify-content: space-between;
         <div>
           <LoginInput name="password" type="password" placeholder="Password" />
         </div>
+        <ForgotPassword><Link to="#">Forgot your password?</Link></ForgotPassword>
         <div>
           <LoginFormButton type="submit">Log In</LoginFormButton>
         </div>
