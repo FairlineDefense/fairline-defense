@@ -33,14 +33,14 @@ const VerifyEmail = () => {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin: 4rem;
+      margin: 3rem;
       width: 340px;
       text-align: center;
     `
     const Heading = styled.span`
       font-size: 32px;
       font-weight: 300;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     `
     const SubHeading = styled.span`
       font-size: 16px;
@@ -59,7 +59,7 @@ const VerifyEmail = () => {
     padding: 1rem 2rem 1rem 2rem;
     font-size: 20px;
     font-weight: 100;
-    margin: 2rem;
+    margin: 1rem;
     outline: none;
     border: none;
     cursor: pointer;
@@ -79,7 +79,6 @@ const VerifyEmail = () => {
           <Heading>Verify Your Email</Heading>
             <CenteredWrapper>
               <EmailSVG />
-              Email SVG
             <SubHeading>
               A confirmation link has been sent to
             </SubHeading>
