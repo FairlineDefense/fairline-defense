@@ -1,6 +1,5 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import EmailSVG from './EmailSVG'
 import styled from 'styled-components'
 import history from '../../history'
 import RegisterHeader from './RegisterHeader'
@@ -42,6 +41,15 @@ const VerifyEmail = () => {
       font-weight: 300;
       margin-bottom: 1rem;
     `
+    const ConfirmEmail = styled.div`
+    height: 60px;
+    width: auto;
+    margin: 1rem;
+    background-image: url("./images/confirmemail.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: none;
+    `
     const SubHeading = styled.span`
       font-size: 16px;
       font-weight: 200;
@@ -78,7 +86,7 @@ const VerifyEmail = () => {
         <Wrapper>
           <Heading>Verify Your Email</Heading>
             <CenteredWrapper>
-              <EmailSVG />
+            <ConfirmEmail />
             <SubHeading>
               A confirmation link has been sent to
             </SubHeading>

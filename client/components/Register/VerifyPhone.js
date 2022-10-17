@@ -1,6 +1,5 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import EmailSVG from './EmailSVG'
 import styled from 'styled-components'
 import history from '../../history'
 import { useState } from 'react'
@@ -108,7 +107,7 @@ const VerifyPhone = () => {
         <Wrapper>
           <Heading>Verify Your Phone Number</Heading>
             <CenteredWrapper>
-              <EmailSVG />
+              
               Phone SVG
             <SubHeading>
             A verification code has been sent to

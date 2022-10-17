@@ -73,7 +73,7 @@ const SignupForm = styled.form`
 display: flex;
 flex-direction: column;
 justify-content: center;
-width: 720px;
+max-width: 720px;
 position: relative;
 `
 const FinePrint = styled.div`
