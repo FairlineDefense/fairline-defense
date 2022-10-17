@@ -1,3 +1,4 @@
+const Dotenv = require('dotenv-webpack')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
@@ -23,7 +24,16 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
       }
     ]
-  }
+  },
+  plugins: [
+    new Dotenv({
+      systemvars: true
+    })
+  ]
 }

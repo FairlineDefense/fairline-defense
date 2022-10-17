@@ -3,10 +3,39 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  phone: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
+  },
+  emailVerified: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  phoneVerified: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  plan: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  customerId: {
+    type: Sequelize.STRING,
+    unique: true,
   },
   password: {
     type: Sequelize.STRING,
