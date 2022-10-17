@@ -7,6 +7,7 @@ import {useState, useEffect} from 'react'
 import CheckoutForm from './CheckoutForm'
 import css from './register.css'
 import styled from 'styled-components'
+import RegisterHeader from './RegisterHeader'
 
 const Payment = props => {
   const {priceId, customerId, clickHandler} = props
@@ -44,14 +45,18 @@ const Payment = props => {
       theme: 'stripe',
 
       variables: {
-        colorText: '#FFF',
-        colorPrimary: '#FFF',
-        colorBackground: '#ffffff',
-        colorDanger: '#df1b41',
+        colorText: '#0C192E',
+        colorPrimaryText: '#FFF',
+        colorTextSecondary: '#FFF',
+        colorTextPlaceholder: '#AAB1B9',
+        colorPrimary: '#00abe1',
+        colorBackground: '#FFF',
+        colorDanger: '#FF1E3E',
         fontFamily: 'Poppins, sans-serif',
-        spacingUnit: '4px',
-        borderRadius: '4px',
+        spacingUnit: '5px',
+        borderRadius: '5px',
     },
+    labels: 'floating',
   }
   }
 
@@ -166,9 +171,7 @@ const Payment = props => {
       <svg />
       <svg />
       <svg />
-      <header className="authHeader">
-        <img src="./images/fdlogo.png" />
-      </header>
+      <RegisterHeader />
       <Wrapper>
         <CenteredWrapper>
         <H1>Selected Plan</H1>

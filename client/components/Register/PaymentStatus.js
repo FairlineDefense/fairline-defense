@@ -7,11 +7,12 @@ import {useStripe, useElements} from '@stripe/react-stripe-js';
 import {Elements} from '@stripe/react-stripe-js'
 import Shipping from './Shipping'
 import {loadStripe} from '@stripe/stripe-js'
+import RegisterHeader from './RegisterHeader'
 
-const OrderComplete = () => {
+const PaymentStatus = () => {
   const user = useSelector(state => state.user)
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
-  
+
   const Wrapper = styled.div`
     width: 100%;
     height: 100%;
@@ -49,9 +50,7 @@ const OrderComplete = () => {
       <svg />
       <svg />
       <svg />
-      <header className="authHeader">
-        <img src="./images/fdlogo.png" />
-      </header>
+      <RegisterHeader />
       <Wrapper>
         <Elements stripe={stripePromise}>
         <Shipping />
@@ -60,5 +59,5 @@ const OrderComplete = () => {
     </div>
   )
 }
-export default OrderComplete
+export default PaymentStatus
 

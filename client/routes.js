@@ -12,7 +12,9 @@ import {
   Membership,
   Benefits,
   Feed,
-  OrderComplete
+  PaymentStatus,
+  VerifyEmail,
+  VerifyPhone,
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'
@@ -41,7 +43,8 @@ const Routes = props => {
             <Route path="/membership" component={Membership} />
             <Route path="/benefits" component={Benefits} />
             <Route path="/feed" component={Feed} />
-            <Route path="/ordercomplete" component={OrderComplete} />
+            <Route path="/paymentstatus" component={PaymentStatus} />
+            <Route path="/verifyemail" component={VerifyEmail} />
           </Switch>
         </div>
       ) : (
