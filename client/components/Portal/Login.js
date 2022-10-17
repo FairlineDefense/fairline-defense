@@ -98,6 +98,14 @@ margin-bottom: 1rem;
 color: var(--blue);
 }
 `
+const ErrorText = styled.span`
+height: 4rem;
+border: 1px solid red;
+border-radius: 5px;
+padding: .5rem;
+background-color: #fff;
+color: #000;
+`
   return (
     <section className="auth">
     <svg />
@@ -120,12 +128,12 @@ color: var(--blue);
         <div>
           <LoginFormButton type="submit">Log In</LoginFormButton>
         </div>
-        {errorText}
       </LoginForm>
       </CenteredWrapper>
       <CenteredWrapper>
       <BottomText><span>Don't have an account?</span><Link to="/signup">Register</Link></BottomText>
       </CenteredWrapper>
+      <CenteredWrapper>{errorText &&<ErrorText>{errorText}</ErrorText>}</CenteredWrapper>
       </LoginWrapper>
     </section>
   )
