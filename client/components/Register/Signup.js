@@ -68,6 +68,9 @@ const SignupWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 5rem;
+  @media (max-width: 768px) {
+    padding: 4rem 1rem 0rem 1rem;
+  }
 `
 const SignupForm = styled.form`
 display: flex;
@@ -75,6 +78,9 @@ flex-direction: column;
 justify-content: center;
 max-width: 720px;
 position: relative;
+@media (max-width: 768px) {
+  max-width: 100%;
+}
 `
 const FinePrint = styled.div`
 display: flex;
