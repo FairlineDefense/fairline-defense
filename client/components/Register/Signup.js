@@ -93,12 +93,18 @@ const PasswordFormat = styled.div`
   margin-bottom: 2rem;
   width: 60%;
   font-size: 14px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 const TermsAndConditions = styled.div`
 display: flex;
 flex-direction: row;
 width: 100%;
 font-size: 16px;
+@media (max-width: 768px) {
+  flex-wrap: wrap;
+}
 `
 const Checkbox = styled.input`
 margin-right: .5rem;
