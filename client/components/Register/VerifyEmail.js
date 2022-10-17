@@ -41,15 +41,6 @@ const VerifyEmail = () => {
       font-weight: 300;
       margin-bottom: 1rem;
     `
-    const ConfirmEmail = styled.div`
-    height: 60px;
-    width: auto;
-    margin: 1rem;
-    background-image: url("./images/confirmemail.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: none;
-    `
     const SubHeading = styled.span`
       font-size: 16px;
       font-weight: 200;
@@ -86,7 +77,7 @@ const VerifyEmail = () => {
         <Wrapper>
           <Heading>Verify Your Email</Heading>
             <CenteredWrapper>
-            <ConfirmEmail />
+            <img src="./images/confirmphone.png" />
             <SubHeading>
               A confirmation link has been sent to
             </SubHeading>

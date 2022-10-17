@@ -107,8 +107,7 @@ const VerifyPhone = () => {
         <Wrapper>
           <Heading>Verify Your Phone Number</Heading>
             <CenteredWrapper>
-              
-              Phone SVG
+              <img src="./images/confirmphone.png" />
             <SubHeading>
             A verification code has been sent to
             </SubHeading>
