@@ -1,8 +1,16 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import Navbar from './Navbar'
+import ReferAFriend from './ReferAFriend'
 import {VerifyEmail, VerifyPhone, ChoosePlan} from '../'
 import styled from 'styled-components'
+import {
+  CircularProgressbar,
+  CircularProgressbarWithChildren,
+  buildStyles
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
 const UserHome = () => {
   const user = useSelector(state => state.user)
   // if user.emailVerified => render verify
@@ -20,22 +28,23 @@ const UserHome = () => {
   // if (!user.plan) {
   //   return <ChoosePlan />
   // }
+const Wrapper = styled.div`
+width: 100vw;
+padding: 2rem;
+background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+`
 const Main = styled.div`
 height: 500px;
 width: 100vw;
 color: #fff;
 display: flex;
 padding: 5rem;
-`
-const Wrapper = styled.div`
-width: 100vw;
-padding: 2rem;
-background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+flex-direction: row;
 `
 const Left = styled.div`
 display: flex;
 flex-direction: column;
-width: 50%;
+width: 70%;
 justify-content: flex-start;
 `
 const H1 = styled.h1`
@@ -78,13 +87,14 @@ cursor: pointer;
 const Right = styled.div`
 display: flex;
 flex-direction: column;
-width: 50%;
+width: 30%;
 justify-content: flex-start;
 `
 const TextBlock = styled.div`
 display: flex;
 width: 220px;
 flex-direction: column;
+margin: .5rem 0 .5rem 0;
 `
 const Bold = styled.span`
 font-weight: 500;
@@ -92,7 +102,12 @@ font-weight: 500;
 const Small = styled.span`
 font-weight: 200;
 `
+const ProgressBarWrapper = styled.div`
+height: 20px;
+width: 20px;
+`
   return (
+    <>
     <Wrapper>
       <Navbar />
       <Main>
@@ -104,11 +119,24 @@ font-weight: 200;
         <BlueButton>Emergency Help</BlueButton>
       </Left>
       <Right>
+        <CircularProgressbar
+        value={50}
+        text={`227 days remaining`}
+        styles={buildStyles({
+          textColor: "#FFF",
+          pathColor: "#D6AE21",
+          trailColor: "#FFF",
+          textSize: "7px",
+          strokeLinecap: "butt"
+        })}
+      />
     <TextBlock><Bold>Auto Renew</Bold><Small>October 12, 2022</Small></TextBlock>
     <TextBlock><Bold>Questions</Bold><Small>Call 1 877 xxx xxxx</Small></TextBlock>
       </Right>
       </Main>
     </Wrapper>
+     <ReferAFriend></ReferAFriend>
+     </>
   )
 }
 
