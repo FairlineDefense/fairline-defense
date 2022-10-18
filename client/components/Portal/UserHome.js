@@ -52,7 +52,7 @@ flex-direction: row;
 const Left = styled.div`
 display: flex;
 flex-direction: column;
-width: 70%;
+width: 65%;
 height: 70vh;
 justify-content: flex-start;
 
@@ -63,8 +63,9 @@ justify-content: flex-start;
 const Right = styled.div`
 display: flex;
 flex-direction: column;
-width: 30%;
+width: 35%;
 justify-content: flex-start;
+
 @media (max-width: 768px) {
   justify-content: center;
   width: 100%;
@@ -108,12 +109,11 @@ font-size: 18px;
 font-weight: 200;
 cursor: pointer;
 `
-
 const TextBlock = styled.div`
 display: flex;
 width: 220px;
 flex-direction: column;
-margin: .5rem 0 .5rem 0;
+margin-bottom: .5rem;
 `
 const Bold = styled.span`
 font-weight: 500;
@@ -122,8 +122,9 @@ const Small = styled.span`
 font-weight: 200;
 `
 const ProgressBarWrapper = styled.div`
-width: 100%;
-height: 100%;
+width: 225px;
+height: 225px;
+margin-bottom: 2rem;
 @media (max-width: 768px) {
   height: 300px;
   width: 300px;
