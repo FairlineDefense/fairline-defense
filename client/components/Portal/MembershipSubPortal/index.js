@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 export default function MembershipSubPortal() {
     const user = useSelector(state => state.user)
     let [state, setState] = useState('')
@@ -8,11 +9,15 @@ export default function MembershipSubPortal() {
     const switcher = () => {
         switch(state) {
         case 'PersonalInformation':
-            return <PersonalInformation />;
+            return <PersonalInformation user={user} />;
         case 'EditPersonalInformation':
-            return <EditPersonalInformation />;
+            return <EditPersonalInformation user={user} />;
+        case 'MembershipAndBilling':
+            return <MembershipAndBilling user={user} />;
+        case 'EmailPreferences':
+            return <EmailPreferences user={user} />;
         default:
-            return <PersonalInformation />;
+            return <PersonalInformation user={user} />;
     }
 }
 
