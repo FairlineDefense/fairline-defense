@@ -31,6 +31,8 @@ const WhiteBackground = styled.div`
 width: 100%;
 min-height: 500px;
 padding: 2rem;
+position: relative;
+background-color: #fff;
 `
     return (
         <>
