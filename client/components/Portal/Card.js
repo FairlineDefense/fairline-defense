@@ -1,25 +1,35 @@
 import React from 'react'
 import styled from 'styled-components'
-export default function ReferAFriend() {
-
+export default function Card() {
 const Wrapper = styled.div`
-width: 100vw;
+width: 100%;
 background-color: #fff;
-color: var(--darkblue);
+display: flex;
+align-items: center;
+min-height: 80vh;
+`
+const Container = styled.div`
+margin: 1rem;
+background-color: var(--bgblue);
+border-radius: 20px;
+padding: 2rem;
 display: flex;
 flex-direction: row;
-padding: 4rem 12rem 4rem 12rem;
 align-items: center;
-min-height: 70vh;
+width: 100%;
+height: 400px;
 `
 const Left = styled.div`
 display: flex;
 flex-direction: column;
 width: 50%;
-justify-content: flex-start;
+align-items: flex-end;
+img {
+    width: 400px;
+}
 `
 const H1 = styled.h1`
-font-size: 36px;
+font-size: 42px;
 font-weight: 600;
 color: var(--darkblue);
 margin-bottom: 1.5rem;
@@ -30,6 +40,20 @@ font-size: 30px;
 font-weight: 200;
 color: var(--darkblue);
 margin-bottom: 1rem;
+`
+const Button = styled.button`
+color: var(--primary);
+width: 220px;
+border-color: var(--primary);
+border: 1px solid;
+border-radius: 5px;
+padding: .75rem;
+background: transparent;
+outline: none;
+margin: .5rem 0rem .5rem 0rem;
+font-size: 18px;
+font-weight: 200;
+cursor: pointer;
 `
 const CyanButton = styled.button`
 color: #fff;
@@ -50,9 +74,6 @@ flex-direction: column;
 width: 50%;
 justify-content: flex-start;
 padding: 2rem;
-img {
-    width: 360px;
-}
 `
 const TextBlock = styled.div`
 display: flex;
@@ -67,14 +88,14 @@ color: var(--cyan);
 `
     return (
         <Wrapper>
-           <Left>
-            <H1>Fairline defense is awesome.</H1>
-            <H2>Refer a Friend and <Cyan>make $20</Cyan></H2>
-            <CyanButton>Refer a Friend</CyanButton>
-            </Left>
-           <Right>
-            <img src="./images/referafriend.png" />
-           </Right>
+            <Container>
+                <Left><img src="./images/card.png" /></Left>
+                <Right>
+                    <H1>Membership Card</H1>
+                    <Button>Download Digital</Button>
+                    <CyanButton>Ship a New Card</CyanButton>
+                </Right>
+            </Container>
         </Wrapper>
     )
 }

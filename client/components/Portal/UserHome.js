@@ -2,6 +2,7 @@ import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import Navbar from './Navbar'
 import ReferAFriend from './ReferAFriend'
+import Card from './Card'
 import {VerifyEmail, VerifyPhone, ChoosePlan} from '../'
 import styled from 'styled-components'
 import {
@@ -10,6 +11,7 @@ import {
   buildStyles
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { oneOf } from 'prop-types'
 
 const UserHome = () => {
   const user = useSelector(state => state.user)
@@ -135,7 +137,8 @@ width: 20px;
       </Right>
       </Main>
     </Wrapper>
-     <ReferAFriend></ReferAFriend>
+     <ReferAFriend />
+     <Card />
      </>
   )
 }
