@@ -7,6 +7,7 @@ import PersonalInformation from './PersonalInformation'
 import EditPersonalInformation from './EditPersonalInformation'
 import MembershipAndBilling from './MembershipAndBilling'
 import EmailPreferences from './EmailPreferences'
+import Invoices from './Invoices'
 
 export default function MembershipSubPortal() {
     const user = useSelector(state => state.user)
@@ -20,6 +21,8 @@ export default function MembershipSubPortal() {
             return <EditPersonalInformation user={user} />;
         case 'MembershipAndBilling':
             return <MembershipAndBilling user={user} />;
+        case 'Invoices':
+            return <Invoices user={user} />;
         case 'EmailPreferences':
             return <EmailPreferences user={user} />;
         default:
@@ -30,9 +33,10 @@ export default function MembershipSubPortal() {
 const WhiteBackground = styled.div`
 width: 100%;
 min-height: 500px;
-padding: 2rem;
+padding: 4rem;
 position: relative;
 background-color: #fff;
+border-radius: 4px;
 `
     return (
         <>

@@ -8,6 +8,9 @@ export default function MembershipNav(props) {
     border: none;
     cursor: pointer;
     color: #fff;
+    margin: 0rem 2rem .5rem 0rem;
+    font-size: 16px;
+    font-weight: 100;
     `
     return (
         <div>

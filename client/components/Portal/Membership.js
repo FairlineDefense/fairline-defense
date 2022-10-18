@@ -16,7 +16,7 @@ const Membership = () => {
   const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding: 2rem;
+  padding: 1rem 8rem 4rem 8rem;
   `
   const UserInfo = styled.div`
   background-color: #fff;
@@ -24,11 +24,17 @@ const Membership = () => {
   min-height: 800px;
   padding: 2rem 1rem 2rem 1rem;
   `
+  const Header = styled.header`
+  color: #fff;
+  font-weight: 400;
+  margin: 1rem 0rem 1rem 0rem;
+  font-size: 30px;
+  `
   return (
     <Background>
       <Navbar />
       <Wrapper>
-      <h1>Membership</h1>
+      <Header>Membership</Header>
       <MembershipSubPortal />
       </Wrapper>
     </Background>
