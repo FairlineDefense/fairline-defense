@@ -38,11 +38,13 @@ const Navbar = () => {
   `
   return (
     <Nav>
+      <span>
       <Link to="/membership">Membership</Link>
       <Link to="/home">Account</Link>
       <Link to="/benefits">Benefits</Link>
-      <Link to="/"><Logo src="./images/fdlogo.png" /></Link>
       <Link to="/feed">Feed</Link>
+      </span>
+      <Link to="/"><Logo src="./images/fdlogo.png" /></Link>
       <a href="#" onClick={handleClick}>
         Logout
       </a>

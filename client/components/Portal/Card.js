@@ -9,15 +9,15 @@ align-items: center;
 min-height: 80vh;
 `
 const Container = styled.div`
-margin: 1rem;
+margin: 2rem;
 background-color: var(--bgblue);
 border-radius: 20px;
-padding: 2rem;
+padding: 1rem;
 display: flex;
 flex-direction: row;
 align-items: center;
 width: 100%;
-height: 400px;
+height: 420px;
 `
 const Left = styled.div`
 display: flex;
@@ -25,7 +25,8 @@ flex-direction: column;
 width: 50%;
 align-items: flex-end;
 img {
-    width: 400px;
+    width: auto;
+    height: 284px;
 }
 `
 const H1 = styled.h1`
