@@ -16,7 +16,7 @@ export default function MembershipSubPortal() {
     const switcher = () => {
         switch(state) {
         case 'PersonalInformation':
-            return <PersonalInformation user={user} />;
+            return <PersonalInformation user={user} setState={setState} />;
         case 'EditPersonalInformation':
             return <EditPersonalInformation user={user} />;
         case 'MembershipAndBilling':
@@ -26,14 +26,14 @@ export default function MembershipSubPortal() {
         case 'EmailPreferences':
             return <EmailPreferences user={user} />;
         default:
-            return <PersonalInformation user={user} />;
+            return <PersonalInformation user={user} setState={setState} />;
     }
 }
 
 const WhiteBackground = styled.div`
 width: 100%;
 min-height: 500px;
-padding: 4rem;
+padding: 4rem 6rem 6rem 4rem;
 position: relative;
 background-color: #fff;
 border-radius: 4px;

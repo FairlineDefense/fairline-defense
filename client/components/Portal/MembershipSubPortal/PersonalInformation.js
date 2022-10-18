@@ -1,7 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function PersonalInformation() {
+export default function PersonalInformation(props) {
+let {user, setState} = props
+const clickHandler = (e) => {
+    e.preventDefault()
+    setState('EditPersonalInformation')
+}
 const Wrapper = styled.div`
 width: 100%;
 height: 100%;
@@ -73,7 +78,7 @@ return (
                 </InformationBlock>
             </InformationWrapper>
             <EditWrapper>
-                <EditButton>Edit Profile</EditButton>
+                <EditButton onClick={(e) => clickHandler(e)}>Edit Profile</EditButton>
             </EditWrapper>
         </Wrapper>
     )
