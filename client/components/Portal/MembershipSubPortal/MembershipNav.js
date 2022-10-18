@@ -1,13 +1,14 @@
 import React from 'react'
 
-export default function MembershipNav() {
+export default function MembershipNav(props) {
+    let {state, setState} = props
     return (
         <div>
             <ul>
-                <li>Personal Info</li>
-                <li>Membership and Billing</li>
-                <li>Invoices</li>
-                <li>Email Preferences</li>
+                <li onClick={(e)=>{setState(e.target.value)}} value="PersonalInformation">Personal Info</li>
+                <li onClick={(e)=>{setState(e.target.value)}} value="MembershipAndBilling">Membership and Billing</li>
+                <li onClick={(e)=>{setState(e.target.value)}} value="Invoices">Invoices</li>
+                <li onClick={(e)=>{setState(e.target.value)}} value="EmailPreferences">Email Preferences</li>
                 </ul>
         </div>
     )

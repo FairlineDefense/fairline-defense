@@ -5,14 +5,28 @@ export default function MembershipSubPortal() {
     const user = useSelector(state => state.user)
     let [state, setState] = useState('')
 
+    const switcher = () => {
+        switch(state) {
+        case 'PersonalInformation':
+            return <PersonalInformation />;
+        case 'EditPersonalInformation':
+            return <EditPersonalInformation />;
+        default:
+            return <PersonalInformation />;
+    }
+}
+
+const WhiteBackground = styled.container`
+width: 100%;
+min-height: 500px;
+padding: 2rem;
+`
     return (
         <>
         <MembershipNav state={state} setState={setState} />
-        {/* case: membership info => membershipinfo.js
-            case: editmembership info => editmembershipinfo.js
-            case: membership and billing => m and b.js
-            etc...
-         */}
+        <WhiteBackground>
+        {switcher()}
+        </WhiteBackground>
         </>
     )
 }
