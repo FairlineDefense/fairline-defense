@@ -11,12 +11,20 @@ flex-direction: row;
 padding: 4rem 12rem 4rem 12rem;
 align-items: center;
 min-height: 70vh;
+
+@media (max-width: 768px) {
+    padding: 1rem;
 `
 const Left = styled.div`
 display: flex;
 flex-direction: column;
 width: 50%;
 justify-content: flex-start;
+
+@media (max-width: 768px) {
+    img {
+        width: 100%;
+    }
 `
 const H1 = styled.h1`
 font-size: 36px;
@@ -24,12 +32,20 @@ font-weight: 600;
 color: var(--darkblue);
 margin-bottom: 1.5rem;
 line-height: 42px;
+
+@media (max-width: 768px) {
+   font-size: 24px;
+}
 `
 const H2 = styled.h1`
 font-size: 30px;
 font-weight: 200;
 color: var(--darkblue);
 margin-bottom: 1rem;
+
+@media (max-width: 768px) {
+    font-size: 18px;
+ }
 `
 const CyanButton = styled.button`
 color: #fff;
@@ -52,6 +68,11 @@ justify-content: flex-start;
 padding: 2rem;
 img {
     width: 360px;
+}
+@media (max-width: 768px) {
+    img {
+        width: 100%;
+    }
 }
 `
 const TextBlock = styled.div`

@@ -18,16 +18,31 @@ flex-direction: row;
 align-items: center;
 width: 100%;
 height: 420px;
+
+@media (max-width: 768px) {
+    flex-direction: column-reverse;
+    height: 80vh;
+    margin: .5rem;
+ }
 `
 const Left = styled.div`
 display: flex;
 flex-direction: column;
-width: 50%;
+width: 100%;
 align-items: flex-end;
 img {
     width: auto;
     height: 284px;
 }
+@media (max-width: 768px) {
+    font-size: 18px;
+    justify-content: center;
+    padding: 1rem 0rem 1rem 0rem;
+    img {
+        width: 100%;
+        height: auto;
+    }
+ }
 `
 const H1 = styled.h1`
 font-size: 42px;
@@ -75,6 +90,12 @@ flex-direction: column;
 width: 50%;
 justify-content: flex-start;
 padding: 2rem;
+
+@media (max-width: 768px) {
+font-size: 18px;
+width: 100%;
+padding: 0;
+}
 `
 const TextBlock = styled.div`
 display: flex;

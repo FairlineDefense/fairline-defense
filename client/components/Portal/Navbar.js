@@ -21,7 +21,6 @@ const Navbar = () => {
   width: 100%;
   height: 70px;
   color: #fff;
-  padding: 1rem 1rem 1rem 1rem;
   font-size: 14px;
   border-bottom: 1px solid #fff;
   align-items: center;

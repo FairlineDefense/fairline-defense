@@ -42,12 +42,34 @@ color: #fff;
 display: flex;
 padding: 5rem;
 flex-direction: row;
+
+@media (max-width: 768px) {
+  height: 100vh;
+  flex-direction: column;
+  padding: 1rem 0rem 0rem 0rem;
+}
 `
 const Left = styled.div`
 display: flex;
 flex-direction: column;
 width: 70%;
+height: 70vh;
 justify-content: flex-start;
+
+@media (max-width: 768px) {
+  width: 100%;
+}
+`
+const Right = styled.div`
+display: flex;
+flex-direction: column;
+width: 30%;
+justify-content: flex-start;
+@media (max-width: 768px) {
+  justify-content: center;
+  width: 100%;
+  height: 70px;
+}
 `
 const H1 = styled.h1`
 font-size: 42px;
@@ -86,12 +108,7 @@ font-size: 18px;
 font-weight: 200;
 cursor: pointer;
 `
-const Right = styled.div`
-display: flex;
-flex-direction: column;
-width: 30%;
-justify-content: flex-start;
-`
+
 const TextBlock = styled.div`
 display: flex;
 width: 220px;
@@ -105,8 +122,12 @@ const Small = styled.span`
 font-weight: 200;
 `
 const ProgressBarWrapper = styled.div`
-height: 20px;
-width: 20px;
+width: 100%;
+height: 100%;
+@media (max-width: 768px) {
+  height: 300px;
+  width: 300px;
+}
 `
   return (
     <>
@@ -121,6 +142,7 @@ width: 20px;
         <BlueButton>Emergency Help</BlueButton>
       </Left>
       <Right>
+        <ProgressBarWrapper>
         <CircularProgressbar
         value={50}
         text={`227 days remaining`}
@@ -129,9 +151,10 @@ width: 20px;
           pathColor: "#D6AE21",
           trailColor: "#FFF",
           textSize: "7px",
-          strokeLinecap: "butt"
+          strokeLinecap: "butt",
         })}
       />
+      </ProgressBarWrapper>
     <TextBlock><Bold>Auto Renew</Bold><Small>October 12, 2022</Small></TextBlock>
     <TextBlock><Bold>Questions</Bold><Small>Call 1 877 xxx xxxx</Small></TextBlock>
       </Right>
