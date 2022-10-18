@@ -38,6 +38,7 @@ img {
     font-size: 18px;
     justify-content: center;
     padding: 1rem 0rem 1rem 0rem;
+    width: 100%;
     img {
         width: 100%;
         height: auto;

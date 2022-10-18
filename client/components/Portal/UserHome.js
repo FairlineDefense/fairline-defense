@@ -44,7 +44,7 @@ padding: 5rem;
 flex-direction: row;
 
 @media (max-width: 768px) {
-  height: 100vh;
+  height: 110vh;
   flex-direction: column;
   padding: 1rem 0rem 0rem 0rem;
 }
