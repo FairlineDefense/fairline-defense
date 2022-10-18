@@ -19,13 +19,16 @@ const Navbar = () => {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  height: 60px;
+  height: 70px;
   color: #fff;
   padding: 1rem 1rem 1rem 1rem;
   font-size: 14px;
   border-bottom: 1px solid #fff;
+  align-items: center;
+
   a {
   color: #fff;
+  margin-right: 1rem;
   }
   a:visited {
     color: #fff;
