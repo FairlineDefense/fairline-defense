@@ -2,6 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import MembershipNav from './MembershipNav'
+import PersonalInformation from './PersonalInformation'
+import EditPersonalInformation from './EditPersonalInformation'
+import MembershipAndBilling from './MembershipAndBilling'
+import EmailPreferences from './EmailPreferences'
+
 export default function MembershipSubPortal() {
     const user = useSelector(state => state.user)
     let [state, setState] = useState('')
@@ -21,7 +27,7 @@ export default function MembershipSubPortal() {
     }
 }
 
-const WhiteBackground = styled.container`
+const WhiteBackground = styled.div`
 width: 100%;
 min-height: 500px;
 padding: 2rem;

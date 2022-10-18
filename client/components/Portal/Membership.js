@@ -2,17 +2,18 @@ import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import Navbar from './Navbar'
 import styled from 'styled-components'
+import MembershipSubPortal from './MembershipSubPortal'
 
 const Membership = () => {
   const user = useSelector(state => state.user)
 
-  const Background = styled.container`
+  const Background = styled.div`
   width: 100vw;
   min-height: 100vh;
   padding: 2rem;
   background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
   `
-  const Wrapper = styled.container`
+  const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   padding: 2rem;
@@ -27,10 +28,9 @@ const Membership = () => {
     <Background>
       <Navbar />
       <Wrapper>
-      <Heading>Membership</Heading>
+      <h1>Membership</h1>
       <MembershipSubPortal />
       </Wrapper>
-     
     </Background>
   )
 }
