@@ -105,20 +105,6 @@ const Payment = props => {
   let [clientSecret, setClientSecret] = useState('none')
 
   let [customerId, setCustomerId] = useState('none')
-      // Create Customer
-      const createCustomer = async () => {
-        try {
-          const response = await fetch('/payment/create-customer', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(user)
-          })
-          const {customerId: customerId} = await response.json()
-          setCustomerId(customerId)
-        } catch (error) {
-          console.log('create customer error',error)
-        }
-      }
 
   // Fetch client secret to render payment form from Stripe
   const fetchCs = async () => {
@@ -135,6 +121,22 @@ const Payment = props => {
     const {clientSecret: clientSecret} = await response.json()
     setClientSecret(clientSecret)
   }
+
+        // Create Customer
+        const createCustomer = async () => {
+          try {
+            const response = await fetch('/payment/create-customer', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify(user)
+            })
+            const {customerId: customerId} = await response.json()
+            setCustomerId(customerId)
+            fetchCs()
+          } catch (error) {
+            console.log('create customer error',error)
+          }
+        }
 
   const options = {
     clientSecret: clientSecret,
@@ -158,21 +160,21 @@ const Payment = props => {
   }
   }
 
-  if (clientSecret === 'none' || !clientSecret) {
-    return (
-      <div className="auth">
-        <svg />
-        <svg />
-        <svg />
-        <header className="authHeader">
-          <img src="./images/fdlogo.png" />
-        </header>
-        <CenteredWrapper>
-          Loading
-          </CenteredWrapper>
-      </div>
-    )
-  }
+  // if (clientSecret === 'none' || !clientSecret) {
+  //   return (
+  //     <div className="auth">
+  //       <svg />
+  //       <svg />
+  //       <svg />
+  //       <header className="authHeader">
+  //         <img src="./images/fdlogo.png" />
+  //       </header>
+  //       <CenteredWrapper>
+  //         Loading
+  //         </CenteredWrapper>
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className="auth">
