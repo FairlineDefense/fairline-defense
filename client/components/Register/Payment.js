@@ -1,8 +1,6 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {Elements} from '@stripe/react-stripe-js'
+import {useSelector} from 'react-redux'
 import {loadStripe} from '@stripe/stripe-js'
-import {PaymentElement} from '@stripe/react-stripe-js'
 import {useState, useEffect} from 'react'
 import CreateSubscription from './CreateSubscription'
 import css from './register.css'
@@ -92,7 +90,7 @@ const Payment = props => {
 
   let [customerId, setCustomerId] = useState('none')
 
-// Fetch client secret from Stripe with customer and product information
+  // Fetch client secret from Stripe with customer and product information
   const fetchCs = async () => {
     const response = await fetch('payment/create-subscription', {
       method: 'POST',
@@ -108,24 +106,24 @@ const Payment = props => {
     setClientSecret(clientSecret)
   }
 
-// Create Customer creates the customer object with their personal information for Stripe.
-// Stripe can then generate a Client Secret to render the PaymentElement in our CheckoutForm
-        const createCustomer = async (address) => {
-          try {
-            let reqBody = {...user, ...address}
-            const response = await fetch('/payment/create-customer', {
-              method: 'POST',
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify(reqBody)
-            })
-            const {customerId: customerId} = await response.json()
-            setCustomerId(customerId)
-          } catch (error) {
-            console.log('create customer error',error)
-          }
-        }
+  // Create Customer creates the customer object with their personal information for Stripe.
+  // Stripe can then generate a Client Secret to render the PaymentElement in our CheckoutForm
+  const createCustomer = async (address) => {
+  try {
+   let reqBody = {...user, ...address}
+   const response = await fetch('/payment/create-customer', {
+     method: 'POST',
+     headers: {'Content-Type': 'application/json'},
+     body: JSON.stringify(reqBody)
+   })
+   const {customerId: customerId} = await response.json()
+   setCustomerId(customerId)
+   } catch (error) {
+   console.log('create customer error',error)
+   }
+  }
 
-useEffect(()=>{
+  useEffect(()=>{
   try {
     if(customerId !== 'none') {
       fetchCs()
@@ -133,7 +131,7 @@ useEffect(()=>{
   } catch (error) {
     console.log(error)
   }
-}, [customerId])
+  }, [customerId])
 
   const options = {
     clientSecret: clientSecret,
