@@ -40,12 +40,6 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     unique: true,
   },
-  emergencyContactName: {
-    type: Sequelize.STRING,
-  },
-  emergencyContactPhone: {
-    type: Sequelize.STRING,
-  },
   email: {
     type: Sequelize.STRING,
     unique: true,
@@ -67,6 +61,12 @@ const User = db.define('user', {
     type: Sequelize.STRING,
   },
   zipCode: {
+    type: Sequelize.STRING,
+  },
+  emergencyContactName: {
+    type: Sequelize.STRING,
+  },
+  emergencyContactPhone: {
     type: Sequelize.STRING,
   },
   emailVerified: {
