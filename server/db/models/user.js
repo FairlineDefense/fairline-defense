@@ -192,7 +192,7 @@ const setMembershipNumber = async user => {
   console.log(membershipNumber)
 }
 
-User.beforeCreate(setMembershipNumber)
+// User.beforeCreate(setMembershipNumber)
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {
