@@ -86,7 +86,6 @@ const ChoosePlan = props => {
   `
 
   let [priceId, setPriceId] = useState('none')
-  let [customerId, setCustomerId] = useState('none')
 
   const clickHandler = e => {
     e.preventDefault()
@@ -94,26 +93,11 @@ const ChoosePlan = props => {
     createCustomer()
   }
 
-    // Create Customer
-    const createCustomer = async () => {
-      try {
-        const response = await fetch('/payment/create-customer', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(user)
-        })
-        const {customerId: customerId} = await response.json()
-        setCustomerId(customerId)
-      } catch (error) {
-        console.log('create customer error',error)
-      }
-    }
 
-  if (priceId !== 'none' && customerId !== 'none') {
+  if (priceId !== 'none') {
     return (
       <Payment
         priceId={priceId}
-        customerId={customerId}
         clickHandler={clickHandler}
       />
     )
