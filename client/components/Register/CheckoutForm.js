@@ -1,38 +1,37 @@
 import React, {useState} from 'react'
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js'
-import {Elements} from '@stripe/react-stripe-js'
+
 import styled from 'styled-components'
+
+const FormWrapper = styled.div`
+width: 800px;
+text-align: center;
+`
+ const Form = styled.form`
+ font-size: 18px;
+ font-weight: 200;
+ width: 100%;
+ `
+ const Span = styled.span`
+width: 100%;
+ `
+ const Button = styled.button`
+ background-color: var(--blue);
+ color: #FFF;
+ border-radius: 40px;
+ width: 340px;
+ padding: 1rem 2rem 1rem 2rem;
+ font-size: 20px;
+ font-weight: 100;
+ margin: 2rem;
+ outline: none;
+ border: none;
+ `
 const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
 
   const [errorMessage, setErrorMessage] = useState(null)
-
-
- const FormWrapper = styled.div`
- width: 800px;
- text-align: center;
- `
-  const Form = styled.form`
-  font-size: 18px;
-  font-weight: 200;
-  width: 100%;
-  `
-  const Span = styled.span`
-width: 100%;
-  `
-  const Button = styled.button`
-  background-color: var(--blue);
-  color: #FFF;
-  border-radius: 40px;
-  width: 340px;
-  padding: 1rem 2rem 1rem 2rem;
-  font-size: 20px;
-  font-weight: 100;
-  margin: 2rem;
-  outline: none;
-  border: none;
-  `
 
   const handleSubmit = async event => {
     // We don't want to let default form submission happen here,
