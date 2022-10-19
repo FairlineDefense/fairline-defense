@@ -10,71 +10,83 @@ display: flex;
 flex-direction: column;
 align-items: center;
 `
-const ButtonWrapper = styled.div`
-display: flex;
-flex-direction: row;
-width: 500px;
-align-items: center;
-justify-content: space-around;
-`
 const Button = styled.button`
-border: 1px solid #fff;
-border-radius: 5px;
+background-color: var(--blue);
+color: #FFF;
+border-radius: 40px;
+width: 340px;
+padding: 1rem 2rem 1rem 2rem;
+font-size: 20px;
+font-weight: 100;
+margin: 2rem;
 outline: none;
-background: transparent;
-color: #fff;
-height: 12rem;
-width: 18rem;
-margin: 2rem 1rem 2rem 1rem;
-padding: 2rem;
-display: flex;
-flex-direction: column;
-justify-content: center;
-text-align: center;
-align-items: center;
+border: none;
 cursor: pointer;
+`
 
-&:hover {
-  background: rgba(0, 171, 224, 0.2);
-  border-color: var(--blue);
-}
-`
-const Price = styled.p`
-font-size: 40px;
-color: var(--blue);
-margin-bottom: 1rem;
-text-align: center;
-`
-const Term = styled.p`
-font-size: 22px;
-font-weight: 200;
-margin-bottom: 3rem;
-text-align: center;
-`
-const Billing = styled.p`
-font-size: 18px;
-font-weight: 500;
-text-align: center;
-`
-const H1 = styled.h1`
+const Header = styled.h1`
 font-size: 32px;
 font-weight: 300;
 margin-bottom: 2rem;
 `
-const H2 = styled.h2`
-font-size: 24px;
-font-weight: 200;
-margin-bottom: 2rem;
+const Form = styled.form`
+max-width: 700px;
+display: flex;
+flex-wrap: wrap;
 `
-const H3 = styled.h3`
-font-size: 18px;
-font-weight: 200;
-margin-bottom: 2rem;
+const Input = styled.input`
+width: 220;
+margin: .5rem;
+padding: 1rem;
+font-color: #333;
+border: none;
+border-radius: 4px;
+outline: none;
 `
-const Blue = styled.span`
-font-size: inherit;
-font-weight: inherit;
-color: var(--blue);
+const InputGrow = styled.input`
+flex-grow: 1;
+margin: .5rem;
+padding: 1rem;
+font-color: #333;
+border: none;
+border-radius: 4px;
+outline: none;
+`
+const City = styled.input`
+min-width: 300px;
+margin: .5rem;
+padding: 1rem;
+font-color: #333;
+border: none;
+border-radius: 4px;
+outline: none;
+`
+const AptNumber = styled.input`
+width: 100px;
+margin: .5rem;
+padding: 1rem;
+font-color: #333;
+border: none;
+border-radius: 4px;
+outline: none;
+`
+const Line2 = styled.input`
+width: 100%;
+margin: .5rem;
+padding: 1rem;
+font-color: #333;
+border: none;
+border-radius: 4px;
+outline: none;
+`
+const State = styled.input`
+width: 100px;
+margin: .5rem;
+padding: 1rem;
+font-color: #333;
+border: none;
+border-radius: 4px;
+outline: none;
 `
 const ChoosePlan = props => {
   const user = useSelector(state => state.user)
@@ -82,11 +94,18 @@ const ChoosePlan = props => {
   const dispatch = useDispatch()
 
   return (
+    <Wrapper>
+    <Header>Shipping Address</Header>
     <Form>
-        {/* Heading */}
-        {/* Shipping Info */}
-        {/* Continue Button => createCustomer */}
+        <AptNumber name='' placeholder='Apt.' value=''></AptNumber>
+        <InputGrow name='' placeholder='Street Address' value=''></InputGrow>
+        <Line2 name='' placeholder='Street Address 2 - Optional' value=''></Line2>
+        <City name='' placeholder='City' value=''></City>
+        <State name='' placeholder='State' value=''></State>
+        <InputGrow name='' placeholder='Zip Code' value=''></InputGrow>
     </Form>
+    <Button onClick={(e)=>createCustomer(e)}>Continue to Payment</Button>
+    </Wrapper>
   )
 }
 export default ChoosePlan

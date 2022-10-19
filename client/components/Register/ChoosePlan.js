@@ -90,9 +90,7 @@ const ChoosePlan = props => {
   const clickHandler = e => {
     e.preventDefault()
     setPriceId(e.currentTarget.value)
-    createCustomer()
   }
-
 
   if (priceId !== 'none') {
     return (
