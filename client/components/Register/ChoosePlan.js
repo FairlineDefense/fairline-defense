@@ -102,7 +102,7 @@ const ChoosePlan = props => {
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(user)
         })
-        const {customerId: customerId} = await response.json()
+        const {customerId} = await response.json()
         setCustomerId(customerId)
       } catch (error) {
         console.log('create customer error',error)

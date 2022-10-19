@@ -146,7 +146,7 @@ margin-bottom: 2rem;
         <ProgressBarWrapper>
         <CircularProgressbar
         value={50}
-        text={`227 days remaining`}
+        text="227 days remaining"
         styles={buildStyles({
           textColor: "#FFF",
           pathColor: "#D6AE21",

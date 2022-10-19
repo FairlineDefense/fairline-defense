@@ -79,42 +79,42 @@ cursor: pointer;
             <form>
                 <InputGroup>
                 <span>
-                    <Label htmlFor={'firstName'}>First Name</Label>
-                        <Input placeholder={'First Name'} name='firstName' value={form.firstName}></Input>
+                    <Label htmlFor="firstName">First Name</Label>
+                        <Input placeholder="First Name" name='firstName' value={form.firstName}></Input>
                     </span>
                     <span>
-                    <Label htmlFor={'lastName'}>Last Name</Label>
-                        <Input placeholder={'Last Name'} name='lastName' value={form.lastName}></Input>
+                    <Label htmlFor="lastName">Last Name</Label>
+                        <Input placeholder="Last Name" name='lastName' value={form.lastName}></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>
                 <span>
-                    <Label htmlFor={'email'}>Email</Label>
-                        <Input placeholder={'Email Address'} name='email' value={form.email}></Input>
+                    <Label htmlFor="email">Email</Label>
+                        <Input placeholder="Email Address" name='email' value={form.email}></Input>
                     </span>
                     <span>
-                    <Label htmlFor={'phone'}>Phone</Label>
-                        <Input placeholder={'Phone Number'} name='phone' value={form.phone}></Input>
+                    <Label htmlFor="phone">Phone</Label>
+                        <Input placeholder="Phone Number" name='phone' value={form.phone}></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>
                 <span>
-                    <Label htmlFor={'streetAddress'}>Street Address</Label>
-                        <Input placeholder={'Street Address'} name='streetAddress' value={form.streetAddress}></Input>
+                    <Label htmlFor="streetAddress">Street Address</Label>
+                        <Input placeholder="Street Address" name='streetAddress' value={form.streetAddress}></Input>
                     </span>
                     <span>
-                    <Label htmlFor={'city'}>City, Zip Code</Label>
-                        <Input placeholder={'City, Zip Code'} name='city' value={form.city + form.zipCode}></Input>
+                    <Label htmlFor="city">City, Zip Code</Label>
+                        <Input placeholder="City, Zip Code" name='city' value={form.city + form.zipCode}></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>
                 <span>
-                    <Label htmlFor={'password'}>Password</Label>
-                        <Input placeholder={'Password'} name='password' value={form.password}></Input>
+                    <Label htmlFor="password">Password</Label>
+                        <Input placeholder="Password" name='password' value={form.password}></Input>
                     </span>
                     <span>
-                    <Label htmlFor={'repeatPassword'}>Repeat New Password</Label>
-                        <Input placeholder={'Repeat Password'} name='repeatPassword' value={form.repeatPassword}></Input>
+                    <Label htmlFor="repeatPassword">Repeat New Password</Label>
+                        <Input placeholder="Repeat Password" name='repeatPassword' value={form.repeatPassword}></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>

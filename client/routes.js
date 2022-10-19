@@ -14,7 +14,7 @@ import {
   Feed,
   PaymentStatus,
   VerifyEmail,
-  VerifyPhone,
+  VerifyPhone
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'

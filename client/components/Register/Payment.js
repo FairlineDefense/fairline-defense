@@ -26,7 +26,7 @@ const Payment = props => {
         customerId: customerId,
       }),
     })
-    const {clientSecret: clientSecret} = await response.json()
+    const {clientSecret} = await response.json()
     setClientSecret(clientSecret)
   }
 
