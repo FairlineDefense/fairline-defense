@@ -6,6 +6,7 @@ const User = db.define('user', {
   membershipNumber: {
     type: Sequelize.STRING,
     unique: true,
+    // allowNull: false
   },
   firstName: {
     type: Sequelize.STRING,
@@ -192,7 +193,7 @@ const setMembershipNumber = async user => {
   console.log(membershipNumber)
 }
 
-// User.beforeCreate(setMembershipNumber)
+User.beforeCreate(setMembershipNumber)
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {
