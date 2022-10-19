@@ -93,7 +93,7 @@ const BillingAddress = props => {
   }
   return (
     <Wrapper>
-    <Header>Shipping Address</Header>
+    <Header>Billing Address</Header>
     <Form>
         <AptNumber name='apt' placeholder='Apt.' onChange={(e) => changeHandler(e)} value={address.apt}></AptNumber>
         <Input name='streetAddress' placeholder='Street Address' onChange={(e) => changeHandler(e)} value={address.streetAddress} required></Input>
