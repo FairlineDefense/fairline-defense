@@ -86,34 +86,16 @@ const ChoosePlan = props => {
   `
 
   let [priceId, setPriceId] = useState('none')
-  let [customerId, setCustomerId] = useState('none')
 
   const clickHandler = e => {
     e.preventDefault()
     setPriceId(e.currentTarget.value)
-    createCustomer()
   }
 
-    // Create Customer
-    const createCustomer = async () => {
-      try {
-        const response = await fetch('/payment/create-customer', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(user)
-        })
-        const {customerId: customerId} = await response.json()
-        setCustomerId(customerId)
-      } catch (error) {
-        console.log('create customer error',error)
-      }
-    }
-
-  if (priceId !== 'none' && customerId !== 'none') {
+  if (priceId !== 'none') {
     return (
       <Payment
         priceId={priceId}
-        customerId={customerId}
         clickHandler={clickHandler}
       />
     )
@@ -130,12 +112,12 @@ const ChoosePlan = props => {
         <H2>Your account has been created succsefully!</H2>
         <H1>Start Your Protection</H1>
         <ButtonWrapper>
-          <Button onClick={e => clickHandler(e)} value="price_1LrnW0IvvF6ba6jUlHTzjnlt">
+          <Button onClick={e => clickHandler(e)} value="month">
             <Price>$19</Price>
             <Term>Per Month</Term>
             <Billing>Billed Monthly</Billing>
           </Button>
-          <Button onClick={e => clickHandler(e)} value="price_1LrnXQIvvF6ba6jUHo9iIRDM">
+          <Button onClick={e => clickHandler(e)} value="year">
             <Price>$199</Price>
             <Term>Per Year</Term>
             <Billing>Billed Annually</Billing>
