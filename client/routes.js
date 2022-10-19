@@ -32,14 +32,13 @@ const Routes = props => {
 
   return (
     <Switch>
-            <Route path="/" component={SiteHome} />
-            <Route path="/howitworks" component={HowItWorks} />
-            <Route path="/coverages" component={Coverages} />
-            <Route path="/testimonials" component={Testimonials} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-{isLoggedIn &&
+      {isLoggedIn ? (
+        <div>
           <Switch>
+            <Route exact path="/" component={SiteHome} />
+            <Route exact path="/howitworks" component={HowItWorks} />
+            <Route exact path="/coverages" component={Coverages} />
+            <Route exact path="/testimonials" component={Testimonials} />
             <Route path="/home" component={UserHome} />
             <Route path="/membership" component={Membership} />
             <Route path="/benefits" component={Benefits} />
@@ -47,8 +46,20 @@ const Routes = props => {
             <Route path="/paymentstatus" component={PaymentStatus} />
             <Route path="/verifyemail" component={VerifyEmail} />
           </Switch>
-}
-        <Route component={Login} />
+        </div>
+      ) : (
+        <div>
+          <Switch>
+            <Route exact path="/" component={SiteHome} />
+            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/howitworks" component={HowItWorks} />
+            <Route exact path="/coverages" component={Coverages} />
+            <Route exact path="/testimonials" component={Testimonials} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+          </Switch>
+        </div>
+      )}
     </Switch>
   )
 }
