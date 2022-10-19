@@ -179,7 +179,20 @@ const setSaltAndPassword = user => {
     user.password = User.encryptPassword(user.password(), user.salt())
   }
 }
+const setMembershipNumber = async user => {
+  const makeNumber = () => {
+    return Math.floor(100000000 + Math.random() * 900000000);
+  }
+  let membershipNumber = makeNumber()
 
+  // while(!await User.findOne({where:{membershipNumber: membershipNumber}})) {
+  //   membershipNumber = makeNumber()
+  // }
+  user.membershipNumber = String(membershipNumber)
+  console.log(membershipNumber)
+}
+
+User.beforeCreate(setMembershipNumber)
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {
