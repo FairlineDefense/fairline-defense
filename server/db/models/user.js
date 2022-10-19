@@ -46,10 +46,10 @@ const User = db.define('user', {
     unique: true,
     allowNull: false
   },
-  apartmentNumber: {
+  streetAddress: {
     type: Sequelize.STRING,
   },
-  streetAddress: {
+  line2: {
     type: Sequelize.STRING,
   },
   city: {
