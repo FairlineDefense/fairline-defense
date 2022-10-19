@@ -19,16 +19,16 @@ try {
     }
   });
 
-  await User.update({
-    customerId: customer.id,
-    streetAddress: req.body.apt + req.body.streetAddress,
-    line2: req.body.line2,
-    city: req.body.address,
-    state: req.body.state,
-    zipCode: req.body.zipCode,
+  // await User.update({
+  //   customerId: customer.id,
+  //   streetAddress: req.body.apt + req.body.streetAddress,
+  //   line2: req.body.line2,
+  //   city: req.body.address,
+  //   state: req.body.state,
+  //   zipCode: req.body.zipCode,
 
-    where: {email:req.body.email}
-  })
+  //   where: {email:req.body.email}
+  // })
 
   return res.json({customerId: customer.id})
 } catch (error) {
