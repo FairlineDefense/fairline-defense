@@ -5,6 +5,7 @@ import {useState} from 'react'
 import {Elements} from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js'
 import {PaymentElement} from '@stripe/react-stripe-js'
+import CheckoutForm  from './CheckoutForm'
 
 const Wrapper = styled.div`
 width: 100%;
@@ -13,87 +14,46 @@ display: flex;
 flex-direction: column;
 align-items: center;
 `
-const ButtonWrapper = styled.div`
-display: flex;
-flex-direction: row;
-width: 500px;
-align-items: center;
-justify-content: space-around;
-`
 const Button = styled.button`
-border: 1px solid #fff;
-border-radius: 5px;
+background-color: var(--blue);
+color: #FFF;
+border-radius: 40px;
+width: 340px;
+padding: 1rem 2rem 1rem 2rem;
+font-size: 20px;
+font-weight: 100;
+margin: 2rem;
 outline: none;
-background: transparent;
-color: #fff;
-height: 12rem;
-width: 18rem;
-margin: 2rem 1rem 2rem 1rem;
-padding: 2rem;
-display: flex;
-flex-direction: column;
-justify-content: center;
-text-align: center;
-align-items: center;
+border: none;
 cursor: pointer;
-
-&:hover {
-  background: rgba(0, 171, 224, 0.2);
-  border-color: var(--blue);
-}
 `
-const Price = styled.p`
-font-size: 40px;
-color: var(--blue);
-margin-bottom: 1rem;
-text-align: center;
-`
-const Term = styled.p`
-font-size: 22px;
-font-weight: 200;
-margin-bottom: 3rem;
-text-align: center;
-`
-const Billing = styled.p`
-font-size: 18px;
-font-weight: 500;
-text-align: center;
-`
-const H1 = styled.h1`
+const Header = styled.h1`
 font-size: 32px;
 font-weight: 300;
-margin-bottom: 2rem;
+margin: .5rem 0rem 2rem 0rem;
 `
-const H2 = styled.h2`
-font-size: 24px;
-font-weight: 200;
-margin-bottom: 2rem;
-`
-const H3 = styled.h3`
-font-size: 18px;
-font-weight: 200;
-margin-bottom: 2rem;
-`
-const Blue = styled.span`
-font-size: inherit;
-font-weight: inherit;
-color: var(--blue);
+const Form = styled.form`
+max-width: 700px;
+display: flex;
+flex-wrap: wrap;
 `
 const CreateSubscription = props => {
-  const user = useSelector(state => state.user)
-  const {name, displayName, error} = props
-  const dispatch = useDispatch()
+  const {stripePromise, options} = props
 
+  if(!options.clientSecret || options.clientSecret === 'none') {
+    return 'loading'
+  }
   return (
-    <Form>
-<CenteredWrapper>
-    <H1>Credit Card</H1></CenteredWrapper>
-        <Elements stripe={stripePromise} options={options}>
-        <CenteredWrapper>
+    <>
+    <Wrapper>
+    <Header>Credit Card</Header>
+    </Wrapper>
+        <Elements stripePromise={stripePromise} options={options}>
+        <Wrapper>
           <CheckoutForm />
-        </CenteredWrapper>
+        </Wrapper>
         </Elements>
-    </Form>
+        </>
   )
 }
 export default CreateSubscription

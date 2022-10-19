@@ -22,7 +22,6 @@ try {
   router.post('/create-subscription', async (req, res) => {
     const customerId = req.body.customerId
     const priceId = req.body.priceId;
-
     try {
       // Create the subscription. Note we're expanding the Subscription's
       // latest invoice and that invoice's payment_intent
@@ -36,7 +35,6 @@ try {
         payment_settings: { save_default_payment_method: 'on_subscription' },
         expand: ['latest_invoice.payment_intent'],
       });
-
       return res.json({
         subscriptionId: subscription.id,
         clientSecret: subscription.latest_invoice.payment_intent.client_secret,

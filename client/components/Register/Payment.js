@@ -1,5 +1,5 @@
 import React from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {Elements} from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js'
 import {PaymentElement} from '@stripe/react-stripe-js'
@@ -85,6 +85,7 @@ text-align: center;
 `
 
 const Payment = props => {
+  let user = useSelector((state)=>state.user)
   const {priceId, clickHandler} = props
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
   let [clientSecret, setClientSecret] = useState('none')
@@ -109,20 +110,28 @@ const Payment = props => {
 
 // Create Customer creates the customer object with their personal information for Stripe.
 // Stripe can then generate a Client Secret to render the PaymentElement in our CheckoutForm
-        const createCustomer = async () => {
+        const createCustomer = async (address) => {
           try {
+            let reqBody = {...user, ...address}
             const response = await fetch('/payment/create-customer', {
               method: 'POST',
               headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify(user)
+              body: JSON.stringify(reqBody)
             })
             const {customerId: customerId} = await response.json()
             setCustomerId(customerId)
-            fetchCs()
           } catch (error) {
             console.log('create customer error',error)
           }
         }
+
+useEffect(()=>{
+  try {
+    fetchCs()
+  } catch (error) {
+    console.log(error)
+  }
+}, [customerId])
 
   const options = {
     clientSecret: clientSecret,
@@ -181,10 +190,10 @@ const Payment = props => {
             </>
           )}
         </ButtonWrapper>
-        {customerId === 'none' ?
+        {clientSecret === 'none' ?
         <BillingAddress createCustomer={createCustomer} />
         :
-        <CreateSubscription stripe={stripePromise} options={options} />
+        <CreateSubscription stripePromise={stripePromise} options={options} />
         }
       </Wrapper>
     </div>

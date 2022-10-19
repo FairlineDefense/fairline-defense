@@ -35,15 +35,6 @@ display: flex;
 flex-wrap: wrap;
 `
 const Input = styled.input`
-width: 220;
-margin: .5rem;
-padding: 1rem;
-font-color: #333;
-border: none;
-border-radius: 4px;
-outline: none;
-`
-const InputGrow = styled.input`
 flex-grow: 1;
 margin: .5rem;
 padding: 1rem;
@@ -104,12 +95,12 @@ const BillingAddress = props => {
     <Wrapper>
     <Header>Shipping Address</Header>
     <Form>
-        <AptNumber name='apt' placeholder='Apt.' onChange={() => changeHandler()} value={address.apt}></AptNumber>
-        <InputGrow name='streetAddress' placeholder='Street Address' onChange={() => changeHandler()} value={address.streetAddress} required></InputGrow>
-        <Line2 name='line2' placeholder='Street Address 2 - Optional' onChange={() => changeHandler()} value={address.line2}></Line2>
-        <City name='city' placeholder='City' onChange={() => changeHandler()} value={address.city} required></City>
-        <State name='state' placeholder='State' onChange={() => changeHandler()} value={address.state} required></State>
-        <InputGrow name='zipCode' placeholder='Zip Code' onChange={() => changeHandler()} value={address.zipCode} required></InputGrow>
+        <AptNumber name='apt' placeholder='Apt.' onChange={(e) => changeHandler(e)} value={address.apt}></AptNumber>
+        <Input name='streetAddress' placeholder='Street Address' onChange={(e) => changeHandler(e)} value={address.streetAddress} required></Input>
+        <Line2 name='line2' placeholder='Street Address 2 - Optional' onChange={(e) => changeHandler(e)} value={address.line2}></Line2>
+        <City name='city' placeholder='City' onChange={(e) => changeHandler(e)} value={address.city} required></City>
+        <State name='state' placeholder='State' onChange={(e) => changeHandler(e)} value={address.state} required></State>
+        <Input name='zipCode' placeholder='Zip Code' onChange={(e) => changeHandler(e)} value={address.zipCode} required></Input>
     </Form>
     <Button onClick={(e)=>clickHandler(e)}>Continue to Payment</Button>
     </Wrapper>
