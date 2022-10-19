@@ -9,9 +9,27 @@ try {
   const customer = await stripe.customers.create({
     email: req.body.email,
     name: `${req.body.firstName} ${req.body.lastName}`,
-    phone: req.body.phone
+    phone: req.body.phone,
+    address: {
+      line1: req.body.apt + req.body.streetAddress,
+      line2: req.body.line2,
+      city: req.body.address,
+      state: req.body.state,
+      postal_code: req.body.zipCode,
+    }
   });
-  // await User.update({customerId: customer.id, where:{email:req.body.email}}) TBD - How to conceal customer id for our DB
+
+  await User.update({
+    customerId: customer.id,
+    streetAddress: req.body.apt + req.body.streetAddress,
+    line2: req.body.line2,
+    city: req.body.address,
+    state: req.body.state,
+    zipCode: req.body.zipCode,
+
+    where: {email:req.body.email}
+  })
+
   return res.json({customerId: customer.id})
 } catch (error) {
   console.log(error)
