@@ -4,11 +4,11 @@ import {Elements} from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js'
 import {PaymentElement} from '@stripe/react-stripe-js'
 import {useState, useEffect} from 'react'
-import CheckoutForm from './CheckoutForm'
+import CreateSubscription from './CreateSubscription'
 import css from './register.css'
 import styled from 'styled-components'
 import RegisterHeader from './RegisterHeader'
-import CreateCustomer from './CreateCustomer'
+import BillingAddress from './BillingAddress'
 
 const Wrapper = styled.div`
 width: 100%;
@@ -25,11 +25,6 @@ const H1 = styled.h1`
 font-size: 32px;
 font-weight: 300;
 margin: 1rem 0rem 2rem 0rem;
-`
-const H2 = styled.h2`
-font-size: 24px;
-font-weight: 200;
-margin-bottom: 2rem;
 `
 const ButtonWrapper = styled.div`
 display: flex;
@@ -83,22 +78,12 @@ color: var(--blue);
 margin-bottom: 1rem;
 text-align: center;
 `
-const Term = styled.p`
-font-size: 22px;
-font-weight: 200;
-margin-bottom: 1rem;
-text-align: center;
-`
 const Billing = styled.p`
 font-size: 18px;
 font-weight: 500;
 text-align: center;
 `
-const Blue = styled.span`
-font-size: inherit;
-font-weight: inherit;
-color: var(--blue);
-`
+
 const Payment = props => {
   const {priceId, clickHandler} = props
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
@@ -106,7 +91,7 @@ const Payment = props => {
 
   let [customerId, setCustomerId] = useState('none')
 
-  // Fetch client secret to render payment form from Stripe
+// Fetch client secret from Stripe with customer and product information
   const fetchCs = async () => {
     const response = await fetch('payment/create-subscription', {
       method: 'POST',
@@ -122,7 +107,8 @@ const Payment = props => {
     setClientSecret(clientSecret)
   }
 
-        // Create Customer
+// Create Customer creates the customer object with their personal information for Stripe.
+// Stripe can then generate a Client Secret to render the PaymentElement in our CheckoutForm
         const createCustomer = async () => {
           try {
             const response = await fetch('/payment/create-customer', {
@@ -160,22 +146,6 @@ const Payment = props => {
   }
   }
 
-  // if (clientSecret === 'none' || !clientSecret) {
-  //   return (
-  //     <div className="auth">
-  //       <svg />
-  //       <svg />
-  //       <svg />
-  //       <header className="authHeader">
-  //         <img src="./images/fdlogo.png" />
-  //       </header>
-  //       <CenteredWrapper>
-  //         Loading
-  //         </CenteredWrapper>
-  //     </div>
-  //   )
-  // }
-
   return (
     <div className="auth">
       <svg />
@@ -212,7 +182,7 @@ const Payment = props => {
           )}
         </ButtonWrapper>
         {customerId === 'none' ?
-        <CreateCustomer createCustomer={createCustomer} />
+        <BillingAddress createCustomer={createCustomer} />
         :
         <CreateSubscription stripe={stripePromise} options={options} />
         }

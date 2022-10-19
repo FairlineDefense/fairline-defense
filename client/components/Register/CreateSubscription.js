@@ -96,4 +96,4 @@ const CreateSubscription = props => {
     </Form>
   )
 }
-export default ChoosePlan
+export default CreateSubscription

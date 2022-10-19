@@ -27,7 +27,7 @@ cursor: pointer;
 const Header = styled.h1`
 font-size: 32px;
 font-weight: 300;
-margin-bottom: 2rem;
+margin: .5rem 0rem 2rem 0rem;
 `
 const Form = styled.form`
 max-width: 700px;
@@ -88,24 +88,31 @@ border: none;
 border-radius: 4px;
 outline: none;
 `
-const ChoosePlan = props => {
-  const user = useSelector(state => state.user)
-  const {name, displayName, error} = props
-  const dispatch = useDispatch()
+const BillingAddress = props => {
+  const {createCustomer} = props
+  let [address, setAddress] = useState({apt: '', streetAddress: '', address2: '', city: '', state: '', zipCode: ''})
 
+  const changeHandler = (e) => {
+    e.preventDefault()
+    setAddress({...address, [e.target.name]: e.target.value})
+  }
+  const clickHandler = (e) => {
+    e.preventDefault()
+    createCustomer(address)
+  }
   return (
     <Wrapper>
     <Header>Shipping Address</Header>
     <Form>
-        <AptNumber name='' placeholder='Apt.' value=''></AptNumber>
-        <InputGrow name='' placeholder='Street Address' value=''></InputGrow>
-        <Line2 name='' placeholder='Street Address 2 - Optional' value=''></Line2>
-        <City name='' placeholder='City' value=''></City>
-        <State name='' placeholder='State' value=''></State>
-        <InputGrow name='' placeholder='Zip Code' value=''></InputGrow>
+        <AptNumber name='apt' placeholder='Apt.' onChange={() => changeHandler()} value={address.apt}></AptNumber>
+        <InputGrow name='streetAddress' placeholder='Street Address' onChange={() => changeHandler()} value={address.streetAddress} required></InputGrow>
+        <Line2 name='line2' placeholder='Street Address 2 - Optional' onChange={() => changeHandler()} value={address.line2}></Line2>
+        <City name='city' placeholder='City' onChange={() => changeHandler()} value={address.city} required></City>
+        <State name='state' placeholder='State' onChange={() => changeHandler()} value={address.state} required></State>
+        <InputGrow name='zipCode' placeholder='Zip Code' onChange={() => changeHandler()} value={address.zipCode} required></InputGrow>
     </Form>
-    <Button onClick={(e)=>createCustomer(e)}>Continue to Payment</Button>
+    <Button onClick={(e)=>clickHandler(e)}>Continue to Payment</Button>
     </Wrapper>
   )
 }
-export default ChoosePlan
+export default BillingAddress
