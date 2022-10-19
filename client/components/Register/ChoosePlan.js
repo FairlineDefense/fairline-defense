@@ -92,6 +92,7 @@ const ChoosePlan = props => {
     setPriceId(e.currentTarget.value)
   }
 
+
   if (priceId !== 'none') {
     return (
       <Payment

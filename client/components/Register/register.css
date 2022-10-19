@@ -138,7 +138,7 @@
   color: #000;
 }
 
-svg {
+.auth svg {
   position: absolute;
   height: 175px;
   transform: rotate(-5deg) skew(-20deg);
@@ -146,17 +146,17 @@ svg {
   left: -10%;
 }
 
-svg:nth-child(1) {
+.auth svg:nth-child(1) {
   width: 540px;
   top: -50px;
 }
 
-svg:nth-child(2) {
+.auth svg:nth-child(2) {
   width: 590px;
   top: 200px;
 }
 
-svg:nth-child(3) {
+.auth svg:nth-child(3) {
   width: 260px;
   top: 460px;
 }
