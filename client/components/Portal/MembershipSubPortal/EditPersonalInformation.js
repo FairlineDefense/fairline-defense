@@ -2,19 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-export default function EditPersonalInformation(props) {
-let {user} = props
-const dispatch = useDispatch()
-let [form, setForm] = useState({firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, streetAddress: user.streetAddress, city: user.city, zipCode: user.zipCode, password: user.password || '', repeatPassword: ''})
 
-const changeHandler = (e) => {
-    e.preventDefault()
-    setForm({...form, [e.target.name]: e.target.value})
-}
-const submitHandler = (e) => {
-    e.preventDefault()
-    //dispatch update user
-}
 const Wrapper = styled.div`
 width: 100%;
 height: 100%;
@@ -74,6 +62,20 @@ font-size: 18px;
 font-weight: 200;
 cursor: pointer;
 `
+export default function EditPersonalInformation(props) {
+let {user} = props
+const dispatch = useDispatch()
+let [form, setForm] = useState({firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, streetAddress: user.streetAddress, city: user.city, zipCode: user.zipCode, password: user.password || '', repeatPassword: ''})
+
+const changeHandler = (e) => {
+    e.preventDefault()
+    setForm({...form, [e.target.name]: e.target.value})
+}
+const submitHandler = (e) => {
+    e.preventDefault()
+    //dispatch update user
+}
+
     return (
         <Wrapper>
             <form>
@@ -104,7 +106,7 @@ cursor: pointer;
                     </span>
                     <span>
                     <Label htmlFor="city">City, Zip Code</Label>
-                        <Input placeholder="City, Zip Code" name='city' value={form.city + form.zipCode}></Input>
+                        <Input placeholder="City, Zip Code" name='city' value={form.city + ',' + ' ' + form.zipCode}></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>

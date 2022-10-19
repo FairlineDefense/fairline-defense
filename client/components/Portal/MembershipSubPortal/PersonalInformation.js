@@ -58,23 +58,23 @@ return (
             <InformationWrapper>
                 <InformationBlock>
                     <h3>Full Name</h3>
-                    <small>Colt Seman</small>
+                    <small>{`${user.firstName} ${user.lastName}`}</small>
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Email</h3>
-                    <small>colt@fairlinedefense.com</small>
+                    <small>{user.email}</small>
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Phone</h3>
-                    <small>123-456-7890</small>
+                    <small>{user.phone}</small>
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Shipping Address</h3>
-                    <small>22 3rd Street</small>
+                    <small>{`${user.streetAddress}, ${user.city}, ${user.state}`}</small>
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Password</h3>
-                    <small>*******************</small>
+                    <small>************</small>
                 </InformationBlock>
             </InformationWrapper>
             <EditWrapper>
