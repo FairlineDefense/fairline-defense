@@ -27,9 +27,9 @@ const UserHome = () => {
   //   return <VerifyPhone />
   // }
 
-  // if (!user.plan) {
-  //   return <ChoosePlan />
-  // }
+  if (!user.plan) {
+    return <ChoosePlan />
+  }
 const Wrapper = styled.div`
 width: 100vw;
 padding: 2rem;
