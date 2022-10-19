@@ -23,7 +23,7 @@ try {
     customerId: customer.id,
     streetAddress: req.body.apt + req.body.streetAddress,
     line2: req.body.line2,
-    city: req.body.address,
+    city: req.body.city,
     state: req.body.state,
     zipCode: req.body.zipCode,
     planActive: true,
