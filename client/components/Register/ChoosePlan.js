@@ -112,12 +112,12 @@ const ChoosePlan = props => {
         <H2>Your account has been created succsefully!</H2>
         <H1>Start Your Protection</H1>
         <ButtonWrapper>
-          <Button onClick={e => clickHandler(e)} value="price_1LrnW0IvvF6ba6jUlHTzjnlt">
+          <Button onClick={e => clickHandler(e)} value="month">
             <Price>$19</Price>
             <Term>Per Month</Term>
             <Billing>Billed Monthly</Billing>
           </Button>
-          <Button onClick={e => clickHandler(e)} value="price_1LrnXQIvvF6ba6jUHo9iIRDM">
+          <Button onClick={e => clickHandler(e)} value="year">
             <Price>$199</Price>
             <Term>Per Year</Term>
             <Billing>Billed Annually</Billing>

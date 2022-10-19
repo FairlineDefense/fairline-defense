@@ -168,24 +168,24 @@ useEffect(()=>{
         <H1>Selected Plan</H1>
         </CenteredWrapper>
         <ButtonWrapper>
-          {priceId === 'price_1LrnW0IvvF6ba6jUlHTzjnlt' ? (
+          {priceId === 'month' ? (
             <>
-              <SelectedButton value="price_1LrnW0IvvF6ba6jUlHTzjnlt">
+              <SelectedButton value="month">
                 <Price>$19</Price>
                 <Billing>Billed Monthly</Billing>
               </SelectedButton>
-              <Button onClick={e => clickHandler(e)} value="price_1LrnXQIvvF6ba6jUHo9iIRDM">
+              <Button onClick={e => clickHandler(e)} value="year">
                 <Price>$199</Price>
                 <Billing>Billed Annually</Billing>
               </Button>
             </>
           ) : (
             <>
-              <Button onClick={e => clickHandler(e)} value="price_1LrnW0IvvF6ba6jUlHTzjnlt">
+              <Button onClick={e => clickHandler(e)} value="month">
                 <Price>$19</Price>
                 <Billing>Billed Monthly</Billing>
               </Button>
-              <SelectedButton value="price_1LrnXQIvvF6ba6jUHo9iIRDM">
+              <SelectedButton value="year">
                 <Price>$199</Price>
                 <Billing>Billed Annually</Billing>
               </SelectedButton>

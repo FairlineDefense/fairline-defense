@@ -21,7 +21,8 @@ try {
 
   router.post('/create-subscription', async (req, res) => {
     const customerId = req.body.customerId
-    const priceId = req.body.priceId;
+    const priceIds = {month: 'price_1LrnW0IvvF6ba6jUlHTzjnlt', year: 'price_1LrnXQIvvF6ba6jUHo9iIRDM'}
+    let priceId = priceIds[req.body.priceId];
     try {
       // Create the subscription. Note we're expanding the Subscription's
       // latest invoice and that invoice's payment_intent
