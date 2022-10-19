@@ -127,7 +127,9 @@ const Payment = props => {
 
 useEffect(()=>{
   try {
-    fetchCs()
+    if(customerId !== 'none') {
+      fetchCs()
+    }
   } catch (error) {
     console.log(error)
   }
@@ -193,7 +195,7 @@ useEffect(()=>{
         {clientSecret === 'none' ?
         <BillingAddress createCustomer={createCustomer} />
         :
-        <CreateSubscription stripePromise={stripePromise} options={options} />
+        <CreateSubscription stripe={stripePromise} options={options} />
         }
       </Wrapper>
     </div>

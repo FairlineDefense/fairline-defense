@@ -38,7 +38,7 @@ display: flex;
 flex-wrap: wrap;
 `
 const CreateSubscription = props => {
-  const {stripePromise, options} = props
+  const {stripe, options} = props
 
   if(!options.clientSecret || options.clientSecret === 'none') {
     return 'loading'
@@ -48,7 +48,7 @@ const CreateSubscription = props => {
     <Wrapper>
     <Header>Credit Card</Header>
     </Wrapper>
-        <Elements stripePromise={stripePromise} options={options}>
+        <Elements stripe={stripe} options={options}>
         <Wrapper>
           <CheckoutForm />
         </Wrapper>
