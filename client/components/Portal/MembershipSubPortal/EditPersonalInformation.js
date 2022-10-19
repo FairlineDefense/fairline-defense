@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import update from '../../../store/'
 
 const Wrapper = styled.div`
 width: 100%;
@@ -74,11 +75,12 @@ const changeHandler = (e) => {
 const submitHandler = (e) => {
     e.preventDefault()
     //dispatch update user
+    dispatch(update(form))
 }
 
     return (
         <Wrapper>
-            <form>
+            <form onSubmit={submitHandler}>
                 <InputGroup>
                 <span>
                     <Label htmlFor="firstName">First Name</Label>
@@ -120,7 +122,7 @@ const submitHandler = (e) => {
                 </span>
                 </InputGroup>
                 <InputGroup>
-                <Button>Cancel</Button><CyanButton>Save Edits</CyanButton>
+                <Button type="button" onClick={()=>cancelHandler()}>Cancel</Button><CyanButton type="submit">Save Edits</CyanButton>
                 </InputGroup>
            </form>
         </Wrapper>
