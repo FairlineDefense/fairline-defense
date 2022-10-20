@@ -101,7 +101,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case UPDATE_USER:
       const {user} = action
-      return {...state, user}
+      console.log(user)
+      return {...state, ...user}
     case REMOVE_USER:
       return defaultUser
     default:

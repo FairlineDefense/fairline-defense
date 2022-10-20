@@ -85,10 +85,21 @@ font-size: 18px;
 font-weight: 200;
 cursor: pointer;
 `
+const ErrorText = styled.div`
+height: 70px;
+width: 220px;
+margin: 2rem;
+border: 1px solid red;
+border-radius: 5px;
+padding: 1rem;
+background-color: #fff;
+color: inherit;
+`
 export default function EditPersonalInformation(props) {
 let {user, setState} = props
 const dispatch = useDispatch()
 let [form, setForm] = useState({id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, streetAddress: user.streetAddress, line2: user.line2, city: user.city, state: user.state, zipCode: user.zipCode, password: user.password || '', repeatPassword: ''})
+let [errorText, setErrorText] = useState('')
 
 const changeHandler = (e) => {
     e.preventDefault()
@@ -101,8 +112,34 @@ const cancelHandler = (e) => {
 }
 const submitHandler = (e) => {
     e.preventDefault()
-    console.log(form)
-    dispatch(update(form))
+    function validateFields() {
+        if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(form.email)) {
+          return setErrorText('Invalid email address.')
+        }
+        if(!/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(form.phone)) {
+          return setErrorText('Invalid phone number.')
+        }
+        if(!/^\d{5}(-\d{4})?$/.test(form.zipCode)) {
+            return setErrorText('Invalid zip code.')
+        }
+        //Not operational:
+        if (password !== confirmPassword) {
+          return setErrorText('Passwords do not match.')
+        }
+        if (password.length < 8) {
+          return setErrorText('Your password must be at least 8 characters')
+        }
+        if (password.search(/[a-z]/i) < 0) {
+          return setErrorText('Your password must contain at least one letter.')
+        }
+        if (password.search(/[0-9]/) < 0) {
+          return setErrorText('Your password must contain at least one digit.')
+        } else {
+            dispatch(update(form))
+        }
+      }
+      validateFields()
+    
 }
 
     return (
@@ -111,32 +148,42 @@ const submitHandler = (e) => {
                 <InputGroup>
                 <span>
                     <Label htmlFor="firstName">First Name</Label>
-                        <Input placeholder="First Name" name='firstName' value={form.firstName} onChange={(e)=>changeHandler(e)}></Input>
+                        <Input placeholder="First Name" name='firstName' value={form.firstName} onChange={(e)=>changeHandler(e)} required></Input>
                     </span>
                     <span>
                     <Label htmlFor="lastName">Last Name</Label>
-                        <Input placeholder="Last Name" name='lastName' value={form.lastName} onChange={(e)=>changeHandler(e)}></Input>
+                        <Input placeholder="Last Name" name='lastName' value={form.lastName} onChange={(e)=>changeHandler(e)} required></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>
                 <span>
                     <Label htmlFor="email">Email</Label>
-                        <Input placeholder="Email Address" name='email' value={form.email} onChange={(e)=>changeHandler(e)}></Input>
+                        <Input placeholder="Email Address" name='email' value={form.email} onChange={(e)=>changeHandler(e)} required></Input>
                     </span>
                     <span>
                     <Label htmlFor="phone">Phone</Label>
-                        <Input placeholder="Phone Number" name='phone' value={form.phone} onChange={(e)=>changeHandler(e)}></Input>
+                        <Input placeholder="Phone Number" name='phone' value={form.phone} onChange={(e)=>changeHandler(e)} required></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>
                 <span>
                     <Label htmlFor="streetAddress">Street Address</Label>
-                        <Input placeholder="Street Address" name='streetAddress' value={form.streetAddress} onChange={(e)=>changeHandler(e)}></Input>
+                        <Input placeholder="Street Address" name='streetAddress' value={form.streetAddress} onChange={(e)=>changeHandler(e)} required></Input>
                     </span>
                     <span>
                     <Label htmlFor="city">City, Zipcode</Label>
-                        <City placeholder="City" name='city' value={form.city} onChange={(e)=>changeHandler(e)}></City>
-                        <ZipCode placeholder="Zip Code" name='zipCode' value={form.zipCode} onChange={(e)=>changeHandler(e)}></ZipCode>
+                        <City placeholder="City" name='city' value={form.city} onChange={(e)=>changeHandler(e)} required></City>
+                        <ZipCode placeholder="Zip." name='zipCode' value={form.zipCode} onChange={(e)=>changeHandler(e)} required></ZipCode>
+                </span>
+                </InputGroup>
+                <InputGroup>
+                <span>
+                    <Label htmlFor="line2">Street Address Line 2</Label>
+                        <Input placeholder="Optional" name='line2' value={form.line2} onChange={(e)=>changeHandler(e)}></Input>
+                    </span>
+                    <span>
+                    <Label htmlFor="state">State</Label>
+                        <Input placeholder="State" name='state' value={form.state} onChange={(e)=>changeHandler(e)} required></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>
@@ -150,9 +197,10 @@ const submitHandler = (e) => {
                 </span>
                 </InputGroup>
                 <InputGroup>
-                <Button type="button" onClick={()=>cancelHandler()}>Cancel</Button><CyanButton type="submit">Save Edits</CyanButton>
+                <Button type="button" onClick={(e)=>cancelHandler(e)}>Cancel</Button><CyanButton type="submit">Save Edits</CyanButton>
                 </InputGroup>
            </form>
+           {errorText && <ErrorText>{errorText}</ErrorText>}
         </Wrapper>
 
     )
