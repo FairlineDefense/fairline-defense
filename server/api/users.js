@@ -17,7 +17,8 @@ router.get('/', async (req, res, next) => {
 })
 
 router.put('/:id', async (req, res, next) => {
-  const {firstName, lastName, email, phone, streetAddress, line2, city, zipCode, password} = req.body
+  const {firstName, lastName, email, phone, streetAddress, line2, city, state, zipCode, password} = req.body
+  console.log(req)
   try {
       await User.update({
       firstName: firstName,
@@ -32,7 +33,7 @@ router.put('/:id', async (req, res, next) => {
       // password: password Should have its own route
     },
     {
-      where:{id: req.body.id}
+      where:{id: req.params.id}
     })
     res.status(200).send()
   } catch (err) {

@@ -18,7 +18,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const updateUser = user => ({type: UPDATE_USER})
+const updateUser = user => ({type: UPDATE_USER, user})
 
 /**
  * THUNK CREATORS
@@ -76,8 +76,9 @@ export const auth = (email, password, method) => async dispatch => {
 }
 export const update = (body) => async dispatch => {
   try {
-  let res = await axios.put(`/users/${body.id}`, body)
-  dispatch(updateUser(res))
+    console.log(body)
+  let res = await axios.put(`/api/users/${body.id}`, body)
+  dispatch(updateUser(body))
   } catch (error) {
     console.error(error)
   }
@@ -100,7 +101,8 @@ export default function(state = defaultUser, action) {
     case GET_USER:
       return action.user
     case UPDATE_USER:
-      return action.data
+      const {user} = action
+      return {...state, user}
     case REMOVE_USER:
       return defaultUser
     default:

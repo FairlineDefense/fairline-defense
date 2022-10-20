@@ -126,9 +126,9 @@ const UserHome = () => {
   //   return <VerifyPhone />
   // }
 
-  if (!user.planActive) {
-    return <ChoosePlan />
-  }
+  // if (!user.planActive) {
+  //   return <ChoosePlan />
+  // }
   return (
     <>
     <Wrapper>

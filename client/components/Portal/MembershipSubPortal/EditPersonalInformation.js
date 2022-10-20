@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import update from '../../../store/'
+import {update} from '../../../store/'
 
 const Wrapper = styled.div`
 width: 100%;
@@ -88,41 +88,41 @@ const submitHandler = (e) => {
                 <InputGroup>
                 <span>
                     <Label htmlFor="firstName">First Name</Label>
-                        <Input placeholder="First Name" name='firstName' value={form.firstName}></Input>
+                        <Input placeholder="First Name" name='firstName' value={form.firstName} onChange={(e)=>changeHandler(e)}></Input>
                     </span>
                     <span>
                     <Label htmlFor="lastName">Last Name</Label>
-                        <Input placeholder="Last Name" name='lastName' value={form.lastName}></Input>
+                        <Input placeholder="Last Name" name='lastName' value={form.lastName} onChange={(e)=>changeHandler(e)}></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>
                 <span>
                     <Label htmlFor="email">Email</Label>
-                        <Input placeholder="Email Address" name='email' value={form.email}></Input>
+                        <Input placeholder="Email Address" name='email' value={form.email} onChange={(e)=>changeHandler(e)}></Input>
                     </span>
                     <span>
                     <Label htmlFor="phone">Phone</Label>
-                        <Input placeholder="Phone Number" name='phone' value={form.phone}></Input>
+                        <Input placeholder="Phone Number" name='phone' value={form.phone} onChange={(e)=>changeHandler(e)}></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>
                 <span>
                     <Label htmlFor="streetAddress">Street Address</Label>
-                        <Input placeholder="Street Address" name='streetAddress' value={form.streetAddress}></Input>
+                        <Input placeholder="Street Address" name='streetAddress' value={form.streetAddress} onChange={(e)=>changeHandler(e)}></Input>
                     </span>
                     <span>
                     <Label htmlFor="city">City, Zip Code</Label>
-                        <Input placeholder="City, Zip Code" name='city' value={form.city + ',' + ' ' + form.zipCode}></Input>
+                        <Input placeholder="City, Zip Code" name='city' value={form.city + ',' + ' ' + form.zipCode} onChange={(e)=>changeHandler(e)}></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>
                 <span>
                     <Label htmlFor="password">Password</Label>
-                        <Input placeholder="Password" name='password' value={form.password}></Input>
+                        <Input placeholder="Password" name='password' value={form.password} onChange={(e)=>changeHandler(e)}></Input>
                     </span>
                     <span>
                     <Label htmlFor="repeatPassword">Repeat New Password</Label>
-                        <Input placeholder="Repeat Password" name='repeatPassword' value={form.repeatPassword}></Input>
+                        <Input placeholder="Repeat Password" name='repeatPassword' value={form.repeatPassword} onChange={(e)=>changeHandler(e)}></Input>
                 </span>
                 </InputGroup>
                 <InputGroup>
