@@ -18,7 +18,7 @@ export default function MembershipSubPortal() {
         case 'PersonalInformation':
             return <PersonalInformation user={user} setState={setState} />;
         case 'EditPersonalInformation':
-            return <EditPersonalInformation user={user} />;
+            return <EditPersonalInformation user={user} setState={setState} />;
         case 'MembershipAndBilling':
             return <MembershipAndBilling user={user} />;
         case 'Invoices':
