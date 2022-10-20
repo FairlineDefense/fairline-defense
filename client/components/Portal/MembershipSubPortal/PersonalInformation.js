@@ -70,7 +70,7 @@ return (
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Shipping Address</h3>
-                    <small>{`${user.streetAddress}, ${user.city}, ${user.state}`}</small>
+                    <small>{`${user.streetAddress}, ${user.city}, ${user.state}, ${user.zipCode}`}</small>
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Password</h3>

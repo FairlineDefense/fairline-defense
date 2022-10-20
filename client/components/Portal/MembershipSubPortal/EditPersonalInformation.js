@@ -36,6 +36,28 @@ font-weight: 200;
 display: block;
 color: var(--primary);
 `
+const City = styled.input`
+padding: 1rem;
+border: 1px solid #AAB1B9;
+border-radius: 4px;
+outline: none;
+width: 170px;
+margin-right: 10px;
+font-size: 16px;
+font-weight: 200;
+color: var(--primary);
+`
+const ZipCode = styled.input`
+padding: 1rem;
+border: 1px solid #AAB1B9;
+border-radius: 4px;
+outline: none;
+width: 80px;
+margin-right: 0rem;
+font-size: 16px;
+font-weight: 200;
+color: var(--primary);
+`
 const Button = styled.button`
 color: var(--blueblack);
 width: 200px;
@@ -79,6 +101,7 @@ const cancelHandler = (e) => {
 }
 const submitHandler = (e) => {
     e.preventDefault()
+    console.log(form)
     dispatch(update(form))
 }
 
@@ -111,8 +134,9 @@ const submitHandler = (e) => {
                         <Input placeholder="Street Address" name='streetAddress' value={form.streetAddress} onChange={(e)=>changeHandler(e)}></Input>
                     </span>
                     <span>
-                    <Label htmlFor="city">City, Zip Code</Label>
-                        <Input placeholder="City, Zip Code" name='city' value={form.city + ',' + ' ' + form.zipCode} onChange={(e)=>changeHandler(e)}></Input>
+                    <Label htmlFor="city">City, Zipcode</Label>
+                        <City placeholder="City" name='city' value={form.city} onChange={(e)=>changeHandler(e)}></City>
+                        <ZipCode placeholder="Zip Code" name='zipCode' value={form.zipCode} onChange={(e)=>changeHandler(e)}></ZipCode>
                 </span>
                 </InputGroup>
                 <InputGroup>
