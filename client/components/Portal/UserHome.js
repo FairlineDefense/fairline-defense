@@ -1,5 +1,5 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector} from 'react-redux'
 import Navbar from './Navbar'
 import ReferAFriend from './ReferAFriend'
 import Card from './Card'
@@ -11,25 +11,7 @@ import {
   buildStyles
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { oneOf } from 'prop-types'
 
-const UserHome = () => {
-  const user = useSelector(state => state.user)
-  // if user.emailVerified => render verify
-  // if user.phoneVerified => render verify phone
-  // if user.userPlan => render choose plan
-
-  // if(!user.emailVerified) {
-  //   return <VerifyEmail />
-  // }
-
-  // if (!user.phoneVerified) {
-  //   return <VerifyPhone />
-  // }
-
-  // if (!user.plan) {
-  //   return <ChoosePlan />
-  // }
 const Wrapper = styled.div`
 width: 100vw;
 padding: 2rem;
@@ -130,6 +112,23 @@ margin-bottom: 2rem;
   width: 300px;
 }
 `
+const UserHome = () => {
+  const user = useSelector(state => state.user)
+  // if user.emailVerified => render verify
+  // if user.phoneVerified => render verify phone
+  // if user.userPlan => render choose plan
+
+  // if(!user.emailVerified) {
+  //   return <VerifyEmail />
+  // }
+
+  // if (!user.phoneVerified) {
+  //   return <VerifyPhone />
+  // }
+
+  if (!user.planActive) {
+    return <ChoosePlan />
+  }
   return (
     <>
     <Wrapper>
@@ -137,7 +136,7 @@ margin-bottom: 2rem;
       <Main>
       <Left>
         <H1>Hi, {user.firstName}</H1>
-        <MemberID>#000000001</MemberID>
+        <MemberID>#{user.membershipNumber}</MemberID>
         <Button>Membership Card</Button>
         <Button>Add a spouse</Button>
         <BlueButton>Emergency Help</BlueButton>
