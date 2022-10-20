@@ -66,7 +66,7 @@ cursor: pointer;
 export default function EditPersonalInformation(props) {
 let {user} = props
 const dispatch = useDispatch()
-let [form, setForm] = useState({firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, streetAddress: user.streetAddress, city: user.city, zipCode: user.zipCode, password: user.password || '', repeatPassword: ''})
+let [form, setForm] = useState({id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, streetAddress: user.streetAddress, line2: user.line2, city: user.city, state: user.state, zipCode: user.zipCode, password: user.password || '', repeatPassword: ''})
 
 const changeHandler = (e) => {
     e.preventDefault()
