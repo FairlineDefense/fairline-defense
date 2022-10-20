@@ -26,6 +26,7 @@ width: 100%;
  margin: 2rem;
  outline: none;
  border: none;
+ cursor: pointer;
  `
 const CheckoutForm = () => {
   const stripe = useStripe()
