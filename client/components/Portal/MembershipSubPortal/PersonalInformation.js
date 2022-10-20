@@ -1,12 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
-export default function PersonalInformation(props) {
-let {user, setState} = props
-const clickHandler = (e) => {
-    e.preventDefault()
-    setState('EditPersonalInformation')
-}
 const Wrapper = styled.div`
 width: 100%;
 height: 100%;
@@ -52,6 +45,12 @@ font-size: 18px;
 font-weight: 200;
 cursor: pointer;
 `
+export default function PersonalInformation(props) {
+let {user, setState} = props
+const clickHandler = (e) => {
+    e.preventDefault()
+    setState('EditPersonalInformation')
+}
 
 return (
         <Wrapper>
@@ -70,7 +69,7 @@ return (
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Shipping Address</h3>
-                    <small>{`${user.streetAddress}, ${user.city}, ${user.state}, ${user.zipCode}`}</small>
+                    <small>{`${user.streetAddress}, ${user.city}, ${user.state}, ${user.zipCode}, ${user.line2}`}</small>
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Password</h3>
