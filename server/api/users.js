@@ -18,7 +18,6 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   const {firstName, lastName, email, phone, streetAddress, line2, city, state, zipCode, password} = req.body
-  console.log(req)
   try {
       await User.update({
       firstName: firstName,
