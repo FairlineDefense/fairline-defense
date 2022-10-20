@@ -64,7 +64,7 @@ font-weight: 200;
 cursor: pointer;
 `
 export default function EditPersonalInformation(props) {
-let {user} = props
+let {user, setState} = props
 const dispatch = useDispatch()
 let [form, setForm] = useState({id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, phone: user.phone, streetAddress: user.streetAddress, line2: user.line2, city: user.city, state: user.state, zipCode: user.zipCode, password: user.password || '', repeatPassword: ''})
 
@@ -72,9 +72,13 @@ const changeHandler = (e) => {
     e.preventDefault()
     setForm({...form, [e.target.name]: e.target.value})
 }
+const cancelHandler = (e) => {
+    e.preventDefault()
+    //Insert warning to save or continue
+    setState('PersonalInformation')
+}
 const submitHandler = (e) => {
     e.preventDefault()
-    //dispatch update user
     dispatch(update(form))
 }
 
