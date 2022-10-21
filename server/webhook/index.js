@@ -1,10 +1,11 @@
+require('dotenv').config()
 // This is your test secret API key.
-const stripe = require('stripe')('***REMOVED***');
+const stripe = require('stripe')(process.env.SECRET_KEY);
 // Replace this endpoint secret with your endpoint's unique secret
 // If you are testing with the CLI, find the secret by running 'stripe listen'
 // If you are using an endpoint defined with the API or dashboard, look in your webhook settings
 // at https://dashboard.stripe.com/webhooks
-const endpointSecret = 'process.env.ENDPOINT_SECRET';
+const endpointSecret = process.env.ENDPOINT_SECRET;
 const express = require('express')
 const router = require('express').Router()
 module.exports = router
