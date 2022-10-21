@@ -27,6 +27,7 @@ try {
     state: req.body.state,
     zipCode: req.body.zipCode,
     planActive: true,
+    customerId: customer.id
   }, {where:{ email: req.body.email}})
 
   return res.json({customerId: customer.id})

@@ -84,6 +84,17 @@ const clickHandler = (e) => {
     } if (e.target.value === 'Add a Member')
     setState('AddAMember')
 }
+const portalHandler = (e) => {
+    e.preventDefault()
+    console.log(user.customerId)
+    fetch('/api/users/create-customer-portal-session', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify({customerId: user.customerId})
+    })
+}
 
 
 return (
@@ -97,7 +108,7 @@ return (
                 <InformationBlock>
                     <h3>Membership Number</h3>
                     <small># {user.membershipNumber}</small>
-                    <Link>Edit Membership</Link>
+                    <Link onClick={(e)=>portalHandler(e)}>Edit Membership</Link>
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Auto Renew</h3>

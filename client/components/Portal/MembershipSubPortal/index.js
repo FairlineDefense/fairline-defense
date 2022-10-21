@@ -8,7 +8,6 @@ import EditPersonalInformation from './EditPersonalInformation'
 import MembershipAndBilling from './MembershipAndBilling'
 import EmailPreferences from './EmailPreferences'
 import Invoices from './Invoices'
-
 export default function MembershipSubPortal() {
     const user = useSelector(state => state.user)
     let [state, setState] = useState('')
@@ -20,7 +19,7 @@ export default function MembershipSubPortal() {
         case 'EditPersonalInformation':
             return <EditPersonalInformation user={user} setState={setState} />;
         case 'MembershipAndBilling':
-            return <MembershipAndBilling user={user} />;
+            return <MembershipAndBilling user={user} setState={setState} />;
         case 'Invoices':
             return <Invoices user={user} />;
         case 'EmailPreferences':

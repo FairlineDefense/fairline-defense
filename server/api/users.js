@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+const stripe = require('stripe')('***REMOVED***');
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -40,3 +41,13 @@ router.put('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/create-customer-portal-session', async (req, res) => {
+  // Authenticate your user.
+  const session = await stripe.billingPortal.sessions.create({
+    customer: req.body.customerId,
+    return_url: 'http://localhost:8080/membership',
+  });
+
+  res.redirect(session.url);
+});
