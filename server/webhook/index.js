@@ -6,11 +6,12 @@ const stripe = require('stripe')(process.env.SECRET_KEY);
 // If you are using an endpoint defined with the API or dashboard, look in your webhook settings
 // at https://dashboard.stripe.com/webhooks
 const endpointSecret = process.env.ENDPOINT_SECRET;
-const express = require('express')
+const express = require('express');
+const { User, Order} = require('../db/models');
 const router = require('express').Router()
 module.exports = router
 
-router.post('/', express.raw({type: 'application/json'}), (request, response) => {
+router.post('/', express.raw({type: 'application/json'}), async (request, response) => {
 
   let event = request.body;
   // Only verify the event if you have an endpoint secret defined.
@@ -29,20 +30,19 @@ router.post('/', express.raw({type: 'application/json'}), (request, response) =>
       return response.sendStatus(400);
     }
   }
-
+  console.log(event.type, ':', event.data.object)
   // Handle the event
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-      console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
-      // Then define and call a method to handle the successful payment intent.
-      // handlePaymentIntentSucceeded(paymentIntent);
-      break;
-    case 'payment_method.attached':
-      const paymentMethod = event.data.object;
-      // Then define and call a method to handle the successful attachment of a PaymentMethod.
-      // handlePaymentMethodAttached(paymentMethod);
-      break;
+     switch (event.type) {
+    case 'invoice.payment_succeeded':
+      const invoice = event.data.object;
+      try {
+        const user = await User.findOne({where: {customerId: invoice.customer}})
+        await Order.create({customerId: invoice.customer, paidAt: invoice.status_transitions.paid_at, amountDue: invoice.amount_due, amountPaid: invoice.amount_paid, amountRemaining: invoice.amount_remaining, invoicePDF: invoice.invoice_pdf, periodEnd: invoice.period_end, periodStart: invoice.period_start, status: invoice.status })
+        await Order.setUser(user)
+      } catch (error) {
+        console.log(error)
+      }
+        break;
     default:
       // Unexpected event type
       console.log(`Unhandled event type ${event.type}.`);
