@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
-const stripe = require('stripe')('***REMOVED***');
+require('dotenv').config()
+const stripe = require('stripe')(process.env.SECRET_KEY);
 module.exports = router
 
 router.get('/', async (req, res, next) => {
