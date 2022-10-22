@@ -32,13 +32,24 @@ router.post('/', express.raw({type: 'application/json'}), async (request, respon
   }
   console.log(event.type, ':', event.data.object)
   // Handle the event
+  switch (event.type) {
+    case 'payment_method.attached':
+      const paymentMethod = event.data.object;
+      try {
+        await User.update({last4: paymentMethod.card.last4, brand: paymentMethod.card.brand, expMonth: paymentMethod.card.exp_month, expYear: paymentMethod.card.exp_year}, 
+            {where: {customerId: paymentMethod.customer}})
+      } catch (error) {
+        console.log(error)
+      }
+        break;
+    }
      switch (event.type) {
     case 'invoice.payment_succeeded':
       const invoice = event.data.object;
       try {
         const user = await User.findOne({where: {customerId: invoice.customer}})
-        await Order.create({customerId: invoice.customer, paidAt: invoice.status_transitions.paid_at, amountDue: invoice.amount_due, amountPaid: invoice.amount_paid, amountRemaining: invoice.amount_remaining, invoicePDF: invoice.invoice_pdf, periodEnd: invoice.period_end, periodStart: invoice.period_start, status: invoice.status })
-        await Order.setUser(user)
+        const order = await Order.create({customerId: invoice.customer, paidAt: invoice.status_transitions.paid_at, amountDue: invoice.amount_due, amountPaid: invoice.amount_paid, amountRemaining: invoice.amount_remaining, invoicePDF: invoice.invoice_pdf, periodEnd: invoice.period_end, periodStart: invoice.period_start, status: invoice.status })
+        await user.addOrder(order)
       } catch (error) {
         console.log(error)
       }

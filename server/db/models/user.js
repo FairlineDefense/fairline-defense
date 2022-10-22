@@ -126,6 +126,18 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  brand: {
+    type: Sequelize.STRING,
+  },
+  last4:{
+    type: Sequelize.STRING
+  },
+  expMonth:{
+    type: Sequelize.STRING,
+  },
+  expYear:{
+    type: Sequelize.STRING,
+  },
   password: {
     type: Sequelize.STRING,
     // Making `.password` act like a func hides it when serializing to JSON.
