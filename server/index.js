@@ -47,11 +47,17 @@ passport.deserializeUser(async (id, done) => {
         if(startDate < date) {
           if(endDate > date) {
             if(orders[i].status === 'paid') {
+              let daysTotal = Math.floor((endDate - startDate) / 86400000)
+              let periodStart = new Date(startDate)
+              let periodEnd = new Date(endDate)
+              let daysLeft = Math.floor((endDate - date) / 86400000)
+              let periodRatio = daysTotal / daysLeft
               obj.planActive = true
-              obj.periodStart = new Date(startDate)
-              obj.periodEnd = new Date(endDate)
-              obj.daysTotal = Math.floor((endDate - startDate) / 86400000)
-              obj.daysLeft = Math.floor((endDate - date) / 86400000)
+              obj.periodStart = periodStart
+              obj.periodEnd = periodEnd
+              obj.daysTotal = daysTotal
+              obj.daysLeft = daysLeft
+              obj.periodRatio = periodRatio
             }
           }
           break;

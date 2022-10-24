@@ -117,7 +117,7 @@ margin-bottom: 2rem;
 const UserHome = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-  
+
   useEffect(() => {
     dispatch(me())
   }, [])
@@ -152,7 +152,7 @@ const UserHome = () => {
       <Right>
         <ProgressBarWrapper>
         <CircularProgressbar
-        value={50}
+        value={user.periodRatio}
         text={`${user.daysLeft} days remaining`}
         styles={buildStyles({
           textColor: "#FFF",
@@ -163,7 +163,7 @@ const UserHome = () => {
         })}
       />
       </ProgressBarWrapper>
-    <TextBlock><Bold>Auto Renew</Bold><Small>October 12, 2022</Small></TextBlock>
+    <TextBlock><Bold>Auto Renew</Bold><Small>{user.periodEnd}</Small></TextBlock>
     <TextBlock><Bold>Questions</Bold><Small>Call 1 877 xxx xxxx</Small></TextBlock>
       </Right>
       </Main>

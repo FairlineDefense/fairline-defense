@@ -18,40 +18,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
-  try {
-    console.log('get user', req.params.id)
-    const user = await User.findOne({where:{id:req.params.id},include:{model: Order}} )
-    const data = JSON.stringify(user, 2, null)
-    let obj = JSON.parse(data)
-    const getStatus = () => {
-      const date = Date.now()
-      const orders = obj.orders
-      for(let i = 0; i < orders.length; i++) {
-        const startDate = Math.floor(Number(orders[i].periodStart) * 1000)
-        const endDate = Math.floor(Number(orders[i].periodEnd) * 1000)
-
-        if(startDate < date) {
-          if(endDate > date) {
-            if(orders[i].status === 'paid') {
-              obj.planActive = true
-              obj.periodStart = new Date(startDate)
-              obj.periodEnd = new Date(endDate)
-              obj.daysTotal = Math.floor((endDate - startDate) / 86400000)
-              obj.daysLeft = Math.floor((endDate - date) / 86400000)
-            }
-          }
-          break;
-        }
-      }
-    }
-    getStatus()
-    res.json(obj)
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.put('/:id', async (req, res, next) => {
   const {firstName, lastName, email, phone, streetAddress, line2, city, state, zipCode, password} = req.body
   try {
