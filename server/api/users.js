@@ -22,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findOne({where:{id:req.params.id},include:{model: Order}} )
     const data = JSON.stringify(user, 2, null)
-    const obj = JSON.parse(data)
+    let obj = JSON.parse(data)
 
     const getStatus = () => {
       //get current date
@@ -37,8 +37,9 @@ router.get('/:id', async (req, res, next) => {
           if(endDate > date) {
             if(orders[i].status === 'paid') {
               obj.planActive = true
-              obj.periodStart = `${startDate.getMonth} ${startDate.getDay} ${startDate.getYear}`
-              obj.periodEnd = `${endDate.getMonth} ${endDate.getDay} ${endDate.getYear}`
+              obj.periodStart = new Date(startDate)
+              obj.periodEnd = new Date(endDate)
+              obj.daysTotal = Math.floor((endDate - startDate) / 86400000)
               obj.daysLeft = Math.floor((endDate - date) / 86400000)
             }
           }
