@@ -10,6 +10,7 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const {User, Order} = require('./db/models')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -33,8 +34,32 @@ passport.serializeUser((user, done) => done(null, user.id))
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await db.models.user.findByPk(id)
-    done(null, user)
+    const user = await User.findOne({where:{id:id},include:{model: Order}} )
+    const data = JSON.stringify(user, 2, null)
+    let obj = JSON.parse(data)
+    const getStatus = () => {
+      const date = Date.now()
+      const orders = obj.orders
+      for(let i = 0; i < orders.length; i++) {
+        const startDate = Math.floor(Number(orders[i].periodStart) * 1000)
+        const endDate = Math.floor(Number(orders[i].periodEnd) * 1000)
+
+        if(startDate < date) {
+          if(endDate > date) {
+            if(orders[i].status === 'paid') {
+              obj.planActive = true
+              obj.periodStart = new Date(startDate)
+              obj.periodEnd = new Date(endDate)
+              obj.daysTotal = Math.floor((endDate - startDate) / 86400000)
+              obj.daysLeft = Math.floor((endDate - date) / 86400000)
+            }
+          }
+          break;
+        }
+      }
+    }
+    getStatus()
+    done(null, obj)
   } catch (err) {
     done(err)
   }

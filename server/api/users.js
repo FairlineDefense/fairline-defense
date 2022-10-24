@@ -20,18 +20,16 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
+    console.log('get user', req.params.id)
     const user = await User.findOne({where:{id:req.params.id},include:{model: Order}} )
     const data = JSON.stringify(user, 2, null)
     let obj = JSON.parse(data)
-
     const getStatus = () => {
-      //get current date
       const date = Date.now()
       const orders = obj.orders
       for(let i = 0; i < orders.length; i++) {
         const startDate = Math.floor(Number(orders[i].periodStart) * 1000)
         const endDate = Math.floor(Number(orders[i].periodEnd) * 1000)
-        console.log('dateNow:', date, new Date(date), 'startDate:', startDate, new Date(startDate), 'endDate:', endDate, new Date(endDate))
 
         if(startDate < date) {
           if(endDate > date) {

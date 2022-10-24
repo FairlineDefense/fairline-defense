@@ -1,10 +1,12 @@
 import React from 'react'
-import { useSelector} from 'react-redux'
+import { useSelector, useDispatch} from 'react-redux'
 import Navbar from './Navbar'
 import ReferAFriend from './ReferAFriend'
 import Card from './Card'
 import {VerifyEmail, VerifyPhone, ChoosePlan} from '../'
 import styled from 'styled-components'
+import {useEffect} from 'react'
+import { me } from '../../store'
 import {
   CircularProgressbar,
   CircularProgressbarWithChildren,
@@ -114,6 +116,12 @@ margin-bottom: 2rem;
 `
 const UserHome = () => {
   const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    dispatch(me())
+  }, [])
+
   // if user.emailVerified => render verify
   // if user.phoneVerified => render verify phone
   // if user.userPlan => render choose plan
@@ -145,7 +153,7 @@ const UserHome = () => {
         <ProgressBarWrapper>
         <CircularProgressbar
         value={50}
-        text="227 days remaining"
+        text={`${user.daysLeft} days remaining`}
         styles={buildStyles({
           textColor: "#FFF",
           pathColor: "#D6AE21",

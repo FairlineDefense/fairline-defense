@@ -26,7 +26,7 @@ try {
     city: req.body.city,
     state: req.body.state,
     zipCode: req.body.zipCode,
-    customerId: customer.id
+    customerId: customer.id,
   }, {where:{ email: req.body.email}})
 
   return res.json({customerId: customer.id})

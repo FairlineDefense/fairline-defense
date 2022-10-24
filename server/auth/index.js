@@ -38,7 +38,8 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
+router.get('/me', async (req, res) => {
+  console.log(req)
   res.json(req.user)
 })
 

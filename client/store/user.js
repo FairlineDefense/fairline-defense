@@ -4,10 +4,10 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
+const GET_STATUS = 'GET_STATUS'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const UPDATE_USER = 'UPDATE_USER'
-
 /**
  * INITIAL STATE
  */
@@ -16,6 +16,7 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
+const status = data => ({type: GET_STATUS, data})
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 const updateUser = user => ({type: UPDATE_USER, user})
@@ -74,6 +75,15 @@ export const auth = (email, password, method) => async dispatch => {
     console.error(dispatchOrHistoryErr)
   }
 }
+
+export const getStatus = (id) => async dispatch => {
+  try {
+    const res = await axios.get(`/users/${id}`)
+    dispatch(status(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
 export const update = (body) => async dispatch => {
   try {
   await axios.put(`/api/users/${body.id}`, body)
@@ -99,9 +109,10 @@ export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
+      case GET_STATUS:
+        return {...state, planActive: action.planActive, daysLeft: action.daysLeft, orders:action.orders}
     case UPDATE_USER:
       const {user} = action
-      console.log(user)
       return {...state, ...user}
     case REMOVE_USER:
       return defaultUser
