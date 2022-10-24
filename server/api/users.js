@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Order} = require('../db/models')
 require('dotenv').config()
 const stripe = require('stripe')(process.env.SECRET_KEY);
 module.exports = router
@@ -13,6 +13,41 @@ router.get('/', async (req, res, next) => {
       attributes: ['id', 'email']
     })
     res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findOne({where:{id:req.params.id},include:{model: Order}} )
+    const data = JSON.stringify(user, 2, null)
+    const obj = JSON.parse(data)
+
+    const getStatus = () => {
+      //get current date
+      const date = Date.now()
+      const orders = obj.orders
+      for(let i = 0; i < orders.length; i++) {
+        const startDate = Math.floor(Number(orders[i].periodStart) * 1000)
+        const endDate = Math.floor(Number(orders[i].periodEnd) * 1000)
+        console.log('dateNow:', date, new Date(date), 'startDate:', startDate, new Date(startDate), 'endDate:', endDate, new Date(endDate))
+
+        if(startDate < date) {
+          if(endDate > date) {
+            if(orders[i].status === 'paid') {
+              obj.planActive = true
+              obj.periodStart = `${startDate.getMonth} ${startDate.getDay} ${startDate.getYear}`
+              obj.periodEnd = `${endDate.getMonth} ${endDate.getDay} ${endDate.getYear}`
+              obj.daysLeft = Math.floor((endDate - date) / 86400000)
+            }
+          }
+          break;
+        }
+      }
+    }
+    getStatus()
+    res.json(obj)
   } catch (err) {
     next(err)
   }

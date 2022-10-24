@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Order = require('./order')
 
 const User = db.define('user', {
   membershipNumber: {
@@ -167,7 +168,6 @@ module.exports = User
 User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
-
 /**
  * classMethods
  */

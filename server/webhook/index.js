@@ -43,21 +43,44 @@ router.post('/', express.raw({type: 'application/json'}), async (request, respon
       }
         break;
     }
+    switch (event.type) {
+      case 'customer.subscription.created':
+        const invoice = event.data.object;
+        try {
+          const user = await User.findOne({where: {customerId: invoice.customer}})
+          // Add logic to translate datestamps and add to user plan start, end, days left, planActive etc
+          // This is a catch all for invoice payment succeeded, so in the event a spouse is added, do we want the
+          // above logic here?
+          const order = await Order.create({orderId: invoice.id, customerId: invoice.customer, plan: invoice.plan.id, product: invoice.plan.product, interval: invoice.plan.interval, paidAt: 'n/a', amountDue: invoice.plan.amount, amountPaid: 'n/a', amountRemaining: invoice.plan.amount, invoicePDF: 'n/a', periodEnd: invoice.current_period_end, periodStart: invoice.current_period_start, status: invoice.status })
+          await user.addOrder(order)
+        } catch (error) {
+          console.log(error)
+        }
+        break;
+      }
      switch (event.type) {
-    case 'invoice.payment_succeeded':
+    case 'customer.subscription.updated':
       const invoice = event.data.object;
       try {
-        const user = await User.findOne({where: {customerId: invoice.customer}})
-        const order = await Order.create({customerId: invoice.customer, paidAt: invoice.status_transitions.paid_at, amountDue: invoice.amount_due, amountPaid: invoice.amount_paid, amountRemaining: invoice.amount_remaining, invoicePDF: invoice.invoice_pdf, periodEnd: invoice.period_end, periodStart: invoice.period_start, status: invoice.status })
-        await user.addOrder(order)
+      await Order.update({paidAt: 'n/a', amountDue: invoice.amount_due, amountPaid: invoice.amount_paid, amountRemaining: invoice.amount_remaining, invoicePDF: invoice.invoice_pdf }, {where: {orderId: invoice.id}})
       } catch (error) {
         console.log(error)
       }
-        break;
+      break;
+    }
+        switch (event.type) {
+          case 'invoice.paid':
+            const invoice = event.data.object;
+            try {
+              await Order.update({paidAt: invoice.status_transitions.paid_at, amountDue: invoice.amount_due, amountPaid: invoice.amount_paid, amountRemaining: invoice.amount_remaining, invoicePDF: invoice.invoice_pdf, status: invoice.status }, {where: {orderId: invoice.subscription}})
+            } catch (error) {
+              console.log(error)
+            }
+              break;
     default:
       // Unexpected event type
       console.log(`Unhandled event type ${event.type}.`);
-  }  
+  }
 
   // Return a 200 response to acknowledge receipt of the event
   response.send();
