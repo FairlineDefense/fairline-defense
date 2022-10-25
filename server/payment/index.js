@@ -38,10 +38,9 @@ try {
 
   router.post('/create-subscription', async (req, res) => {
     const customerId = req.body.customerId
-    const priceIds = {month: PROCESSS.ENV.PRICE_ID_MONTH,
-                      year: PROCESS.ENV.PRICE_ID_YEAR,
-                      monthSpouse: PROCESSS.ENV.PRICE_ID_MONTH_SPOUSE,
-                      yearSpouse: PROCESSS.ENV.PRICE_ID_YEAR_SPOUSE
+    const priceIds = {month: process.env.MONTH_PRICE_ID,
+                      year: process.env.ANNUAL_PRICE_ID,
+                      spouse: process.env.MONTH_SPOUSE_PRICE_ID
                       }
     let priceId = priceIds[req.body.priceId];
     try {
