@@ -152,7 +152,7 @@ const UserHome = () => {
       <Right>
         <ProgressBarWrapper>
         <CircularProgressbar
-        value={user.periodRatio}
+        value={user.percentageLeft}
         text={`${user.daysLeft} days remaining`}
         styles={buildStyles({
           textColor: "#FFF",
