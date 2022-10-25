@@ -64,3 +64,23 @@ try {
       return res.status(400).send({ error: { message: error.message } });
     }
   });
+
+  router.put('/add-a-spouse', async (req, res) => {
+    const sub = req.body.subscription
+    console.log(sub)
+    const priceIds = {month:process.env.MONTH_SPOUSE_PRICE_ID, year: process.env.ANNUAL_SPOUSE_PRICE_ID}
+    try {
+      const subscription = await stripe.subscriptions.update(
+        sub,
+     {   items: [{
+          price: priceIds[req.body.interval],
+        }],
+        proration_behavior: 'always_invoice'
+      }
+      );
+      console.log(subscription)
+    } catch (error) {
+      console.log(error)
+      return res.status(400).send({ error: { message: error.message } });
+    }
+  });

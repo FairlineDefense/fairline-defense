@@ -16,6 +16,7 @@ module.exports = router
 router.post('/', express.raw({type: 'application/json'}), async (request, response) => {
 
   let event = request.body;
+
   // Only verify the event if you have an endpoint secret defined.
   // Otherwise use the basic event deserialized with JSON.parse
   if (endpointSecret) {
@@ -32,6 +33,7 @@ router.post('/', express.raw({type: 'application/json'}), async (request, respon
       return response.sendStatus(400);
     }
   }
+  console.log(event.type,':', event.data.object)
   // Handle the event
   switch (event.type) {
     case 'payment_method.attached':

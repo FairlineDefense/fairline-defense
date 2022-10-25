@@ -81,8 +81,8 @@ const clickHandler = (e) => {
     e.preventDefault()
     if(e.target.value === 'View Card') {
       setState('ViewCard')
-    } if (e.target.value === 'Add a Member')
-    setState('AddAMember')
+    } if (e.target.value === 'addASpouse')
+    setState('AddASpouse')
 }
 const portalHandler = (e) => {
     e.preventDefault()
@@ -123,7 +123,7 @@ return (
             
             <ButtonWrapper>
                 <Button onClick={(e) => clickHandler(e)}>View Card</Button>
-                <CyanButton onClick={(e) => clickHandler(e)}>Add a Member</CyanButton>
+                <CyanButton onClick={(e) => clickHandler(e)} value="addASpouse">Add a Spouse</CyanButton>
             </ButtonWrapper>
         
             <BottomWrapper>
