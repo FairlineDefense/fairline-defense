@@ -9,6 +9,8 @@ const endpointSecret = process.env.ENDPOINT_SECRET;
 const express = require('express');
 const { User, Order} = require('../db/models');
 const router = require('express').Router()
+const dateString = require('../../utils/dateString')
+
 module.exports = router
 
 router.post('/', express.raw({type: 'application/json'}), async (request, response) => {
@@ -30,7 +32,6 @@ router.post('/', express.raw({type: 'application/json'}), async (request, respon
       return response.sendStatus(400);
     }
   }
-  console.log(event.type, ':', event.data.object)
   // Handle the event
   switch (event.type) {
     case 'payment_method.attached':
@@ -46,6 +47,7 @@ router.post('/', express.raw({type: 'application/json'}), async (request, respon
     switch (event.type) {
       case 'customer.subscription.created':
         const invoice = event.data.object;
+        console.log(dateString(invoice.current_period_start), dateString(invoice.current_period_end))
         try {
           const user = await User.findOne({where: {customerId: invoice.customer}})
           // Add logic to translate datestamps and add to user plan start, end, days left, planActive etc

@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
 const {User, Order} = require('./db/models')
+const dateString = require('../utils/dateString')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -38,23 +39,23 @@ passport.deserializeUser(async (id, done) => {
     const data = JSON.stringify(user, 2, null)
     let obj = JSON.parse(data)
     const getStatus = () => {
-      const date = Date.now()
+      const date = Date.now() / 1000
       const orders = obj.orders
       for(let i = 0; i < orders.length; i++) {
-        const startDate = Math.floor(Number(orders[i].periodStart) * 1000)
-        const endDate = Math.floor(Number(orders[i].periodEnd) * 1000)
+        const startDate = orders[i].periodStart
+        const endDate = orders[i].periodEnd
 
         if(startDate < date) {
           if(endDate > date) {
             if(orders[i].status === 'paid') {
-              let daysTotal = Math.floor((endDate - startDate) / 86400000)
-              let periodStart = new Date(startDate)
-              let periodEnd = new Date(endDate)
-              let daysLeft = Math.floor((endDate - date) / 86400000)
+              let daysTotal = Math.floor((endDate - startDate) / 86400)
+              let daysLeft = Math.floor((endDate - date) / 86400)
               let periodRatio = daysTotal / daysLeft
+              let periodStartString = dateString(startDate)
+              let periodEndString = dateString(endDate)
               obj.planActive = true
-              obj.periodStart = periodStart
-              obj.periodEnd = periodEnd
+              obj.periodStart = periodStartString
+              obj.periodEnd = periodEndString
               obj.daysTotal = daysTotal
               obj.daysLeft = daysLeft
               obj.periodRatio = periodRatio
