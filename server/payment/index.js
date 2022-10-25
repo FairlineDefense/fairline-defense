@@ -26,8 +26,7 @@ try {
     city: req.body.city,
     state: req.body.state,
     zipCode: req.body.zipCode,
-    planActive: true,
-    customerId: customer.id
+    customerId: customer.id,
   }, {where:{ email: req.body.email}})
 
   return res.json({customerId: customer.id})
@@ -39,7 +38,11 @@ try {
 
   router.post('/create-subscription', async (req, res) => {
     const customerId = req.body.customerId
-    const priceIds = {month: 'price_1LrnW0IvvF6ba6jUlHTzjnlt', year: 'price_1LrnXQIvvF6ba6jUHo9iIRDM'}
+    const priceIds = {month: PROCESSS.ENV.PRICE_ID_MONTH,
+                      year: PROCESS.ENV.PRICE_ID_YEAR,
+                      monthSpouse: PROCESSS.ENV.PRICE_ID_MONTH_SPOUSE,
+                      yearSpouse: PROCESSS.ENV.PRICE_ID_YEAR_SPOUSE
+                      }
     let priceId = priceIds[req.body.priceId];
     try {
       // Create the subscription. Note we're expanding the Subscription's

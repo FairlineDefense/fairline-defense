@@ -112,11 +112,11 @@ return (
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Auto Renew</h3>
-                    <small>{'date of renewal from stripe'}</small>
+                    <small>{user.periodEnd}</small>
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Credit Card Billed for Membership</h3>
-                    <small>{'last four digits of cc from stripe'}</small>
+                    <small>**** **** **** {user.last4}</small>
                     <Link>Update Card</Link>
                 </InformationBlock>
             </InformationWrapper>

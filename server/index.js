@@ -10,6 +10,8 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const {User, Order} = require('./db/models')
+const dateString = require('../utils/dateString')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -27,14 +29,44 @@ if (process.env.NODE_ENV === 'test') {
  * Node process on process.env
  */
 if (process.env.NODE_ENV !== 'production') require('../secrets')
-
+app.use('/webhook', require('./webhook'))
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await db.models.user.findByPk(id)
-    done(null, user)
+    const user = await User.findOne({where:{id:id},include:{model: Order}} )
+    const data = JSON.stringify(user, 2, null)
+    let obj = JSON.parse(data)
+    const getStatus = () => {
+      const date = Date.now() / 1000
+      const orders = obj.orders
+      for(let i = 0; i < orders.length; i++) {
+        const startDate = orders[i].periodStart
+        const endDate = orders[i].periodEnd
+
+        if(startDate < date) {
+          if(endDate > date) {
+            if(orders[i].status === 'paid') {
+              let daysTotal = Math.floor((endDate - startDate) / 86400)
+              let daysLeft = Math.floor((endDate - date) / 86400)
+              let percentageLeft = Math.floor(100 - ((daysLeft / daysTotal) * 100))
+              let periodStartString = dateString(startDate)
+              let periodEndString = dateString(endDate)
+              obj.planActive = true
+              obj.periodStart = periodStartString
+              obj.periodEnd = periodEndString
+              obj.daysTotal = daysTotal
+              obj.daysLeft = daysLeft
+              obj.percentageLeft = percentageLeft
+            }
+          }
+          break;
+        }
+      }
+    }
+    getStatus()
+    done(null, obj)
   } catch (err) {
     done(err)
   }
