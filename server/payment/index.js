@@ -78,7 +78,7 @@ try {
         proration_behavior: 'always_invoice'
       }
       );
-      console.log(subscription)
+      await User.update({addSpouse: true}, {where:{ id: req.body.id}})
     } catch (error) {
       console.log(error)
       return res.status(400).send({ error: { message: error.message } });
