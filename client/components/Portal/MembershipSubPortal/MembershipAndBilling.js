@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useEffect, useState} from 'react'
 const Wrapper = styled.div`
 width: 100%;
 display: flex;
@@ -68,14 +69,18 @@ font-weight: 200;
 cursor: pointer;
 `
 const Link = styled.span`
-font-size: 16px;
 margin-top: .25rem;
-text-transform: uppercase;
-font-weight: 500;
-color: var(--cyan);
+
+a {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--cyan);
+}
 `
 export default function MembershipAndBilling(props) {
 let {user, setState} = props
+let [portalUrl, setPortalUrl]= useState('')
 
 const clickHandler = async (e) => {
     e.preventDefault()
@@ -84,19 +89,20 @@ const clickHandler = async (e) => {
     } if (e.target.value === 'addASpouse')
     setState('AddASpouse')
 }
-const portalHandler = (e) => {
-    e.preventDefault()
-    console.log(user.customerId)
-    fetch('/api/users/create-customer-portal-session', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-          },
-        body: JSON.stringify({customerId: user.customerId})
+
+const getPortalUrl = async () => {
+   const res = await fetch('/api/users/create-customer-portal-session', {
+        method: 'GET',
+        headers: {'Content-type': 'application/json'}
     })
+    const {sessionUrl:sessionUrl} = await res.json()
+    setPortalUrl(sessionUrl)
 }
 
-
+useEffect(() => {
+    getPortalUrl()
+}, [])
+console.log(portalUrl)
 return (
   <>
         <Wrapper>
@@ -108,7 +114,7 @@ return (
                 <InformationBlock>
                     <h3>Membership Number</h3>
                     <small># {user.membershipNumber}</small>
-                    <Link onClick={(e)=>portalHandler(e)}>Edit Membership</Link>
+                    <Link><a href={portalUrl} target="_blank">Edit Membership</a></Link>
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Auto Renew</h3>
@@ -117,7 +123,7 @@ return (
                 <InformationBlock>
                     <h3>Credit Card Billed for Membership</h3>
                     <small>**** **** **** {user.last4}</small>
-                    <Link>Update Card</Link>
+                    <Link><a href={portalUrl} target="_blank">Update Card</a></Link>
                 </InformationBlock>
             </InformationWrapper>
             
@@ -130,15 +136,15 @@ return (
                 <InformationBlock>
                     <h3>Membership Documents</h3>
                     <small>Fairline MEMBERSHIP AGREEMENT AND SELF-DEFENSE LIABILITY POLICY</small>
-                    <Link>View Documents</Link>
+                    <Link><a href={portalUrl} target="_blank">View Documents</a></Link>
                 </InformationBlock>
                 </BottomWrapper>
 
             <BottomWrapper>
             <InformationBlock>
             <h3>Cancellation</h3>
-            <small>Active Membership: user.planType</small>
-            <Link>Cancel Membership</Link>
+            <small>Active Membership: Billed {user.interval}ly</small>
+            <Link><a href={portalUrl} target="_blank">Cancel Membership</a></Link>
         </InformationBlock>
         </BottomWrapper>
         

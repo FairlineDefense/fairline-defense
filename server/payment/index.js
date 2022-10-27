@@ -98,7 +98,7 @@ try {
         proration_behavior: 'always_invoice'
       }
       );
-      await User.update({addSpouse: true}, {where:{ id: req.body.id}})
+      await User.update({addSpouse: true, spouseName: req.body.spouseName, spouseEmail: req.body.spouseEmail, spousePhone: req.body.spousePhone}, {where:{ id: req.body.id}})
     } catch (error) {
       console.log(error)
       return res.status(400).send({ error: { message: error.message } });

@@ -87,6 +87,18 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  spouseName: {
+    type: Sequelize.STRING,
+    defaultValue: 'n/a'
+  },
+  spouseEmail: {
+    type: Sequelize.STRING,
+    defaultValue: 'n/a'
+  },
+  spousePhone: {
+    type: Sequelize.STRING,
+    defaultValue: 'n/a'
+  },
   customerId: {
     type: Sequelize.STRING,
     unique: true,
