@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
+
 const Wrapper = styled.div`
 width: 100%;
 height: 100%;

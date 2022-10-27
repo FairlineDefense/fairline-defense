@@ -20,10 +20,12 @@ flex-wrap: no-wrap;
 const Date = styled.span`
 width: fit-content;
 display: inline-block;
+color: var(--blueblack);
 `
 const Charge = styled.span`
 width: fit-content;
 display: inline-block;
+color: var(--blueblack);
 `
 const PDF = styled.span`
 width: fit-content;
