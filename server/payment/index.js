@@ -65,6 +65,26 @@ try {
     }
   });
 
+  router.post('/add-a-spouse', async (req, res) => {
+    const priceIds = {month: process.env.MONTH_SPOUSE_PRICE_ID, year: process.env.ANNUAL_SPOUSE_PRICE_ID,}
+    try {
+      const response = await stripe.quotes.create({
+        customer: req.body.customerId,
+        line_items: [
+          {
+            price: priceIds[req.body.interval],
+            quantity: 1,
+          },
+        ],
+      });
+      const totalString = `${response.amount_total / 100}`
+      return res.json({total: totalString, interval: response.computed.recurring.interval})
+    } catch (error) {
+      console.log(error)
+      return res.status(400).send({ error: { message: error.message } });
+    }
+  });
+
   router.put('/add-a-spouse', async (req, res) => {
     const sub = req.body.subscription
     console.log(sub)

@@ -77,7 +77,7 @@ color: var(--cyan);
 export default function MembershipAndBilling(props) {
 let {user, setState} = props
 
-const clickHandler = (e) => {
+const clickHandler = async (e) => {
     e.preventDefault()
     if(e.target.value === 'View Card') {
       setState('ViewCard')
