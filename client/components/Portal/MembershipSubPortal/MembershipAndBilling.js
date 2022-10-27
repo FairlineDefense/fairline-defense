@@ -102,6 +102,7 @@ const getPortalUrl = async () => {
 useEffect(() => {
     getPortalUrl()
 }, [])
+
 console.log(portalUrl)
 return (
   <>
@@ -122,7 +123,7 @@ return (
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Credit Card Billed for Membership</h3>
-                    <small>**** **** **** {user.last4}</small>
+                    <small>{user.brand} ending in {user.last4}</small>
                     <Link><a href={portalUrl} target="_blank">Update Card</a></Link>
                 </InformationBlock>
             </InformationWrapper>

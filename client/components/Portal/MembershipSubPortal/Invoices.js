@@ -6,7 +6,7 @@ width: 100%;
 min-height: 100%;
 flex-direction: column;
 
-div:nth-child(odd) {
+div:nth-child(even) {
     background-color: #E8F3F9;
 }
 `
@@ -58,7 +58,7 @@ export default function Invoices() {
             <Line key={line.id}>
             <Date>{line.date}</Date>
             <Charge>{line.amount}</Charge>
-            <PDF><a href={line.pdf}>View PDF</a></PDF>
+            <PDF><a href={line.pdf} target="_blank">View PDF</a></PDF>
             </Line>)}
         </Wrapper>
     )

@@ -94,7 +94,7 @@ display: block;
 `
 export default function AddASpouse(props) {
 let {user, setState} = props
-let [form, setForm] = useState({spouseName: user.spouseName, spouseEmail: user.spouseEmail, spousePhone: user.spousePhone})
+let [form, setForm] = useState({spouseName: '', spouseEmail: '', spousePhone: ''})
 let [quote, setQuote] = useState({})
 let [errorText, setErrorText] = useState('')
 const changeHandler = (e) => {
@@ -160,16 +160,16 @@ return (
                     <InputGroup>
                         <span>
                             <Label htmlFor="firstName">Spouse Name</Label>
-                            <Input value={form.spouseName} onChange={(e) => changeHandler(e)} required>
+                            <Input name="spouseName" value={form.spouseName} onChange={(e) => changeHandler(e)} required>
                             </Input>
                         </span>
                     <span>
                         <Label htmlFor="email">Spouse Email Address</Label>
-                        <Input value={form.spouseEmailAddress} onChange={(e) => changeHandler(e)} required></Input>
+                        <Input name="spouseEmail" value={form.spouseEmailAddress} onChange={(e) => changeHandler(e)} required></Input>
                     </span>
                     <span>
                         <Label htmlFor="phone">Spouse Phone Number</Label>
-                        <Input value={form.spousePhone} onChange={(e) => changeHandler(e)} required>
+                        <Input name="spousePhone" value={form.spousePhone} onChange={(e) => changeHandler(e)} required>
                         </Input>
                         </span>
                     </InputGroup>
