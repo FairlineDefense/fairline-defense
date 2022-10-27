@@ -2,6 +2,8 @@ const {User} = require('../db/models')
 const router = require('express').Router()
 require('dotenv').config()
 const stripe = require('stripe')(process.env.SECRET_KEY)
+const dateIntString = require('../../utils/dateIntString')
+const priceString = require('../../utils/priceString')
 module.exports = router
 
 router.post('/create-customer', async(req,res) => {
@@ -110,7 +112,16 @@ try {
       const invoices = await stripe.invoices.list({
         customer: req.customerId
       });
-      return res.json(invoices)
+
+     const data = invoices.data.map((line) => {
+      const date = dateIntString(line.created)
+      const amount = priceString(line.amount_due)
+      const pdfUrl = line.hosted_invoice_url
+      return {date: date, amount: amount, pdf: pdfUrl}
+      })
+
+    console.log(invoices)
+      return res.json(data)
     } catch (error) {
       console.log(error)
       return res.status(400).send({ error: { message: error.message } });

@@ -14,8 +14,8 @@ const Line = styled.div`
 width: 100%;
 display: flex;
 justify-content: space-between;
-padding: .2rem;
-margin: .5rem;
+padding: .5rem;
+flex-wrap: no-wrap;
 `
 const Date = styled.span`
 width: fit-content;
@@ -32,6 +32,7 @@ display: inline-block;
 a {
     text-transform: uppercase;
     color: var(--cyan);
+    font-weight: 600;
 }
 `
 export default function Invoices() {
@@ -43,7 +44,7 @@ export default function Invoices() {
             headers: {'Content-type': 'application/json'}
         })
         const body = await res.json()
-        setInvoices(body.data)
+        setInvoices(body)
     }
 
     useEffect(()=> {
@@ -55,9 +56,9 @@ export default function Invoices() {
         <Wrapper>
             {invoices && invoices.map((line) =>
             <Line key={line.id}>
-            <Date>{line.created}</Date>
-            <Charge>{line.amount_paid}</Charge>
-            <PDF><a href={line.hosted_invoice_url}>PDF</a></PDF>
+            <Date>{line.date}</Date>
+            <Charge>{line.amount}</Charge>
+            <PDF><a href={line.pdf}>View PDF</a></PDF>
             </Line>)}
         </Wrapper>
     )
