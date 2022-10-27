@@ -104,3 +104,15 @@ try {
       return res.status(400).send({ error: { message: error.message } });
     }
   });
+
+  router.get('/invoices', async (req, res) => {
+    try {
+      const invoices = await stripe.invoices.list({
+        customer: req.customerId
+      });
+      return res.json(invoices)
+    } catch (error) {
+      console.log(error)
+      return res.status(400).send({ error: { message: error.message } });
+    }
+  });
