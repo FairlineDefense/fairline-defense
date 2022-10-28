@@ -35,17 +35,50 @@ router.post('/', express.raw({type: 'application/json'}), async (request, respon
   }
   console.log(event.type,':', event.data.object)
   // Handle the event
-  switch (event.type) {
-    case 'payment_method.attached':
-      const paymentMethod = event.data.object;
-      try {
-        await User.update({last4: paymentMethod.card.last4, brand: paymentMethod.card.brand, expMonth: paymentMethod.card.exp_month, expYear: paymentMethod.card.exp_year}, 
-            {where: {customerId: paymentMethod.customer}})
-      } catch (error) {
-        console.log(error)
+  // switch (event.type) {
+  //   case 'charge.succeeded':
+  //     const charge = event.data.object;
+  //     try {
+  //       await User.update({last4: charge.payment_method_details.card.last4,
+  //         brand: charge.payment_method_details.card.brand,
+  //         expMonth: charge.payment_method_details.card.exp_month,
+  //         expYear: charge.payment_method_details.card.exp_year},
+  //         {where: {customerId: charge.payment_method_details.customer}})
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //       break;
+  //   }
+    switch (event.type) {
+      case 'customer.updated':
+        const customer = event.data.object;
+        try {
+          const paymentMethod = await stripe.paymentMethods.retrieve(
+            customer.invoice_settings.default_payment_method
+          );
+          
+          await User.update({
+            email: customer.email,
+            firstName: customer.name.split(' ')[0],
+            lastName: customer.name.split(' ')[1],
+            phone: customer.phone,
+            city: customer.address.city,
+            streetAddress: customer.address.line1,
+            line2: customer.address.line2,
+            postalCode: customer.address.postal_code,
+            country: customer.address.country,
+            paymentMethod: customer.invoice_settings.default_payment_method,
+            last4: paymentMethod.card.last4,
+            expYear: paymentMethod.card.exp_year,
+            expMonth: paymentMethod.card.exp_month,
+            brand: paymentMethod.card.brand
+          },
+          {where: {customerId: customer.id}})
+        } catch (error) {
+          console.log(error)
+        }
+          break;
       }
-        break;
-    }
     switch (event.type) {
       case 'customer.subscription.created':
         const invoice = event.data.object;
@@ -65,12 +98,32 @@ router.post('/', express.raw({type: 'application/json'}), async (request, respon
     case 'customer.subscription.updated':
       const invoice = event.data.object;
       try {
-      await Order.update({paidAt: 'n/a', amountDue: invoice.amount_due, amountPaid: invoice.amount_paid, amountRemaining: invoice.amount_remaining, invoicePDF: invoice.invoice_pdf }, {where: {orderId: invoice.id}})
+        if(invoice.canceled_at) {
+      return await Order.update({status: 'cancelled'}, {where: {orderId: invoice.id}})
+        }
+        if(invoice.default_payment_method) {
+          const paymentMethod = await stripe.paymentMethods.retrieve(
+            invoice.default_payment_method
+          );
+          await User.update({paymentMethod: invoice.default_payment_method, last4: paymentMethod.card.last4, expYear: paymentMethod.card.exp_year, expMonth: paymentMethod.card.exp_month, brand: paymentMethod.card.brand}, {where:{customerId: invoice.customer}})
+        }
       } catch (error) {
         console.log(error)
       }
       break;
     }
+    switch (event.type) {
+      case 'customer.subscription.deleted':
+        const subscription = event.data.object;
+        try {
+          await User.update({planActive: false, spouseName: 'n/a', spouseEmail: 'n/a', spousePhone: 'n/a'})
+          const order = Order.findOne({where:{orderId: subscription.id}})
+          await order.destroy()
+        } catch (error) {
+          console.log(error)
+        }
+        break;
+      }
         switch (event.type) {
           case 'invoice.paid':
             const invoice = event.data.object;

@@ -142,6 +142,9 @@ const User = db.define('user', {
   brand: {
     type: Sequelize.STRING,
   },
+  paymentMethod: {
+    type: Sequelize.STRING,
+  },
   last4:{
     type: Sequelize.STRING
   },

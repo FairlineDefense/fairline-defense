@@ -12,6 +12,8 @@ const app = express()
 const socketio = require('socket.io')
 const {User, Order} = require('./db/models')
 const dateString = require('../utils/dateString')
+require('dotenv').config()
+const stripe = require('stripe')(process.env.SECRET_KEY);
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -38,22 +40,27 @@ passport.deserializeUser(async (id, done) => {
     const user = await User.findOne({where:{id:id},include:{model: Order}} )
     const data = JSON.stringify(user, 2, null)
     let obj = JSON.parse(data)
-    const getStatus = () => {
+    const getStatus = async () => {
       const date = Date.now() / 1000
       const orders = obj.orders
       for(let i = 0; i < orders.length; i++) {
         const startDate = orders[i].periodStart
         const endDate = orders[i].periodEnd
-
         if(startDate < date) {
           if(endDate > date) {
             if(orders[i].status === 'paid') {
+              obj.status = 'paid'
+            }
+            if(orders[i].status === 'cancelled') {
+              obj.status = 'cancelled'
+            }
+
+              obj.planActive = true
               let daysTotal = Math.floor((endDate - startDate) / 86400)
               let daysLeft = Math.floor((endDate - date) / 86400)
               let percentageLeft = Math.floor(100 - ((daysLeft / daysTotal) * 100))
               let periodStartString = dateString(startDate)
               let periodEndString = dateString(endDate)
-              obj.planActive = true
               obj.subscription = orders[i].orderId
               obj.interval = orders[i].interval
               obj.periodStart = periodStartString
@@ -64,7 +71,6 @@ passport.deserializeUser(async (id, done) => {
             }
           }
           break;
-        }
       }
     }
     getStatus()

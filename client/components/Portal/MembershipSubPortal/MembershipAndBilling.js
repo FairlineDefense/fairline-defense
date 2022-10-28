@@ -115,7 +115,7 @@ return (
                 <InformationBlock>
                     <h3>Membership Number</h3>
                     <small># {user.membershipNumber}</small>
-                    <Link><a href={portalUrl} target="_blank">Edit Membership</a></Link>
+                    <Link><a href={portalUrl}>Edit Membership</a></Link>
                 </InformationBlock>
                 <InformationBlock>
                     <h3>Auto Renew</h3>
@@ -124,7 +124,7 @@ return (
                 <InformationBlock>
                     <h3>Credit Card Billed for Membership</h3>
                     <small>{user.brand} ending in {user.last4}</small>
-                    <Link><a href={portalUrl} target="_blank">Update Card</a></Link>
+                    <Link><a href={portalUrl}>Update Card</a></Link>
                 </InformationBlock>
             </InformationWrapper>
             
@@ -137,7 +137,7 @@ return (
                 <InformationBlock>
                     <h3>Membership Documents</h3>
                     <small>Fairline MEMBERSHIP AGREEMENT AND SELF-DEFENSE LIABILITY POLICY</small>
-                    <Link><a href={portalUrl} target="_blank">View Documents</a></Link>
+                    <Link><a href={portalUrl}>View Documents</a></Link>
                 </InformationBlock>
                 </BottomWrapper>
 
@@ -145,7 +145,7 @@ return (
             <InformationBlock>
             <h3>Cancellation</h3>
             <small>Active Membership: Billed {user.interval}ly</small>
-            <Link><a href={portalUrl} target="_blank">Cancel Membership</a></Link>
+            <Link><a href={portalUrl}>Cancel Membership</a></Link>
         </InformationBlock>
         </BottomWrapper>
         
