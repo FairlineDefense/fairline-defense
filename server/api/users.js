@@ -2,7 +2,6 @@ const router = require('express').Router()
 const {User, Order} = require('../db/models')
 require('dotenv').config()
 const stripe = require('stripe')(process.env.SECRET_KEY);
-var cors = require('cors')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
