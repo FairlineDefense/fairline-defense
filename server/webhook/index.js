@@ -53,25 +53,29 @@ router.post('/', express.raw({type: 'application/json'}), async (request, respon
       case 'customer.updated':
         const customer = event.data.object;
         try {
-          const paymentMethod = await stripe.paymentMethods.retrieve(
+          let card = {last4: undefined, exp_year: undefined, exp_month: undefined, brand: undefined}
+
+          if(customer.invoice_settings.default_payment_method){
+           await stripe.paymentMethods.retrieve(
             customer.invoice_settings.default_payment_method
-          );
-          
+          ).then(res => card = res.card);
+        }
+
           await User.update({
             email: customer.email,
             firstName: customer.name.split(' ')[0],
             lastName: customer.name.split(' ')[1],
             phone: customer.phone,
             city: customer.address.city,
+            state: customer.address.state,
             streetAddress: customer.address.line1,
             line2: customer.address.line2,
             postalCode: customer.address.postal_code,
             country: customer.address.country,
-            paymentMethod: customer.invoice_settings.default_payment_method,
-            last4: paymentMethod.card.last4,
-            expYear: paymentMethod.card.exp_year,
-            expMonth: paymentMethod.card.exp_month,
-            brand: paymentMethod.card.brand
+            last4: card.last4 && card.last4,
+            expYear: card.exp_year && card.exp_year,
+            expMonth: card.exp_month && card.exp_month,
+            brand: card.brand && card.brand
           },
           {where: {customerId: customer.id}})
         } catch (error) {
