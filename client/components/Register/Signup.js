@@ -17,7 +17,7 @@ const Signup = () => {
     const firstName = evt.target.firstName.value
     const lastName = evt.target.lastName.value
     const email = evt.target.email.value
-    const phone = evt.target.countryCode.value + evt.target.phone.value
+    const phone = evt.target.phone.value
     const password = evt.target.password.value
     const confirmPassword = evt.target.confirmPassword.value
 
