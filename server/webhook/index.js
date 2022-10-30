@@ -133,7 +133,7 @@ router.post('/', express.raw({type: 'application/json'}), async (request, respon
           const invoice = event.data.object;
           try {
             if(invoice.amount_remaining >= 1){
-            await Order.update({status: 'unpaid'},{where:{orderId: invoice.subscription}})
+            await Order.update({status: 'action_required'},{where:{orderId: invoice.subscription}})
             }
           } catch (error) {
             console.log(error)

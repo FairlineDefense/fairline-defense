@@ -48,6 +48,9 @@ passport.deserializeUser(async (id, done) => {
         const endDate = orders[i].periodEnd
         if(startDate < date) {
           if(endDate > date) {
+            if(orders[i].status === 'actionRequired') {
+              obj.status = 'actionRequired'
+            }
             if(orders[i].status === 'paid') {
               obj.status = 'paid'
             }
