@@ -128,6 +128,18 @@ router.post('/', express.raw({type: 'application/json'}), async (request, respon
         }
         break;
       }
+      switch (event.type) {
+        case 'invoice.updated':
+          const invoice = event.data.object;
+          try {
+            if(invoice.amount_remaining >= 1){
+            await Order.update({status: 'unpaid'},{where:{orderId: invoice.subscription}})
+            }
+          } catch (error) {
+            console.log(error)
+          }
+          break;
+        }
         switch (event.type) {
           case 'invoice.paid':
             const invoice = event.data.object;
