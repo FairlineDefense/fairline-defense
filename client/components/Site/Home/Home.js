@@ -4,6 +4,7 @@ import Landing from './Landing'
 import Card from './Card'
 import ProtectYourFuture from './ProtectYourFuture'
 import HowItWorksSection from './HowItWorksSection'
+import WhatDoWeCover from './WhatDoWeCover'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Card />
       <ProtectYourFuture />
       <HowItWorksSection />
+      <WhatDoWeCover />
     </>
   )
 }
