@@ -47,9 +47,29 @@ img {
     padding: 2rem;
 }
 `
+const StartButton = styled.div`
+    background-color: var(--red);
+    color: #FFF;
+    border-radius: 40px;
+    width: 280px;
+    padding: 1rem 2rem 1rem 2rem;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 1rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: none;
+
+@media(max-width: 800px) {
+    display: block;
+}
+`
 export default function ProtectYourFuture() {
     return (
         <Section>
+        <StartButton>Get Started</StartButton>
         <Text><header>Protect your future</header>
         <p>If you have to defend yourself in a traumatic situation, you will be questioned by the police.</p>
         <p>You can even be sued by your attacker or their family. Defending yourself can quickly spiral into a financial problem.</p></Text>
