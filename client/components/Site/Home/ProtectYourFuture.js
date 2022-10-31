@@ -32,6 +32,7 @@ p {
 @media(max-width: 800px) {
     width: 100%;
     padding: 0rem;
+    text-align: center;
 }
 `
 const Image = styled.div`
@@ -43,6 +44,7 @@ img {
 
 @media(max-width: 800px) {
     width: 100%;
+    padding: 2rem;
 }
 `
 export default function ProtectYourFuture() {

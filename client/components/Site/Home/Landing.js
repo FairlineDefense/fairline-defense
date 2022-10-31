@@ -15,18 +15,30 @@ background-size: 100%;
   background-size: cover;
   height: 80vh;
   padding: 20rem 1rem 1rem 1rem;
+  text-align: center;
+  align-items: center;
 }
 `
 const Heading = styled.div`
 font-size: 48px;
 font-weight: 600;
 color: #fff;
+
+@media(max-width: 800px) {
+  width: 250px;
+  font-size: 32px;
+}
 `
 const SubHeading = styled.div`
 font-size: 24px;
 font-weight: 200;
 color: #fff;
 width: 500px;
+
+@media(max-width: 800px) {
+  width: 280px;
+  font-size: 16px;
+}
 `
 const StartButton = styled.div`
     background-color: var(--red);

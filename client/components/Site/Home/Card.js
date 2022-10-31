@@ -32,6 +32,7 @@ div {
 @media(max-width: 800px) {
     width: 100%;
     padding: 0rem;
+    text-align: center;
 }
 `
 const Bold = styled.div`
@@ -51,8 +52,7 @@ img {
     max-width: 515px;
 }
 @media(max-width: 800px) {
-    width: 100%;
-    padding: 1rem 4rem 1rem 4rem;
+   display: none;
 }
 `
 export default function Card() {
