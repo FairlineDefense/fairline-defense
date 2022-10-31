@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Section = styled.div`
-height: 400px;
+min-height: 400px;
 width: 100vw;
 display: flex;
 flex-direction: row;
@@ -11,6 +11,7 @@ align-items: center;
 padding: 2rem 4rem 2rem 4rem;
 
 @media(max-width: 800px) {
+    padding: 2rem;
     flex-direction: column;
 }
 `
@@ -30,7 +31,7 @@ div {
 
 @media(max-width: 800px) {
     width: 100%;
-    padding: 1rem;
+    padding: 0rem;
 }
 `
 const Bold = styled.div`
