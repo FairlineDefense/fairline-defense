@@ -112,7 +112,7 @@ const VerifyPhone = () => {
         <svg />
         <RegisterHeader />
         <Wrapper>
-          <Heading>Verify Your Phone Number</Heading>
+          <Heading>Verify your phone</Heading>
             <CenteredWrapper>
               <PhoneIcon src="./images/confirmphone.png"></PhoneIcon>
             <SubHeading>
