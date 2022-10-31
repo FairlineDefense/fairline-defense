@@ -9,6 +9,56 @@ position: absolute;
 left: 0;
 right: 0;
 top: 0;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+padding: 2rem;
+
+a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+ul {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  list-style: none;
+}
+
+ul li {
+  margin-right: 1rem;
+}
+`
+const FairlineLogo = styled.img`
+height: 60px;
+`
+const Nav = styled.nav`
+display: flex;
+align-items: center;
+justify-content: flex-end;
+width: 100%;
+`
+const LoginButton = styled.div`
+    background-color: var(--cyan);
+    color: #FFF;
+    border-radius: 40px;
+    width: 150px;
+    padding: .25rem 1rem .25rem 1rem;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+`
+const Cyan = styled.span`
+    color: var(--cyan);
+    font-size: inherit;
+    font-weight:inherit;
+    cursor: pointer;
+   
 `
 const Navbar = () => {
   const user = useSelector(state => state.user)
@@ -22,31 +72,33 @@ const Navbar = () => {
 
   return (
     <Wrapper>
-      <h1>Fairline</h1>
-      <nav>
+      <FairlineLogo src="./images/fdlogo.png"></FairlineLogo>
+      <Nav>
         {isLoggedIn ? (
-          <div>
+          <ul>
             {/* The navbar will show these links after you log in */}
-            <Link to="/">Home</Link>
-            <Link to="/howitworks">How It Works</Link>
-            <Link to="/coverages">Coverages</Link>
-            <Link to="/testimonials">Testimonials</Link>
-            <a href="#" onClick={handleClick}>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/howitworks">How It Works</Link></li>
+            <li><Link to="/coverages">Coverages</Link></li>
+            <li><Link to="/testimonials">Testimonials</Link></li>
+            <li>
+              <a href="#" onClick={handleClick}>
               Logout
             </a>
-          </div>
+            </li>
+          </ul>
         ) : (
-          <div>
+          <ul>
             {/* The navbar will show these links before you log in */}
-            <Link to="/">Home</Link>
-            <Link to="/howitworks">How It Works</Link>
-            <Link to="/coverages">Coverages</Link>
-            <Link to="/testimonials">Testimonials</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/howitworks">How It Works</Link></li>
+            <li><Link to="/coverages">Coverages</Link></li>
+            <li><Link to="/testimonials">Testimonials</Link></li>
+            <li><Link to="/login"><Cyan>Login</Cyan></Link></li>
+            <li><Link to="/signup"><LoginButton>Join Now</LoginButton></Link></li>
+          </ul>
         )}
-      </nav>
+      </Nav>
       <hr />
     </Wrapper>
   )
