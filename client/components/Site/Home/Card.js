@@ -36,10 +36,13 @@ div {
     text-align: center;
 
     header {
+        line-height: 38px;
         margin-bottom: 1rem;
         font-size: 32px;
+        margin-bottom: 1rem;
     }
     div {
+        line-height: 30px;
         font-size: 16px;
     }
 }
