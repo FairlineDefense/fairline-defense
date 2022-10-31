@@ -77,7 +77,7 @@ const VerifyEmail = () => {
         <Wrapper>
           <Heading>Verify Your Email</Heading>
             <CenteredWrapper>
-            <img src="./images/confirmphone.png" />
+            <img src="./images/confirmemail.png" />
             <SubHeading>
               A confirmation link has been sent to
             </SubHeading>
