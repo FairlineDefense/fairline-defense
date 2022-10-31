@@ -42,6 +42,9 @@ border: none;
 background-color: #CCC;
 font-size: 32px;
 `
+const PhoneIcon = styled.img`
+margin: 1rem;
+`
 const Heading = styled.span`
 font-size: 32px;
 font-weight: 300;
@@ -107,7 +110,7 @@ const VerifyPhone = () => {
         <Wrapper>
           <Heading>Verify Your Phone Number</Heading>
             <CenteredWrapper>
-              <img src="./images/confirmphone.png" />
+              <PhoneIcon src="./images/confirmphone.png"></PhoneIcon>
             <SubHeading>
             A verification code has been sent to
             </SubHeading>
