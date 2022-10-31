@@ -12,9 +12,13 @@ padding: 2rem 4rem 2rem 4rem;
 justify-content: center;
 
 @media(max-width: 800px) {
-    min-height: 300px;
+    min-height: 800px;
     padding: 2rem;
     flex-direction: column;
+    background-image: url('./images/lightredbg.png');
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 `
 const Header = styled.div`
