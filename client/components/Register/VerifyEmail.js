@@ -4,6 +4,58 @@ import styled from 'styled-components'
 import history from '../../history'
 import RegisterHeader from './RegisterHeader'
 
+const Wrapper = styled.div`
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+align-content: space-between;
+padding: 4rem;
+`
+const CenteredWrapper = styled.div`
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 3rem;
+width: 340px;
+text-align: center;
+`
+const Heading = styled.span`
+font-size: 32px;
+font-weight: 300;
+margin-bottom: 1rem;
+`
+const SubHeading = styled.span`
+font-size: 16px;
+font-weight: 200;
+`
+const SemiBold = styled.span`
+font-size: inherit;
+font-weight: 500;
+color: inherit;
+`
+const Button = styled.button`
+background-color: var(--blue);
+color: #FFF;
+border-radius: 40px;
+width: 340px;
+padding: 1rem 2rem 1rem 2rem;
+font-size: 20px;
+font-weight: 100;
+margin: 1rem;
+outline: none;
+border: none;
+cursor: pointer;
+
+&::disabled {
+background-color: #2A4C78;
+}
+`
+
 const VerifyEmail = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
@@ -15,58 +67,6 @@ const VerifyEmail = () => {
     // }
     history.push('/home')
   }
-
-    const Wrapper = styled.div`
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      align-content: space-between;
-      padding: 4rem;
-    `
-    const CenteredWrapper = styled.div`
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin: 3rem;
-      width: 340px;
-      text-align: center;
-    `
-    const Heading = styled.span`
-      font-size: 32px;
-      font-weight: 300;
-      margin-bottom: 1rem;
-    `
-    const SubHeading = styled.span`
-      font-size: 16px;
-      font-weight: 200;
-    `
-    const SemiBold = styled.span`
-    font-size: inherit;
-    font-weight: 500;
-    color: inherit;
-    `
-    const Button = styled.button`
-    background-color: var(--blue);
-    color: #FFF;
-    border-radius: 40px;
-    width: 340px;
-    padding: 1rem 2rem 1rem 2rem;
-    font-size: 20px;
-    font-weight: 100;
-    margin: 1rem;
-    outline: none;
-    border: none;
-    cursor: pointer;
-
-    &::disabled {
-    background-color: #2A4C78;
-  }
-    `
 
     return (
       <div className="auth">
