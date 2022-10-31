@@ -55,7 +55,6 @@ margin: 1rem;
 const Heading = styled.span`
 font-size: 32px;
 font-weight: 300;
-margin-bottom: 1rem;
 `
 const SubHeading = styled.span`
 font-size: 16px;
