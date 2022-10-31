@@ -13,7 +13,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 align-content: space-between;
-padding: 4rem;
+padding-top: 4rem;
 `
 const CenteredWrapper = styled.div`
 width: 100%;
@@ -21,9 +21,9 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-margin: 3rem;
 width: 340px;
 text-align: center;
+margin: 1rem;
 `
 const Form = styled.form`
 width: 100%;
@@ -31,6 +31,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 width: 340px;
+margin: 1rem;
 
 .ReactInputVerificationCode__item {
   position: relative;
@@ -54,16 +55,11 @@ margin: 1rem;
 const Heading = styled.span`
 font-size: 32px;
 font-weight: 300;
-margin-bottom: 2rem;
+margin-bottom: 1rem;
 `
 const SubHeading = styled.span`
 font-size: 16px;
 font-weight: 200;
-`
-const SemiBold = styled.span`
-font-size: inherit;
-font-weight: 500;
-color: inherit;
 `
 const Button = styled.button`
 background-color: var(--blue);
@@ -73,7 +69,7 @@ width: 340px;
 padding: 1rem 2rem 1rem 2rem;
 font-size: 20px;
 font-weight: 100;
-margin: 2rem;
+margin-top: 1rem;
 outline: none;
 border: none;
 cursor: pointer;
@@ -82,7 +78,21 @@ cursor: pointer;
 background-color: #2A4C78;
 }
 `
+const BottomWrapper = styled.span`
+width: 100%;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+width: 340px;
+margin-top: .5rem;
 
+span {
+  color: var(--blue);
+  font-weight: 400;
+  font-size: 14px;
+}
+`
 const VerifyPhone = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
@@ -121,6 +131,7 @@ const VerifyPhone = () => {
           </SubHeading>
             <Button onClick={(e)=>clickHandler(e)} disabled={user.phoneVerified}>Continue</Button>
             </CenteredWrapper>
+            <BottomWrapper><span>Resend SMS Code</span><span>Edit Phone Number</span></BottomWrapper>
         </Wrapper>
       </div>
   )
