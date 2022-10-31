@@ -2,7 +2,14 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {logout} from '../../store'
 import {useDispatch, useSelector} from 'react-redux'
+import styled from 'styled-components'
 
+const Wrapper = styled.div`
+position: absolute;
+left: 0;
+right: 0;
+top: 0;
+`
 const Navbar = () => {
   const user = useSelector(state => state.user)
   const isLoggedIn = user.id
@@ -14,7 +21,7 @@ const Navbar = () => {
   }
 
   return (
-    <div>
+    <Wrapper>
       <h1>Fairline</h1>
       <nav>
         {isLoggedIn ? (
@@ -41,7 +48,7 @@ const Navbar = () => {
         )}
       </nav>
       <hr />
-    </div>
+    </Wrapper>
   )
 }
 
