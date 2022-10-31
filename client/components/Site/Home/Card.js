@@ -11,6 +11,7 @@ align-items: center;
 padding: 2rem 4rem 2rem 4rem;
 
 @media(max-width: 800px) {
+    min-height: 300px;
     padding: 2rem;
     flex-direction: column;
 }
@@ -31,8 +32,16 @@ div {
 
 @media(max-width: 800px) {
     width: 100%;
-    padding: 0rem;
+    padding: 1rem;
     text-align: center;
+
+    header {
+        margin-bottom: 1rem;
+        font-size: 32px;
+    }
+    div {
+        font-size: 16px;
+    }
 }
 `
 const Bold = styled.div`

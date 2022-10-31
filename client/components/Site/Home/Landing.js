@@ -25,6 +25,7 @@ font-weight: 600;
 color: #fff;
 
 @media(max-width: 800px) {
+  line-height: 36px;
   width: 250px;
   font-size: 32px;
 }
@@ -38,6 +39,7 @@ width: 500px;
 @media(max-width: 800px) {
   width: 280px;
   font-size: 16px;
+  margin: 1rem 0rem 1rem 0rem;
 }
 `
 const StartButton = styled.div`
