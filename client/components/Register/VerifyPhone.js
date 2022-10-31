@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import history from '../../history'
 import { useState } from 'react'
 import RegisterHeader from './RegisterHeader'
-
+import ReactInputVerificationCode from 'react-input-verification-code';
 const Wrapper = styled.div`
 width: 100%;
 height: 100%;
@@ -31,16 +31,22 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 width: 340px;
-`
-const Input = styled.input`
-border-radius: 5px;
-text-align: center;
-width: 2.75rem;
-height: 4rem;
-outline: none;
-border: none;
-background-color: #CCC;
-font-size: 32px;
+
+.ReactInputVerificationCode__item {
+  position: relative;
+  border-radius: 5px;
+ // background-color: #AAB1B9;
+  background-color: #FFF;
+  height: 4.5rem;
+  width: 3rem;
+  font-size: 30px;
+  margin: .25rem;
+  color: #0C192E;
+  font-weight: 200;
+}
+.ReactInputVerificationCode__item:after {
+  background-color: #FFF;
+}
 `
 const PhoneIcon = styled.img`
 margin: 1rem;
@@ -81,24 +87,12 @@ const VerifyPhone = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
 
-  let [code,setCode] = useState(['', '', '', '', '', ''])
+  let [code,setCode] = useState('')
 
   const clickHandler = (e) => {
     e.preventDefault(e)
-    // if(!user.emailVerifed){
-    //   return
-    // }
+    console.log(code)
     history.push('/home')
-  }
-
-  const changeHandler = (e) => {
-    e.preventDefault()
-    let index = Number(e.target.name)
-    let value = String(e.target.value)
-    // if(code[index] !== ''){
-    //   index = index + 1
-    //    }
-    setCode(code[index] = value)
   }
 
     return (
@@ -118,14 +112,9 @@ const VerifyPhone = () => {
                 {user.phone}
               </SubHeading>
             </CenteredWrapper>
-              <Form>
-                <Input type="text" name="0" onChange={(e)=>changeHandler(e)} value={code[0]}></Input>
-                <Input type="text" name="1" onChange={(e)=>changeHandler(e)} value={code[1]}></Input>
-                <Input type="text" name="2" onChange={(e)=>changeHandler(e)} value={code[2]}></Input>
-                <Input type="text" name="3" onChange={(e)=>changeHandler(e)} value={code[3]}></Input>
-                <Input type="text" name="4" onChange={(e)=>changeHandler(e)} value={code[4]}></Input>
-                <Input type="text" name="5" onChange={(e)=>changeHandler(e)} value={code[5]}></Input>
-              </Form>
+            <Form>
+            <ReactInputVerificationCode length={6} placeholder="" onChange={setCode} value={code} />
+            </Form>
           <CenteredWrapper>
             <SubHeading>
             Please enter the verification code received by SMS.
