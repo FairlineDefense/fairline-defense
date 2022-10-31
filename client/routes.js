@@ -45,6 +45,7 @@ const Routes = props => {
             <Route path="/feed" component={Feed} />
             <Route path="/paymentstatus" component={PaymentStatus} />
             <Route path="/verifyemail" component={VerifyEmail} />
+            <Route path="/verifyphone" component={VerifyPhone} />
           </Switch>
         </div>
       ) : (
