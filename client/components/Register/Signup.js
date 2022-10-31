@@ -17,7 +17,7 @@ const Signup = () => {
     const firstName = evt.target.firstName.value
     const lastName = evt.target.lastName.value
     const email = evt.target.email.value
-    const phone = evt.target.countryCode.value + evt.target.phone.value
+    const phone = evt.target.phone.value
     const password = evt.target.password.value
     const confirmPassword = evt.target.confirmPassword.value
 
@@ -68,6 +68,9 @@ const SignupWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 5rem;
+  @media (max-width: 768px) {
+    padding: 4rem 1rem 0rem 1rem;
+  }
 `
 const SignupForm = styled.form`
 display: flex;
@@ -75,6 +78,9 @@ flex-direction: column;
 justify-content: center;
 max-width: 720px;
 position: relative;
+@media (max-width: 768px) {
+  max-width: 100%;
+}
 `
 const FinePrint = styled.div`
 display: flex;
@@ -87,12 +93,18 @@ const PasswordFormat = styled.div`
   margin-bottom: 2rem;
   width: 60%;
   font-size: 14px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 const TermsAndConditions = styled.div`
 display: flex;
 flex-direction: row;
 width: 100%;
 font-size: 16px;
+@media (max-width: 768px) {
+  flex-wrap: wrap;
+}
 `
 const Checkbox = styled.input`
 margin-right: .5rem;
