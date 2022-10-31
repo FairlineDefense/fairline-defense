@@ -20,23 +20,35 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-margin: 3rem;
 width: 340px;
 text-align: center;
 `
 const Heading = styled.span`
 font-size: 32px;
 font-weight: 300;
-margin-bottom: 1rem;
+margin-bottom: 2rem;
 `
 const SubHeading = styled.span`
 font-size: 16px;
 font-weight: 200;
 `
+const EmailIcon = styled.img`
+margin: 1rem;
+`
 const SemiBold = styled.span`
 font-size: inherit;
 font-weight: 500;
 color: inherit;
+`
+const BottomWrapper = styled.span`
+margin-top: 8rem;
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 340px;
+text-align: center;
 `
 const Button = styled.button`
 background-color: var(--blue);
@@ -77,7 +89,7 @@ const VerifyEmail = () => {
         <Wrapper>
           <Heading>Verify Your Email</Heading>
             <CenteredWrapper>
-            <img src="./images/confirmemail.png" />
+            <EmailIcon src="./images/confirmemail.png"></EmailIcon>
             <SubHeading>
               A confirmation link has been sent to
             </SubHeading>
@@ -87,12 +99,12 @@ const VerifyEmail = () => {
               </SemiBold>
               </SubHeading>
             </CenteredWrapper>
-          <CenteredWrapper>
+          <BottomWrapper>
             <SubHeading>
             In order to proceed, please check your email and click the confirmation link.
           </SubHeading>
             <Button onClick={(e)=>clickHandler(e)} disabled={user.emailVerified}>Continue</Button>
-            </CenteredWrapper>
+            </BottomWrapper>
         </Wrapper>
       </div>
   )
