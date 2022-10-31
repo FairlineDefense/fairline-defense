@@ -45,7 +45,7 @@ const LoginButton = styled.div`
     color: #FFF;
     border-radius: 40px;
     width: 150px;
-    padding: .25rem 1rem .25rem 1rem;
+    padding: .5rem 1rem .5rem 1rem;
     font-size: 16px;
     font-weight: 400;
     outline: none;
@@ -58,7 +58,6 @@ const Cyan = styled.span`
     font-size: inherit;
     font-weight:inherit;
     cursor: pointer;
-   
 `
 const Navbar = () => {
   const user = useSelector(state => state.user)
@@ -72,7 +71,7 @@ const Navbar = () => {
 
   return (
     <Wrapper>
-      <FairlineLogo src="./images/fdlogo.png"></FairlineLogo>
+      <Link to="/"><FairlineLogo src="./images/fdlogo.png"></FairlineLogo></Link>
       <Nav>
         {isLoggedIn ? (
           <ul>
