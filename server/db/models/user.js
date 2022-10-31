@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Order = require('./order')
 
 const User = db.define('user', {
   membershipNumber: {
@@ -86,6 +87,18 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  spouseName: {
+    type: Sequelize.STRING,
+    defaultValue: 'n/a'
+  },
+  spouseEmail: {
+    type: Sequelize.STRING,
+    defaultValue: 'n/a'
+  },
+  spousePhone: {
+    type: Sequelize.STRING,
+    defaultValue: 'n/a'
+  },
   customerId: {
     type: Sequelize.STRING,
     unique: true,
@@ -126,6 +139,21 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  brand: {
+    type: Sequelize.STRING,
+  },
+  paymentMethod: {
+    type: Sequelize.STRING,
+  },
+  last4:{
+    type: Sequelize.STRING
+  },
+  expMonth:{
+    type: Sequelize.STRING,
+  },
+  expYear:{
+    type: Sequelize.STRING,
+  },
   password: {
     type: Sequelize.STRING,
     // Making `.password` act like a func hides it when serializing to JSON.
@@ -155,7 +183,6 @@ module.exports = User
 User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
-
 /**
  * classMethods
  */

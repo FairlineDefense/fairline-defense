@@ -1,5 +1,7 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Order} = require('../db/models')
+require('dotenv').config()
+const stripe = require('stripe')(process.env.SECRET_KEY);
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -38,5 +40,18 @@ router.put('/:id', async (req, res, next) => {
   } catch (err) {
     console.log(err)
     next(err)
+  }
+})
+
+router.get('/create-customer-portal-session', async (req, res) => {
+  // Authenticate your user.
+  try {
+    const session = await stripe.billingPortal.sessions.create({
+      customer: req.user.customerId,
+      return_url: 'http://localhost:8080/membership',
+    });
+    return res.json({sessionUrl: session.url});
+  } catch (error) {
+    console.log(error)
   }
 })
