@@ -5,6 +5,7 @@ import Card from './Card'
 import ProtectYourFuture from './ProtectYourFuture'
 import HowItWorksSection from './HowItWorksSection'
 import WhatDoWeCover from './WhatDoWeCover'
+import WhatWeDontCover from './WhatWeDontCover'
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <ProtectYourFuture />
       <HowItWorksSection />
       <WhatDoWeCover />
+      <WhatWeDontCover />
     </>
   )
 }
