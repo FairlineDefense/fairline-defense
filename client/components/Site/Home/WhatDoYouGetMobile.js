@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Section = styled.div`
 max-width: 100vw;
-height: 650px;
+height: fit-content;
 display: flex;
 flex-direction: column;
 align-items: center;
