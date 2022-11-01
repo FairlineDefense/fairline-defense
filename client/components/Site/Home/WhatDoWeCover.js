@@ -18,14 +18,20 @@ padding: 2rem 4rem 2rem 4rem;
 `
 const Wrapper = styled.div`
 display: flex;
+min-height: 360px;
 flex-direction: row;
+justify-content: space-between;
+width: 100%;
+margin: 4rem 2rem 4rem 2rem;
+background-color: pink;
 `
 const Text = styled.div`
-width: 50%;
+width: 40%;
 color: var(--darkblue);
-padding: 4rem;
+padding: 2rem;
 display: flex;
 flex-direction: column;
+background-color: green;
 @media(max-width: 800px) {
 }
 `
@@ -38,13 +44,17 @@ color: var(--darkblue);
 const Small = styled.div`
 font-size: 14px;
 color: var(--darkblue);
-margin: 1rem 0rem 1rem 0rem;
+margin: 1.5rem 0rem 1.5rem 0rem;
 `
 const Icons = styled.div`
-width: 50%;
+width: 60%;
 display: flex;
 align-items: center;
-padding: 4rem;
+justif-content: center;
+background-image: url('./images/icons.png');
+background-position: center;
+background-repeat: no-repeat;
+
 @media(max-width: 800px) {
 }
 `
@@ -71,7 +81,7 @@ export default function WhatDoWeCover() {
             <Small>Click below to see all coverages</Small>
             <CyanButton>All Coverages</CyanButton>
            </Text>
-           <Icons><img src="./images/icons.png" /></Icons>
+           <Icons></Icons>
            </Wrapper>
         </Section>
     )
