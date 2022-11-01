@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Section = styled.div`
 min-height: 700px;
-width: 100vw;
+max-width: 100vw;
 display: flex;
 flex-direction: column;
 padding: 4rem;
@@ -13,7 +13,7 @@ margin: 2rem;
 
 @media(max-width: 800px) {
     padding: 2rem 0rem 2rem 0rem;
-    margin: 1rem 2rem 1rem 1rem;
+    margin: 1rem;
     flex-direction: column;
     min-height: 420px;
 }

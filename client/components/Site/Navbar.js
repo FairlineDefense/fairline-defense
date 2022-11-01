@@ -30,6 +30,12 @@ ul {
 ul li {
   margin-right: 1rem;
 }
+
+@media(max-width: 800px) {
+  ul {
+    display: none;
+  }
+}
 `
 const FairlineLogo = styled.img`
 height: 60px;

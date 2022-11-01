@@ -12,8 +12,10 @@ padding: 2rem 4rem 2rem 4rem;
 
 @media(max-width: 800px) {
     min-height: 300px;
-    padding: 2rem;
+    padding: 1rem;
     flex-direction: column;
+    justify-content: center;
+    background-color: pink;
 }
 `
 const Wrapper = styled.div`
@@ -49,7 +51,7 @@ font-weight: 500;
 line-height: 48px;
 color: var(--darkblue);
 @media(max-width:800px) {
-    font-size: 32px
+    font-size: 30px;
     line-height: 30px;
 }
 `
