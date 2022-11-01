@@ -23,7 +23,10 @@ flex-direction: row;
 justify-content: space-between;
 width: 100%;
 margin: 4rem 2rem 4rem 2rem;
-background-color: pink;
+@media(max-width: 800px) {
+    margin: 0;
+    flex-direction: column-reverse;
+}
 `
 const Text = styled.div`
 width: 40%;
@@ -31,8 +34,13 @@ color: var(--darkblue);
 padding: 2rem;
 display: flex;
 flex-direction: column;
-background-color: green;
+
 @media(max-width: 800px) {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem;
 }
 `
 const Header = styled.div`
@@ -40,6 +48,10 @@ font-size: 42px;
 font-weight: 500;
 line-height: 48px;
 color: var(--darkblue);
+@media(max-width:800px) {
+    font-size: 32px
+    line-height: 30px;
+}
 `
 const Small = styled.div`
 font-size: 14px;
@@ -48,21 +60,22 @@ margin: 1.5rem 0rem 1.5rem 0rem;
 `
 const Icons = styled.div`
 width: 60%;
-display: flex;
-align-items: center;
-justif-content: center;
 background-image: url('./images/icons.png');
 background-position: center;
 background-repeat: no-repeat;
 
 @media(max-width: 800px) {
+    display: block;
+    width: 100%;
+    height: 300px;
+    background-size: contain;
 }
 `
 const CyanButton = styled.div`
     background-color: var(--cyan);
     color: #FFF;
     border-radius: 40px;
-    width: 150px;
+    width: 280px;
     padding: .5rem 1rem .5rem 1rem;
     font-size: 16px;
     font-weight: 200;
