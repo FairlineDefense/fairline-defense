@@ -15,7 +15,6 @@ padding: 2rem 4rem 2rem 4rem;
     padding: 1rem;
     flex-direction: column;
     justify-content: center;
-    background-color: pink;
 }
 `
 const Wrapper = styled.div`
