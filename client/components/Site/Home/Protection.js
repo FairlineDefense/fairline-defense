@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Section = styled.div`
-height: 548px;
+height: 520px;
 max-width: 100vw;
 display: flex;
 flex-direction: row;
@@ -10,15 +10,26 @@ padding: 1rem;
 align-items: center;
 margin: 6rem 2rem 6rem 2rem;
 background-color: var(--bgblue);
+
+@media(max-width: 800px) {
+    display: none;
+}
 `
 const Wrapper = styled.div`
-width: 50%;
+width: 400px;
 display: flex;
+height: 100%;
+padding-top: 4rem;
 flex-direction: column;
 justify-content: flex-start;
+align-items: flex-start;
+
+div:nth-child(2) {
+    margin-bottom: 3rem;
+}
 `
 const FairlineLogo = styled.div`
-width: 50%;
+width: 540px;
 overflow: visible;
 
 img {
@@ -31,14 +42,13 @@ font-size: 48px;
 font-weight: 600;
 line-height: 55px;
 color: var(--darkblue);
-margin-bottom: 1rem;
 `
 const Arrow = styled.div`
-width: 260px;
-height: 200px;
-background-image: url('./images/webelieve.png');
-background-position: bottom;
-background-repeat: no-repeat;
+width: 220px;
+height: 300px;
+img {
+    width: 220px;
+}
 `
 
 export default function Protection() {
@@ -59,7 +69,7 @@ export default function Protection() {
                     No Politics
                 </Header>
             </Wrapper>
-            <Arrow></Arrow>
+            <Arrow><img src="./images/webelieve.png" /></Arrow>
         </Section>
     )
 }
