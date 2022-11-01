@@ -9,6 +9,7 @@ import WhatWeDontCover from './WhatWeDontCover'
 import Plans from './Plans'
 import Protection from './Protection'
 import WhatDoYouGet from './WhatDoYouGet'
+import WhatDoYouGetMobile from './WhatDoYouGetMobile'
 const Home = () => {
   return (
     <>
@@ -22,6 +23,7 @@ const Home = () => {
       <Plans />
       <Protection />
       <WhatDoYouGet />
+      <WhatDoYouGetMobile />
     </>
   )
 }
