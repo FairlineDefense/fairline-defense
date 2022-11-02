@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import Navbar from './Navbar'
 import styled from 'styled-components'
 import MembershipSubPortal from './MembershipSubPortal'
+import Footer from '../Site/Home/Footer'
 const Background = styled.div`
 width: 100vw;
 min-height: 100vh;
@@ -30,6 +31,7 @@ const Membership = () => {
   const user = useSelector(state => state.user)
 
   return (
+    <>
     <Background>
       <Navbar />
       <Wrapper>
@@ -37,6 +39,8 @@ const Membership = () => {
       <MembershipSubPortal />
       </Wrapper>
     </Background>
+    <Footer />
+    </>
   )
 }
 
