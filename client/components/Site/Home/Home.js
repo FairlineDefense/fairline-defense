@@ -14,6 +14,7 @@ import PlansMobile from './PlansMobile'
 import BePrepared from './BePrepared'
 import Stories from './Stories'
 import JoinNow from './JoinNow'
+import Footer from './Footer'
 const Home = () => {
   return (
     <>
@@ -32,6 +33,7 @@ const Home = () => {
       <BePrepared />
       <Stories />
       <JoinNow />
+      <Footer />
     </>
   )
 }
