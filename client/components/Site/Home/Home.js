@@ -12,6 +12,7 @@ import WhatDoYouGet from './WhatDoYouGet'
 import WhatDoYouGetMobile from './WhatDoYouGetMobile'
 import PlansMobile from './PlansMobile'
 import BePrepared from './BePrepared'
+import Stories from './Stories'
 const Home = () => {
   return (
     <>
@@ -28,6 +29,7 @@ const Home = () => {
       <WhatDoYouGetMobile />
       <PlansMobile />
       <BePrepared />
+      <Stories />
     </>
   )
 }

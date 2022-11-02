@@ -31,7 +31,7 @@ width: 100vw;
 height: 500px;
 margin: 4rem 0rem 4rem 0rem;
 display: flex;
-justify-content: space-around;
+justify-content: center;
 `
 const Card = styled.div`
 width: 284px;
@@ -43,6 +43,7 @@ flex-direction: column;
 justify-content: flex-end;
 color: var(--darkblue);
 padding: 2rem;
+margin: 0rem 2rem 0rem 2rem;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 header {
     font-size: 60px;
