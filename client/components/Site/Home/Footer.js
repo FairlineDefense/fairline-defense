@@ -92,7 +92,7 @@ export default function Footer() {
             <Support>
             <header>Support</header>
             <ul>
-            <li><Phone>1-888-XXX-XXXX</Phone></li>
+            <li><Phone>1-833-201-1463</Phone></li>
             <li><Link to="#">Email or Chat with us</Link></li>
             <li><Link to="#">FAQ & Questions</Link></li>
             </ul>
