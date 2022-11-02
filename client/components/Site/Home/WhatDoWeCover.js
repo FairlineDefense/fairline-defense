@@ -23,9 +23,10 @@ min-height: 360px;
 flex-direction: row;
 justify-content: space-between;
 width: 100%;
-margin: 4rem 2rem 4rem 2rem;
+padding: 4rem 6rem 4rem 6rem;
 @media(max-width: 800px) {
     margin: 0;
+    padding: 2rem;
     flex-direction: column-reverse;
 }
 `
@@ -52,6 +53,7 @@ color: var(--darkblue);
 @media(max-width:800px) {
     font-size: 30px;
     line-height: 30px;
+    margin-top: 1rem;
 }
 `
 const Small = styled.div`
@@ -68,7 +70,7 @@ background-repeat: no-repeat;
 @media(max-width: 800px) {
     display: block;
     width: 100%;
-    height: 300px;
+    height: 200px;
     background-size: contain;
 }
 `
