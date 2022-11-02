@@ -15,6 +15,7 @@ import BePrepared from './BePrepared'
 import Stories from './Stories'
 import JoinNow from './JoinNow'
 import Footer from './Footer'
+import WhyYouNeedIt from './WhyYouNeedIt'
 const Home = () => {
   return (
     <>
@@ -23,6 +24,7 @@ const Home = () => {
       <Card />
       <ProtectYourFuture />
       <HowItWorksSection />
+      <WhyYouNeedIt />
       <WhatDoWeCover />
       <WhatWeDontCover />
       <Plans />
