@@ -12,10 +12,17 @@ background-color: var(--darkblue);
 `
 const Logo = styled.div`
 width: 25%;
-object-fit: contain;
 
 img {
     width: 182px;
+}
+
+@media(max-width:800px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 `
 const Links = styled.div`
@@ -24,8 +31,8 @@ display: flex;
 flex-direction: column;
 header {
     font-weight: 400;
-    font-size: 18px;
-    margin-bottom: 1rem;
+    font-size: 20px;
+    margin-bottom: 1.5rem;
 }
 ul {
     list-style: none;
@@ -36,6 +43,9 @@ ul li {
 a {
     color: #fff;
 }
+@media(max-width:800px) {
+    display:none;
+}
 `
 const Support = styled.div`
 width: 25%;
@@ -43,7 +53,7 @@ display: flex;
 flex-direction: column;
 header {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 1rem;
 }
 ul {
@@ -55,6 +65,13 @@ li {
 a {
     color: #fff;
 }
+@media(max-width:800px) {
+    display:none;
+}
+`
+const Phone = styled.span`
+font-size: 25px;
+color: #FFD600;
 `
 export default function Footer() {
     return (
@@ -75,7 +92,7 @@ export default function Footer() {
             <Support>
             <header>Support</header>
             <ul>
-            <li><Link to="#">1-888-XXX-XXXX</Link></li>
+            <li><Phone>1-888-XXX-XXXX</Phone></li>
             <li><Link to="#">Email or Chat with us</Link></li>
             <li><Link to="#">FAQ & Questions</Link></li>
             </ul>

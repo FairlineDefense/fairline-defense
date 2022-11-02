@@ -8,7 +8,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 background-image: url('./images/21centuryimage.jpg');
-background-position: center;
+background-position: center bottom;
 background-repeat: no-repeat;
 background-size: 100%;
 text-align: center;
