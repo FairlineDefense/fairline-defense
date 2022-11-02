@@ -42,6 +42,10 @@ padding: 4rem 6rem 6rem 4rem;
 position: relative;
 background-color: #fff;
 border-radius: 4px;
+
+@media(max-width: 800px) {
+    padding: 2rem;
+}
 `
     return (
         <>
