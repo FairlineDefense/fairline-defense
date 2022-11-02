@@ -54,7 +54,7 @@ export default function JoinNow() {
     return (
         <Section>
         <Heading>Protection for the 21st Century starts here</Heading>
-        <StartButton>Join Now</StartButton>
+        <a href="/signup"><StartButton>Join Now</StartButton></a>
       </Section>
     )
 }
