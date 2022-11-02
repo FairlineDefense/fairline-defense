@@ -22,7 +22,7 @@ justify-content: center;
 }
 `
 const Header = styled.div`
-font-size: 32px;
+font-size: 48px;
 font-weight: 500;
 color: var(--darkblue);
 text-align: center;
@@ -79,21 +79,43 @@ padding: 1rem;
     padding: 2rem;
 }
 `
+const SubHeader = styled.div`
+font-size: 30px;
+font-weight: 500;
+color: var(--darkblue);
+text-align: center;
+margin-bottom: .5rem;
+width: 100%;
+@media(max-width: 800px) {
+    width: 240px;
+}
+`
 export default function HowItWorksSection() {
     return (
         <Section>
-            <Header>
-            How it Works
-            </Header>
-            <Image><img src='./images/randomguy-768x335.png'></img></Image>
-            <Header>
-            It couldn’t be more simple.
-            </Header>
-            <Text>
-            <Blue>Step 1</Blue><Red>Sign up</Red></Text>
-            <Text>
-            <Blue>& done</Blue><Red>You are protected</Red>
-            </Text>
+            <Header>How it Works</Header>
+            <SubHeader>
+                If anything happens defending your life.
+            </SubHeader>
+            <SubHeader>
+                Fairline Defense is here with a legal and support team.
+            </SubHeader>
         </Section>
     )
+    // return (
+    //     <Section>
+    //         <Header>
+    //         How it Works
+    //         </Header>
+    //         <Image><img src='./images/randomguy-768x335.png'></img></Image>
+    //         <Header>
+    //         It couldn’t be more simple.
+    //         </Header>
+    //         <Text>
+    //         <Blue>Step 1</Blue><Red>Sign up</Red></Text>
+    //         <Text>
+    //         <Blue>& done</Blue><Red>You are protected</Red>
+    //         </Text>
+    //     </Section>
+    // )
 }
