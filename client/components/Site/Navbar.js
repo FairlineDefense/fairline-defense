@@ -3,8 +3,9 @@ import {Link} from 'react-router-dom'
 import {logout} from '../../store'
 import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
+import { useState } from 'react'
 
-const Wrapper = styled.div`
+const Wrapper = styled.div.attrs(props => ({display: props.display || "none"}))`
 position: absolute;
 left: 0;
 right: 0;
@@ -32,11 +33,26 @@ ul li {
 }
 
 @media(max-width: 800px) {
+  flex-direction: row-reverse;
   ul {
-    display: none;
+    display: ${props => props.display};
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 6rem 0rem 0rem 1rem;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--darkblue);
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  li a {
+    font-size: 32px;
+    font-weight: 200;
   }
 }
 `
+
 const FairlineLogo = styled.img`
 height: 60px;
 `
@@ -65,6 +81,22 @@ const Cyan = styled.span`
     font-weight:inherit;
     cursor: pointer;
 `
+const HamburgerMenu = styled.div`
+width: 30px;
+height: 30px;
+display: none;
+background-color: red;
+
+
+@media(max-width: 800px) {
+  display: block;
+  position: fixed;
+  z-index: 20;
+  left: 20px;
+  top: 40px;
+}
+`
+
 const Navbar = () => {
   const user = useSelector(state => state.user)
   const isLoggedIn = user.id
@@ -75,10 +107,13 @@ const Navbar = () => {
     dispatch(logout())
   }
 
+let [display, setDisplay] = useState("none")
+
   return (
-    <Wrapper>
+    <Wrapper display={display}>
       <Link to="/"><FairlineLogo src="./images/fdlogo.png"></FairlineLogo></Link>
       <Nav>
+        <HamburgerMenu onClick={()=>setDisplay(display === 'flex' ? 'none' : 'flex')} />
         {isLoggedIn ? (
           <ul>
             {/* The navbar will show these links after you log in */}
