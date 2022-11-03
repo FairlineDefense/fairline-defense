@@ -5,6 +5,9 @@ width: 100%;
 height: 100%;
 display: flex;
 flex-direction: row;
+@media(max-width: 800px) {
+    flex-direction: column;
+  }
 `
 const InformationWrapper = styled.div`
 width: 80%;
