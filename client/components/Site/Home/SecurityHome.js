@@ -13,10 +13,10 @@ import WhatDoYouGetMobile from './WhatDoYouGetMobile'
 import PlansMobile from './PlansMobile'
 import BePrepared from './BePrepared'
 import Stories from './Stories'
-import JoinNow from './JoinNow'
 import Footer from './Footer'
 import WhyYouNeedIt from './WhyYouNeedIt'
 import WhyWeStartedThis from './WhyWeStartedThis'
+import JoinNowSecurity from './JoinNowSecurity'
 
 const SecurityHome = () => {
   return (
@@ -37,7 +37,7 @@ const SecurityHome = () => {
       <PlansMobile />
       <BePrepared />
       <Stories />
-      <JoinNow />
+      <JoinNowSecurity />
       <Footer />
     </>
   )

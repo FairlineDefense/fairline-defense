@@ -5,7 +5,7 @@ width: 100vw;
 height: 670px;
 display: flex;
 flex-direction: column;
-padding: 17rem 0rem 0rem 4rem;
+padding: 13rem 0rem 0rem 6rem;
 background-image: url('./images/security.png');
 background-position: center top;
 background-repeat: no-repeat;
@@ -59,7 +59,7 @@ const StartButton = styled.div`
 export default function SecurityLanding() {
     return (
         <Section>
-        <Heading>Armed Gaurd Protection Protection Starts Here</Heading>
+        <Heading>Armed Gaurd Protection<br />Starts Here</Heading>
         <StartButton>Get Started</StartButton>
       </Section>
     )

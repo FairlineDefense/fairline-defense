@@ -82,7 +82,6 @@ const Navbar = () => {
         {isLoggedIn ? (
           <ul>
             {/* The navbar will show these links after you log in */}
-            <li><Link to="/">Home</Link></li>
             <li><Link to="/howitworks">How It Works</Link></li>
             <li><Link to="/coverages">Coverages</Link></li>
             <li><Link to="/testimonials">Testimonials</Link></li>
@@ -95,7 +94,6 @@ const Navbar = () => {
         ) : (
           <ul>
             {/* The navbar will show these links before you log in */}
-            <li><Link to="/">Home</Link></li>
             <li><Link to="/howitworks">How It Works</Link></li>
             <li><Link to="/coverages">Coverages</Link></li>
             <li><Link to="/testimonials">Testimonials</Link></li>
