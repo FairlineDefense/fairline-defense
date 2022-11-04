@@ -35,11 +35,11 @@ font-size: 24px;
 font-weight: 200;
 color: #fff;
 width: 500px;
+margin: 1rem 0rem 1rem 0rem;
 
 @media(max-width: 800px) {
   width: 280px;
   font-size: 16px;
-  margin: 1rem 0rem 1rem 0rem;
 }
 `
 const StartButton = styled.div`
@@ -60,7 +60,7 @@ export default function Landing() {
     return (
         <Section>
         <Heading>Protection Starts Here</Heading>
-        <SubHeading>Fairline Defense protects your family in all  defense situations. </SubHeading>
+        <SubHeading>Fairline Defense protects your family in all defense situations.</SubHeading>
         <StartButton>Get Started</StartButton>
       </Section>
     )
