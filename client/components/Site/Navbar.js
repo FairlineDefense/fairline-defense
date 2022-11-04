@@ -30,7 +30,7 @@ ul {
 }
 
 ul li {
-  margin-right: 1rem;
+  margin-left: 2.5rem;
 }
 
 @media(max-width: 800px) {
@@ -142,7 +142,6 @@ let [display, setDisplay] = useState("none")
         {isLoggedIn ? (
           <ul>
             {/* The navbar will show these links after you log in */}
-            <li><Link to="/">Home</Link></li>
             <li><Link to="/howitworks">How It Works</Link></li>
             <li><Link to="/coverages">Coverages</Link></li>
             <li><Link to="/testimonials">Testimonials</Link></li>
@@ -155,7 +154,6 @@ let [display, setDisplay] = useState("none")
         ) : (
           <ul>
             {/* The navbar will show these links before you log in */}
-            <li><Link to="/">Home</Link></li>
             <li><Link to="/howitworks">How It Works</Link></li>
             <li><Link to="/coverages">Coverages</Link></li>
             <li><Link to="/testimonials">Testimonials</Link></li>
