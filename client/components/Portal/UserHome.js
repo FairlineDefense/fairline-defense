@@ -164,7 +164,7 @@ const UserHome = () => {
       />
       </ProgressBarWrapper>
     <TextBlock><Bold>Auto Renew</Bold><Small>{user.periodEnd}</Small></TextBlock>
-    <TextBlock><Bold>Questions</Bold><Small>Call 1 877 xxx xxxx</Small></TextBlock>
+    <TextBlock><Bold>Questions</Bold><Small>Call 1 833 201 1463</Small></TextBlock>
       </Right>
       </Main>
     </Wrapper>
