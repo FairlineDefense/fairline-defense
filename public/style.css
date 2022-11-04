@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Eina';
-  src: url("fonts/") format("opentype");
+  src: url("./fonts/") format("opentype");
 }
 
 * {
