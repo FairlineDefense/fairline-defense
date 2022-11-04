@@ -56,12 +56,25 @@ const StartButton = styled.div`
     cursor: pointer;
     text-align: center;
 `
+
+const DownArrow = styled.div`
+position: absolute;
+background-image: url('./images/downarrow.png');
+background-repeat: no-repeat;
+height: 50px;
+width: 50px;
+display: block;
+z-index: 50;
+top: 74%;
+left: 50%;
+`
 export default function Landing() {
     return (
         <Section>
         <Heading>Protection Starts Here</Heading>
         <SubHeading>Fairline Defense protects your family in all defense situations.</SubHeading>
         <StartButton>Get Started</StartButton>
+        <DownArrow />
       </Section>
     )
 }
