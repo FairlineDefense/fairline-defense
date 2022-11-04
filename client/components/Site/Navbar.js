@@ -3,8 +3,9 @@ import {Link} from 'react-router-dom'
 import {logout} from '../../store'
 import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
+import { useState } from 'react'
 
-const Wrapper = styled.div`
+const Wrapper = styled.div.attrs(props => ({display: props.display || "none"}))`
 position: absolute;
 left: 0;
 right: 0;
@@ -14,7 +15,8 @@ flex-direction: row;
 align-items: center;
 justify-content: space-between;
 padding: 2rem;
-
+max-width: 100vw;
+z-index: 50;
 a {
   color: #fff;
   font-size: 16px;
@@ -28,17 +30,46 @@ ul {
 }
 
 ul li {
-  margin-right: 1rem;
+  margin-left: 2.5rem;
 }
 
 @media(max-width: 800px) {
+  flex-direction: row-reverse;
+  background-color: var(--darkblue);
+  position: fixed;
+  padding: 1rem;
+
   ul {
-    display: none;
+    display: ${props => props.display};
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 6rem 0rem 0rem 1rem;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--darkblue);
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  ul li {
+    margin-right: 0;
+  }
+  li a {
+    font-size: 32px;
+    font-weight: 200;
   }
 }
 `
-const FairlineLogo = styled.img`
+
+const FairlineLogo = styled.div`
 height: 60px;
+z-index: 30;
+img {
+  height: 100%;
+}
+@media(max-width: 800px) {
+  height: 40px;
+}
 `
 const Nav = styled.nav`
 display: flex;
@@ -65,6 +96,30 @@ const Cyan = styled.span`
     font-weight:inherit;
     cursor: pointer;
 `
+const HamburgerMenu = styled.div`
+width: 30px;
+height: 30px;
+display: none;
+z-index: 20;
+
+@media(max-width: 800px) {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 20;
+  left: 20px;
+  top: 25px;
+}
+`
+const Bar = styled.div`
+background-color: #FFF;
+height: 4px;
+width: 100%;
+display: block;
+margin-bottom: 5px;
+border-radius: 2px;
+`
+
 const Navbar = () => {
   const user = useSelector(state => state.user)
   const isLoggedIn = user.id
@@ -75,16 +130,22 @@ const Navbar = () => {
     dispatch(logout())
   }
 
+let [display, setDisplay] = useState("none")
+
   return (
-    <Wrapper>
-      <Link to="/"><FairlineLogo src="./images/fdlogo.png"></FairlineLogo></Link>
+    <Wrapper display={display}>
+      <FairlineLogo><img src="./images/fdlogo.png" /></FairlineLogo>
       <Nav>
+        <HamburgerMenu onClick={()=>setDisplay(display === 'flex' ? 'none' : 'flex')}>
+<Bar /><Bar /><Bar />
+          </HamburgerMenu>
         {isLoggedIn ? (
           <ul>
             {/* The navbar will show these links after you log in */}
             <li><Link to="/howitworks">How It Works</Link></li>
             <li><Link to="/coverages">Coverages</Link></li>
             <li><Link to="/testimonials">Testimonials</Link></li>
+            <li><Link to="/security">Security Professionals</Link></li>
             <li>
               <a href="#" onClick={handleClick}>
               Logout
@@ -103,7 +164,6 @@ const Navbar = () => {
           </ul>
         )}
       </Nav>
-      <hr />
     </Wrapper>
   )
 }
