@@ -10,6 +10,19 @@ import EmailPreferences from './EmailPreferences'
 import Invoices from './Invoices'
 import AddASpouse from './AddASpouse'
 import EditSpouse from './EditSpouse'
+
+const WhiteBackground = styled.div`
+width: 100%;
+min-height: 500px;
+padding: 4rem 6rem 6rem 4rem;
+position: relative;
+background-color: #fff;
+border-radius: 4px;
+
+@media(max-width: 800px) {
+    padding: 1rem;
+}
+`
 export default function MembershipSubPortal() {
     const user = useSelector(state => state.user)
     let [state, setState] = useState('')
@@ -34,15 +47,6 @@ export default function MembershipSubPortal() {
             return <PersonalInformation user={user} setState={setState} />;
     }
 }
-
-const WhiteBackground = styled.div`
-width: 100%;
-min-height: 500px;
-padding: 4rem 6rem 6rem 4rem;
-position: relative;
-background-color: #fff;
-border-radius: 4px;
-`
     return (
         <>
         <MembershipNav state={state} setState={setState} />
