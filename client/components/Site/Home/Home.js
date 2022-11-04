@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <Landing />
+      <Landing /> 
       <Card />
       <ProtectYourFuture />
       <HowItWorksSection />
@@ -33,7 +33,7 @@ const Home = () => {
       <WhatDoYouGet />
       <WhatDoYouGetMobile />
       <PlansMobile />
-      <BePrepared />
+      <BePrepared /> 
       <Stories />
       <JoinNow />
       <Footer />
