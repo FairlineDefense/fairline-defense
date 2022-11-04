@@ -3,25 +3,16 @@ import {useDispatch, useSelector} from 'react-redux'
 import Navbar from './Navbar'
 import styled from 'styled-components'
 import MembershipSubPortal from './MembershipSubPortal'
-import Footer from '../Site/Home/Footer'
 const Background = styled.div`
 width: 100vw;
 min-height: 100vh;
 padding: 2rem;
 background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
-
-@media(max-width: 800px) {
-  padding: 1rem;
-}
 `
 const Wrapper = styled.div`
 width: 100%;
 height: 100%;
 padding: 1rem 8rem 4rem 8rem;
-
-@media(max-width: 800px) {
-  padding: 1rem;
-}
 `
 const UserInfo = styled.div`
 background-color: #fff;
@@ -39,7 +30,6 @@ const Membership = () => {
   const user = useSelector(state => state.user)
 
   return (
-    <>
     <Background>
       <Navbar />
       <Wrapper>
@@ -47,8 +37,6 @@ const Membership = () => {
       <MembershipSubPortal />
       </Wrapper>
     </Background>
-    <Footer />
-    </>
   )
 }
 

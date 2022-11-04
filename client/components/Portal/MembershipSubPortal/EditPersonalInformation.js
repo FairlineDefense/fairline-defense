@@ -16,10 +16,6 @@ display: flex;
 flex-direction: row;
 margin-bottom: 2rem;
 justify-content: flex-start;
-
-@media(max-width: 800px) {
-    flex-direction: column;
-}
 `
 const Label = styled.label`
 display: block;
@@ -27,10 +23,6 @@ font-weight: 300;
 font-size: 14px;
 font-weight: 400;
 margin-bottom: .5rem;
-
-@media(max-width: 800px) {
-    margin-top: 1rem;
-}
 `
 const Input = styled.input`
 padding: 1rem;

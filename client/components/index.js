@@ -1,11 +1,9 @@
 // Site
 export {default as SiteNavbar} from './Site/Navbar'
-export {default as SiteHome} from './Site/Home/Home'
-export {default as SecurityHome} from './Site/Home/SecurityHome'
+export {default as SiteHome} from './Site/Home'
 export {default as Testimonials} from './Site/Testimonials'
 export {default as Coverages} from './Site/Coverages'
 export {default as HowItWorks} from './Site/HowItWorks'
-export {default as Footer } from './Site/Home/Footer'
 
 // Register
 export {default as Signup} from './Register/Signup'

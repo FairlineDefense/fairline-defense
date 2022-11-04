@@ -3,7 +3,7 @@ import { useSelector, useDispatch} from 'react-redux'
 import Navbar from './Navbar'
 import ReferAFriend from './ReferAFriend'
 import Card from './Card'
-import {VerifyEmail, VerifyPhone, ChoosePlan, Footer} from '../'
+import {VerifyEmail, VerifyPhone, ChoosePlan} from '../'
 import styled from 'styled-components'
 import {useEffect} from 'react'
 import { me } from '../../store'
@@ -170,7 +170,6 @@ const UserHome = () => {
     </Wrapper>
      <ReferAFriend />
      <Card />
-     <Footer />
      </>
   )
 }

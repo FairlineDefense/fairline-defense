@@ -5,9 +5,7 @@ const Wrapper = styled.div`
 width: 100%;
 display: flex;
 flex-wrap: wrap;
-@media(max-width: 800px) {
-    flex-direction: column;
-}
+// background-color: green;
 `
 const InformationWrapper = styled.div`
 width: 75%;

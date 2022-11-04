@@ -12,10 +12,6 @@ export default function MembershipNav(props) {
     font-size: 14px;
     line-height: 20px;
     font-weight: 200;
-
-    @media(max-width: 800px) {
-        margin: 0rem .5rem .5rem 0rem;
-    }
     `
     return (
         <div>
