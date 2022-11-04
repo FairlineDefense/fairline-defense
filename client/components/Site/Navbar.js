@@ -35,7 +35,7 @@ ul li {
 
 @media(max-width: 800px) {
   flex-direction: row-reverse;
-  background-color: var(--darkblue);
+  background-color: #000;
   position: fixed;
   padding: 1rem;
 
@@ -44,15 +44,15 @@ ul li {
     position: fixed;
     left: 0;
     top: 0;
-    padding: 6rem 0rem 0rem 1rem;
-    width: 300px;
+    padding: 6rem 0rem 0rem 0rem;
+    width: 375px;
     height: 100vh;
-    background-color: var(--darkblue);
+    background-color: #000;
     align-items: flex-start;
     flex-direction: column;
   }
   ul li {
-    margin-right: 0;
+    margin-bottom: 1rem;
   }
   li a {
     font-size: 32px;
@@ -89,6 +89,16 @@ const LoginButton = styled.div`
     border: none;
     cursor: pointer;
     text-align: center;
+
+    @media(max-width: 800px) {
+      font-size: 32px;
+      background: none;
+      color: var(--cyan);
+      width: auto;
+      padding: 0rem;
+      margin: 0rem;
+      text-align: left;
+    }
 `
 const Cyan = styled.span`
     color: var(--cyan);
