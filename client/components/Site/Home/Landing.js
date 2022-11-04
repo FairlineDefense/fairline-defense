@@ -67,6 +67,10 @@ display: block;
 z-index: 50;
 top: 74%;
 left: 50%;
+
+@media(max-width: 800px) {
+  display: none;
+}
 `
 export default function Landing() {
     return (

@@ -87,17 +87,6 @@ span {
     display: none;
 }
 `
-const DownArrow = styled.div`
-position: absolute;
-background-image: url('./images/downarrow.png');
-background-repeat: no-repeat;
-height: 50px;
-width: 50px;
-display: block;
-z-index: 50;
-top: 74%;
-left: 50%;
-`
 export default function WhyWeStartedThis() {
     return (
         <Section>
@@ -115,7 +104,6 @@ export default function WhyWeStartedThis() {
                 </span>
             </Arrow>
            </Wrapper>
-           <DownArrow />
         </Section>
     )
 }

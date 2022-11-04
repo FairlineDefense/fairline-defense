@@ -56,11 +56,26 @@ const StartButton = styled.div`
     cursor: pointer;
     text-align: center;
 `
+const DownArrow = styled.div`
+position: absolute;
+background-image: url('./images/downarrow.png');
+background-repeat: no-repeat;
+height: 50px;
+width: 50px;
+display: block;
+top: 74%;
+left: 50%;
+
+@media(max-width: 800px) {
+  display: none;
+}
+`
 export default function SecurityLanding() {
     return (
         <Section>
         <Heading>Armed Gaurd Protection<br />Starts Here</Heading>
         <StartButton>Get Started</StartButton>
+        <DownArrow />
       </Section>
     )
 }
