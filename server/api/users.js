@@ -48,7 +48,7 @@ router.get('/create-customer-portal-session', async (req, res) => {
   try {
     const session = await stripe.billingPortal.sessions.create({
       customer: req.user.customerId,
-      return_url: 'http://localhost:8080/membership',
+      return_url: process.env.RETURN_URL,
     });
     return res.json({sessionUrl: session.url});
   } catch (error) {
