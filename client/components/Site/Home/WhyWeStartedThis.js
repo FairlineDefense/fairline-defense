@@ -48,7 +48,7 @@ justify-content: flex-end;
 `
 const Header = styled.div`
 font-size: 42px;
-font-weight: 500;
+font-weight: 600;
 line-height: 48px;
 color: var(--darkblue);
 @media(max-width:800px) {
@@ -60,7 +60,7 @@ color: var(--darkblue);
 `
 const Small = styled.div`
 font-size: 30px;
-font-weight: 500;
+font-weight: 600;
 color: var(--darkblue);
 margin: 1.5rem 0rem 1.5rem 0rem;
 
