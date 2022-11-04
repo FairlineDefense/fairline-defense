@@ -12,7 +12,7 @@ import WhatDoYouGet from './WhatDoYouGet'
 import WhatDoYouGetMobile from './WhatDoYouGetMobile'
 import PlansMobile from './PlansMobile'
 import BePrepared from './BePrepared'
-import Stories from './Stories'
+import SecurityStories from './SecurityStories'
 import Footer from './Footer'
 import WhyYouNeedIt from './WhyYouNeedIt'
 import WhyWeStartedThis from './WhyWeStartedThis'
@@ -36,7 +36,7 @@ const SecurityHome = () => {
       <WhatDoYouGetMobile />
       <PlansMobile />
       <BePrepared />
-      <Stories />
+      <SecurityStories />
       <JoinNowSecurity />
       <Footer />
     </>
