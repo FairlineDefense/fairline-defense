@@ -14,7 +14,7 @@ const Line = styled.div`
 width: 100%;
 display: flex;
 justify-content: space-between;
-padding: .5rem;
+padding: .75rem;
 flex-wrap: no-wrap;
 `
 const Date = styled.span`
@@ -26,6 +26,7 @@ const Charge = styled.span`
 width: fit-content;
 display: inline-block;
 color: var(--blueblack);
+margin-left: 8rem;
 `
 const PDF = styled.span`
 width: fit-content;
@@ -34,7 +35,7 @@ display: inline-block;
 a {
     text-transform: uppercase;
     color: var(--cyan);
-    font-weight: 600;
+    font-weight: 500;
 }
 `
 export default function Invoices() {
@@ -58,8 +59,10 @@ export default function Invoices() {
         <Wrapper>
             {invoices && invoices.map((line) =>
             <Line key={line.id}>
+            <span>
             <Date>{line.date}</Date>
             <Charge>{line.amount}</Charge>
+            </span>
             <PDF><a href={line.pdf} target="_blank">View PDF</a></PDF>
             </Line>)}
         </Wrapper>

@@ -21,13 +21,13 @@ margin-bottom: 2rem;
 color: var(--blueblack);
 
 header {
-font-weight: 300;
-font-size: 22px;
-margin-bottom: 1rem;
+font-weight: 500;
+font-size: 16px;
+margin-bottom: .5rem;
 }
 small {
 font-weight: 200;
-font-size: 16px;
+font-size: 12px;
 }
 `
 const EditWrapper = styled.div`
@@ -59,23 +59,23 @@ return (
         <Wrapper>
             <InformationWrapper>
                 <InformationBlock>
-                    <h3>Full Name</h3>
+                    <header>Full Name</header>
                     <small>{`${user.firstName} ${user.lastName}`}</small>
                 </InformationBlock>
                 <InformationBlock>
-                    <h3>Email</h3>
+                    <header>Email</header>
                     <small>{user.email}</small>
                 </InformationBlock>
                 <InformationBlock>
-                    <h3>Phone</h3>
+                    <header>Phone</header>
                     <small>{user.phone}</small>
                 </InformationBlock>
                 <InformationBlock>
-                    <h3>Shipping Address</h3>
+                    <header>Shipping Address</header>
                     <small>{`${user.streetAddress}, ${user.city}, ${user.state}, ${user.zipCode}`}{user.line2 && `, ${user.line2}`}</small>
                 </InformationBlock>
                 <InformationBlock>
-                    <h3>Password</h3>
+                    <header>Password</header>
                     <small>************</small>
                 </InformationBlock>
             </InformationWrapper>

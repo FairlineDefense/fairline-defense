@@ -21,14 +21,14 @@ margin-bottom: 2rem;
 color: var(--blueblack);
 
 header {
-font-weight: 300;
-font-size: 22px;
+font-weight: 500;
+font-size: 16px;
 line-height: 25px;
-margin-bottom: 1rem;
+margin-bottom: .25rem;
 }
 small {
 font-weight: 200;
-font-size: 16px;
+font-size: 12px;
 }
 `
 const ButtonWrapper = styled.div`
@@ -71,8 +71,7 @@ font-weight: 200;
 cursor: pointer;
 `
 const Link = styled.span`
-margin-top: .25rem;
-
+margin-top: .5rem;
 a {
     text-transform: uppercase;
     font-size: 16px;
@@ -105,26 +104,25 @@ useEffect(() => {
     getPortalUrl()
 }, [])
 
-console.log(portalUrl)
 return (
   <>
         <Wrapper>
             <InformationWrapper>
                 <InformationBlock>
-                    <h3>Member</h3>
+                    <header>Member</header>
                     <small>{`${user.firstName} ${user.lastName}`}</small>
                 </InformationBlock>
                 <InformationBlock>
-                    <h3>Membership Number</h3>
+                    <header>Membership Number</header>
                     <small># {user.membershipNumber}</small>
                     <Link><a href={portalUrl}>Edit Membership</a></Link>
                 </InformationBlock>
                 <InformationBlock>
-                    <h3>Auto Renew</h3>
+                    <header>Auto Renew</header>
                     <small>{user.periodEnd}</small>
                 </InformationBlock>
                 <InformationBlock>
-                    <h3>Credit Card Billed for Membership</h3>
+                    <header>Credit Card Billed for Membership</header>
                     <small>{user.brand} ending in {user.last4}</small>
                     <Link><a href={portalUrl}>Update Card</a></Link>
                 </InformationBlock>
@@ -137,7 +135,7 @@ return (
         
             <BottomWrapper>
                 <InformationBlock>
-                    <h3>Membership Documents</h3>
+                    <header>Membership Documents</header>
                     <small>Fairline MEMBERSHIP AGREEMENT AND SELF-DEFENSE LIABILITY POLICY</small>
                     <Link><a href={portalUrl}>View Documents</a></Link>
                 </InformationBlock>
@@ -145,7 +143,7 @@ return (
 
             <BottomWrapper>
             <InformationBlock>
-            <h3>Cancellation</h3>
+            <header>Cancellation</header>
             <small>Active Membership: Billed {user.interval}ly</small>
             <Link><a href={portalUrl}>Cancel Membership</a></Link>
         </InformationBlock>
