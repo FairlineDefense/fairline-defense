@@ -99,6 +99,7 @@ const Navbar = () => {
             <li><Link to="/howitworks">How It Works</Link></li>
             <li><Link to="/coverages">Coverages</Link></li>
             <li><Link to="/testimonials">Testimonials</Link></li>
+            <li><Link to="/security">Security Professionals</Link></li>
             <li><Link to="/login"><Cyan>Login</Cyan></Link></li>
             <li><Link to="/signup"><LoginButton>Join Now</LoginButton></Link></li>
           </ul>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../Navbar'
-import Landing from './Landing'
+import SecurityLanding from './SecurityLanding'
 import Card from './Card'
 import ProtectYourFuture from './ProtectYourFuture'
 import HowItWorksSection from './HowItWorksSection'
@@ -16,12 +16,14 @@ import Stories from './Stories'
 import JoinNow from './JoinNow'
 import Footer from './Footer'
 import WhyYouNeedIt from './WhyYouNeedIt'
-const Home = () => {
+import WhyWeStartedThis from './WhyWeStartedThis'
 
+const SecurityHome = () => {
   return (
     <>
       <Navbar />
-      <Landing />
+      <SecurityLanding />
+      <WhyWeStartedThis />
       <Card />
       <ProtectYourFuture />
       <HowItWorksSection />
@@ -40,4 +42,4 @@ const Home = () => {
     </>
   )
 }
-export default Home
+export default SecurityHome
