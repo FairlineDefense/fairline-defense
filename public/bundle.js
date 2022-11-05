@@ -6849,7 +6849,7 @@ var CheckoutForm = function CheckoutForm() {
                 //`Elements` instance that was used to create the Payment Element
                 elements: elements,
                 confirmParams: {
-                  return_url: "http://localhost:8080/paymentstatus"
+                  return_url: 'https://fairline-defense.herokuapp.com/paymentstatus'
                 }
               });
 
