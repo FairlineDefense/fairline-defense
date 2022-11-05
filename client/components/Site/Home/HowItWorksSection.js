@@ -77,6 +77,9 @@ padding: 1rem;
 
 @media(max-width: 800px) {
     padding: 2rem;
+    img {
+        max-width: 300px;
+    }
 }
 `
 const SubHeader = styled.div`

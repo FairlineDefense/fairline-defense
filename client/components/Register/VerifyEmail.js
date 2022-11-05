@@ -73,7 +73,7 @@ const VerifyEmail = () => {
   const dispatch = useDispatch()
 
   const clickHandler = (e) => {
-    console.log('')
+    history.push('/home')
   }
 
     return (
@@ -99,7 +99,7 @@ const VerifyEmail = () => {
             <SubHeading>
             In order to proceed, please check your email and click the confirmation link.
           </SubHeading>
-           <a href="https://manage.kmail-lists.com/subscriptions/subscribe?a=Xnx6uA&g=YaKZjb"><Button onClick={(e)=>clickHandler(e)} disabled={user.emailVerified}>Continue</Button></a>
+           <Button onClick={(e)=>clickHandler(e)} disabled={user.emailVerified}>Continue</Button>
             </BottomWrapper>
         </Wrapper>
       </div>

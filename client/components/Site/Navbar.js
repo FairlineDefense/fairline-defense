@@ -156,6 +156,7 @@ let [display, setDisplay] = useState("none")
             <li><Link to="/coverages">Coverages</Link></li>
             <li><Link to="/testimonials">Testimonials</Link></li>
             <li><Link to="/security">Security Professionals</Link></li>
+            <li><Link to="/home"><LoginButton>Account</LoginButton></Link></li>
             <li>
               <a href="#" onClick={handleClick}>
               Logout

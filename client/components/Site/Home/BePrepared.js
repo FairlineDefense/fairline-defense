@@ -39,16 +39,19 @@ position: relative;
 `
 const Svg = styled.svg`
 position: absolute;
-left: -60px;
-margin-top: 14rem;
+left: 0px;
+margin-top:8rem;
+width: 506px;
+height: 530px;
 @media(max-width: 800px) {
-    left: -100px;
-    margin-top: 2rem;
+    width: 100%;
+    height: auto;
+    left: -60px;
 }
 `
 export default function BePrepared() {
     return (<>
-        <Svg width="506" height="530" viewBox="0 0 506 530" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <Svg viewBox="0 0 506 530" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_673_27)">
         <path d="M31.2033 68.4848L0 187.72L474.797 119.38L506 0L31.2033 68.4848Z" fill="#B32D2D" fill-opacity="0.5"/>
         <path d="M31.2033 239.336L0 358.716L474.797 290.231L506 170.996L31.2033 239.336Z" fill="#B32D2D" fill-opacity="0.5"/>

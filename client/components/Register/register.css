@@ -3,6 +3,7 @@
   min-height: 100vh;
   background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
   color: #fff;
+  overflow-x: hidden;
 }
 
 .auth a {
@@ -139,7 +140,7 @@
 }
 
 .auth svg {
-  position: absolute;
+  position: fixed;
   height: 175px;
   transform: rotate(-5deg) skew(-20deg);
   background: rgba(151, 203, 220, 0.2);
