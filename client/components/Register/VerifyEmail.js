@@ -72,8 +72,15 @@ const VerifyEmail = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
 
-  const clickHandler = (e) => {
-    history.push('/home')
+  const clickHandler = async (e) => {
+    
+    await fetch('webhook/klaviyo/verify-email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json', 'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({email: user.email})
+    }).then(()=> history.push('/home'))
   }
 
   const sendEmail = async () => {
