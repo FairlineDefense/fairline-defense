@@ -126,9 +126,9 @@ const UserHome = () => {
   // if user.phoneVerified => render verify phone
   // if user.userPlan => render choose plan
 
-  if(!user.emailVerified) {
-    return <VerifyEmail />
-  }
+  // if(!user.emailVerified) {
+  //   return <VerifyEmail />
+  // }
 
   // if (!user.phoneVerified) {
   //   return <VerifyPhone />
