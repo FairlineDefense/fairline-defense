@@ -85,6 +85,7 @@ const VerifyEmail = () => {
         },
         body: JSON.stringify({email: user.email, phone: user.phone})
       })
+      console.log('Fire')
     }
   }
 
