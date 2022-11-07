@@ -1,9 +1,5 @@
-
-
-    const router = require('express').Router()
-const {User, Order} = require('../db/models')
-var client = require('klaviyo-sdk');
-const {User, Order} = require('../db/models')
+const router = require('express').Router()
+const {User} = require('../db/models')
 module.exports = router
 
 router.post('/verify-email', async (req, res, next) => {
