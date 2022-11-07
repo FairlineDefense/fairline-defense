@@ -31,6 +31,7 @@ if (process.env.NODE_ENV === 'test') {
  * Node process on process.env
  */
 if (process.env.NODE_ENV !== 'production') require('../secrets')
+app.use('/webhook/klaviyo', require('./webhook/klaviyo'))
 app.use('/webhook', require('./webhook'))
 
 // passport registration
