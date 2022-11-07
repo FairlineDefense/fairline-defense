@@ -14,6 +14,7 @@ const dateString = require('../../utils/dateString')
 module.exports = router
 router.post('klaviyo/verify-email', async (req, res, next) => {
   try {
+    console.log('web hook called', req.body.email)
     await User.update({emailVerified: true}, {where:{email: req.body.email}})
   } catch (err) {
     next(err)
