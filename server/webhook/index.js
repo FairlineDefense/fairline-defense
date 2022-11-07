@@ -12,6 +12,13 @@ const router = require('express').Router()
 const dateString = require('../../utils/dateString')
 
 module.exports = router
+router.post('klaviyo/verify-email', async (req, res, next) => {
+  try {
+    await User.update({emailVerified: true}, {where:{email: req.body.email}})
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.post('/', express.raw({type: 'application/json'}), async (request, response) => {
 
