@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'test') {
  */
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 app.use('/webhook', require('./webhook'))
-app.use('/klaviyo', require('./klaviyo'))
+
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
 
@@ -111,7 +111,7 @@ const createApp = () => {
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
   app.use('/payment', require('./payment'))
-
+  app.use('/klaviyo', require('./klaviyo'))
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
 
