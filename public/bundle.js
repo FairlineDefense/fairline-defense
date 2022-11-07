@@ -10576,8 +10576,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "logout": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_3__.logout),
 /* harmony export */   "me": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_3__.me),
-/* harmony export */   "signup": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_3__.signup),
-/* harmony export */   "update": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_3__.update)
+/* harmony export */   "signup": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_3__.signup)
 /* harmony export */ });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
@@ -10615,18 +10614,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* export default binding */ __WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "logout": () => (/* binding */ logout),
 /* harmony export */   "me": () => (/* binding */ me),
-/* harmony export */   "signup": () => (/* binding */ signup),
-/* harmony export */   "update": () => (/* binding */ update)
+/* harmony export */   "signup": () => (/* binding */ signup)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../history */ "./client/history.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -10639,7 +10631,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var GET_USER = 'GET_USER';
 var REMOVE_USER = 'REMOVE_USER';
-var UPDATE_USER = 'UPDATE_USER';
 /**
  * INITIAL STATE
  */
@@ -10659,13 +10650,6 @@ var getUser = function getUser(user) {
 var removeUser = function removeUser() {
   return {
     type: REMOVE_USER
-  };
-};
-
-var updateUser = function updateUser(user) {
-  return {
-    type: UPDATE_USER,
-    user: user
   };
 };
 /**
@@ -10823,7 +10807,7 @@ var auth = function auth(email, password, method) {
     }()
   );
 };
-var update = function update(body) {
+var logout = function logout() {
   return (
     /*#__PURE__*/
     function () {
@@ -10836,68 +10820,29 @@ var update = function update(body) {
               case 0:
                 _context4.prev = 0;
                 _context4.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/users/".concat(body.id), body);
-
-              case 3:
-                dispatch(updateUser(body));
-                _context4.next = 9;
-                break;
-
-              case 6:
-                _context4.prev = 6;
-                _context4.t0 = _context4["catch"](0);
-                console.error(_context4.t0);
-
-              case 9:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, null, [[0, 6]]);
-      }));
-
-      return function (_x4) {
-        return _ref4.apply(this, arguments);
-      };
-    }()
-  );
-};
-var logout = function logout() {
-  return (
-    /*#__PURE__*/
-    function () {
-      var _ref5 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee5(dispatch) {
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                _context5.prev = 0;
-                _context5.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/auth/logout');
 
               case 3:
                 dispatch(removeUser());
                 _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/login');
-                _context5.next = 10;
+                _context4.next = 10;
                 break;
 
               case 7:
-                _context5.prev = 7;
-                _context5.t0 = _context5["catch"](0);
-                console.error(_context5.t0);
+                _context4.prev = 7;
+                _context4.t0 = _context4["catch"](0);
+                console.error(_context4.t0);
 
               case 10:
               case "end":
-                return _context5.stop();
+                return _context4.stop();
             }
           }
-        }, _callee5, null, [[0, 7]]);
+        }, _callee4, null, [[0, 7]]);
       }));
 
-      return function (_x5) {
-        return _ref5.apply(this, arguments);
+      return function (_x4) {
+        return _ref4.apply(this, arguments);
       };
     }()
   );
@@ -10913,10 +10858,6 @@ var logout = function logout() {
   switch (action.type) {
     case GET_USER:
       return action.user;
-
-    case UPDATE_USER:
-      var user = action.user;
-      return _objectSpread({}, state, {}, user);
 
     case REMOVE_USER:
       return defaultUser;
