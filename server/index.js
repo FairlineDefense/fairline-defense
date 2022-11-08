@@ -31,8 +31,6 @@ if (process.env.NODE_ENV === 'test') {
  * Node process on process.env
  */
 if (process.env.NODE_ENV !== 'production') require('../secrets')
-app.use('/webhook/klaviyo', require('./webhook/klaviyo'))
-app.use('/webhook', require('./webhook'))
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
@@ -95,7 +93,9 @@ const createApp = () => {
 
   // compression middleware
   app.use(compression())
-
+  
+  app.use('/webhook/klaviyo', require('./webhook/klaviyo'))
+  app.use('/webhook', require('./webhook'))
   // session middleware with passport
   app.use(
     session({

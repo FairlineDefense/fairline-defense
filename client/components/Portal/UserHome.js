@@ -5,7 +5,7 @@ import ReferAFriend from './ReferAFriend'
 import Card from './Card'
 import {VerifyEmail, VerifyPhone, ChoosePlan, Footer} from '../'
 import styled from 'styled-components'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import { me } from '../../store'
 import {
   CircularProgressbar,
@@ -13,11 +13,19 @@ import {
   buildStyles
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-
+import RegisterHeader from '../Register/RegisterHeader'
 const Wrapper = styled.div`
 width: 100vw;
 padding: 2rem;
 background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+`
+const CenteredWrapper = styled.div`
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
 `
 const Main = styled.div`
 height: 500px;
@@ -119,13 +127,31 @@ const UserHome = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(me())
+    setTimeout(()=>{
+      dispatch(me())
+      setLoaded(true)
+    }, 2000)
   }, [])
 
   // if user.emailVerified => render verify
   // if user.phoneVerified => render verify phone
   // if user.userPlan => render choose plan
+  // Set time out to check if user is verified? In use effect above ?
+  let [loaded, setLoaded] = useState(false)
 
+  if(!loaded) {
+    return (
+      <div className="auth">
+      <svg />
+      <svg />
+      <svg />
+      <RegisterHeader />
+      <Wrapper>
+        <CenteredWrapper>Loading</CenteredWrapper>
+      </Wrapper>
+    </div>
+    )
+  }
   if(!user.emailVerified) {
     return <VerifyEmail />
   }

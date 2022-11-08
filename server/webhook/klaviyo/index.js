@@ -5,8 +5,10 @@ module.exports = router
 
 router.post('/verify-email', express.raw({type: 'application/json'}), async (req, res, next) => {
   try {
-      const body = JSON.parse(req.body)
-      await User.update({emailVerified: true}, {where:{email: body.email}})
+      // const body = JSON.parse(req.body)
+      console.log(req.body)
+      // await User.update({emailVerified: true}, {where:{email: body.email}})
+      res.send(req.body)
     } catch (err) {
       next(err)
     }
