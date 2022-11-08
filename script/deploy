@@ -22,7 +22,7 @@ set -e
 
 function cleanup_at_exit {
   # return to your dev branch
-  git checkout development
+  git checkout klaviyo-api
   
   # remove the deploy branch
   git branch -D deploy
