@@ -127,7 +127,10 @@ const UserHome = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(me())
+    setTimeout(()=>{
+      dispatch(me())
+      setLoaded(true)
+    }, 2000)
   }, [])
 
   // if user.emailVerified => render verify
@@ -135,10 +138,6 @@ const UserHome = () => {
   // if user.userPlan => render choose plan
   // Set time out to check if user is verified? In use effect above ?
   let [loaded, setLoaded] = useState(false)
-
-  setTimeout(()=>{
-    setLoaded(true)
-  }, 2000)
 
   if(!loaded) {
     return (
