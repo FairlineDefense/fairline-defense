@@ -21,7 +21,8 @@ module.exports = app
 if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions())
 }
-
+app.use('/webhook/klaviyo', require('./webhook/klaviyo'))
+app.use('/webhook', require('./webhook'))
 /**
  * In your development environment, you can keep all of your
  * app's secret API keys in a file called `secrets.js`, in your project
@@ -93,9 +94,7 @@ const createApp = () => {
 
   // compression middleware
   app.use(compression())
-  
-  app.use('/webhook/klaviyo', require('./webhook/klaviyo'))
-  app.use('/webhook', require('./webhook'))
+
   // session middleware with passport
   app.use(
     session({
