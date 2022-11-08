@@ -126,7 +126,7 @@ const UserHome = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
   let [loaded, setLoaded] = useState(false)
-  
+
   useEffect(() => {
     setTimeout(()=>{
       dispatch(me())
@@ -153,9 +153,9 @@ const UserHome = () => {
     </div>
     )
   }
-  if(!user.emailVerified) {
-    return <VerifyEmail />
-  }
+  // if(!user.emailVerified) {
+  //   return <VerifyEmail />
+  // }
 
   // if (!user.phoneVerified) {
   //   return <VerifyPhone />
