@@ -125,7 +125,8 @@ margin-bottom: 2rem;
 const UserHome = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-
+  let [loaded, setLoaded] = useState(false)
+  
   useEffect(() => {
     setTimeout(()=>{
       dispatch(me())
@@ -137,7 +138,7 @@ const UserHome = () => {
   // if user.phoneVerified => render verify phone
   // if user.userPlan => render choose plan
   // Set time out to check if user is verified? In use effect above ?
-  let [loaded, setLoaded] = useState(false)
+
 
   if(!loaded) {
     return (

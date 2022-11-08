@@ -84,7 +84,7 @@ const VerifyEmail = () => {
   }
 
   const sendEmail = async () => {
-    if(user.id) {
+    if(!user.emailVerified) {
       await fetch('klaviyo/create-account', {
         method: 'POST',
         headers: {
