@@ -9,6 +9,7 @@ router.post('/verify-email', express.raw({type: 'application/json'}), async (req
       // const body = JSON.parse(req.body)
       // console.log(body)
       // await User.update({emailVerified: true}, {where:{email: body.email}})
+      return 'HIT'
     } catch (err) {
       next(err)
     }
