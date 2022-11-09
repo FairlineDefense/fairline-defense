@@ -4,57 +4,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import RegisterHeader from './RegisterHeader'
-
+import '@material/react-text-field/dist/text-field.css';
+import TextField, {HelperText, Input} from '@material/react-text-field';
 import css from './register.css'
 import styled from 'styled-components'
-const Signup = () => {
-  let user = useSelector(state => state.user)
-  const dispatch = useDispatch()
-  let [errorText, setErrorText] = useState('')
 
-  const handleSubmit = evt => {
-    evt.preventDefault()
-    const firstName = evt.target.firstName.value
-    const lastName = evt.target.lastName.value
-    const email = evt.target.email.value
-    const phone = evt.target.phone.value
-    const password = evt.target.password.value
-    const confirmPassword = evt.target.confirmPassword.value
-
-    function validateFields() {
-      if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-        return setErrorText('Invalid email address.')
-      }
-      if(!/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(phone)) {
-        return setErrorText('Invalid phone number.')
-      }
-      if (password !== confirmPassword) {
-        return setErrorText('Passwords do not match.')
-      }
-      if (password.length < 8) {
-        return setErrorText('Your password must be at least 8 characters')
-      }
-      if (password.search(/[a-z]/i) < 0) {
-        return setErrorText('Your password must contain at least one letter.')
-      }
-      if (password.search(/[0-9]/) < 0) {
-        return setErrorText('Your password must contain at least one digit.')
-      } else {
-        dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
-      }
-    }
-    validateFields()
-  }
-
-  useEffect(
-    () => {
-      user.error &&
-        setErrorText(
-          'An account with that information already exists try logging in.'
-        )
-    },
-    [user]
-  )
 const H1 = styled.h1`
   font-weight: 400;
   font-size: 30px;
@@ -131,6 +85,59 @@ background-color: var(--blue);
 margin-bottom: 2rem;
 cursor: pointer;
 `
+
+const Signup = () => {
+  let user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  let [errorText, setErrorText] = useState('')
+  let [form, setForm] = useState({firstName: '', lastName: '', email: '', cc: '', phone: '', password: '', confirmPassword:''})
+  const changeHandler = (e) => {
+    setForm({...form, [e.target.name]: e.target.value})
+  }
+  const handleSubmit = evt => {
+    evt.preventDefault()
+    const firstName = form.firstName
+    const lastName = form.lastName
+    const email = form.email
+    const phone = form.phone
+    const password = form.password
+    const confirmPassword = form.confirmPassword
+
+    function validateFields() {
+      if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+        return setErrorText('Invalid email address.')
+      }
+      if(!/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(phone)) {
+        return setErrorText('Invalid phone number.')
+      }
+      if (password !== confirmPassword) {
+        return setErrorText('Passwords do not match.')
+      }
+      if (password.length < 8) {
+        return setErrorText('Your password must be at least 8 characters')
+      }
+      if (password.search(/[a-z]/i) < 0) {
+        return setErrorText('Your password must contain at least one letter.')
+      }
+      if (password.search(/[0-9]/) < 0) {
+        return setErrorText('Your password must contain at least one digit.')
+      } else {
+        dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
+      }
+    }
+    validateFields()
+  }
+
+  useEffect(
+    () => {
+      user.error &&
+        setErrorText(
+          'An account with that information already exists try logging in.'
+        )
+    },
+    [user]
+  )
+
   return (
     <section className="auth">
       <svg />
@@ -141,59 +148,90 @@ cursor: pointer;
         <H1>Get Started</H1>
         <SignupForm onSubmit={handleSubmit} name="signup">
           <div className="inputGroup">
-            <input
-              className="signupInput"
+            <TextField
+            label="First Name"
+            className="signupInput"
+            >
+              <Input 
               name="firstName"
               type="text"
-              placeholder="First Name"
-              required
-            />
-            <input
-              className="signupInput"
+              onChange={(e)=>changeHandler(e)}
+              value={form.firstName}
+              required />
+            </TextField>
+            <TextField className="signupInput" label="Last Name">
+            <Input
               name="lastName"
               type="text"
-              placeholder="Last Name"
+              onChange={(e)=>changeHandler(e)}
+              value={form.lastName}
               required
             />
+            </TextField>
           </div>
           <div className="inputGroup">
-            <input
-              className="signupInput"
-              name="email"
-              type="email"
-              placeholder="Email"
+            <TextField
+            label="Email Address"
+            className="signupInput"
+            >
+            <Input
+            name="email"
+            type="email"
+            onChange={(e)=>changeHandler(e)}
+            value={form.email}
+            required
+            />
+            </TextField>
+            <TextField
+            label=""
+            className="signupInputCC"
+            >
+            <Input
+            name="cc"
+            type="tel"
+             onChange={(e)=>changeHandler(e)}
+            value={form.cc}
               required
             />
-            <input
-              className="signupInputCC"
-              name="countryCode"
-              type="tel"
-              placeholder="+1"
+            </TextField>
+            <TextField
+            label="Phone"
+            className="signupInputPhone"
+            >
+            <Input
+           name="phone"
+           type="tel"
+            onChange={(e)=>changeHandler(e)}
+            value={form.phone}
               required
             />
-            <input
-              className="signupInputPhone"
-              name="phone"
-              type="tel"
-              placeholder="Phone"
-              required
-            />
+            </TextField>
           </div>
           <div className="inputGroup">
-            <input
-              className="signupInput"
-              name="password"
-              type="password"
-              placeholder="Create Password"
+            <TextField
+            label="Password"
+            className="signupInput"
+            >
+            <Input
+         name="password"
+         type="password"
+             onChange={(e)=>changeHandler(e)}
+            value={form.password}
               required
             />
-            <input
-              className="signupInput"
-              name="confirmPassword"
-              type="password"
-              placeholder="Repeat Password"
+            </TextField>
+            <TextField
+            label="Confirm Password"
+            className="signupInput"
+            >
+            <Input
+          name="confirmPassword"
+          type="password"
+            onChange={(e)=>changeHandler(e)}
+            value={form.confirmPassword}
               required
             />
+            </TextField>
           </div>
           <FinePrint>
             <PasswordFormat>
