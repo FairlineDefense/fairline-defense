@@ -21,7 +21,8 @@ module.exports = app
 if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions())
 }
-
+app.use('/webhook/klaviyo', require('./webhook/klaviyo'))
+app.use('/webhook', require('./webhook'))
 /**
  * In your development environment, you can keep all of your
  * app's secret API keys in a file called `secrets.js`, in your project
@@ -31,8 +32,7 @@ if (process.env.NODE_ENV === 'test') {
  * Node process on process.env
  */
 if (process.env.NODE_ENV !== 'production') require('../secrets')
-app.use('/webhook', require('./webhook'))
-app.use('/klaviyo', require('./klaviyo'))
+
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
 
@@ -111,7 +111,7 @@ const createApp = () => {
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
   app.use('/payment', require('./payment'))
-
+  app.use('/klaviyo', require('./klaviyo'))
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
 

@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import history from '../../history'
 import RegisterHeader from './RegisterHeader'
-
+import { useEffect } from 'react'
 const Wrapper = styled.div`
 width: 100%;
 height: 100%;
@@ -72,9 +72,37 @@ const VerifyEmail = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
 
-  const clickHandler = (e) => {
-    history.push('/home')
+  const clickHandler = async (e) => {
+    
+    await fetch('webhook/klaviyo/verify-email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json', 'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({email: user.email})
+    }).then(()=> history.push('/home'))
   }
+
+  const sendEmail = async () => {
+    if(user.id) {
+      await fetch('klaviyo/create-account', {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json', 'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email: user.email, phone: user.phone})
+      })
+      console.log('Fire')
+    }
+  }
+
+useEffect(() => {
+try {
+  sendEmail()
+} catch (error) {
+  console.log(error)
+}
+}, [])
 
     return (
       <div className="auth">
