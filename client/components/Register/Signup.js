@@ -21,7 +21,7 @@ const SignupWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5rem;
+  padding: 4rem;
   @media (max-width: 768px) {
     padding: 4rem 1rem 0rem 1rem;
   }
@@ -40,16 +40,8 @@ const FinePrint = styled.div`
 display: flex;
 flex-direction: column;
 padding: .5rem;
-margin-bottom: 3rem;
+margin-bottom: 2rem;
 width: 100%;
-`
-const PasswordFormat = styled.div`
-  margin-bottom: 2rem;
-  width: 60%;
-  font-size: 14px;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
 `
 const TermsAndConditions = styled.div`
 display: flex;
@@ -105,16 +97,24 @@ background-color: var(--blue);
 margin-bottom: 2rem;
 cursor: pointer;
 `
-
+const ErrorText = styled.div`
+  height: fit-content;
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: .5rem;
+  background-color: #fff;
+  font-size: .75rem;
+  color: #000;
+`
 const Signup = () => {
   let user = useSelector(state => state.user)
   const dispatch = useDispatch()
   let [errorText, setErrorText] = useState('')
   let [passwordErrorText, setPasswordErrorText] = useState(" ")
-  let [validation, setValidation] = useState({email: false, phone: false, password: false, confirmPassword:false})
+  let [invalidation, setInvalidation] = useState({email: false, phone: false, password: false, confirmPassword:false})
   let [form, setForm] = useState({firstName: '', lastName: '', email: '', cc: '', phone: '', password: '', confirmPassword:''})
   const changeHandler = (e) => {
-    setValidation({...validation, [e.target.name]: false})
+    setInvalidation({...invalidation, [e.target.name]: false})
     setForm({...form, [e.target.name]: e.target.value})
   }
   const handleSubmit = evt => {
@@ -129,35 +129,35 @@ const Signup = () => {
     function validateFields() {
       let res = true
       if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-         setValidation({...validation, email: true})
+         setInvalidation({...invalidation, email: true})
          res = false
       }
       if(!/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(phone)) {
-         setValidation({...validation, phone: true})
+         setInvalidation({...invalidation, phone: true})
          res = false
       }
       if (password !== confirmPassword) {
-         setValidation({...validation, password: true, confirmPassword: true})
+         setInvalidation({...invalidation, confirmPassword: true})
          setPasswordErrorText("Passwords do not match")
          res = false
       }
       if (password.length < 8) {
-         setValidation({...validation, password: true})
+         setInvalidation({...invalidation, password: true, confirmPassword: true})
          setPasswordErrorText("Passwords must be min. 8 chars long")
          res = false
       }
       if (password.search(/[a-z]/i) < 0) {
-         setValidation({...validation, password: true})
+         setInvalidation({...invalidation, password: true, confirmPassword: true})
          setPasswordErrorText("Passwords must contain at least one letter")
          res = false
       }
       if (password.search(/[!@#\$%\^\&*\)\(+=._-]/i) < 0) {
-        setValidation({...validation, password: true})
+        setInvalidation({...invalidation, password: true, confirmPassword: true})
         setPasswordErrorText("Passwords must contain at least one special character")
         res = false
      }
       if (password.search(/[0-9]/) < 0) {
-         setValidation({...validation, password: true})
+         setInvalidation({...invalidation, password: true, confirmPassword: true})
          setPasswordErrorText("Passwords must contain at least one number")
          res = false
       } 
@@ -173,13 +173,11 @@ const Signup = () => {
     () => {
       user.error &&
         setErrorText(
-          'An account with that information already exists try logging in.'
+          'An account with that information already exists. Try logging in.'
         )
     },
     [user]
   )
-
-  
 
   return (
     <section className="auth">
@@ -228,7 +226,7 @@ const Signup = () => {
             style={{ margin: 5, flexGrow: 1 }}
             variant="filled"
             required
-            error={validation.email ? true : false}
+            error={invalidation.email ? true : false}
             />
             <Phone>
             <FDTextField
@@ -251,7 +249,7 @@ const Signup = () => {
             value={form.phone}
             style={{ margin: 5 }}
             variant="filled"
-            error={validation.phone ? true : false}
+            error={invalidation.phone ? true : false}
             required
             />
             </Phone>
@@ -267,7 +265,7 @@ const Signup = () => {
             value={form.password}
             style={{ margin: 5 }}
             variant="filled"
-            error={validation.password ? true : false}
+            error={invalidation.password ? true : false}
             helperText={`Min 8 char. with at least one upper case letter, one number, and
             one special char.: !, @, $, #, &, *.`}
             required
@@ -282,7 +280,7 @@ const Signup = () => {
             value={form.confirmPassword}
             style={{ margin: 5 }}
             variant="filled"
-            error={validation.password ? true : false}
+            error={invalidation.confirmPassword ? true : false}
             helperText={passwordErrorText}
             required
             />
@@ -293,20 +291,18 @@ const Signup = () => {
               </TermsAndConditions>
             </FinePrint> 
 
-          {errorText.length ? (
-            <section className="errorText">{errorText}</section>
-          ) : null}
-
           <SignupButtonWrapper>
             <SignupFormButton type="submit">Create an Account</SignupFormButton>
           </SignupButtonWrapper>
           <section className="signupFormBottom">
-            <div>
-              <span>Already have an account?</span>
-              <span>
-                <Link to="/login">Login</Link>
-              </span>
-            </div>
+          {errorText.length ? (
+            <ErrorText>{errorText}</ErrorText>
+          ) : <div>
+          <span>Already have an account?</span>
+          <span>
+            <Link to="/login">Login</Link>
+          </span>
+        </div>}
           </section>
         </SignupForm>
       </SignupWrapper>
