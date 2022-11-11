@@ -64,6 +64,10 @@
   border-radius: 6px;
 }
 
+.textWhite {
+  color: #FFF;
+}
+
 .inputGroup div {
   flex-grow: 1;
   margin: .2rem;

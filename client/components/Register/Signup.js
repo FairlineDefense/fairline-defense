@@ -30,7 +30,7 @@ const SignupForm = styled.form`
 display: flex;
 flex-direction: column;
 justify-content: center;
-max-width: 720px;
+max-width: 680px;
 position: relative;
 @media (max-width: 768px) {
   max-width: 100%;
@@ -110,8 +110,11 @@ const Signup = () => {
   let user = useSelector(state => state.user)
   const dispatch = useDispatch()
   let [errorText, setErrorText] = useState('')
+  let [passwordErrorText, setPasswordErrorText] = useState(" ")
+  let [validation, setValidation] = useState({email: false, phone: false, password: false, confirmPassword:false})
   let [form, setForm] = useState({firstName: '', lastName: '', email: '', cc: '', phone: '', password: '', confirmPassword:''})
   const changeHandler = (e) => {
+    setValidation({...validation, [e.target.name]: false})
     setForm({...form, [e.target.name]: e.target.value})
   }
   const handleSubmit = evt => {
@@ -124,29 +127,47 @@ const Signup = () => {
     const confirmPassword = form.confirmPassword
 
     function validateFields() {
+      let res = true
       if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-        return setErrorText('Invalid email address.')
+         setValidation({...validation, email: true})
+         res = false
       }
       if(!/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(phone)) {
-        return setErrorText('Invalid phone number.')
+         setValidation({...validation, phone: true})
+         res = false
       }
       if (password !== confirmPassword) {
-        return setErrorText('Passwords do not match.')
+         setValidation({...validation, password: true, confirmPassword: true})
+         setPasswordErrorText("Passwords do not match")
+         res = false
       }
       if (password.length < 8) {
-        return setErrorText('Your password must be at least 8 characters')
+         setValidation({...validation, password: true})
+         setPasswordErrorText("Passwords must be min. 8 chars long")
+         res = false
       }
       if (password.search(/[a-z]/i) < 0) {
-        return setErrorText('Your password must contain at least one letter.')
+         setValidation({...validation, password: true})
+         setPasswordErrorText("Passwords must contain at least one letter")
+         res = false
       }
+      if (password.search(/[!@#\$%\^\&*\)\(+=._-]/i) < 0) {
+        setValidation({...validation, password: true})
+        setPasswordErrorText("Passwords must contain at least one special character")
+        res = false
+     }
       if (password.search(/[0-9]/) < 0) {
-        return setErrorText('Your password must contain at least one digit.')
-      } else {
-        dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
-      }
+         setValidation({...validation, password: true})
+         setPasswordErrorText("Passwords must contain at least one number")
+         res = false
+      } 
+      return res
     }
-    validateFields()
-  }
+
+    if(validateFields()) {
+        dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
+    }
+}
 
   useEffect(
     () => {
@@ -180,7 +201,7 @@ const Signup = () => {
               type="text"
               onChange={(e)=>changeHandler(e)}
               value={form.firstName}
-              style={{ margin: 10 }}
+              style={{ margin: 5 }}
               required
             />
             <FDTextField
@@ -191,7 +212,7 @@ const Signup = () => {
               type="text"
               onChange={(e)=>changeHandler(e)}
               value={form.lastName}
-              style={{ margin: 10 }}
+              style={{ margin: 5 }}
               variant="filled"
               required
             />
@@ -201,12 +222,13 @@ const Signup = () => {
             label="Email Address"
             name="email"
             placeholder="name@email.com"
-            type="email"
+            type="text"
             onChange={(e)=>changeHandler(e)}
             value={form.email}
-            style={{ margin: 10, flexGrow: 1 }}
+            style={{ margin: 5, flexGrow: 1 }}
             variant="filled"
             required
+            error={validation.email ? true : false}
             />
             <Phone>
             <FDTextField
@@ -216,7 +238,7 @@ const Signup = () => {
             type="tel"
             onChange={(e)=>changeHandler(e)}
             value={form.cc}
-            style={{ margin: 10 }}
+            style={{ margin: 5 }}
             variant="filled"
             required
             />
@@ -227,8 +249,9 @@ const Signup = () => {
             type="tel"
             onChange={(e)=>changeHandler(e)}
             value={form.phone}
-            style={{ margin: 10 }}
+            style={{ margin: 5 }}
             variant="filled"
+            error={validation.phone ? true : false}
             required
             />
             </Phone>
@@ -242,8 +265,11 @@ const Signup = () => {
             type="password"
             onChange={(e)=>changeHandler(e)}
             value={form.password}
-            style={{ margin: 10 }}
+            style={{ margin: 5 }}
             variant="filled"
+            error={validation.password ? true : false}
+            helperText={`Min 8 char. with at least one upper case letter, one number, and
+            one special char.: !, @, $, #, &, *.`}
             required
             />
             <FDTextField
@@ -254,20 +280,18 @@ const Signup = () => {
             type="password"
             onChange={(e)=>changeHandler(e)}
             value={form.confirmPassword}
-            style={{ margin: 10 }}
+            style={{ margin: 5 }}
             variant="filled"
+            error={validation.password ? true : false}
+            helperText={passwordErrorText}
             required
             />
           </InputGroup> 
-          <FinePrint>
-            <PasswordFormat>
-              Min 8 char. with at least one upper case letter, one number, and
-              one special char.: !, @, $, #, &, *.
-            </PasswordFormat>
+           <FinePrint>
             <TermsAndConditions>
               <Checkbox type="checkbox" required></Checkbox>I agree to the&nbsp;<OpenFinePrint>Fairline Defense Terms & Conditions</OpenFinePrint>
               </TermsAndConditions>
-            </FinePrint>
+            </FinePrint> 
 
           {errorText.length ? (
             <section className="errorText">{errorText}</section>
