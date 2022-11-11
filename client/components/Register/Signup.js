@@ -70,6 +70,7 @@ cursor: pointer;
 const InputGroup = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
   `
 const Phone = styled.span`
@@ -171,6 +172,7 @@ const Signup = () => {
         <SignupForm onSubmit={handleSubmit} name="signup">
           <InputGroup>
             <FDTextField
+              fullWidth
               label="First Name"
               name="firstName"
               variant="filled"
@@ -181,6 +183,7 @@ const Signup = () => {
               required
             />
             <FDTextField
+              fullWidth
               label="Last Name"
               name="lastName"
               type="text"
@@ -191,63 +194,67 @@ const Signup = () => {
               required
             />
           </InputGroup>
-           {/*
           <InputGroup>
-            <TextField
+            <FDTextField
             label="Email Address"
             name="email"
+            placeholder="name@email.com"
             type="email"
             onChange={(e)=>changeHandler(e)}
             value={form.email}
+            style={{ margin: 10, flexGrow: 1 }}
             variant="filled"
-            margin="normal"
             required
             />
             <Phone>
-            <TextField
-            label="+1"
+            <FDTextField
+            label="CC"
             name="cc"
+            placeholder="+1"
             type="tel"
-             onChange={(e)=>changeHandler(e)}
+            onChange={(e)=>changeHandler(e)}
             value={form.cc}
+            style={{ margin: 10 }}
             variant="filled"
-            margin="normal"
             required
             />
-            <TextField
+            <FDTextField
             label="Phone"
-           name="phone"
-           type="tel"
+            name="phone"
+            placeholder="123-456-7890"
+            type="tel"
             onChange={(e)=>changeHandler(e)}
             value={form.phone}
+            style={{ margin: 10 }}
             variant="filled"
-            margin="normal"
             required
             />
             </Phone>
           </InputGroup>
           <InputGroup>
-            <TextField
+            <FDTextField
+            fullWidth
             label="Password"
             name="password"
             type="password"
             onChange={(e)=>changeHandler(e)}
             value={form.password}
+            style={{ margin: 10 }}
             variant="filled"
-            margin="normal"
             required
             />
-            <TextField
+            <FDTextField
+            fullWidth
             label="Confirm Password"
             name="confirmPassword"
             type="password"
             onChange={(e)=>changeHandler(e)}
             value={form.confirmPassword}
+            style={{ margin: 10 }}
             variant="filled"
-            margin="normal"
             required
             />
-          </InputGroup> */}
+          </InputGroup> 
           <FinePrint>
             <PasswordFormat>
               Min 8 char. with at least one upper case letter, one number, and
