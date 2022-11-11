@@ -174,6 +174,7 @@ const Signup = () => {
             <FDTextField
               fullWidth
               label="First Name"
+              placeholder="First Name"
               name="firstName"
               variant="filled"
               type="text"
@@ -185,6 +186,7 @@ const Signup = () => {
             <FDTextField
               fullWidth
               label="Last Name"
+              placeholder="Last Name"
               name="lastName"
               type="text"
               onChange={(e)=>changeHandler(e)}
@@ -235,6 +237,7 @@ const Signup = () => {
             <FDTextField
             fullWidth
             label="Password"
+            placeholder="Password"
             name="password"
             type="password"
             onChange={(e)=>changeHandler(e)}
@@ -246,6 +249,7 @@ const Signup = () => {
             <FDTextField
             fullWidth
             label="Confirm Password"
+            placeholder="Confirm Password"
             name="confirmPassword"
             type="password"
             onChange={(e)=>changeHandler(e)}
