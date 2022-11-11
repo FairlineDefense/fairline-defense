@@ -4,8 +4,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import RegisterHeader from './RegisterHeader'
-import '@material/react-text-field/dist/text-field.css';
-import TextField, {HelperText, Input} from '@material/react-text-field';
+import FDTextField from '../FDTextField'
+
 import css from './register.css'
 import styled from 'styled-components'
 
@@ -67,6 +67,25 @@ const OpenFinePrint = styled.span`
 text-decoration: underline;
 cursor: pointer;
 `
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  `
+const Phone = styled.span`
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  
+  div:nth-child(1) {
+    width: 60px;
+  }
+  div:nth-child(2) {
+    flex-grow: 1;
+  }
+  `
 const SignupButtonWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -138,101 +157,97 @@ const Signup = () => {
     [user]
   )
 
+  
+
   return (
     <section className="auth">
       <svg />
       <svg />
       <svg />
+
      <RegisterHeader />
       <SignupWrapper>
         <H1>Get Started</H1>
         <SignupForm onSubmit={handleSubmit} name="signup">
-          <div className="inputGroup">
-            <TextField
-            label="First Name"
-            className="signupInput"
-            >
-              <Input 
+          <InputGroup>
+            <FDTextField
+              label="First Name"
               name="firstName"
+              variant="filled"
               type="text"
               onChange={(e)=>changeHandler(e)}
               value={form.firstName}
-              required />
-            </TextField>
-            <TextField className="signupInput" label="Last Name">
-            <Input
+              style={{ margin: 10 }}
+              required
+            />
+            <FDTextField
+              label="Last Name"
               name="lastName"
               type="text"
               onChange={(e)=>changeHandler(e)}
               value={form.lastName}
+              style={{ margin: 10 }}
+              variant="filled"
               required
             />
-            </TextField>
-          </div>
-          <div className="inputGroup">
+          </InputGroup>
+           {/*
+          <InputGroup>
             <TextField
             label="Email Address"
-            className="signupInput"
-            >
-            <Input
             name="email"
             type="email"
             onChange={(e)=>changeHandler(e)}
             value={form.email}
+            variant="filled"
+            margin="normal"
             required
             />
-            </TextField>
+            <Phone>
             <TextField
-            label=""
-            className="signupInputCC"
-            >
-            <Input
+            label="+1"
             name="cc"
             type="tel"
              onChange={(e)=>changeHandler(e)}
             value={form.cc}
-              required
+            variant="filled"
+            margin="normal"
+            required
             />
-            </TextField>
             <TextField
             label="Phone"
-            className="signupInputPhone"
-            >
-            <Input
            name="phone"
            type="tel"
             onChange={(e)=>changeHandler(e)}
             value={form.phone}
-              required
+            variant="filled"
+            margin="normal"
+            required
             />
-            </TextField>
-          </div>
-          <div className="inputGroup">
+            </Phone>
+          </InputGroup>
+          <InputGroup>
             <TextField
             label="Password"
-            className="signupInput"
-            >
-            <Input
-         name="password"
-         type="password"
-             onChange={(e)=>changeHandler(e)}
+            name="password"
+            type="password"
+            onChange={(e)=>changeHandler(e)}
             value={form.password}
-              required
+            variant="filled"
+            margin="normal"
+            required
             />
-            </TextField>
             <TextField
             label="Confirm Password"
-            className="signupInput"
-            >
-            <Input
-          name="confirmPassword"
-          type="password"
+            name="confirmPassword"
+            type="password"
             onChange={(e)=>changeHandler(e)}
             value={form.confirmPassword}
-              required
+            variant="filled"
+            margin="normal"
+            required
             />
-            </TextField>
-          </div>
+          </InputGroup> */}
           <FinePrint>
             <PasswordFormat>
               Min 8 char. with at least one upper case letter, one number, and

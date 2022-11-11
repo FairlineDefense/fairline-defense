@@ -59,22 +59,23 @@
   width: 100%;
 }
 
-.signupInput {
-  outline: none;
-  border: none;
-  width: 50%;
-  margin: 0.5rem;
+.inputGroup input {
+  background-color: #FFF;
   border-radius: 6px;
-  font-size: 16px;
 }
 
-.signupInputCC {
-  outline: none;
-  border: none;
-  width: 12%;
-  margin: 0.5rem;
+.inputGroup div {
+  flex-grow: 1;
+  margin: .2rem;
+}
+
+.signupInputCC div {
+  width: 60px;
   border-radius: 6px;
-  font-size: 16px;
+}
+
+.signupInput {
+  border-radius: 6px;
 }
 
 .signupInputPhone {
