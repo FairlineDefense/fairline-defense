@@ -5,6 +5,14 @@ import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import RegisterHeader from './RegisterHeader'
 import FDTextField from '../FDTextField'
+import history from '../../history'
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 
 import css from './register.css'
 import styled from 'styled-components'
@@ -169,12 +177,25 @@ const Signup = () => {
     }
 }
 
+const [open, setOpen] = useState(false);
+
+const handleClick = () => {
+  setForm({firstName: '', lastName: '', email: '', cc: '', phone: '', password: '', confirmPassword:''})
+  setOpen(false);
+  user.error = ''
+  history.push('/login')
+};
+
+const handleClose = (value) => {
+  setOpen(false);
+  setSelectedValue(value);
+};
+
   useEffect(
     () => {
-      user.error &&
-        setErrorText(
-          'An account with that information already exists. Try logging in.'
-        )
+     if(user.error){
+      setOpen(true)
+     }
     },
     [user]
   )
@@ -306,6 +327,27 @@ const Signup = () => {
           </section>
         </SignupForm>
       </SignupWrapper>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+      >
+        <DialogTitle>
+         Account Already Exists
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            An Account with that information has already been created. Would you like to login?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClick}>Continue to Login</Button>
+          <Button onClick={handleClose} autoFocus>
+            Go back
+          </Button>
+        </DialogActions>
+      </Dialog>
+
     </section>
   )
 }
