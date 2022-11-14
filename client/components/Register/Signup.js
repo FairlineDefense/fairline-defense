@@ -17,6 +17,9 @@ import Button from '@material-ui/core/Button';
 import css from './register.css'
 import styled from 'styled-components'
 
+
+import TermsAndConditions from './TermsAndConditions'
+
 const H1 = styled.h1`
   font-weight: 400;
   font-size: 30px;
@@ -51,7 +54,7 @@ padding: .5rem;
 margin-bottom: 2rem;
 width: 100%;
 `
-const TermsAndConditions = styled.div`
+const TermsAndConditionsDiv = styled.div`
 display: flex;
 flex-direction: row;
 width: 100%;
@@ -121,10 +124,12 @@ const Signup = () => {
   let [passwordErrorText, setPasswordErrorText] = useState(" ")
   let [invalidation, setInvalidation] = useState({email: false, phone: false, password: false, confirmPassword:false})
   let [form, setForm] = useState({firstName: '', lastName: '', email: '', cc: '', phone: '', password: '', confirmPassword:''})
+  
   const changeHandler = (e) => {
     setInvalidation({...invalidation, [e.target.name]: false})
     setForm({...form, [e.target.name]: e.target.value})
   }
+  
   const handleSubmit = evt => {
     evt.preventDefault()
     const firstName = form.firstName
@@ -200,6 +205,13 @@ const handleClose = (value) => {
     [user]
   )
 
+  let [openTerms, setOpenTerms] = useState(false);
+
+  const viewTerms = (e) => {
+    e.preventDefault()
+    setOpenTerms(true)
+  }
+
   return (
     <section className="auth">
       <svg />
@@ -254,7 +266,7 @@ const handleClose = (value) => {
             label="CC"
             name="cc"
             placeholder="+1"
-            type="tel"
+            type="text"
             onChange={(e)=>changeHandler(e)}
             value={form.cc}
             style={{ margin: 5 }}
@@ -265,6 +277,7 @@ const handleClose = (value) => {
             label="Phone"
             name="phone"
             placeholder="123-456-7890"
+            autoComplete="off"
             type="tel"
             onChange={(e)=>changeHandler(e)}
             value={form.phone}
@@ -307,9 +320,9 @@ const handleClose = (value) => {
             />
           </InputGroup> 
            <FinePrint>
-            <TermsAndConditions>
-              <Checkbox type="checkbox" required></Checkbox>I agree to the&nbsp;<OpenFinePrint>Fairline Defense Terms & Conditions</OpenFinePrint>
-              </TermsAndConditions>
+            <TermsAndConditionsDiv>
+              <Checkbox type="checkbox" required></Checkbox>I agree to the&nbsp;<OpenFinePrint onClick={(e)=>{viewTerms(e)}}>Fairline Defense Terms & Conditions</OpenFinePrint>
+              </TermsAndConditionsDiv>
             </FinePrint> 
 
           <SignupButtonWrapper>
@@ -347,6 +360,8 @@ const handleClose = (value) => {
           </Button>
         </DialogActions>
       </Dialog>
+
+<TermsAndConditions openTerms={openTerms} setOpenTerms={setOpenTerms} />
 
     </section>
   )
