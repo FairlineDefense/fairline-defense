@@ -34,14 +34,14 @@ const SignupWrapper = styled.div`
   align-items: center;
   padding: 4rem;
   @media (max-width: 768px) {
-    padding: 4rem 1rem 0rem 1rem;
+    padding: 4rem .5rem 0rem .5rem;
   }
 `
 const SignupForm = styled.form`
 display: flex;
 flex-direction: column;
 justify-content: center;
-max-width: 680px;
+max-width: 720px;
 position: relative;
 @media (max-width: 768px) {
   max-width: 100%;
@@ -50,8 +50,7 @@ position: relative;
 const FinePrint = styled.div`
 display: flex;
 flex-direction: column;
-padding: .5rem;
-margin-bottom: 2rem;
+margin: 3rem 0rem 3rem 0rem;
 width: 100%;
 `
 const TermsAndConditionsDiv = styled.div`
@@ -59,6 +58,7 @@ display: flex;
 flex-direction: row;
 width: 100%;
 font-size: 16px;
+
 @media (max-width: 768px) {
   flex-wrap: wrap;
 }
