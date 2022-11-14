@@ -250,7 +250,7 @@ const handleClose = (value) => {
           </InputGroup>
           <InputGroup>
             <FDTextField
-            label="Email Address"
+            label={invalidation.email ? 'Invalid email address' : 'Email'}
             name="email"
             placeholder="name@email.com"
             type="text"
@@ -274,7 +274,7 @@ const handleClose = (value) => {
             required
             />
             <FDTextField
-            label="Phone"
+            label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
             name="phone"
             placeholder="123-456-7890"
             autoComplete="off"
