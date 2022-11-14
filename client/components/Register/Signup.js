@@ -232,7 +232,7 @@ const handleClose = (value) => {
               type="text"
               onChange={(e)=>changeHandler(e)}
               value={form.firstName}
-              style={{ margin: 5 }}
+              style={{ margin: 8 }}
               required
             />
             <FDTextField
@@ -243,7 +243,7 @@ const handleClose = (value) => {
               type="text"
               onChange={(e)=>changeHandler(e)}
               value={form.lastName}
-              style={{ margin: 5 }}
+              style={{ margin: 8 }}
               variant="filled"
               required
             />
@@ -256,7 +256,7 @@ const handleClose = (value) => {
             type="text"
             onChange={(e)=>changeHandler(e)}
             value={form.email}
-            style={{ margin: 5, flexGrow: 1 }}
+            style={{ margin: 8, flexGrow: 1 }}
             variant="filled"
             required
             error={invalidation.email ? true : false}
@@ -269,7 +269,7 @@ const handleClose = (value) => {
             type="text"
             onChange={(e)=>changeHandler(e)}
             value={form.cc}
-            style={{ margin: 5 }}
+            style={{ margin: 8 }}
             variant="filled"
             required
             />
@@ -281,7 +281,7 @@ const handleClose = (value) => {
             type="tel"
             onChange={(e)=>changeHandler(e)}
             value={form.phone}
-            style={{ margin: 5 }}
+            style={{ margin: 8 }}
             variant="filled"
             error={invalidation.phone ? true : false}
             required
@@ -297,7 +297,7 @@ const handleClose = (value) => {
             type="password"
             onChange={(e)=>changeHandler(e)}
             value={form.password}
-            style={{ margin: 5 }}
+            style={{ margin: 8 }}
             variant="filled"
             error={invalidation.password ? true : false}
             helperText={`Min 8 char. with at least one upper case letter, one number, and
@@ -312,7 +312,7 @@ const handleClose = (value) => {
             type="password"
             onChange={(e)=>changeHandler(e)}
             value={form.confirmPassword}
-            style={{ margin: 5 }}
+            style={{ margin: 8 }}
             variant="filled"
             error={invalidation.confirmPassword ? true : false}
             helperText={passwordErrorText}
