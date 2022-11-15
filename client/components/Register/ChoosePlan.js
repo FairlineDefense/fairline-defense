@@ -104,9 +104,9 @@ const ChoosePlan = props => {
 
   return (
     <div className="auth">
-      <svg />
-      <svg />
-      <svg />
+      <svg className="logo" />
+      <svg className="logo" />
+      <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
         <H1>Congratulations!</H1>

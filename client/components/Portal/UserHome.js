@@ -143,13 +143,11 @@ const UserHome = () => {
   if(!loaded) {
     return (
       <div className="auth">
-      <svg />
-      <svg />
-      <svg />
+      <svg className="logo" />
+      <svg className="logo" />
+      <svg className="logo" />
       <RegisterHeader />
-      <Wrapper>
         <CenteredWrapper>Loading</CenteredWrapper>
-      </Wrapper>
     </div>
     )
   }

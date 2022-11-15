@@ -106,9 +106,9 @@ try {
 
     return (
       <div className="auth">
-        <svg />
-        <svg />
-        <svg />
+        <svg className="logo" />
+        <svg className="logo" />
+        <svg className="logo" />
         <RegisterHeader />
         <Wrapper>
           <Heading>Verify Your Email</Heading>

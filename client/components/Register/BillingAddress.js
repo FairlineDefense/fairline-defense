@@ -1,6 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import {useState} from 'react'
+import FDTextField from '../FDTextField'
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import { ThemeProvider } from '@material-ui/core';
+import theme from '../theme';
 
 const Wrapper = styled.div`
 width: 100%;
@@ -88,7 +93,7 @@ color: #000;
 `
 const BillingAddress = props => {
   const {createCustomer} = props
-  let [address, setAddress] = useState({apt: '', streetAddress: '', address2: '', city: '', state: '', zipCode: ''})
+  let [address, setAddress] = useState({apt: '', streetAddress: '', address2: '', city: '', state: 'State', zipCode: ''})
   let [errorText, setErrorText] = useState('')
   const changeHandler = (e) => {
     e.preventDefault()
@@ -110,71 +115,91 @@ const BillingAddress = props => {
     validateFields()
   }
 
+const states = [
+'State',
+'AL',
+'AK',
+'AL',
+'AR',
+'AZ',
+'CA',
+'CO',
+'CT',
+'DC',
+'DE',
+'FL',
+'GA',
+'HI',
+'IA',
+'ID',
+'IL',
+'IN',
+'KS',
+'KY',
+'LA',
+'MA',
+'MD',
+'ME',
+'MI',
+'MN',
+'MO',
+'MS',
+'MT',
+'NC',
+'ND',
+'NE',
+'NH',
+'NJ',
+'NM',
+'NV',
+'NY',
+'OH',
+'OK',
+'OR',
+'PA',
+'RI',
+'SC',
+'SD',
+'TN',
+'TX',
+'UT',
+'VA',
+'VT',
+'WA',
+'WI',
+'WV',
+'WY',]
+
   return (
     <Wrapper>
     <Header>Billing Address</Header>
+    <ThemeProvider theme={theme}>
     <Form>
-        <AptNumber name='apt' placeholder='Apt.' onChange={(e) => changeHandler(e)} value={address.apt}></AptNumber>
-        <Input name='streetAddress' placeholder='Street Address' onChange={(e) => changeHandler(e)} value={address.streetAddress} required></Input>
-        <Line2 name='line2' placeholder='Street Address 2 - Optional' onChange={(e) => changeHandler(e)} value={address.line2}></Line2>
-        <City name='city' placeholder='City' onChange={(e) => changeHandler(e)} value={address.city} required></City>
-        <State placeholder="State" name='state' value={address.state} onChange={(e)=>changeHandler(e)} required>
-                        <option value="">State</option>
-                        <option value="AL">AL</option>
-                        <option value="AK">AK</option>
-                        <option value="AL">AL</option>
-                        <option value="AR">AR</option>
-                        <option value="AZ">AZ</option>
-                        <option value="CA">CA</option>
-                        <option value="CO">CO</option>
-                        <option value="CT">CT</option>
-                        <option value="DC">DC</option>
-                        <option value="DE">DE</option>
-                        <option value="FL">FL</option>
-                        <option value="GA">GA</option>
-                        <option value="HI">HI</option>
-                        <option value="IA">IA</option>
-                        <option value="ID">ID</option>
-                        <option value="IL">IL</option>
-                        <option value="IN">IN</option>
-                        <option value="KS">KS</option>
-                        <option value="KY">KY</option>
-                        <option value="LA">LA</option>
-                        <option value="MA">MA</option>
-                        <option value="MD">MD</option>
-                        <option value="ME">ME</option>
-                        <option value="MI">MI</option>
-                        <option value="MN">MN</option>
-                        <option value="MO">MO</option>
-                        <option value="MS">MS</option>
-                        <option value="MT">MT</option>
-                        <option value="NC">NC</option>
-                        <option value="ND">ND</option>
-                        <option value="NE">NE</option>
-                        <option value="NH">NH</option>
-                        <option value="NJ">NJ</option>
-                        <option value="NM">NM</option>
-                        <option value="NV">NV</option>
-                        <option value="NY">NY</option>
-                        <option value="OH">OH</option>
-                        <option value="OK">OK</option>
-                        <option value="OR">OR</option>
-                        <option value="PA">PA</option>
-                        <option value="RI">RI</option>
-                        <option value="SC">SC</option>
-                        <option value="SD">SD</option>
-                        <option value="TN">TN</option>
-                        <option value="TX">TX</option>
-                        <option value="UT">UT</option>
-                        <option value="VA">VA</option>
-                        <option value="VT">VT</option>
-                        <option value="WA">WA</option>
-                        <option value="WI">WI</option>
-                        <option value="WV">WV</option>
-                        <option value="WY">WY</option>
-        </State>
-        <Input name='zipCode' placeholder='Zip Code' onChange={(e) => changeHandler(e)} value={address.zipCode} required></Input>
+         <FDTextField
+          label="Apt."
+          variant="filled"
+          type="text"
+          style={{ margin: 8 }}
+          name='apt'
+          placeholder='Apt.'
+          onChange={(e) => changeHandler(e)}
+          value={address.apt}
+          required></FDTextField>
+        <FDTextField name='streetAddress' label='Street Address' placeholder='Street Address' type='text' variant='filled' style={{ margin: 8, flexGrow: 1 }} onChange={(e) => changeHandler(e)} value={address.streetAddress} required></FDTextField>
+        <FDTextField fullWidth name='line2' label='Street Address Line 2' placeholder='Street Address Line 2' type='text' variant='filled' style={{ margin: 8 }} onChange={(e) => changeHandler(e)} value={address.line2}></FDTextField>
+        <FDTextField name='city' placeholder='City' label='City' variant='filled' style={{ margin: 8, flexGrow: 1 }} onChange={(e) => changeHandler(e)} value={address.city} required></FDTextField>
+        <Select placeholder="State" style={{backgroundColor: '#FFF', borderRadius: 4, margin: 8, width: 100, paddingLeft: 20}} name='state' value={address.state} onChange={(e)=>changeHandler(e)} required>
+          {states.map((state) => (
+            <MenuItem
+              key={state}
+              value={state}
+            >
+              {state}
+            </MenuItem>))}
+        </Select>
+        <FDTextField name='zipCode' placeholder='Zip Code' label='Zip Code' variant='filled' style={{ margin: 8 }} onChange={(e) => changeHandler(e)} value={address.zipCode} required></FDTextField>
     </Form>
+    </ThemeProvider>
     <Button onClick={(e)=>clickHandler(e)}>Continue to Payment</Button>
     {errorText && <ErrorText>{errorText}</ErrorText>}
     </Wrapper>

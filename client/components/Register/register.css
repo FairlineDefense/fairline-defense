@@ -59,31 +59,33 @@
   width: 100%;
 }
 
-.signupInput {
-  outline: none;
-  border: none;
-  width: 50%;
-  padding: 1rem;
-  margin: 0.5rem;
+.inputGroup input {
+  background-color: #FFF;
   border-radius: 6px;
-  font-size: 16px;
 }
 
-.signupInputCC {
-  outline: none;
-  border: none;
-  width: 12%;
-  padding: 1rem;
-  margin: 0.5rem;
+.textWhite {
+  color: #FFF;
+}
+
+.inputGroup div {
+  flex-grow: 1;
+  margin: .2rem;
+}
+
+.signupInputCC div {
+  width: 60px;
   border-radius: 6px;
-  font-size: 16px;
+}
+
+.signupInput {
+  border-radius: 6px;
 }
 
 .signupInputPhone {
   outline: none;
   border: none;
   width: 35%;
-  padding: 1rem;
   margin: 0.5rem;
   border-radius: 6px;
   font-size: 16px;
@@ -139,7 +141,7 @@
   color: #000;
 }
 
-.auth svg {
+.auth svg.logo {
   position: fixed;
   height: 175px;
   transform: rotate(-5deg) skew(-20deg);
@@ -147,17 +149,17 @@
   left: -10%;
 }
 
-.auth svg:nth-child(1) {
+.auth svg.logo:nth-child(1) {
   width: 540px;
   top: -50px;
 }
 
-.auth svg:nth-child(2) {
+.auth svg.logo:nth-child(2) {
   width: 590px;
   top: 200px;
 }
 
-.auth svg:nth-child(3) {
+.auth svg.logo:nth-child(3) {
   width: 260px;
   top: 460px;
 }
