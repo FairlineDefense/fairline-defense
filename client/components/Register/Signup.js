@@ -6,19 +6,16 @@ import {useState, useEffect} from 'react'
 import RegisterHeader from './RegisterHeader'
 import FDTextField from '../FDTextField'
 import history from '../../history'
-
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
-
+import white from '@material-ui/core/colors'
 import css from './register.css'
 import styled from 'styled-components'
 
-
+import AccountExistsModal from './AccountExistsModal'
 import TermsAndConditions from './TermsAndConditions'
+import Checkbox from '@material-ui/core/Checkbox'
+
+import { ThemeProvider } from '@material-ui/core'
+import theme from '../theme'
 
 const H1 = styled.h1`
   font-weight: 400;
@@ -50,7 +47,7 @@ position: relative;
 const FinePrint = styled.div`
 display: flex;
 flex-direction: column;
-margin: 3rem 0rem 3rem 0rem;
+margin: 2rem 0rem 3rem 0rem;
 width: 100%;
 `
 const TermsAndConditionsDiv = styled.div`
@@ -58,13 +55,14 @@ display: flex;
 flex-direction: row;
 width: 100%;
 font-size: 16px;
+align-items: center;
+svg {
+  fill: white;
+}
 
 @media (max-width: 768px) {
   flex-wrap: wrap;
 }
-`
-const Checkbox = styled.input`
-margin-right: .5rem;
 `
 const OpenFinePrint = styled.span`
 text-decoration: underline;
@@ -182,6 +180,7 @@ const Signup = () => {
     }
 }
 
+//Account already exists modal props:
 const [open, setOpen] = useState(false);
 
 const handleClick = () => {
@@ -205,6 +204,7 @@ const handleClose = (value) => {
     [user]
   )
 
+  //Terms and Conditions modal props:
   let [openTerms, setOpenTerms] = useState(false);
 
   const viewTerms = (e) => {
@@ -318,12 +318,14 @@ const handleClose = (value) => {
             helperText={passwordErrorText}
             required
             />
-          </InputGroup> 
+          </InputGroup>
            <FinePrint>
             <TermsAndConditionsDiv>
-              <Checkbox type="checkbox" required></Checkbox>I agree to the&nbsp;<OpenFinePrint onClick={(e)=>{viewTerms(e)}}>Fairline Defense Terms & Conditions</OpenFinePrint>
+              <ThemeProvider theme={theme}>
+              <Checkbox color='primary' required></Checkbox>I agree to the Fairline Defense&nbsp;<OpenFinePrint onClick={(e)=>{viewTerms(e)}}>Terms & Conditions</OpenFinePrint>
+              </ThemeProvider>
               </TermsAndConditionsDiv>
-            </FinePrint> 
+            </FinePrint>
 
           <SignupButtonWrapper>
             <SignupFormButton type="submit">Create an Account</SignupFormButton>
@@ -341,26 +343,7 @@ const handleClose = (value) => {
         </SignupForm>
       </SignupWrapper>
 
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
-        <DialogTitle>
-         Account Already Exists
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            An Account with that information has already been created. Would you like to login?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClick}>Continue to Login</Button>
-          <Button onClick={handleClose} autoFocus>
-            Go back
-          </Button>
-        </DialogActions>
-      </Dialog>
-
+<AccountExistsModal open={open} handleClose={handleClose} handleClick={handleClick} />
 <TermsAndConditions openTerms={openTerms} setOpenTerms={setOpenTerms} />
 
     </section>
