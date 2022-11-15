@@ -2,7 +2,7 @@ import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import history from '../../history'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import RegisterHeader from './RegisterHeader'
 import ReactInputVerificationCode from 'react-input-verification-code';
 const Wrapper = styled.div`
@@ -31,7 +31,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 width: 340px;
-margin: 1rem;
+margin: 1rem 0rem 2rem 0rem;
 
 .ReactInputVerificationCode__item {
   position: relative;
@@ -68,7 +68,7 @@ width: 340px;
 padding: 1rem 2rem 1rem 2rem;
 font-size: 20px;
 font-weight: 100;
-margin-top: 1rem;
+margin: 1rem 0rem 2rem 0rem;
 outline: none;
 border: none;
 cursor: pointer;
@@ -96,13 +96,48 @@ const VerifyPhone = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
 
-  let [code,setCode] = useState('')
+  let [code, setCode] = useState('')
 
-  const clickHandler = (e) => {
-    e.preventDefault(e)
-    console.log(code)
-    history.push('/home')
+  const clickHandler = async (e) => {
+    e.preventDefault()
+    console.log('click')
+      const verifyCode = await fetch('klaviyo/phone-code', {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json', 'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({code:code})
+      })
+      const res = verifyCode
+      console.log('->',verifyCode)
+      if(res.status === 200) {
+      history.push('/home')
+      }
+      if(res.status === 403) {
+        console.log('Invalid Code')
+      }
   }
+
+
+  const sendText = async () => {
+    if(user.id) {
+      await fetch('klaviyo/verify-phone', {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json', 'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email: user.email, phone: user.phone})
+      })
+    }
+  }
+
+useEffect(() => {
+try {
+  sendText()
+} catch (error) {
+  console.log(error)
+}
+}, [])
 
     return (
       <div className="auth">
@@ -128,7 +163,7 @@ const VerifyPhone = () => {
             <SubHeading>
             Please enter the verification code received by SMS.
           </SubHeading>
-            <Button onClick={(e)=>clickHandler(e)} disabled={user.phoneVerified}>Continue</Button>
+            <Button onClick={(e)=>clickHandler(e)}>Continue</Button>
             </CenteredWrapper>
             <BottomWrapper><span>Resend SMS Code</span><span>Edit Phone Number</span></BottomWrapper>
         </Wrapper>
