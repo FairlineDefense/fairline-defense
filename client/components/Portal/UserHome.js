@@ -17,7 +17,6 @@ import RegisterHeader from '../Register/RegisterHeader'
 const Wrapper = styled.div`
 width: 100vw;
 padding: 2rem;
-background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
 `
 const CenteredWrapper = styled.div`
 width: 100%;
@@ -143,9 +142,9 @@ const UserHome = () => {
   if(!loaded) {
     return (
       <div className="auth">
-      <svg />
-      <svg />
-      <svg />
+      <svg className="logo" />
+      <svg className="logo" />
+      <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
         <CenteredWrapper>Loading</CenteredWrapper>

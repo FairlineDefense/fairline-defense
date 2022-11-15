@@ -4,6 +4,8 @@ import {useState} from 'react'
 import FDTextField from '../FDTextField'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { ThemeProvider } from '@material-ui/core';
+import theme from '../theme';
 
 const Wrapper = styled.div`
 width: 100%;
@@ -91,7 +93,7 @@ color: #000;
 `
 const BillingAddress = props => {
   const {createCustomer} = props
-  let [address, setAddress] = useState({apt: '', streetAddress: '', address2: '', city: '', state: '', zipCode: ''})
+  let [address, setAddress] = useState({apt: '', streetAddress: '', address2: '', city: '', state: 'State', zipCode: ''})
   let [errorText, setErrorText] = useState('')
   const changeHandler = (e) => {
     e.preventDefault()
@@ -114,6 +116,7 @@ const BillingAddress = props => {
   }
 
 const states = [
+'State',
 'AL',
 'AK',
 'AL',
@@ -170,8 +173,9 @@ const states = [
   return (
     <Wrapper>
     <Header>Billing Address</Header>
+    <ThemeProvider theme={theme}>
     <Form>
-        <FDTextField
+         <FDTextField
           label="Apt."
           variant="filled"
           type="text"
@@ -184,10 +188,7 @@ const states = [
         <FDTextField name='streetAddress' label='Street Address' placeholder='Street Address' type='text' variant='filled' style={{ margin: 8, flexGrow: 1 }} onChange={(e) => changeHandler(e)} value={address.streetAddress} required></FDTextField>
         <FDTextField fullWidth name='line2' label='Street Address Line 2' placeholder='Street Address Line 2' type='text' variant='filled' style={{ margin: 8 }} onChange={(e) => changeHandler(e)} value={address.line2}></FDTextField>
         <FDTextField name='city' placeholder='City' label='City' variant='filled' style={{ margin: 8, flexGrow: 1 }} onChange={(e) => changeHandler(e)} value={address.city} required></FDTextField>
-        <Select placeholder="State" style={{backgroundColor: '#FFF', borderRadius: 4, margin: 8, width: 80}} name='state' value={address.state} onChange={(e)=>changeHandler(e)} required>
-        <MenuItem disabled value="">
-            State
-          </MenuItem>
+        <Select placeholder="State" style={{backgroundColor: '#FFF', borderRadius: 4, margin: 8, width: 100, paddingLeft: 20}} name='state' value={address.state} onChange={(e)=>changeHandler(e)} required>
           {states.map((state) => (
             <MenuItem
               key={state}
@@ -198,6 +199,7 @@ const states = [
         </Select>
         <FDTextField name='zipCode' placeholder='Zip Code' label='Zip Code' variant='filled' style={{ margin: 8 }} onChange={(e) => changeHandler(e)} value={address.zipCode} required></FDTextField>
     </Form>
+    </ThemeProvider>
     <Button onClick={(e)=>clickHandler(e)}>Continue to Payment</Button>
     {errorText && <ErrorText>{errorText}</ErrorText>}
     </Wrapper>

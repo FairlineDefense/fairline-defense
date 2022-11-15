@@ -133,9 +133,9 @@ const Login = () => {
  
   return (
     <section className="auth">
-    <svg />
-    <svg />
-    <svg />
+    <svg className="logo" />
+    <svg className="logo" />
+    <svg className="logo" />
     <LoginWrapper>
      <CenteredWrapper>
       <Logo src="./images/fdlogo.png" />
