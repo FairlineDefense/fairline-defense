@@ -133,7 +133,7 @@ const Signup = () => {
     const firstName = form.firstName
     const lastName = form.lastName
     const email = form.email
-    const phone = form.phone
+    const phone = form.cc + form.phone
     const password = form.password
     const confirmPassword = form.confirmPassword
 

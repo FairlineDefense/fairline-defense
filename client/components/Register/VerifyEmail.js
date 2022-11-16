@@ -74,14 +74,15 @@ const VerifyEmail = () => {
   const dispatch = useDispatch()
 
   const clickHandler = async (e) => {
+    e.preventDefault()
     // For bypassing email functionality for testing:
-    // await fetch('webhook/klaviyo/verify-email', {
-    //   method: 'POST',
-    //   headers: {
-    //     'accept': 'application/json', 'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({email: user.email})
-    // }).then(()=> history.push('/home'))
+process.env.NODE_ENV === 'development' &&  await fetch('webhook/klaviyo/verify-email', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json', 'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({email: user.email})
+    }).then(()=> history.push('/home'))
   }
 
   const sendEmail = async () => {
@@ -127,7 +128,7 @@ try {
             <SubHeading>
             In order to proceed, please check your email and click the confirmation link.
           </SubHeading>
-           <Button onClick={(e)=>clickHandler(e)} disabled={!user.emailVerified}>Continue</Button>
+           <Button onClick={(e)=>clickHandler(e)}>Continue</Button>
             </BottomWrapper>
         </Wrapper>
       </div>

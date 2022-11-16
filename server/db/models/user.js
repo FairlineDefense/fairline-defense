@@ -79,6 +79,9 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
+  phoneCode: {
+    type: Sequelize.STRING,
+  },
   planActive: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
