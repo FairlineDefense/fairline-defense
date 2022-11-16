@@ -12,6 +12,9 @@ import {
   CircularProgressbarWithChildren,
   buildStyles
 } from "react-circular-progressbar";
+
+import CircularProgress from '@material-ui/core/CircularProgress'
+
 import "react-circular-progressbar/dist/styles.css";
 import RegisterHeader from '../Register/RegisterHeader'
 const Wrapper = styled.div`
@@ -147,7 +150,9 @@ const UserHome = () => {
       <svg className="logo" />
       <svg className="logo" />
       <RegisterHeader />
-        <CenteredWrapper>Loading</CenteredWrapper>
+        <CenteredWrapper>
+          <CircularProgress />
+          </CenteredWrapper>
     </div>
     )
   }
