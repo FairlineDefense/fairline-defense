@@ -19,7 +19,8 @@ router.post('/create-account', async (req, res, next) => {
       headers: {accept: 'application/json', 'content-type': 'application/json'},
       body: JSON.stringify({
         profiles: [
-          {email: req.body.email}
+          {email: req.body.email},
+          {phone_number: req.user.phone}
         ]
       })
     };
@@ -41,7 +42,8 @@ router.post('/verify-phone', async (req, res, next) => {
       headers: {accept: 'application/json', 'content-type': 'application/json'},
       body: JSON.stringify({
         profiles: [
-          {email: req.body.email}
+          {email: req.body.email},
+          {phone_number: req.user.phone}
         ]
       })
     };
@@ -76,11 +78,9 @@ const profileId = await fetch(profileIdUrl, profileIdOptions)
 
 router.post('/phone-code', async (req, res, next) => {
   try {
-    console.log(req.body.code)
     const user = await User.findOne({where:{email:req.user.email}})
 
     if (user.phoneCode === req.body.code) {
-      console.log('facts')
       await User.update({phoneVerified: true}, {where:{email:req.user.email}})
       return res.status(200).send()
     } else {
