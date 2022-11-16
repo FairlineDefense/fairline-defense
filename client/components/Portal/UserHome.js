@@ -151,9 +151,9 @@ const UserHome = () => {
     </div>
     )
   }
-  // if(!user.emailVerified) {
-  //   return <VerifyEmail />
-  // }
+  if(!user.emailVerified) {
+    return <VerifyEmail />
+  }
 
   // if (!user.phoneVerified) {
   //   return <VerifyPhone />

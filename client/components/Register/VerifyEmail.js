@@ -25,15 +25,16 @@ text-align: center;
 `
 const Heading = styled.span`
 font-size: 32px;
-font-weight: 300;
-margin-bottom: 2rem;
+font-weight: 400;
+margin-bottom: 1.5rem;
 `
 const SubHeading = styled.span`
 font-size: 16px;
-font-weight: 200;
+font-weight: 100;
+line-height: 22px;
 `
 const EmailIcon = styled.img`
-margin: 1rem;
+margin: 1.5rem;
 `
 const SemiBold = styled.span`
 font-size: inherit;
@@ -51,17 +52,17 @@ width: 340px;
 text-align: center;
 `
 const Button = styled.button`
-background-color: var(--blue);
-color: #FFF;
+color: #5D789A;
 border-radius: 40px;
 width: 340px;
 padding: 1rem 2rem 1rem 2rem;
 font-size: 20px;
 font-weight: 100;
-margin: 1rem;
+margin: 2rem;
 outline: none;
-border: none;
-cursor: pointer;
+background: transparent;
+background: rgba(0, 171, 224, 0.2);
+border: 1px solid #5D789A;
 
 &::disabled {
 background-color: #2A4C78;
@@ -73,6 +74,7 @@ const VerifyEmail = () => {
   const dispatch = useDispatch()
 
   const clickHandler = async (e) => {
+<<<<<<< HEAD
     
     await fetch('webhook/klaviyo/verify-email', {
       method: 'POST',
@@ -81,10 +83,20 @@ const VerifyEmail = () => {
       },
       body: JSON.stringify({email: user.email})
     }).then(()=> history.push('/verifyphone'))
+=======
+    // For bypassing email functionality for testing:
+    // await fetch('webhook/klaviyo/verify-email', {
+    //   method: 'POST',
+    //   headers: {
+    //     'accept': 'application/json', 'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({email: user.email})
+    // }).then(()=> history.push('/home'))
+>>>>>>> development
   }
 
   const sendEmail = async () => {
-    if(user.id) {
+    if(user.id && !user.emailVerified) {
       await fetch('klaviyo/create-account', {
         method: 'POST',
         headers: {
@@ -92,7 +104,6 @@ const VerifyEmail = () => {
         },
         body: JSON.stringify({email: user.email, phone: user.phone})
       })
-      console.log('Fire')
     }
   }
 
@@ -111,7 +122,7 @@ try {
         <svg className="logo" />
         <RegisterHeader />
         <Wrapper>
-          <Heading>Verify Your Email</Heading>
+          <Heading>Verify your email</Heading>
             <CenteredWrapper>
             <EmailIcon src="./images/confirmemail.png"></EmailIcon>
             <SubHeading>
@@ -127,7 +138,7 @@ try {
             <SubHeading>
             In order to proceed, please check your email and click the confirmation link.
           </SubHeading>
-           <Button onClick={(e)=>clickHandler(e)} disabled={user.emailVerified}>Continue</Button>
+           <Button onClick={(e)=>clickHandler(e)} disabled={!user.emailVerified}>Continue</Button>
             </BottomWrapper>
         </Wrapper>
       </div>
