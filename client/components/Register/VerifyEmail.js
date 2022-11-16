@@ -25,12 +25,13 @@ text-align: center;
 `
 const Heading = styled.span`
 font-size: 32px;
-font-weight: 300;
-margin-bottom: 2rem;
+font-weight: 400;
+margin-bottom: 1.5rem;
 `
 const SubHeading = styled.span`
 font-size: 16px;
-font-weight: 200;
+font-weight: 100;
+line-height: 22px;
 `
 const EmailIcon = styled.img`
 margin: 1.5rem;
@@ -110,7 +111,7 @@ try {
         <svg className="logo" />
         <RegisterHeader />
         <Wrapper>
-          <Heading>Verify Your Email</Heading>
+          <Heading>Verify your email</Heading>
             <CenteredWrapper>
             <EmailIcon src="./images/confirmemail.png"></EmailIcon>
             <SubHeading>
