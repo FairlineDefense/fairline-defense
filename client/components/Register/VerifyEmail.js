@@ -73,18 +73,18 @@ const VerifyEmail = () => {
   const dispatch = useDispatch()
 
   const clickHandler = async (e) => {
-    
-    await fetch('webhook/klaviyo/verify-email', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json', 'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({email: user.email})
-    }).then(()=> history.push('/home'))
+    // For bypassing email functionality for testing:
+    // await fetch('webhook/klaviyo/verify-email', {
+    //   method: 'POST',
+    //   headers: {
+    //     'accept': 'application/json', 'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({email: user.email})
+    // }).then(()=> history.push('/home'))
   }
 
   const sendEmail = async () => {
-    if(user.id) {
+    if(user.id && !user.emailVerified) {
       await fetch('klaviyo/create-account', {
         method: 'POST',
         headers: {
@@ -92,7 +92,6 @@ const VerifyEmail = () => {
         },
         body: JSON.stringify({email: user.email, phone: user.phone})
       })
-      console.log('Fire')
     }
   }
 
