@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js'
-
+console.log(process.env.PAYMENT_STATUS_URL)
 import styled from 'styled-components'
 
 const FormWrapper = styled.div`
@@ -49,7 +49,7 @@ const CheckoutForm = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: process.env.PAYMENT_STATUS_URL
+        return_url: 'https://fairline-defense.herokuapp.com/paymentstatus'
       }
     })
 
