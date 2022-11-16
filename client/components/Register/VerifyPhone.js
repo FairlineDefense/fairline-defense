@@ -5,6 +5,10 @@ import history from '../../history'
 import { useState, useEffect } from 'react'
 import RegisterHeader from './RegisterHeader'
 import ReactInputVerificationCode from 'react-input-verification-code';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { ThemeProvider } from 'styled-components'
+import theme from '../theme'
+
 const Wrapper = styled.div`
 width: 100%;
 height: 100%;
@@ -58,7 +62,13 @@ font-weight: 300;
 `
 const SubHeading = styled.span`
 font-size: 16px;
-font-weight: 200;
+font-weight: 100;
+width: 300px;
+`
+const SemiBold = styled.span`
+font-size: inherit;
+font-weight: 700;
+color: inherit;
 `
 const Button = styled.button`
 background-color: var(--blue);
@@ -90,16 +100,27 @@ span {
   color: var(--blue);
   font-weight: 400;
   font-size: 14px;
+  cursor: pointer;
 }
+`
+const ProgressWrapper = styled.div`
+height: 96px;
+display: flex;
+align-items: center;
 `
 const VerifyPhone = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
 
   let [code, setCode] = useState('')
+  let [loader,setLoader] = useState(false)
+  let [incorrect, setIncorrect] = useState(false)
 
   const clickHandler = async (e) => {
     e.preventDefault()
+
+    setLoader(true)
+
       const verifyCode = await fetch('klaviyo/phone-code', {
         method: 'POST',
         headers: {
@@ -108,12 +129,17 @@ const VerifyPhone = () => {
         body: JSON.stringify({code:code})
       })
       const res = verifyCode
-      if(res.status === 200) {
-      history.push('/home')
-      }
-      if(res.status === 403) {
-        console.log('Invalid Code')
-      }
+
+      setTimeout(()=> {
+        setLoader(false)
+
+        if(res.status === 200) {
+          history.push('/home')
+          }
+          if(res.status === 403) {
+            setIncorrect(true)
+          }
+      }, 2000)
   }
 
 
@@ -137,6 +163,52 @@ try {
 }
 }, [])
 
+const resend = (e) => {
+e.preventDefault()
+sendText()
+setLoader(true)
+setTimeout(()=>{
+setLoader(false)
+setIncorrect(false)
+}, 2000)
+}
+
+if(loader) {
+  return (
+    <div className="auth">
+    <svg className="logo" />
+    <svg className="logo" />
+    <svg className="logo" />
+    <RegisterHeader />
+    <Wrapper>
+      <Heading>Verify your phone</Heading>
+        <CenteredWrapper>
+          <PhoneIcon src="./images/confirmphone.png"></PhoneIcon>
+          <SubHeading>
+            A verification code has been sent to
+            </SubHeading>
+              <SemiBold>
+                {user.phone}
+              </SemiBold>
+        </CenteredWrapper>
+        <CenteredWrapper>
+          <ThemeProvider theme={theme}>
+            <ProgressWrapper>
+              <CircularProgress color={theme.palette.primary.main} />
+            </ProgressWrapper>
+          </ThemeProvider>
+        </CenteredWrapper>
+      <CenteredWrapper>
+        <SubHeading>
+        Please enter the verification code received by SMS.
+      </SubHeading>
+        <Button onClick={(e)=>clickHandler(e)}>Continue</Button>
+        </CenteredWrapper>
+        <BottomWrapper><span>Resend SMS Code</span><span>Edit Phone Number</span></BottomWrapper>
+    </Wrapper>
+  </div>
+  )
+}
     return (
       <div className="auth">
         <svg className="logo" />
@@ -150,20 +222,20 @@ try {
             <SubHeading>
             A verification code has been sent to
             </SubHeading>
-            <SubHeading>
+              <SemiBold>
                 {user.phone}
-              </SubHeading>
+              </SemiBold>
             </CenteredWrapper>
             <Form>
             <ReactInputVerificationCode length={6} placeholder="" onChange={setCode} value={code} />
             </Form>
           <CenteredWrapper>
             <SubHeading>
-            Please enter the verification code received by SMS.
+            {incorrect ? 'That code was incorrect. Please try again or send a new code.' : 'Please enter the verification code received by SMS.'}
           </SubHeading>
             <Button onClick={(e)=>clickHandler(e)}>Continue</Button>
             </CenteredWrapper>
-            <BottomWrapper><span>Resend SMS Code</span><span>Edit Phone Number</span></BottomWrapper>
+            <BottomWrapper><span onClick={(e)=>{resend(e)}}>Resend SMS Code</span><span>Edit Phone Number</span></BottomWrapper>
         </Wrapper>
       </div>
   )
