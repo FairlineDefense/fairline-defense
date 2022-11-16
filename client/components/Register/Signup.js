@@ -176,7 +176,6 @@ const Signup = () => {
     }
 
     if(validateFields()) {
-      console.log('phone =>',phone)
         dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
     }
 }
