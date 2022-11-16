@@ -33,7 +33,7 @@ font-size: 16px;
 font-weight: 200;
 `
 const EmailIcon = styled.img`
-margin: 1rem;
+margin: 1.5rem;
 `
 const SemiBold = styled.span`
 font-size: inherit;
@@ -51,17 +51,17 @@ width: 340px;
 text-align: center;
 `
 const Button = styled.button`
-background-color: var(--blue);
-color: #FFF;
+color: #5D789A;
 border-radius: 40px;
 width: 340px;
 padding: 1rem 2rem 1rem 2rem;
 font-size: 20px;
 font-weight: 100;
-margin: 1rem;
+margin: 2rem;
 outline: none;
-border: none;
-cursor: pointer;
+background: transparent;
+background: rgba(0, 171, 224, 0.2);
+border: 1px solid #5D789A;
 
 &::disabled {
 background-color: #2A4C78;
@@ -127,7 +127,7 @@ try {
             <SubHeading>
             In order to proceed, please check your email and click the confirmation link.
           </SubHeading>
-           <Button onClick={(e)=>clickHandler(e)} disabled={user.emailVerified}>Continue</Button>
+           <Button onClick={(e)=>clickHandler(e)} disabled={!user.emailVerified}>Continue</Button>
             </BottomWrapper>
         </Wrapper>
       </div>
