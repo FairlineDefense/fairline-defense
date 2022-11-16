@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import styled from 'styled-components'
 import MembershipSubPortal from './MembershipSubPortal'
 import Footer from '../Site/Home/Footer'
+import VerifyPhone from '../Register/VerifyPhone'
 const Background = styled.div`
 width: 100vw;
 min-height: 100vh;
@@ -38,6 +39,10 @@ font-size: 30px;
 const Membership = () => {
   const user = useSelector(state => state.user)
 
+  if(!user.phoneVerified) {
+    return <VerifyPhone />
+  }
+  
   return (
     <>
     <Background>

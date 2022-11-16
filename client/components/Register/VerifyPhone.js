@@ -119,13 +119,13 @@ const VerifyPhone = () => {
 
   const sendText = async () => {
     if(user.id) {
-      await fetch('klaviyo/verify-phone', {
+       await fetch('klaviyo/verify-phone', {
         method: 'POST',
         headers: {
           'accept': 'application/json', 'Content-Type': 'application/json',
         },
         body: JSON.stringify({email: user.email, phone: user.phone})
-      })
+      }).then((res)=> res.json()).then((data)=>setCode(String(data)))
     }
   }
 
