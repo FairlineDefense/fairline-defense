@@ -74,16 +74,6 @@ const VerifyEmail = () => {
   const dispatch = useDispatch()
 
   const clickHandler = async (e) => {
-<<<<<<< HEAD
-    
-    await fetch('webhook/klaviyo/verify-email', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json', 'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({email: user.email})
-    }).then(()=> history.push('/verifyphone'))
-=======
     // For bypassing email functionality for testing:
     // await fetch('webhook/klaviyo/verify-email', {
     //   method: 'POST',
@@ -92,7 +82,6 @@ const VerifyEmail = () => {
     //   },
     //   body: JSON.stringify({email: user.email})
     // }).then(()=> history.push('/home'))
->>>>>>> development
   }
 
   const sendEmail = async () => {
