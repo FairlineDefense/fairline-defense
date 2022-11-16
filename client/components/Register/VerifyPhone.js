@@ -100,7 +100,6 @@ const VerifyPhone = () => {
 
   const clickHandler = async (e) => {
     e.preventDefault()
-    console.log('click')
       const verifyCode = await fetch('klaviyo/phone-code', {
         method: 'POST',
         headers: {
@@ -109,7 +108,6 @@ const VerifyPhone = () => {
         body: JSON.stringify({code:code})
       })
       const res = verifyCode
-      console.log('->',verifyCode)
       if(res.status === 200) {
       history.push('/home')
       }
