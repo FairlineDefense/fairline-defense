@@ -14,6 +14,8 @@ import {
 } from "react-circular-progressbar";
 
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { ThemeProvider } from '@material-ui/core'
+import theme from '../theme'
 
 import "react-circular-progressbar/dist/styles.css";
 import RegisterHeader from '../Register/RegisterHeader'
@@ -29,6 +31,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 text-align: center;
+height: 550px;
 `
 const Main = styled.div`
 height: 500px;
@@ -151,7 +154,9 @@ const UserHome = () => {
       <svg className="logo" />
       <RegisterHeader />
         <CenteredWrapper>
-          <CircularProgress />
+            <ThemeProvider theme={theme}>
+                <CircularProgress color={theme.palette.primary.main} />
+            </ThemeProvider>
           </CenteredWrapper>
     </div>
     )
