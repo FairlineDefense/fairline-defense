@@ -5,7 +5,7 @@
 ## Run locally
 
 ```
-npm start-dev
+npm run start-dev
 ```
 
 ## Deploy to Heroku
