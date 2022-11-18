@@ -19,7 +19,7 @@ router.post('/create-account', async (req, res, next) => {
       headers: {accept: 'application/json', 'content-type': 'application/json'},
       body: JSON.stringify({
         profiles: [
-          {email: req.body.email},
+          {email: req.user.email},
           {phone_number: req.user.phone}
         ]
       })
