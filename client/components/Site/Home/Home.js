@@ -17,11 +17,10 @@ import JoinNow from './JoinNow'
 import Footer from './Footer'
 import WhyYouNeedIt from './WhyYouNeedIt'
 const Home = () => {
-
   return (
     <>
       <Navbar />
-      <Landing /> 
+      <Landing />
       <Card />
       <ProtectYourFuture />
       <HowItWorksSection />
@@ -33,7 +32,7 @@ const Home = () => {
       <WhatDoYouGet />
       <WhatDoYouGetMobile />
       <PlansMobile />
-      <BePrepared /> 
+      <BePrepared />
       <Stories />
       <JoinNow />
       <Footer />

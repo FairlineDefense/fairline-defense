@@ -8,27 +8,40 @@ async function seed() {
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'jeffreywood.dev@gmail.com', password: 'fakePassword123!', phone: '123-456-7890', firstName: 'Jeffrey', lastName: 'Wood', streetAddress:'123 5th Avenue', city: 'New York', state: 'NY', zipCode: '10012', customerId: 'cus_MgDPAElk6VULUe', orderId: 1},),
+    User.create({
+      email: 'jeffreywood.dev@gmail.com',
+      password: 'fakePassword123!',
+      phone: '123-456-7890',
+      firstName: 'Jeffrey',
+      lastName: 'Wood',
+      streetAddress: '123 5th Avenue',
+      city: 'New York',
+      state: 'NY',
+      zipCode: '10012',
+      customerId: 'cus_MgDPAElk6VULUe',
+      orderId: 1
+    })
   ])
   const orders = await Promise.all([
     Order.create({
-      "id": 1,
-      "orderId": "sub_1LwuHrIvvF6ba6jU5ulM4hkv",
-			"customerId": "cus_MgDPAElk6VULUe",
-      "price": "price_1LrnW0IvvF6ba6jUlHTzjnlt",
-      "product": "prod_MazUmO6Dj2hOCR",
-      "interval": "month",
-			"paidAt": "1666719156",
-			"amountDue": "1900",
-			"amountPaid": "1900",
-			"amountRemaining": "0",
-			"invoicePDF": "https://pay.stripe.com/invoice/acct_1Kv7G0IvvF6ba6jU/test_YWNjdF8xS3Y3RzBJdnZGNmJhNmpVLF9NZ0RQMmdEdUxwaTRINmQ2TEI1MUQ4WUZyVFZuNUlmLDU3MjU5OTU30200Ifh50QKP/pdf?s=ap",
-			"periodEnd": "1669397532",
-			"periodStart": "1666719132",
-			"status": "paid",
-			"createdAt": "2022-10-22T14:30:38.351Z",
-			"updatedAt": "2022-10-22T14:30:38.401Z",
-			"userId": 1
+      id: 1,
+      orderId: 'sub_1LwuHrIvvF6ba6jU5ulM4hkv',
+      customerId: 'cus_MgDPAElk6VULUe',
+      price: 'price_1LrnW0IvvF6ba6jUlHTzjnlt',
+      product: 'prod_MazUmO6Dj2hOCR',
+      interval: 'month',
+      paidAt: '1666719156',
+      amountDue: '1900',
+      amountPaid: '1900',
+      amountRemaining: '0',
+      invoicePDF:
+        'https://pay.stripe.com/invoice/acct_1Kv7G0IvvF6ba6jU/test_YWNjdF8xS3Y3RzBJdnZGNmJhNmpVLF9NZ0RQMmdEdUxwaTRINmQ2TEI1MUQ4WUZyVFZuNUlmLDU3MjU5OTU30200Ifh50QKP/pdf?s=ap',
+      periodEnd: '1669397532',
+      periodStart: '1666719132',
+      status: 'paid',
+      createdAt: '2022-10-22T14:30:38.351Z',
+      updatedAt: '2022-10-22T14:30:38.401Z',
+      userId: 1
     })
   ])
   console.log(`seeded ${users.length} users`)
