@@ -60,17 +60,17 @@
 }
 
 .inputGroup input {
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 6px;
 }
 
 .textWhite {
-  color: #FFF;
+  color: #fff;
 }
 
 .inputGroup div {
   flex-grow: 1;
-  margin: .2rem;
+  margin: 0.2rem;
 }
 
 .signupInputCC div {

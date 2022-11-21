@@ -15,38 +15,40 @@ const Navbar = () => {
   }
 
   const Nav = styled.nav`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  height: 70px;
-  color: #fff;
-  font-size: 14px;
-  border-bottom: 1px solid #fff;
-  align-items: center;
-
-  a {
-  color: #fff;
-  margin-right: 1rem;
-  }
-  a:visited {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
     color: #fff;
+    font-size: 14px;
+    border-bottom: 1px solid #fff;
+    align-items: center;
+
+    a {
+      color: #fff;
+      margin-right: 1rem;
+    }
+    a:visited {
+      color: #fff;
     }
   `
   const Logo = styled.img`
-  height: 30px;
-  width: auto;
-  cursor: pointer;
+    height: 30px;
+    width: auto;
+    cursor: pointer;
   `
   return (
     <Nav>
       <span>
-      <Link to="/membership">Membership</Link>
-      <Link to="/home">Account</Link>
-      <Link to="/benefits">Benefits</Link>
-      <Link to="/feed">Feed</Link>
+        <Link to="/membership">Membership</Link>
+        <Link to="/home">Account</Link>
+        <Link to="/benefits">Benefits</Link>
+        <Link to="/feed">Feed</Link>
       </span>
-      <Link to="/"><Logo src="./images/fdlogo.png" /></Link>
+      <Link to="/">
+        <Logo src="./images/fdlogo.png" />
+      </Link>
       <a href="#" onClick={handleClick}>
         Logout
       </a>

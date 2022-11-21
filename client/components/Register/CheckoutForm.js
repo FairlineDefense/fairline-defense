@@ -4,30 +4,30 @@ import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js'
 import styled from 'styled-components'
 
 const FormWrapper = styled.div`
-width: 800px;
-text-align: center;
+  width: 800px;
+  text-align: center;
 `
- const Form = styled.form`
- font-size: 18px;
- font-weight: 200;
- width: 100%;
- `
- const Span = styled.span`
-width: 100%;
- `
- const Button = styled.button`
- background-color: var(--blue);
- color: #FFF;
- border-radius: 40px;
- width: 340px;
- padding: 1rem 2rem 1rem 2rem;
- font-size: 20px;
- font-weight: 100;
- margin: 2rem;
- outline: none;
- border: none;
- cursor: pointer;
- `
+const Form = styled.form`
+  font-size: 18px;
+  font-weight: 200;
+  width: 100%;
+`
+const Span = styled.span`
+  width: 100%;
+`
+const Button = styled.button`
+  background-color: var(--blue);
+  color: #fff;
+  border-radius: 40px;
+  width: 340px;
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 20px;
+  font-weight: 100;
+  margin: 2rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+`
 const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
@@ -49,7 +49,10 @@ const CheckoutForm = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: 'https://fairline-defense.herokuapp.com/paymentstatus'
+        return_url:
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:8080/paymentstatus'
+            : 'https://fairline-defense.herokuapp.com/paymentstatus'
       }
     })
 
@@ -67,16 +70,16 @@ const CheckoutForm = () => {
 
   return (
     <FormWrapper>
-    <Form onSubmit={handleSubmit}>
-      <Span>
-      <PaymentElement />
-      </Span>
-      <Span>
-      <Button disabled={!stripe}>Purchase</Button>
-      </Span>
-      {/* Show error message to your customers */}
-      {errorMessage && <div>{errorMessage}</div>}
-    </Form>
+      <Form onSubmit={handleSubmit}>
+        <Span>
+          <PaymentElement />
+        </Span>
+        <Span>
+          <Button disabled={!stripe}>Purchase</Button>
+        </Span>
+        {/* Show error message to your customers */}
+        {errorMessage && <div>{errorMessage}</div>}
+      </Form>
     </FormWrapper>
   )
 }

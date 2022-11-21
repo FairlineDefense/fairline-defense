@@ -14,7 +14,7 @@ import AccountExistsModal from './AccountExistsModal'
 import TermsAndConditions from './TermsAndConditions'
 import Checkbox from '@material-ui/core/Checkbox'
 
-import { ThemeProvider } from '@material-ui/core'
+import {ThemeProvider} from '@material-ui/core'
 import theme from '../theme'
 
 const H1 = styled.h1`
@@ -31,103 +31,115 @@ const SignupWrapper = styled.div`
   align-items: center;
   padding: 4rem;
   @media (max-width: 768px) {
-    padding: 4rem .5rem 0rem .5rem;
+    padding: 4rem 0.5rem 0rem 0.5rem;
   }
 `
 const SignupForm = styled.form`
-display: flex;
-flex-direction: column;
-justify-content: center;
-max-width: 720px;
-position: relative;
-@media (max-width: 768px) {
-  max-width: 100%;
-}
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 720px;
+  position: relative;
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 `
 const FinePrint = styled.div`
-display: flex;
-flex-direction: column;
-margin: 2rem 0rem 3rem 0rem;
-width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0rem 3rem 0rem;
+  width: 100%;
 `
 const TermsAndConditionsDiv = styled.div`
-display: flex;
-flex-direction: row;
-width: 100%;
-font-size: 16px;
-align-items: center;
-svg {
-  fill: white;
-}
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 16px;
+  align-items: center;
+  svg {
+    fill: white;
+  }
 
-@media (max-width: 768px) {
-  flex-wrap: wrap;
-}
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `
 const OpenFinePrint = styled.span`
-text-decoration: underline;
-cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 `
 const InputGroup = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  `
+`
 const Phone = styled.span`
   width: 50%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 
-  
   div:nth-child(1) {
     width: 60px;
   }
   div:nth-child(2) {
     flex-grow: 1;
   }
-  `
+`
 const SignupButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
 `
 const SignupFormButton = styled.button`
-width: 340px;
-font-weight: 200;
-padding: 1rem 2rem 1rem 2rem;
-border-radius: 50px;
-outline: none;
-border: none;
-color: #fff;
-font-size: 20px;
-background-color: var(--blue);
-margin-bottom: 2rem;
-cursor: pointer;
+  width: 340px;
+  font-weight: 200;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  background-color: var(--blue);
+  margin-bottom: 2rem;
+  cursor: pointer;
 `
 const ErrorText = styled.div`
   height: fit-content;
   border: 1px solid red;
   border-radius: 5px;
-  padding: .5rem;
+  padding: 0.5rem;
   background-color: #fff;
-  font-size: .75rem;
+  font-size: 0.75rem;
   color: #000;
 `
 const Signup = () => {
   let user = useSelector(state => state.user)
   const dispatch = useDispatch()
   let [errorText, setErrorText] = useState('')
-  let [passwordErrorText, setPasswordErrorText] = useState(" ")
-  let [invalidation, setInvalidation] = useState({email: false, phone: false, password: false, confirmPassword:false})
-  let [form, setForm] = useState({firstName: '', lastName: '', email: '', cc: '', phone: '', password: '', confirmPassword:''})
-  
-  const changeHandler = (e) => {
+  let [passwordErrorText, setPasswordErrorText] = useState(' ')
+  let [invalidation, setInvalidation] = useState({
+    email: false,
+    phone: false,
+    password: false,
+    confirmPassword: false
+  })
+  let [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    cc: '',
+    phone: '',
+    password: '',
+    confirmPassword: ''
+  })
+
+  const changeHandler = e => {
     setInvalidation({...invalidation, [e.target.name]: false})
     setForm({...form, [e.target.name]: e.target.value})
   }
-  
+
   const handleSubmit = evt => {
     evt.preventDefault()
     const firstName = form.firstName
@@ -139,75 +151,109 @@ const Signup = () => {
 
     function validateFields() {
       let res = true
-      if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-         setInvalidation({...invalidation, email: true})
-         res = false
+      if (
+        !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          email
+        )
+      ) {
+        setInvalidation({...invalidation, email: true})
+        res = false
       }
-      if(!/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(phone)) {
-         setInvalidation({...invalidation, phone: true})
-         res = false
+      if (
+        !/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(
+          phone
+        )
+      ) {
+        setInvalidation({...invalidation, phone: true})
+        res = false
       }
       if (password !== confirmPassword) {
-         setInvalidation({...invalidation, confirmPassword: true})
-         setPasswordErrorText("Passwords do not match")
-         res = false
+        setInvalidation({...invalidation, confirmPassword: true})
+        setPasswordErrorText('Passwords do not match')
+        res = false
       }
       if (password.length < 8) {
-         setInvalidation({...invalidation, password: true, confirmPassword: true})
-         setPasswordErrorText("Passwords must be min. 8 chars long")
-         res = false
+        setInvalidation({
+          ...invalidation,
+          password: true,
+          confirmPassword: true
+        })
+        setPasswordErrorText('Passwords must be min. 8 chars long')
+        res = false
       }
       if (password.search(/[a-z]/i) < 0) {
-         setInvalidation({...invalidation, password: true, confirmPassword: true})
-         setPasswordErrorText("Passwords must contain at least one letter")
-         res = false
+        setInvalidation({
+          ...invalidation,
+          password: true,
+          confirmPassword: true
+        })
+        setPasswordErrorText('Passwords must contain at least one letter')
+        res = false
       }
       if (password.search(/[!@#\$%\^\&*\)\(+=._-]/i) < 0) {
-        setInvalidation({...invalidation, password: true, confirmPassword: true})
-        setPasswordErrorText("Passwords must contain at least one special character")
+        setInvalidation({
+          ...invalidation,
+          password: true,
+          confirmPassword: true
+        })
+        setPasswordErrorText(
+          'Passwords must contain at least one special character'
+        )
         res = false
-     }
+      }
       if (password.search(/[0-9]/) < 0) {
-         setInvalidation({...invalidation, password: true, confirmPassword: true})
-         setPasswordErrorText("Passwords must contain at least one number")
-         res = false
-      } 
+        setInvalidation({
+          ...invalidation,
+          password: true,
+          confirmPassword: true
+        })
+        setPasswordErrorText('Passwords must contain at least one number')
+        res = false
+      }
       return res
     }
 
-    if(validateFields()) {
-        dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
+    if (validateFields()) {
+      dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
     }
-}
+  }
 
-//Account already exists modal props:
-const [open, setOpen] = useState(false);
+  //Account already exists modal props:
+  const [open, setOpen] = useState(false)
 
-const handleClick = () => {
-  setForm({firstName: '', lastName: '', email: '', cc: '', phone: '', password: '', confirmPassword:''})
-  setOpen(false);
-  user.error = ''
-  history.push('/login')
-};
+  const handleClick = () => {
+    setForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      cc: '',
+      phone: '',
+      password: '',
+      confirmPassword: ''
+    })
+    setOpen(false)
+    user.error = ''
+    history.push('/login')
+  }
 
-const handleClose = (value) => {
-  setOpen(false);
-  setSelectedValue(value);
-};
+  const handleClose = value => {
+    setOpen(false)
+    setSelectedValue(value)
+  }
 
   useEffect(
     () => {
-     if(user.error){
-      setOpen(true)
-     }
+      if (user.error) {
+        setOpen(true)
+      }
     },
     [user]
   )
 
   //Terms and Conditions modal props:
-  let [openTerms, setOpenTerms] = useState(false);
+  let [openTerms, setOpenTerms] = useState(false)
 
-  const viewTerms = (e) => {
+  const viewTerms = e => {
     e.preventDefault()
     setOpenTerms(true)
   }
@@ -218,7 +264,7 @@ const handleClose = (value) => {
       <svg className="logo" />
       <svg className="logo" />
 
-     <RegisterHeader />
+      <RegisterHeader />
       <SignupWrapper>
         <H1>Get Started</H1>
         <SignupForm onSubmit={handleSubmit} name="signup">
@@ -230,9 +276,9 @@ const handleClose = (value) => {
               name="firstName"
               variant="filled"
               type="text"
-              onChange={(e)=>changeHandler(e)}
+              onChange={e => changeHandler(e)}
               value={form.firstName}
-              style={{ margin: 8 }}
+              style={{margin: 8}}
               required
             />
             <FDTextField
@@ -241,111 +287,123 @@ const handleClose = (value) => {
               placeholder="Last Name"
               name="lastName"
               type="text"
-              onChange={(e)=>changeHandler(e)}
+              onChange={e => changeHandler(e)}
               value={form.lastName}
-              style={{ margin: 8 }}
+              style={{margin: 8}}
               variant="filled"
               required
             />
           </InputGroup>
           <InputGroup>
             <FDTextField
-            label={invalidation.email ? 'Invalid email address' : 'Email'}
-            name="email"
-            placeholder="name@email.com"
-            type="text"
-            onChange={(e)=>changeHandler(e)}
-            value={form.email}
-            style={{ margin: 8, flexGrow: 1 }}
-            variant="filled"
-            required
-            error={invalidation.email ? true : false}
+              label={invalidation.email ? 'Invalid email address' : 'Email'}
+              name="email"
+              placeholder="name@email.com"
+              type="text"
+              onChange={e => changeHandler(e)}
+              value={form.email}
+              style={{margin: 8, flexGrow: 1}}
+              variant="filled"
+              required
+              error={invalidation.email ? true : false}
             />
             <Phone>
-            <FDTextField
-            label="CC"
-            name="cc"
-            placeholder="+1"
-            type="text"
-            onChange={(e)=>changeHandler(e)}
-            value={form.cc}
-            style={{ margin: 8 }}
-            variant="filled"
-            required
-            />
-            <FDTextField
-            label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
-            name="phone"
-            placeholder="123-456-7890"
-            autoComplete="off"
-            type="tel"
-            onChange={(e)=>changeHandler(e)}
-            value={form.phone}
-            style={{ margin: 8 }}
-            variant="filled"
-            error={invalidation.phone ? true : false}
-            required
-            />
+              <FDTextField
+                label="CC"
+                name="cc"
+                placeholder="+1"
+                type="text"
+                onChange={e => changeHandler(e)}
+                value={form.cc}
+                style={{margin: 8}}
+                variant="filled"
+                required
+              />
+              <FDTextField
+                label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
+                name="phone"
+                placeholder="123-456-7890"
+                autoComplete="off"
+                type="tel"
+                onChange={e => changeHandler(e)}
+                value={form.phone}
+                style={{margin: 8}}
+                variant="filled"
+                error={invalidation.phone ? true : false}
+                required
+              />
             </Phone>
           </InputGroup>
           <InputGroup>
             <FDTextField
-            fullWidth
-            label="Password"
-            placeholder="Password"
-            name="password"
-            type="password"
-            onChange={(e)=>changeHandler(e)}
-            value={form.password}
-            style={{ margin: 8 }}
-            variant="filled"
-            error={invalidation.password ? true : false}
-            helperText={`Min 8 char. with at least one upper case letter, one number, and
+              fullWidth
+              label="Password"
+              placeholder="Password"
+              name="password"
+              type="password"
+              onChange={e => changeHandler(e)}
+              value={form.password}
+              style={{margin: 8}}
+              variant="filled"
+              error={invalidation.password ? true : false}
+              helperText={`Min 8 char. with at least one upper case letter, one number, and
             one special char.: !, @, $, #, &, *.`}
-            required
+              required
             />
             <FDTextField
-            fullWidth
-            label="Confirm Password"
-            placeholder="Confirm Password"
-            name="confirmPassword"
-            type="password"
-            onChange={(e)=>changeHandler(e)}
-            value={form.confirmPassword}
-            style={{ margin: 8 }}
-            variant="filled"
-            error={invalidation.confirmPassword ? true : false}
-            helperText={passwordErrorText}
-            required
+              fullWidth
+              label="Confirm Password"
+              placeholder="Confirm Password"
+              name="confirmPassword"
+              type="password"
+              onChange={e => changeHandler(e)}
+              value={form.confirmPassword}
+              style={{margin: 8}}
+              variant="filled"
+              error={invalidation.confirmPassword ? true : false}
+              helperText={passwordErrorText}
+              required
             />
           </InputGroup>
-           <FinePrint>
+          <FinePrint>
             <TermsAndConditionsDiv>
               <ThemeProvider theme={theme}>
-              <Checkbox color='primary' required></Checkbox>I agree to the Fairline Defense&nbsp;<OpenFinePrint onClick={(e)=>{viewTerms(e)}}>Terms & Conditions</OpenFinePrint>
+                <Checkbox color="primary" required />I agree to the Fairline
+                Defense&nbsp;<OpenFinePrint
+                  onClick={e => {
+                    viewTerms(e)
+                  }}
+                >
+                  Terms & Conditions
+                </OpenFinePrint>
               </ThemeProvider>
-              </TermsAndConditionsDiv>
-            </FinePrint>
+            </TermsAndConditionsDiv>
+          </FinePrint>
 
           <SignupButtonWrapper>
             <SignupFormButton type="submit">Create an Account</SignupFormButton>
           </SignupButtonWrapper>
           <section className="signupFormBottom">
-          {errorText.length ? (
-            <ErrorText>{errorText}</ErrorText>
-          ) : <div>
-          <span>Already have an account?</span>
-          <span>
-            <Link to="/login">Login</Link>
-          </span>
-        </div>}
+            {errorText.length ? (
+              <ErrorText>{errorText}</ErrorText>
+            ) : (
+              <div>
+                <span>Already have an account?</span>
+                <span>
+                  <Link to="/login">Login</Link>
+                </span>
+              </div>
+            )}
           </section>
         </SignupForm>
       </SignupWrapper>
 
-<AccountExistsModal open={open} handleClose={handleClose} handleClick={handleClick} />
-<TermsAndConditions openTerms={openTerms} setOpenTerms={setOpenTerms} />
-
+      <AccountExistsModal
+        open={open}
+        handleClose={handleClose}
+        handleClick={handleClick}
+      />
+      <TermsAndConditions openTerms={openTerms} setOpenTerms={setOpenTerms} />
     </section>
   )
 }

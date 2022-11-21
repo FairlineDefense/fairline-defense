@@ -74,10 +74,10 @@ export const auth = (email, password, method) => async dispatch => {
   }
 }
 
-export const update = (body) => async dispatch => {
+export const update = body => async dispatch => {
   try {
-  await axios.put(`/api/users/${body.id}`, body)
-  dispatch(updateUser(body))
+    await axios.put(`/api/users/${body.id}`, body)
+    dispatch(updateUser(body))
   } catch (error) {
     console.error(error)
   }

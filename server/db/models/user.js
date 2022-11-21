@@ -6,7 +6,7 @@ const Order = require('./order')
 const User = db.define('user', {
   membershipNumber: {
     type: Sequelize.STRING,
-    unique: true,
+    unique: true
     // allowNull: false
   },
   firstName: {
@@ -40,7 +40,7 @@ const User = db.define('user', {
   },
   alternatePhone: {
     type: Sequelize.STRING,
-    unique: true,
+    unique: true
   },
   email: {
     type: Sequelize.STRING,
@@ -48,28 +48,28 @@ const User = db.define('user', {
     allowNull: false
   },
   streetAddress: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   line2: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   city: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   state: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   country: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   zipCode: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   emergencyContactName: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   emergencyContactPhone: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   emailVerified: {
     type: Sequelize.BOOLEAN,
@@ -80,7 +80,7 @@ const User = db.define('user', {
     defaultValue: false
   },
   phoneCode: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   planActive: {
     type: Sequelize.BOOLEAN,
@@ -88,7 +88,7 @@ const User = db.define('user', {
   },
   addSpouse: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    defaultValue: false
   },
   spouseName: {
     type: Sequelize.STRING,
@@ -104,58 +104,58 @@ const User = db.define('user', {
   },
   customerId: {
     type: Sequelize.STRING,
-    unique: true,
+    unique: true
   },
   emailReminders: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true,
+    defaultValue: true
   },
   emailInsider: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true,
+    defaultValue: true
   },
   emailNews: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true,
+    defaultValue: true
   },
   emailPromotions: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true,
+    defaultValue: true
   },
   accountSuspended: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    defaultValue: false
   },
   accountFlagged: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    defaultValue: false
   },
   accountWatchList: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    defaultValue: false
   },
   promotion: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    defaultValue: false
   },
   staff: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    defaultValue: false
   },
   brand: {
-    type: Sequelize.STRING,
-  },
-  paymentMethod: {
-    type: Sequelize.STRING,
-  },
-  last4:{
     type: Sequelize.STRING
   },
-  expMonth:{
-    type: Sequelize.STRING,
+  paymentMethod: {
+    type: Sequelize.STRING
   },
-  expYear:{
-    type: Sequelize.STRING,
+  last4: {
+    type: Sequelize.STRING
+  },
+  expMonth: {
+    type: Sequelize.STRING
+  },
+  expYear: {
+    type: Sequelize.STRING
   },
   password: {
     type: Sequelize.STRING,
@@ -212,7 +212,7 @@ const setSaltAndPassword = user => {
 }
 const setMembershipNumber = async user => {
   const makeNumber = () => {
-    return Math.floor(100000000 + Math.random() * 900000000);
+    return Math.floor(100000000 + Math.random() * 900000000)
   }
   let membershipNumber = makeNumber()
 
