@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import css from './register.css'
 import styled from 'styled-components'
 import {useState, useEffect} from 'react'
-import {useStripe, useElements} from '@stripe/react-stripe-js';
+import {useStripe, useElements} from '@stripe/react-stripe-js'
 import {Elements} from '@stripe/react-stripe-js'
 import Shipping from './Shipping'
 import {loadStripe} from '@stripe/stripe-js'
@@ -53,11 +53,10 @@ const PaymentStatus = () => {
       <RegisterHeader />
       <Wrapper>
         <Elements stripe={stripePromise}>
-        <Shipping />
+          <Shipping />
         </Elements>
       </Wrapper>
     </div>
   )
 }
 export default PaymentStatus
-
