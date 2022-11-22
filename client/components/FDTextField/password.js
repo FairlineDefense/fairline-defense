@@ -18,7 +18,7 @@ const FDPasswordField = styled(props => (
           <InputAdornment position="end">
             <IconButton
               aria-label="toggle password visibility"
-              onClick={props.handleClickShowPassword}
+              onClick={props.toggleVisibility}
               edge="end"
             >
               {props.type === 'text' ? <VisibilityOff /> : <Visibility />}

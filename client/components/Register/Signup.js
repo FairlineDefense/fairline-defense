@@ -365,7 +365,7 @@ const Signup = () => {
               value={form.password}
               style={{margin: 8}}
               variant="filled"
-              handleClickShowPassword={handleClickShowPassword}
+              toggleVisibility={handleClickShowPassword}
               error={invalidation.password ? true : false}
               helperText={`Min 8 char. with at least one upper case letter, one number, and
             one special char.: !, @, $, #, &, *.`}
@@ -381,7 +381,7 @@ const Signup = () => {
               value={form.confirmPassword}
               style={{margin: 8}}
               variant="filled"
-              handleClickShowPassword={handleClickShowConfirmPassword}
+              toggleVisibility={handleClickShowConfirmPassword}
               error={invalidation.confirmPassword ? true : false}
               helperText={passwordErrorText}
               required
