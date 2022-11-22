@@ -16,6 +16,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../theme'
+import FDPasswordField from '../FDTextField/password'
 
 const H1 = styled.h1`
   font-weight: 400;
@@ -132,7 +133,9 @@ const Signup = () => {
     cc: '',
     phone: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    showPassword: false,
+    showConfirmPassword: false
   })
 
   const changeHandler = e => {
@@ -258,6 +261,23 @@ const Signup = () => {
     setOpenTerms(true)
   }
 
+  const handleClickShowPassword = () => {
+    setForm({
+      ...form,
+      showPassword: !form.showPassword,
+    });
+  };
+
+  const handleClickShowConfirmPassword = () => {
+    setForm({
+      ...form,
+      showConfirmPassword: !form.showConfirmPassword,
+    });
+  };
+
+ 
+
+
   return (
     <section className="auth">
       <svg className="logo" />
@@ -335,31 +355,33 @@ const Signup = () => {
             </Phone>
           </InputGroup>
           <InputGroup>
-            <FDTextField
+            <FDPasswordField
               fullWidth
               label="Password"
               placeholder="Password"
               name="password"
-              type="password"
+              type={form.showPassword ? 'text' : 'password'}
               onChange={e => changeHandler(e)}
               value={form.password}
               style={{margin: 8}}
               variant="filled"
+              handleClickShowPassword={handleClickShowPassword}
               error={invalidation.password ? true : false}
               helperText={`Min 8 char. with at least one upper case letter, one number, and
             one special char.: !, @, $, #, &, *.`}
               required
             />
-            <FDTextField
+            <FDPasswordField
               fullWidth
               label="Confirm Password"
               placeholder="Confirm Password"
               name="confirmPassword"
-              type="password"
+              type={form.showConfirmPassword ? 'text' : 'password'}
               onChange={e => changeHandler(e)}
               value={form.confirmPassword}
               style={{margin: 8}}
               variant="filled"
+              handleClickShowPassword={handleClickShowConfirmPassword}
               error={invalidation.confirmPassword ? true : false}
               helperText={passwordErrorText}
               required
