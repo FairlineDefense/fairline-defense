@@ -6,6 +6,7 @@ import {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import css from './style.css'
 import FDTextField from '../FDTextField'
+import FDPasswordField from '../FDTextField/password'
 
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -100,11 +101,16 @@ const Login = () => {
   let user = useSelector(state => state.user)
   const dispatch = useDispatch()
   let [errorText, setErrorText] = useState('')
+  let [form, setForm] = useState({email: '', password: '', showPassword: false})
 
+  const changeHandler = (e) => {
+    e.preventDefault()
+    setForm({...form, [e.target.name]: e.target.value})
+  }
   const handleSubmit = evt => {
     evt.preventDefault()
-    const email = evt.target.email.value
-    const password = evt.target.password.value
+    const email = form.email
+    const password = form.password
     dispatch(auth(email, password, 'login'))
   }
 
@@ -130,6 +136,14 @@ const Login = () => {
     [user]
   )
 
+  const handleClickShowPassword = () => {
+    setForm({
+      ...form,
+      showPassword: !form.showPassword,
+    });
+  };
+
+
   return (
     <section className="auth">
       <svg className="logo" />
@@ -151,20 +165,26 @@ const Login = () => {
                 name="email"
                 variant="filled"
                 type="text"
+                value={form.email}
+                onChange={e => changeHandler(e)}
                 style={{margin: 8}}
                 required
               />
             </div>
             <div>
-              <FDTextField
-                name="password"
-                type="password"
-                fullWidth
-                label="Password"
-                variant="filled"
-                style={{margin: 8}}
-                required
-              />
+            <FDPasswordField
+              fullWidth
+              label="Password"
+              placeholder="Password"
+              name="password"
+              type={form.showPassword ? 'text' : 'password'}
+              onChange={e => changeHandler(e)}
+              value={form.password}
+              style={{margin: 8}}
+              variant="filled"
+              toggleVisibility={handleClickShowPassword}
+              required
+            />
             </div>
             <ForgotPassword>
               <Link to="#">Forgot your password?</Link>
