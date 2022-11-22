@@ -1,12 +1,9 @@
 import * as React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useState } from 'react';
 import {alpha, styled} from '@material-ui/core/styles'
 
 const FDPasswordField = styled(props => (
@@ -60,19 +57,3 @@ const FDPasswordField = styled(props => (
 )
 
 export default FDPasswordField
-
-//   InputProps={
-//                 {
-//                 endAdornment: (
-//               <InputAdornment position="end">
-//                 <IconButton
-//                   aria-label="toggle password visibility"
-//                   onClick={handleClickShowPassword}
-//                   onMouseDown={handleMouseDownPassword}
-//                   edge="end"
-//                 >
-//                   {value.showPassword ? <VisibilityOff /> : <Visibility />}
-//                 </IconButton>
-//               </InputAdornment>
-//                 ),
-//             }}
