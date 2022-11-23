@@ -6,7 +6,7 @@ const FDTextField = styled(props => (
   <TextField InputProps={{disableUnderline: true}} {...props} />
 ))(({theme}) => ({
   '& label.Mui-focused': {
-    color: '#00abe1'
+    color: '#AAB1B9'
   },
   '& .MuiFormHelperText-root': {
     color: '#FFF'
