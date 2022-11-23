@@ -325,7 +325,7 @@ const Signup = () => {
             />
             <Phone>
               <FDTextField
-                label="CC"
+                label="+1"
                 name="cc"
                 placeholder="+1"
                 type="text"
@@ -339,7 +339,6 @@ const Signup = () => {
                 label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
                 name="phone"
                 placeholder="123-456-7890"
-                autoComplete="off"
                 type="tel"
                 onChange={e => changeHandler(e)}
                 value={form.phone}
