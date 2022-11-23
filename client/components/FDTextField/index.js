@@ -34,7 +34,7 @@ const FDTextField = styled(props => (
       backgroundColor: '#FFF',
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
       borderColor: `#00abe1`
-    },
+    }
   }
 }))
 

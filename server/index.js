@@ -134,7 +134,6 @@ const startListening = () => {
   const server = app.listen(PORT, () =>
     console.log(`Mixing it up on port ${PORT}`)
   )
-
 }
 
 const syncDb = () => db.sync()

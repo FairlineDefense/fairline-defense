@@ -103,7 +103,7 @@ const Login = () => {
   let [errorText, setErrorText] = useState('')
   let [form, setForm] = useState({email: '', password: '', showPassword: false})
 
-  const changeHandler = (e) => {
+  const changeHandler = e => {
     e.preventDefault()
     setForm({...form, [e.target.name]: e.target.value})
   }
@@ -139,10 +139,9 @@ const Login = () => {
   const handleClickShowPassword = () => {
     setForm({
       ...form,
-      showPassword: !form.showPassword,
-    });
-  };
-
+      showPassword: !form.showPassword
+    })
+  }
 
   return (
     <section className="auth">
@@ -172,19 +171,19 @@ const Login = () => {
               />
             </div>
             <div>
-            <FDPasswordField
-              fullWidth
-              label="Password"
-              placeholder="Password"
-              name="password"
-              type={form.showPassword ? 'text' : 'password'}
-              onChange={e => changeHandler(e)}
-              value={form.password}
-              style={{margin: 8}}
-              variant="filled"
-              toggleVisibility={handleClickShowPassword}
-              required
-            />
+              <FDPasswordField
+                fullWidth
+                label="Password"
+                placeholder="Password"
+                name="password"
+                type={form.showPassword ? 'text' : 'password'}
+                onChange={e => changeHandler(e)}
+                value={form.password}
+                style={{margin: 8}}
+                variant="filled"
+                toggleVisibility={handleClickShowPassword}
+                required
+              />
             </div>
             <ForgotPassword>
               <Link to="#">Forgot your password?</Link>

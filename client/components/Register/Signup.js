@@ -263,16 +263,16 @@ const Signup = () => {
   const handleClickShowPassword = () => {
     setForm({
       ...form,
-      showPassword: !form.showPassword,
-    });
-  };
+      showPassword: !form.showPassword
+    })
+  }
 
   const handleClickShowConfirmPassword = () => {
     setForm({
       ...form,
-      showConfirmPassword: !form.showConfirmPassword,
-    });
-  };
+      showConfirmPassword: !form.showConfirmPassword
+    })
+  }
 
   return (
     <section className="auth">
