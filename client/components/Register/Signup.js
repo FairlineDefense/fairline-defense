@@ -6,7 +6,6 @@ import {useState, useEffect} from 'react'
 import RegisterHeader from './RegisterHeader'
 import FDTextField from '../FDTextField'
 import history from '../../history'
-import white from '@material-ui/core/colors'
 import css from './register.css'
 import styled from 'styled-components'
 
@@ -274,9 +273,6 @@ const Signup = () => {
       showConfirmPassword: !form.showConfirmPassword,
     });
   };
-
- 
-
 
   return (
     <section className="auth">

@@ -34,6 +34,9 @@ const FDPasswordField = styled(props => (
     '& .MuiFormHelperText-root.Mui-error': {
       color: '#f44336'
     },
+    '& .MuiFilledInput-root.Mui-error': {
+      borderColor: `#f44336`
+    },
     '& .MuiFilledInput-root': {
       border: '1px solid #e2e2e1',
       overflow: 'hidden',

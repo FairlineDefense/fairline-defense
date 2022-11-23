@@ -14,6 +14,9 @@ const FDTextField = styled(props => (
   '& .MuiFormHelperText-root.Mui-error': {
     color: '#f44336'
   },
+  '& .MuiFilledInput-root.Mui-error': {
+    borderColor: `#f44336`
+  },
   '& .MuiFilledInput-root': {
     border: '1px solid #e2e2e1',
     overflow: 'hidden',
@@ -31,7 +34,7 @@ const FDTextField = styled(props => (
       backgroundColor: '#FFF',
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
       borderColor: `#00abe1`
-    }
+    },
   }
 }))
 
