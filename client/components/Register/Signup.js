@@ -12,11 +12,16 @@ import styled from 'styled-components'
 import AccountExistsModal from './AccountExistsModal'
 import TermsAndConditions from './TermsAndConditions'
 import Checkbox from '@material-ui/core/Checkbox'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+
+import countries from './phonecodes'
 
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../theme'
 import FDPasswordField from '../FDTextField/password'
-
+import SvgIcon from '@material-ui/core/SvgIcon'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 const H1 = styled.h1`
   font-weight: 400;
   font-size: 30px;
@@ -114,6 +119,11 @@ const ErrorText = styled.div`
   font-size: 0.75rem;
   color: #000;
 `
+const Flag = styled.img`
+width: 37px;
+height: auto;
+margin-left: 10px;
+`
 const Signup = () => {
   let user = useSelector(state => state.user)
   const dispatch = useDispatch()
@@ -129,7 +139,7 @@ const Signup = () => {
     firstName: '',
     lastName: '',
     email: '',
-    cc: '',
+    cc: '+1',
     phone: '',
     password: '',
     confirmPassword: '',
@@ -138,8 +148,13 @@ const Signup = () => {
   })
 
   const changeHandler = e => {
+    if(e.target.name === 'cc') {
+    setForm({...form, phone: e.target.value})
+
+    }
     setInvalidation({...invalidation, [e.target.name]: false})
     setForm({...form, [e.target.name]: e.target.value})
+    console.log(e.target.value)
   }
 
   const handleSubmit = evt => {
@@ -324,24 +339,33 @@ const Signup = () => {
               error={invalidation.email ? true : false}
             />
             <Phone>
-              <FDTextField
-                label="+1"
-                name="cc"
-                placeholder="+1"
-                type="text"
+            <ThemeProvider theme={theme}>
+              <Select
+                style={{
+                  backgroundColor: '#FFF',
+                  borderRadius: 4,
+                  margin: 8,
+                  width: 85,
+                }}
                 onChange={e => changeHandler(e)}
                 value={form.cc}
-                style={{margin: 8}}
-                variant="filled"
+                name='cc'
                 required
-              />
+              >
+                {countries.map(country => (
+              <MenuItem key={country.name} value={country.code}>
+                {form.cc === country.code ? <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/DE.png`} /></ListItemIcon>  : country.name + ' ' + country.code}
+              </MenuItem>
+            ))}
+          </Select>
+          </ThemeProvider>
               <FDTextField
                 label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
                 name="phone"
                 placeholder="123-456-7890"
                 type="tel"
                 onChange={e => changeHandler(e)}
-                value={form.phone}
+                value={form.cc + '' + form.phone}
                 style={{margin: 8}}
                 variant="filled"
                 error={invalidation.phone ? true : false}
