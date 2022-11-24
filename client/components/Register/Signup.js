@@ -122,7 +122,7 @@ const ErrorText = styled.div`
 const Flag = styled.img`
 width: 37px;
 height: auto;
-margin-left: 10px;
+margin-left: 5px;
 `
 const Signup = () => {
   let user = useSelector(state => state.user)
@@ -139,7 +139,8 @@ const Signup = () => {
     firstName: '',
     lastName: '',
     email: '',
-    cc: '+1',
+    dialCode: '+1',
+    countryCode: 'US',
     phone: '',
     password: '',
     confirmPassword: '',
@@ -148,13 +149,14 @@ const Signup = () => {
   })
 
   const changeHandler = e => {
-    if(e.target.name === 'cc') {
-    setForm({...form, phone: e.target.value})
-
+    if(e.target.name === 'phone'){
+      setForm({...form, [e.target.name]: e.target.value.slice(form.dialCode.length + 1)})
     }
-    setInvalidation({...invalidation, [e.target.name]: false})
-    setForm({...form, [e.target.name]: e.target.value})
-    console.log(e.target.value)
+    else {
+      setInvalidation({...invalidation, [e.target.name]: false})
+      setForm({...form, [e.target.name]: e.target.value})
+      console.log(e.target.value)
+    }
   }
 
   const handleSubmit = evt => {
@@ -348,13 +350,13 @@ const Signup = () => {
                   width: 85,
                 }}
                 onChange={e => changeHandler(e)}
-                value={form.cc}
-                name='cc'
+                value={form.dialCode}
+                name='dialCode'
                 required
               >
                 {countries.map(country => (
-              <MenuItem key={country.name} value={country.code}>
-                {form.cc === country.code ? <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/DE.png`} /></ListItemIcon>  : country.name + ' ' + country.code}
+              <MenuItem key={country.code} value={country.dial_code}>
+                {form.dialCode === country.dial_code ? <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon>  : <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} />{country.name + ' ' + country.dial_code}</ListItemIcon>}
               </MenuItem>
             ))}
           </Select>
@@ -365,7 +367,7 @@ const Signup = () => {
                 placeholder="123-456-7890"
                 type="tel"
                 onChange={e => changeHandler(e)}
-                value={form.cc + '' + form.phone}
+                value={form.dialCode + ' ' + form.phone}
                 style={{margin: 8}}
                 variant="filled"
                 error={invalidation.phone ? true : false}
