@@ -360,8 +360,8 @@ const Signup = () => {
                 required
               >
                 {countries.map(country => (
-              <MenuItem sx={{padding: 5}} key={country.code} value={country.dial_code}>
-                {form.dialCode === country.dial_code ? <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon>  : <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} />{country.name + ' ' + country.dial_code}</ListItemIcon>}
+              <MenuItem sx={{p: 5}} key={country.code} value={country.dial_code}>
+                {form.dialCode === country.dial_code ? <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon>  : <><ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon> {country.name + ' ' + country.dial_code}</>}
               </MenuItem>
             ))}
           </Select>
