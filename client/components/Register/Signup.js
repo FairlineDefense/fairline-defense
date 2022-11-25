@@ -12,11 +12,16 @@ import styled from 'styled-components'
 import AccountExistsModal from './AccountExistsModal'
 import TermsAndConditions from './TermsAndConditions'
 import Checkbox from '@material-ui/core/Checkbox'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+
+import countries from './phonecodes'
 
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../theme'
 import FDPasswordField from '../FDTextField/password'
-
+import SvgIcon from '@material-ui/core/SvgIcon'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 const H1 = styled.h1`
   font-weight: 400;
   font-size: 30px;
@@ -114,6 +119,12 @@ const ErrorText = styled.div`
   font-size: 0.75rem;
   color: #000;
 `
+const Flag = styled.img`
+width: 37px;
+height: auto;
+margin-left: 10px;
+margin-top: 4px;
+`
 const Signup = () => {
   let user = useSelector(state => state.user)
   const dispatch = useDispatch()
@@ -129,7 +140,8 @@ const Signup = () => {
     firstName: '',
     lastName: '',
     email: '',
-    cc: '',
+    dialCode: '+1',
+    countryCode: 'US',
     phone: '',
     password: '',
     confirmPassword: '',
@@ -138,8 +150,17 @@ const Signup = () => {
   })
 
   const changeHandler = e => {
-    setInvalidation({...invalidation, [e.target.name]: false})
-    setForm({...form, [e.target.name]: e.target.value})
+    if(e.target.name === 'phone'){
+      let phone = e.target.value
+      if(phone[0] !== '+'){
+        phone = form.dialCode + ' ' + phone
+      }
+      setForm({...form, phone: phone.slice(form.dialCode.length + 1)})
+    }
+    else {
+      setInvalidation({...invalidation, [e.target.name]: false})
+      setForm({...form, [e.target.name]: e.target.value})
+    }
   }
 
   const handleSubmit = evt => {
@@ -147,7 +168,11 @@ const Signup = () => {
     const firstName = form.firstName
     const lastName = form.lastName
     const email = form.email
-    const phone = form.cc + form.phone
+    const phone = form.dialCode + form.phone.split('').filter(char =>
+      {if(char !== ' ' && char !== '(' && char !== ')' && char !== '-') {
+      return char
+    }}).join('')
+    console.log(phone)
     const password = form.password
     const confirmPassword = form.confirmPassword
 
@@ -162,7 +187,7 @@ const Signup = () => {
         res = false
       }
       if (
-        !/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(
+        !/((?:\+|00)[17](?: |\-)?|(?:\+|00)[1-9]\d{0,2}(?: |\-)?|(?:\+|00)1\-\d{3}(?: |\-)?)?(0\d|\([0-9]{3}\)|[1-9]{0,3})(?:((?: |\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\-)[0-9]{3}(?: |\-)[0-9]{4})|([0-9]{7}))/.test(
           phone
         )
       ) {
@@ -324,25 +349,34 @@ const Signup = () => {
               error={invalidation.email ? true : false}
             />
             <Phone>
-              <FDTextField
-                label="CC"
-                name="cc"
-                placeholder="+1"
-                type="text"
+            <ThemeProvider theme={theme}>
+              <Select
+                disableUnderline={true}
+                style={{
+                  backgroundColor: '#FFF',
+                  borderRadius: 4,
+                  margin: 8,
+                  width: 85,
+                }}
                 onChange={e => changeHandler(e)}
-                value={form.cc}
-                style={{margin: 8}}
-                variant="filled"
+                value={form.dialCode}
+                name='dialCode'
                 required
-              />
+              >
+                {countries.map(country => (
+              <MenuItem sx={{p: 5}} key={country.code} value={country.dial_code}>
+                {form.dialCode === country.dial_code ? <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon>  : <><ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon> {country.name + ' ' + country.dial_code}</>}
+              </MenuItem>
+            ))}
+          </Select>
+          </ThemeProvider>
               <FDTextField
                 label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
                 name="phone"
-                placeholder="123-456-7890"
-                autoComplete="off"
+                placeholder="123 456 7890"
                 type="tel"
                 onChange={e => changeHandler(e)}
-                value={form.phone}
+                value={form.dialCode + ' ' + form.phone}
                 style={{margin: 8}}
                 variant="filled"
                 error={invalidation.phone ? true : false}

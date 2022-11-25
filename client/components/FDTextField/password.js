@@ -29,7 +29,7 @@ const FDPasswordField = styled(props => (
     color: '#333'
   },
   '& label.Mui-focused': {
-    color: '#00abe1'
+    color: '#AAB1B9'
   },
   '& .MuiFormHelperText-root': {
     color: '#FFF'
