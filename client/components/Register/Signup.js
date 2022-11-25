@@ -168,7 +168,11 @@ const Signup = () => {
     const firstName = form.firstName
     const lastName = form.lastName
     const email = form.email
-    const phone = form.dialCode + form.phone
+    const phone = form.dialCode + form.phone.split('').filter(char =>
+      {if(char !== ' ' && char !== '(' && char !== ')' && char !== '-') {
+      return char
+    }}).join('')
+    console.log(phone)
     const password = form.password
     const confirmPassword = form.confirmPassword
 
@@ -369,7 +373,7 @@ const Signup = () => {
               <FDTextField
                 label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
                 name="phone"
-                placeholder="123-456-7890"
+                placeholder="123 456 7890"
                 type="tel"
                 onChange={e => changeHandler(e)}
                 value={form.dialCode + ' ' + form.phone}
