@@ -172,7 +172,6 @@ const Signup = () => {
       {if(char !== ' ' && char !== '(' && char !== ')' && char !== '-') {
       return char
     }}).join('')
-    console.log(phone)
     const password = form.password
     const confirmPassword = form.confirmPassword
 
