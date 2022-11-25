@@ -122,7 +122,8 @@ const ErrorText = styled.div`
 const Flag = styled.img`
 width: 37px;
 height: auto;
-margin-left: 5px;
+margin-left: 10px;
+margin-top: 4px;
 `
 const Signup = () => {
   let user = useSelector(state => state.user)
@@ -150,12 +151,15 @@ const Signup = () => {
 
   const changeHandler = e => {
     if(e.target.name === 'phone'){
-      setForm({...form, [e.target.name]: e.target.value.slice(form.dialCode.length + 1)})
+      let phone = e.target.value
+      if(phone[0] !== '+'){
+        phone = form.dialCode + ' ' + phone
+      }
+      setForm({...form, phone: phone.slice(form.dialCode.length + 1)})
     }
     else {
       setInvalidation({...invalidation, [e.target.name]: false})
       setForm({...form, [e.target.name]: e.target.value})
-      console.log(e.target.value)
     }
   }
 
@@ -343,6 +347,7 @@ const Signup = () => {
             <Phone>
             <ThemeProvider theme={theme}>
               <Select
+                disableUnderline={true}
                 style={{
                   backgroundColor: '#FFF',
                   borderRadius: 4,
@@ -355,7 +360,7 @@ const Signup = () => {
                 required
               >
                 {countries.map(country => (
-              <MenuItem key={country.code} value={country.dial_code}>
+              <MenuItem sx={{padding: 5}} key={country.code} value={country.dial_code}>
                 {form.dialCode === country.dial_code ? <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon>  : <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} />{country.name + ' ' + country.dial_code}</ListItemIcon>}
               </MenuItem>
             ))}
