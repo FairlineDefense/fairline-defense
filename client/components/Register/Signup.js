@@ -27,6 +27,10 @@ const H1 = styled.h1`
   font-size: 30px;
   line-height: 30px;
   margin-bottom: 2rem;
+
+  @media (max-width: 800px) {
+    margin-bottom: .5rem;
+  }
 `
 const SignupWrapper = styled.div`
   height: 100%;
@@ -36,7 +40,7 @@ const SignupWrapper = styled.div`
   align-items: center;
   padding: 4rem;
   @media (max-width: 768px) {
-    padding: 4rem 0.5rem 0rem 0.5rem;
+    padding: 4rem 2rem 0rem 1.5rem;
   }
 `
 const SignupForm = styled.form`
@@ -45,6 +49,7 @@ const SignupForm = styled.form`
   justify-content: center;
   max-width: 720px;
   position: relative;
+
   @media (max-width: 768px) {
     max-width: 100%;
   }
@@ -54,6 +59,10 @@ const FinePrint = styled.div`
   flex-direction: column;
   margin: 2rem 0rem 3rem 0rem;
   width: 100%;
+
+  @media (max-width: 768px) {
+    margin: 0rem 0rem 1rem 0rem;
+  }
 `
 const TermsAndConditionsDiv = styled.div`
   display: flex;
@@ -66,6 +75,7 @@ const TermsAndConditionsDiv = styled.div`
   }
 
   @media (max-width: 768px) {
+    font-size: 12px;
     flex-wrap: wrap;
   }
 `
@@ -78,18 +88,34 @@ const InputGroup = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `
 const Phone = styled.span`
   width: 50%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  padding: 8px;
 
   div:nth-child(1) {
     width: 60px;
   }
   div:nth-child(2) {
-    flex-grow: 1;
+    width: 100%;
+    margin-left: 4px;
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
+    justify-content: space-between;
+    padding: 8px 0px 8px 8px;
+
+    div:nth-child(2) {
+      width: 100%;
+    }
   }
 `
 const SignupButtonWrapper = styled.div`
@@ -109,15 +135,6 @@ const SignupFormButton = styled.button`
   background-color: var(--blue);
   margin-bottom: 2rem;
   cursor: pointer;
-`
-const ErrorText = styled.div`
-  height: fit-content;
-  border: 1px solid red;
-  border-radius: 5px;
-  padding: 0.5rem;
-  background-color: #fff;
-  font-size: 0.75rem;
-  color: #000;
 `
 const Flag = styled.img`
 width: 37px;
@@ -336,6 +353,7 @@ const Signup = () => {
           </InputGroup>
           <InputGroup>
             <FDTextField
+              fullWidth={window.innerWidth >= 768 ? false : true}
               label={invalidation.email ? 'Invalid email address' : 'Email'}
               name="email"
               placeholder="name@email.com"
@@ -354,7 +372,6 @@ const Signup = () => {
                 style={{
                   backgroundColor: '#FFF',
                   borderRadius: 4,
-                  margin: 8,
                   width: 85,
                 }}
                 onChange={e => changeHandler(e)}
@@ -370,13 +387,13 @@ const Signup = () => {
           </Select>
           </ThemeProvider>
               <FDTextField
+               fullWidth={window.innerWidth >= 768 ? false : true}
                 label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
                 name="phone"
                 placeholder="123 456 7890"
                 type="tel"
                 onChange={e => changeHandler(e)}
                 value={form.dialCode + ' ' + form.phone}
-                style={{margin: 8}}
                 variant="filled"
                 error={invalidation.phone ? true : false}
                 required
@@ -410,6 +427,7 @@ const Signup = () => {
               value={form.confirmPassword}
               style={{margin: 8}}
               variant="filled"
+              autocomplete="current-password"
               toggleVisibility={handleClickShowConfirmPassword}
               error={invalidation.confirmPassword ? true : false}
               helperText={passwordErrorText}
