@@ -23,11 +23,12 @@ const InformationBlock = styled.div`
   header {
     font-weight: 500;
     font-size: 16px;
+    line-height: 20px;
     margin-bottom: 0.5rem;
   }
   small {
     font-weight: 200;
-    font-size: 12px;
+    font-size: 14px;
   }
 `
 const EditWrapper = styled.div`
