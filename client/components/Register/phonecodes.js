@@ -231,12 +231,12 @@ const countries =  [
     },
     {
     "name": "Christmas Island",
-    "dial_code": "+61",
+    "dial_code": "+61 ",
     "code": "CX"
     },
     {
     "name": "Cocos (Keeling) Islands",
-    "dial_code": "+61",
+    "dial_code": "+61  ",
     "code": "CC"
     },
     {
