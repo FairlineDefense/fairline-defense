@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import ReferAFriend from './ReferAFriend'
 import Card from './Card'
 import {VerifyEmail, VerifyPhone, ChoosePlan, Footer} from '../'
+import PlanStatus from './PlanStatus'
 import styled from 'styled-components'
 import {useEffect, useState} from 'react'
 import {me} from '../../store'
@@ -183,29 +184,7 @@ const UserHome = () => {
             <Button>Add a spouse</Button>
             <BlueButton>Emergency Help</BlueButton>
           </Left>
-          <Right>
-            <ProgressBarWrapper>
-              <CircularProgressbar
-                value={user.percentageLeft}
-                text={`${user.daysLeft} days remaining`}
-                styles={buildStyles({
-                  textColor: '#FFF',
-                  pathColor: '#D6AE21',
-                  trailColor: '#FFF',
-                  textSize: '7px',
-                  strokeLinecap: 'butt'
-                })}
-              />
-            </ProgressBarWrapper>
-            <TextBlock>
-              <Bold>Auto Renew</Bold>
-              <Small>{user.periodEnd}</Small>
-            </TextBlock>
-            <TextBlock>
-              <Bold>Questions</Bold>
-              <Small>Call 1 833 201 1463</Small>
-            </TextBlock>
-          </Right>
+          <PlanStatus user={user} />
         </Main>
       </Wrapper>
       <ReferAFriend />
