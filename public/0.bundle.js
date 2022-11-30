@@ -3,8 +3,8 @@
   {
     /***/ './client/components/Register/register.css':
       /*!*************************************************!*\
-  !*** ./client/components/Register/register.css ***!
-  \*************************************************/
+    !*** ./client/components/Register/register.css ***!
+    \*************************************************/
       /*! no static exports found */
       /***/ function(module, exports) {
         throw new Error(

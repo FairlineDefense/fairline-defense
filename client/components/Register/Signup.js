@@ -4,62 +4,33 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import RegisterHeader from './RegisterHeader'
-
+import FDTextField from '../FDTextField'
+import history from '../../history'
 import css from './register.css'
 import styled from 'styled-components'
-const Signup = () => {
-  let user = useSelector(state => state.user)
-  const dispatch = useDispatch()
-  let [errorText, setErrorText] = useState('')
 
-  const handleSubmit = evt => {
-    evt.preventDefault()
-    const firstName = evt.target.firstName.value
-    const lastName = evt.target.lastName.value
-    const email = evt.target.email.value
-    const phone = evt.target.phone.value
-    const password = evt.target.password.value
-    const confirmPassword = evt.target.confirmPassword.value
+import AccountExistsModal from './AccountExistsModal'
+import TermsAndConditions from './TermsAndConditions'
+import Checkbox from '@material-ui/core/Checkbox'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
 
-    function validateFields() {
-      if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-        return setErrorText('Invalid email address.')
-      }
-      if(!/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(phone)) {
-        return setErrorText('Invalid phone number.')
-      }
-      if (password !== confirmPassword) {
-        return setErrorText('Passwords do not match.')
-      }
-      if (password.length < 8) {
-        return setErrorText('Your password must be at least 8 characters')
-      }
-      if (password.search(/[a-z]/i) < 0) {
-        return setErrorText('Your password must contain at least one letter.')
-      }
-      if (password.search(/[0-9]/) < 0) {
-        return setErrorText('Your password must contain at least one digit.')
-      } else {
-        dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
-      }
-    }
-    validateFields()
-  }
+import countries from './phonecodes'
 
-  useEffect(
-    () => {
-      user.error &&
-        setErrorText(
-          'An account with that information already exists try logging in.'
-        )
-    },
-    [user]
-  )
+import {ThemeProvider} from '@material-ui/core'
+import theme from '../theme'
+import FDPasswordField from '../FDTextField/password'
+import SvgIcon from '@material-ui/core/SvgIcon'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 const H1 = styled.h1`
   font-weight: 400;
   font-size: 30px;
   line-height: 30px;
   margin-bottom: 2rem;
+
+  @media (max-width: 800px) {
+    margin-bottom: .5rem;
+  }
 `
 const SignupWrapper = styled.div`
   height: 100%;
@@ -67,51 +38,85 @@ const SignupWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5rem;
+  padding: 4rem;
   @media (max-width: 768px) {
-    padding: 4rem 1rem 0rem 1rem;
+    padding: 4rem 2rem 0rem 1.5rem;
   }
 `
 const SignupForm = styled.form`
-display: flex;
-flex-direction: column;
-justify-content: center;
-max-width: 720px;
-position: relative;
-@media (max-width: 768px) {
-  max-width: 100%;
-}
-`
-const FinePrint = styled.div`
-display: flex;
-flex-direction: column;
-padding: .5rem;
-margin-bottom: 3rem;
-width: 100%;
-`
-const PasswordFormat = styled.div`
-  margin-bottom: 2rem;
-  width: 60%;
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 720px;
+  position: relative;
+
   @media (max-width: 768px) {
-    width: 100%;
+    max-width: 100%;
   }
 `
-const TermsAndConditions = styled.div`
-display: flex;
-flex-direction: row;
-width: 100%;
-font-size: 16px;
-@media (max-width: 768px) {
-  flex-wrap: wrap;
-}
+const FinePrint = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0rem 3rem 0rem;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    margin: 0rem 0rem 1rem 0rem;
+  }
 `
-const Checkbox = styled.input`
-margin-right: .5rem;
+const TermsAndConditionsDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 16px;
+  align-items: center;
+  svg {
+    fill: white;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
 `
 const OpenFinePrint = styled.span`
-text-decoration: underline;
-cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
+`
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
+`
+const Phone = styled.span`
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 8px;
+
+  div:nth-child(1) {
+    width: 60px;
+  }
+  div:nth-child(2) {
+    width: 100%;
+    margin-left: 4px;
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
+    justify-content: space-between;
+    padding: 8px 0px 8px 8px;
+
+    div:nth-child(2) {
+      width: 100%;
+    }
+  }
 `
 const SignupButtonWrapper = styled.div`
   width: 100%;
@@ -119,109 +124,355 @@ const SignupButtonWrapper = styled.div`
   justify-content: center;
 `
 const SignupFormButton = styled.button`
-width: 340px;
-font-weight: 200;
-padding: 1rem 2rem 1rem 2rem;
-border-radius: 50px;
-outline: none;
-border: none;
-color: #fff;
-font-size: 20px;
-background-color: var(--blue);
-margin-bottom: 2rem;
-cursor: pointer;
+  width: 340px;
+  font-weight: 200;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  background-color: var(--blue);
+  margin-bottom: 2rem;
+  cursor: pointer;
 `
+const Flag = styled.img`
+width: 37px;
+height: auto;
+margin-left: 10px;
+margin-top: 4px;
+`
+const Signup = () => {
+  let user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  let [errorText, setErrorText] = useState('')
+  let [passwordErrorText, setPasswordErrorText] = useState(' ')
+  let [invalidation, setInvalidation] = useState({
+    email: false,
+    phone: false,
+    password: false,
+    confirmPassword: false
+  })
+  let [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    dialCode: '+1',
+    countryCode: 'US',
+    phone: '',
+    password: '',
+    confirmPassword: '',
+    showPassword: false,
+    showConfirmPassword: false
+  })
+
+  const changeHandler = e => {
+    if(e.target.name === 'phone'){
+      let phone = e.target.value
+      if(phone[0] !== '+'){
+        phone = form.dialCode + ' ' + phone
+      }
+      setForm({...form, phone: phone.slice(form.dialCode.length + 1)})
+    }
+    else {
+      setInvalidation({...invalidation, [e.target.name]: false})
+      setForm({...form, [e.target.name]: e.target.value})
+    }
+  }
+
+  const handleSubmit = evt => {
+    evt.preventDefault()
+    const firstName = form.firstName
+    const lastName = form.lastName
+    const email = form.email
+    const phone = form.dialCode + form.phone.split('').filter(char =>
+      {if(char !== ' ' && char !== '(' && char !== ')' && char !== '-') {
+      return char
+    }}).join('')
+    const password = form.password
+    const confirmPassword = form.confirmPassword
+
+    function validateFields() {
+      let res = true
+      if (
+        !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          email
+        )
+      ) {
+        setInvalidation({...invalidation, email: true})
+        res = false
+      }
+      if (
+        !/^[0-9()-+]+$/.test(
+          phone
+        )
+      ) {
+        setInvalidation({...invalidation, phone: true})
+        res = false
+      }
+      if (password !== confirmPassword) {
+        setInvalidation({...invalidation, confirmPassword: true})
+        setPasswordErrorText('Passwords do not match')
+        res = false
+      }
+      if (password.length < 8) {
+        setInvalidation({
+          ...invalidation,
+          password: true,
+          confirmPassword: true
+        })
+        setPasswordErrorText('Passwords must be min. 8 chars long')
+        res = false
+      }
+      if (password.search(/[a-z]/i) < 0) {
+        setInvalidation({
+          ...invalidation,
+          password: true,
+          confirmPassword: true
+        })
+        setPasswordErrorText('Passwords must contain at least one letter')
+        res = false
+      }
+      if (password.search(/[!@#\$%\^\&*\)\(+=._-]/i) < 0) {
+        setInvalidation({
+          ...invalidation,
+          password: true,
+          confirmPassword: true
+        })
+        setPasswordErrorText(
+          'Passwords must contain at least one special character'
+        )
+        res = false
+      }
+      if (password.search(/[0-9]/) < 0) {
+        setInvalidation({
+          ...invalidation,
+          password: true,
+          confirmPassword: true
+        })
+        setPasswordErrorText('Passwords must contain at least one number')
+        res = false
+      }
+      return res
+    }
+
+    if (validateFields()) {
+      dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
+    }
+  }
+
+  //Account already exists modal props:
+  const [open, setOpen] = useState(false)
+
+  const handleClick = () => {
+    setForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      cc: '',
+      phone: '',
+      password: '',
+      confirmPassword: ''
+    })
+    setOpen(false)
+    user.error = ''
+    history.push('/login')
+  }
+
+  const handleClose = value => {
+    setOpen(false)
+    setSelectedValue(value)
+  }
+
+  useEffect(
+    () => {
+      if (user.error) {
+        setOpen(true)
+      }
+    },
+    [user]
+  )
+
+  //Terms and Conditions modal props:
+  let [openTerms, setOpenTerms] = useState(false)
+
+  const viewTerms = e => {
+    e.preventDefault()
+    setOpenTerms(true)
+  }
+
+  const handleClickShowPassword = () => {
+    setForm({
+      ...form,
+      showPassword: !form.showPassword
+    })
+  }
+
+  const handleClickShowConfirmPassword = () => {
+    setForm({
+      ...form,
+      showConfirmPassword: !form.showConfirmPassword
+    })
+  }
+
   return (
     <section className="auth">
-      <svg />
-      <svg />
-      <svg />
-     <RegisterHeader />
+      <svg className="logo" />
+      <svg className="logo" />
+      <svg className="logo" />
+
+      <RegisterHeader />
       <SignupWrapper>
         <H1>Get Started</H1>
         <SignupForm onSubmit={handleSubmit} name="signup">
-          <div className="inputGroup">
-            <input
-              className="signupInput"
-              name="firstName"
-              type="text"
+          <InputGroup>
+            <FDTextField
+              fullWidth
+              label="First Name"
               placeholder="First Name"
+              name="firstName"
+              variant="filled"
+              type="text"
+              onChange={e => changeHandler(e)}
+              value={form.firstName}
+              style={{margin: 8}}
               required
             />
-            <input
-              className="signupInput"
+            <FDTextField
+              fullWidth
+              label="Last Name"
+              placeholder="Last Name"
               name="lastName"
               type="text"
-              placeholder="Last Name"
+              onChange={e => changeHandler(e)}
+              value={form.lastName}
+              style={{margin: 8}}
+              variant="filled"
               required
             />
-          </div>
-          <div className="inputGroup">
-            <input
-              className="signupInput"
+          </InputGroup>
+          <InputGroup>
+            <FDTextField
+              fullWidth={window.innerWidth >= 768 ? false : true}
+              label={invalidation.email ? 'Invalid email address' : 'Email'}
               name="email"
-              type="email"
-              placeholder="Email"
+              placeholder="name@email.com"
+              type="text"
+              onChange={e => changeHandler(e)}
+              value={form.email}
+              style={{margin: 8, flexGrow: 1}}
+              variant="filled"
               required
+              error={invalidation.email ? true : false}
             />
-            <input
-              className="signupInputCC"
-              name="countryCode"
-              type="tel"
-              placeholder="+1"
-              required
-            />
-            <input
-              className="signupInputPhone"
-              name="phone"
-              type="tel"
-              placeholder="Phone"
-              required
-            />
-          </div>
-          <div className="inputGroup">
-            <input
-              className="signupInput"
+            <Phone>
+            <ThemeProvider theme={theme}>
+              <Select
+                disableUnderline={true}
+                style={{
+                  backgroundColor: '#FFF',
+                  borderRadius: 4,
+                  width: 85,
+                }}
+                onChange={e => changeHandler(e)}
+                value={form.dialCode}
+                name='dialCode'
+                required
+              >
+                {countries.map(country => (
+              <MenuItem sx={{p: 5}} key={country.code} value={country.dial_code}>
+                {form.dialCode === country.dial_code ? <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon>  : <><ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon> {country.name + ' ' + country.dial_code}</>}
+              </MenuItem>
+            ))}
+          </Select>
+          </ThemeProvider>
+              <FDTextField
+               fullWidth={window.innerWidth >= 768 ? false : true}
+                label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
+                name="phone"
+                placeholder="123 456 7890"
+                type="tel"
+                onChange={e => changeHandler(e)}
+                value={form.dialCode + ' ' + form.phone}
+                variant="filled"
+                error={invalidation.phone ? true : false}
+                required
+              />
+            </Phone>
+          </InputGroup>
+          <InputGroup>
+            <FDPasswordField
+              fullWidth
+              label="Password"
+              placeholder="Password"
               name="password"
-              type="password"
-              placeholder="Create Password"
+              type={form.showPassword ? 'text' : 'password'}
+              onChange={e => changeHandler(e)}
+              value={form.password}
+              style={{margin: 8}}
+              variant="filled"
+              toggleVisibility={handleClickShowPassword}
+              error={invalidation.password ? true : false}
+              helperText={`Min 8 char. with at least one upper case letter, one number, and
+            one special char.: !, @, $, #, &, *.`}
               required
             />
-            <input
-              className="signupInput"
+            <FDPasswordField
+              fullWidth
+              label="Confirm Password"
+              placeholder="Confirm Password"
               name="confirmPassword"
-              type="password"
-              placeholder="Repeat Password"
+              type={form.showConfirmPassword ? 'text' : 'password'}
+              onChange={e => changeHandler(e)}
+              value={form.confirmPassword}
+              style={{margin: 8}}
+              variant="filled"
+              autocomplete="current-password"
+              toggleVisibility={handleClickShowConfirmPassword}
+              error={invalidation.confirmPassword ? true : false}
+              helperText={passwordErrorText}
               required
             />
-          </div>
+          </InputGroup>
           <FinePrint>
-            <PasswordFormat>
-              Min 8 char. with at least one upper case letter, one number, and
-              one special char.: !, @, $, #, &, *.
-            </PasswordFormat>
-            <TermsAndConditions>
-              <Checkbox type="checkbox" required></Checkbox>I agree to the&nbsp;<OpenFinePrint>Fairline Defense Terms & Conditions</OpenFinePrint>
-              </TermsAndConditions>
-            </FinePrint>
-
-          {errorText.length ? (
-            <section className="errorText">{errorText}</section>
-          ) : null}
+            <TermsAndConditionsDiv>
+              <ThemeProvider theme={theme}>
+                <Checkbox color="primary" required />I agree to the Fairline
+                Defense&nbsp;<OpenFinePrint
+                  onClick={e => {
+                    viewTerms(e)
+                  }}
+                >
+                  Terms & Conditions
+                </OpenFinePrint>
+              </ThemeProvider>
+            </TermsAndConditionsDiv>
+          </FinePrint>
 
           <SignupButtonWrapper>
             <SignupFormButton type="submit">Create an Account</SignupFormButton>
           </SignupButtonWrapper>
           <section className="signupFormBottom">
-            <div>
-              <span>Already have an account?</span>
-              <span>
-                <Link to="/login">Login</Link>
-              </span>
-            </div>
+            {errorText.length ? (
+              <ErrorText>{errorText}</ErrorText>
+            ) : (
+              <div>
+                <span>Already have an account?</span>
+                <span>
+                  <Link to="/login">Login</Link>
+                </span>
+              </div>
+            )}
           </section>
         </SignupForm>
       </SignupWrapper>
+
+      <AccountExistsModal
+        open={open}
+        handleClose={handleClose}
+        handleClick={handleClick}
+      />
+      <TermsAndConditions openTerms={openTerms} setOpenTerms={setOpenTerms} />
     </section>
   )
 }

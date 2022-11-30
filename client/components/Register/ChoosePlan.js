@@ -92,21 +92,15 @@ const ChoosePlan = props => {
     setPriceId(e.currentTarget.value)
   }
 
-
   if (priceId !== 'none') {
-    return (
-      <Payment
-        priceId={priceId}
-        clickHandler={clickHandler}
-      />
-    )
+    return <Payment priceId={priceId} clickHandler={clickHandler} />
   }
 
   return (
     <div className="auth">
-      <svg />
-      <svg />
-      <svg />
+      <svg className="logo" />
+      <svg className="logo" />
+      <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
         <H1>Congratulations!</H1>

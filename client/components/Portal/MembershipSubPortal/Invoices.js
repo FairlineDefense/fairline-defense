@@ -1,67 +1,76 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useState, useEffect } from 'react'
+import {useState, useEffect} from 'react'
 const Wrapper = styled.div`
-width: 100%;
-min-height: 100%;
-flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  flex-direction: column;
 
-div:nth-child(even) {
-    background-color: #E8F3F9;
-}
+  div:nth-child(even) {
+    background-color: #e8f3f9;
+  }
 `
 const Line = styled.div`
-width: 100%;
-display: flex;
-justify-content: space-between;
-padding: .5rem;
-flex-wrap: no-wrap;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  flex-wrap: no-wrap;
 `
 const Date = styled.span`
-width: fit-content;
-display: inline-block;
-color: var(--blueblack);
+  width: fit-content;
+  display: inline-block;
+  color: var(--blueblack);
 `
 const Charge = styled.span`
-width: fit-content;
-display: inline-block;
-color: var(--blueblack);
+  width: fit-content;
+  display: inline-block;
+  color: var(--blueblack);
+  margin-left: 8rem;
 `
 const PDF = styled.span`
-width: fit-content;
-display: inline-block;
+  width: fit-content;
+  display: inline-block;
 
-a {
+  a {
     text-transform: uppercase;
     color: var(--cyan);
-    font-weight: 600;
-}
+    font-weight: 500;
+  }
 `
 export default function Invoices() {
-    let [invoices, setInvoices] = useState([{}])
+  let [invoices, setInvoices] = useState([{}])
 
-    const getInvoices = async () => {
-        const res = await fetch('/payment/invoices', {
-            method: 'GET',
-            headers: {'Content-type': 'application/json'}
-        })
-        const body = await res.json()
-        setInvoices(body)
-    }
+  const getInvoices = async () => {
+    const res = await fetch('/payment/invoices', {
+      method: 'GET',
+      headers: {'Content-type': 'application/json'}
+    })
+    const body = await res.json()
+    setInvoices(body)
+  }
 
-    useEffect(()=> {
-        getInvoices()
-    }, [])
+  useEffect(() => {
+    getInvoices()
+  }, [])
 
-    console.log(invoices)
-    return (
-        <Wrapper>
-            {invoices && invoices.map((line) =>
-            <Line key={line.id}>
-            <Date>{line.date}</Date>
-            <Charge>{line.amount}</Charge>
-            <PDF><a href={line.pdf} target="_blank">View PDF</a></PDF>
-            </Line>)}
-        </Wrapper>
-    )
+  console.log(invoices)
+  return (
+    <Wrapper>
+      {invoices &&
+        invoices.map(line => (
+          <Line key={line.id}>
+            <span>
+              <Date>{line.date}</Date>
+              <Charge>{line.amount}</Charge>
+            </span>
+            <PDF>
+              <a href={line.pdf} target="_blank">
+                View PDF
+              </a>
+            </PDF>
+          </Line>
+        ))}
+    </Wrapper>
+  )
 }
