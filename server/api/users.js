@@ -29,7 +29,11 @@ router.put('/:id', async (req, res, next) => {
     city,
     state,
     zipCode,
-    password
+    password,
+    emailReminders,
+    emailNews,
+    emailInsider,
+    emailPromotions
   } = req.body
   try {
     await User.update(
@@ -42,7 +46,11 @@ router.put('/:id', async (req, res, next) => {
         line2: line2,
         city: city,
         state: state,
-        zipCode: zipCode
+        zipCode: zipCode,
+        emailReminders: emailReminders,
+        emailNews: emailNews,
+        emailInsider: emailInsider,
+        emailPromotions: emailPromotions
         // password: password Should have its own route
       },
       {
