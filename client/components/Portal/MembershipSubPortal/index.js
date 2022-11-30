@@ -38,7 +38,7 @@ export default function MembershipSubPortal() {
       case 'Invoices':
         return <Invoices user={user} />
       case 'EmailPreferences':
-        return <EmailPreferences user={user} />
+        return <EmailPreferences user={user} setState={setState} />
       case 'AddASpouse':
         return <AddASpouse user={user} setState={setState} />
       case 'EditSpouse':

@@ -19,21 +19,27 @@ const Wrapper = styled.div`
 const Header = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
-  padding-bottom: 1rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid #aab1b9;
+`
+const InformationBlock = styled.div`
+display: flex;
+flex-direction: column;
 
-  heading {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: var(--darkblue);
-  }
-  small {
-    font-weight: 200;
-    font-size: 16px;
-    color: var(--darkblue);
-  }
+heading {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--darkblue);
+}
+small {
+  font-weight: 200;
+  font-size: 16px;
+  color: var(--darkblue);
+}
 `
 const Text = styled.div`
   width: 40%;
@@ -69,8 +75,16 @@ const Button = styled.button`
   font-weight: 200;
   cursor: pointer;
 `
+const Link = styled.span`
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--cyan);
+    cursor: pointer;
+    margin-right: 4rem;
+`
 export default function EmailPreferences(props) {
-  const {user} = props
+  const {user, setState} = props
   const dispatch = useDispatch()
 
   let [form, setForm] = useState({
@@ -95,8 +109,11 @@ export default function EmailPreferences(props) {
     <>
     <ThemeProvider theme={theme}>
       <Header>
+        <InformationBlock>
         <heading>Email</heading>
         <small>{`${user.email}`}</small>
+        </InformationBlock>
+        <Link onClick={() => setState('EditPersonalInformation')}>Update</Link>
       </Header>
       <Wrapper>
         <Text>
