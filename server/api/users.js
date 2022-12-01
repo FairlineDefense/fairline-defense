@@ -36,6 +36,32 @@ router.put('/:id', async (req, res, next) => {
     emailPromotions
   } = req.body
   try {
+    if(password) {
+      await User.update(
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phone: phone,
+          streetAddress: streetAddress,
+          line2: line2,
+          city: city,
+          state: state,
+          zipCode: zipCode,
+          emailReminders: emailReminders,
+          emailNews: emailNews,
+          emailInsider: emailInsider,
+          emailPromotions: emailPromotions,
+          password: password,
+        },
+        {
+          where: {id: req.params.id},
+          individualHooks: true,
+        },
+      )
+      res.status(200).send()
+    }
+    else {
     await User.update(
       {
         firstName: firstName,
@@ -50,14 +76,15 @@ router.put('/:id', async (req, res, next) => {
         emailReminders: emailReminders,
         emailNews: emailNews,
         emailInsider: emailInsider,
-        emailPromotions: emailPromotions
-        // password: password Should have its own route
+        emailPromotions: emailPromotions,
       },
       {
-        where: {id: req.params.id}
-      }
+        where: {id: req.params.id},
+        individualHooks: true,
+      },
     )
     res.status(200).send()
+    }
   } catch (err) {
     console.log(err)
     next(err)
