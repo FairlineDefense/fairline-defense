@@ -368,6 +368,7 @@ export default function EditPersonalInformation(props) {
             <Label htmlFor="repeatPassword">Repeat New Password</Label>
             <Input
               type="password"
+              autoComplete="none"
               placeholder="Repeat Password"
               name="repeatNewPassword"
               value={form.repeatNewPassword}
