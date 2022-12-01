@@ -359,6 +359,7 @@ export default function EditPersonalInformation(props) {
             <Label htmlFor="password">New Password</Label>
             <Input
               type="password"
+              autoComplete="off"
               placeholder="Password"
               name="password"
               value={form.password}
