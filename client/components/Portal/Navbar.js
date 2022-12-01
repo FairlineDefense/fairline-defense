@@ -13,8 +13,8 @@ import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
 import Logout from '@mui/icons-material/Logout'
 import history from '../../history'
-import { ThemeProvider } from '@material-ui/core'
-import theme  from '../theme'
+import {ThemeProvider} from '@material-ui/core'
+import theme from '../theme'
 
 const Nav = styled.nav`
   display: flex;
@@ -53,7 +53,7 @@ const DesktopMenu = styled.div`
   justify-content: flex-start;
   width: 33%;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     display: none;
   }
 `
@@ -63,11 +63,11 @@ const Logo = styled.img`
   cursor: pointer;
 `
 const MobileMenu = styled.ul`
-display: none;
+  display: none;
 
-@media(max-width: 800px) {
-  display: block;
-}
+  @media (max-width: 800px) {
+    display: block;
+  }
 `
 
 const Navbar = () => {
@@ -104,81 +104,91 @@ const Navbar = () => {
       </Wrapper>
       <Wrapper>
         <ThemeProvider theme={theme}>
-        <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
-          <Tooltip title="Account settings">
-            <IconButton
-              onClick={handleClick}
-              size="small"
-              sx={{ml: 2}}
-              aria-controls={open ? 'account-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-            >
-              <Avatar sx={{width: 36, height: 36}}>{user.firstName[0]}</Avatar>
-            </IconButton>
-          </Tooltip>
-        </Box>
+          <Box
+            sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}
+          >
+            <Tooltip title="Account settings">
+              <IconButton
+                onClick={handleClick}
+                size="small"
+                sx={{ml: 2}}
+                aria-controls={open ? 'account-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+              >
+                <Avatar sx={{width: 36, height: 36}}>
+                  {user.firstName[0]}
+                </Avatar>
+              </IconButton>
+            </Tooltip>
+          </Box>
 
-        <Menu
-          anchorEl={anchorEl}
-          id="account-menu"
-          open={open}
-          onClose={handleClose}
-          onClick={handleClose}
-          PaperProps={{
-            elevation: 0,
-            sx: {
-              overflow: 'visible',
-              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-              mt: 1.5,
-              '& .MuiAvatar-root': {
-                width: 32,
-                height: 32,
-                ml: -0.5,
-                mr: 1
-              },
-              '&:before': {
-                content: '""',
-                display: 'block',
-                position: 'absolute',
-                top: 0,
-                right: 14,
-                width: 10,
-                height: 10,
-                bgcolor: 'background.paper',
-                transform: 'translateY(-50%) rotate(45deg)',
-                zIndex: 0
+          <Menu
+            anchorEl={anchorEl}
+            id="account-menu"
+            open={open}
+            onClose={handleClose}
+            onClick={handleClose}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                overflow: 'visible',
+                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                mt: 1.5,
+                '& .MuiAvatar-root': {
+                  width: 32,
+                  height: 32,
+                  ml: -0.5,
+                  mr: 1
+                },
+                '&:before': {
+                  content: '""',
+                  display: 'block',
+                  position: 'absolute',
+                  top: 0,
+                  right: 14,
+                  width: 10,
+                  height: 10,
+                  bgcolor: 'background.paper',
+                  transform: 'translateY(-50%) rotate(45deg)',
+                  zIndex: 0
+                }
               }
-            }
-          }}
-          transformOrigin={{horizontal: 'right', vertical: 'top'}}
-          anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-        >
-          <MenuItem>
-            <Avatar />
-            {user.firstName + ' ' + user.lastName}
-          </MenuItem>
-          <MobileMenu className="mobileMenu">
-            <li>
-              <MenuItem onClick={()=>history.push('/membership')}>Membership</MenuItem>
-            </li>
-            <li>
-            <MenuItem onClick={()=>history.push('/home')}>Account</MenuItem>
-            </li>
-            <li>
-            <MenuItem onClick={()=>history.push('/benefits')}>Benefits</MenuItem>
-            </li>
-            <li>
-            <MenuItem onClick={()=>history.push('/feed')}>Feed</MenuItem>
-            </li>
-          </MobileMenu>
-          <MenuItem onClick={handleLogout}>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
-          </MenuItem>
-        </Menu>
+            }}
+            transformOrigin={{horizontal: 'right', vertical: 'top'}}
+            anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+          >
+            <MenuItem>
+              <Avatar />
+              {user.firstName + ' ' + user.lastName}
+            </MenuItem>
+            <MobileMenu className="mobileMenu">
+              <li>
+                <MenuItem onClick={() => history.push('/membership')}>
+                  Membership
+                </MenuItem>
+              </li>
+              <li>
+                <MenuItem onClick={() => history.push('/home')}>
+                  Account
+                </MenuItem>
+              </li>
+              <li>
+                <MenuItem onClick={() => history.push('/benefits')}>
+                  Benefits
+                </MenuItem>
+              </li>
+              <li>
+                <MenuItem onClick={() => history.push('/feed')}>Feed</MenuItem>
+              </li>
+            </MobileMenu>
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </Menu>
         </ThemeProvider>
       </Wrapper>
     </Nav>
