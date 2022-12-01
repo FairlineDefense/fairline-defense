@@ -8,7 +8,7 @@ import PlanStatus from './PlanStatus'
 import styled from 'styled-components'
 import {useEffect, useState} from 'react'
 import {me} from '../../store'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../theme'
@@ -17,7 +17,7 @@ import RegisterHeader from '../Register/RegisterHeader'
 const Wrapper = styled.div`
   width: 100vw;
   padding: 2rem;
-  background: linear-gradient(102.57deg, #2A4C78 0%, #0b182d 100%);
+  background: linear-gradient(102.57deg, #2a4c78 0%, #0b182d 100%);
 `
 const CenteredWrapper = styled.div`
   width: 100%;
@@ -142,7 +142,9 @@ const UserHome = () => {
             <H1>Hi, {user.firstName}</H1>
             <MemberID>#{user.membershipNumber}</MemberID>
             <Button>Membership Card</Button>
-            <Link to='/membership/addaspouse'><Button>Add a spouse</Button></Link>
+            <Link to="/membership/addaspouse">
+              <Button>Add a spouse</Button>
+            </Link>
             <BlueButton>Emergency Help</BlueButton>
           </Left>
           <PlanStatus user={user} />

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {useState} from 'react'
-import { useDispatch } from 'react-redux'
+import {useDispatch} from 'react-redux'
 import Checkbox from '@material-ui/core/Checkbox'
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../../theme'
@@ -26,20 +26,20 @@ const Header = styled.div`
   border-bottom: 1px solid #aab1b9;
 `
 const InformationBlock = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-heading {
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  color: var(--darkblue);
-}
-small {
-  font-weight: 200;
-  font-size: 16px;
-  color: var(--darkblue);
-}
+  heading {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--darkblue);
+  }
+  small {
+    font-weight: 200;
+    font-size: 16px;
+    color: var(--darkblue);
+  }
 `
 const Text = styled.div`
   width: 40%;
@@ -76,12 +76,12 @@ const Button = styled.button`
   cursor: pointer;
 `
 const Link = styled.span`
-    text-transform: uppercase;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--cyan);
-    cursor: pointer;
-    margin-right: 4rem;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--cyan);
+  cursor: pointer;
+  margin-right: 4rem;
 `
 export default function EmailPreferences(props) {
   const {user, setState} = props
@@ -95,72 +95,80 @@ export default function EmailPreferences(props) {
     id: user.id
   })
 
-  const changeHandler = (e) => {
+  const changeHandler = e => {
     e.preventDefault()
     setForm({...form, [e.target.name]: !form[e.target.name]})
   }
 
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault()
     dispatch(update(form))
   }
 
   return (
     <>
-    <ThemeProvider theme={theme}>
-      <Header>
-        <InformationBlock>
-        <heading>Email</heading>
-        <small>{`${user.email}`}</small>
-        </InformationBlock>
-        <Link onClick={() => setState('EditPersonalInformation')}>Update</Link>
-      </Header>
-      <Wrapper>
-        <Text>
-        To select your email preferences or unsubscribe from all publications, please verify your email address above and update your preferences below:
-        </Text>
-        <Preferences>
-          <ul>
-            <li>
-              <Checkbox
-                color='primary'
-                onChange={(e) => changeHandler(e)}
-                name='emailReminders'
-                checked={form.emailReminders}
-              />
-              Membership & Subscription Reminders
-            </li>
-            <li>
-              <Checkbox
-                color='primary'
-                onChange={(e) => changeHandler(e)}
-                 name='emailInsider'
-                 checked={form.emailInsider} />
-              Insider Deals & Self-Defense Products
-            </li>
-            <li>
-              <Checkbox
-                color='primary'
-                onChange={(e) => changeHandler(e)}
-                name='emailNews'
-                checked={form.emailNews} />
-              News Feed
-            </li>
-            <li>
-              <Checkbox
-                color='primary'
-                onChange={(e) => changeHandler(e)}
-                name='emailPromotions'
-                checked={form.emailPromotions}
-              />
-              Promotions
-            </li>
-            <li>
-            <Button type="submit" onClick={(e) => submitHandler(e)}>Save Changes</Button>
-            </li>
-          </ul>
-        </Preferences>
-      </Wrapper>
+      <ThemeProvider theme={theme}>
+        <Header>
+          <InformationBlock>
+            <heading>Email</heading>
+            <small>{`${user.email}`}</small>
+          </InformationBlock>
+          <Link onClick={() => setState('EditPersonalInformation')}>
+            Update
+          </Link>
+        </Header>
+        <Wrapper>
+          <Text>
+            To select your email preferences or unsubscribe from all
+            publications, please verify your email address above and update your
+            preferences below:
+          </Text>
+          <Preferences>
+            <ul>
+              <li>
+                <Checkbox
+                  color="primary"
+                  onChange={e => changeHandler(e)}
+                  name="emailReminders"
+                  checked={form.emailReminders}
+                />
+                Membership & Subscription Reminders
+              </li>
+              <li>
+                <Checkbox
+                  color="primary"
+                  onChange={e => changeHandler(e)}
+                  name="emailInsider"
+                  checked={form.emailInsider}
+                />
+                Insider Deals & Self-Defense Products
+              </li>
+              <li>
+                <Checkbox
+                  color="primary"
+                  onChange={e => changeHandler(e)}
+                  name="emailNews"
+                  checked={form.emailNews}
+                />
+                News Feed
+              </li>
+              <li>
+                <Checkbox
+                  color="primary"
+                  onChange={e => changeHandler(e)}
+                  name="emailPromotions"
+                  checked={form.emailPromotions}
+                />
+                Promotions
+              </li>
+              <li>
+                <Button type="submit" onClick={e => submitHandler(e)}>
+                  Save Changes
+                </Button>
+              </li>
+            </ul>
+          </Preferences>
+        </Wrapper>
       </ThemeProvider>
     </>
   )
