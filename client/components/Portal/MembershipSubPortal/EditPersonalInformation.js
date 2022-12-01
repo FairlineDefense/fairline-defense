@@ -117,8 +117,9 @@ export default function EditPersonalInformation(props) {
     city: user.city,
     state: user.state,
     zipCode: user.zipCode,
-    password: user.password || '',
-    repeatPassword: ''
+    //New password:
+    password: '',
+    repeatNewPassword: ''
   })
   let [errorText, setErrorText] = useState('')
 
@@ -153,21 +154,28 @@ export default function EditPersonalInformation(props) {
       }
       if (form.state === 'state' || form.state === '') {
         return setErrorText('Invalid state.')
-      } else {
-        //Not operational:
-        // if (password !== confirmPassword) {
-        //   return setErrorText('Passwords do not match.')
-        // }
-        // if (password.length < 8) {
-        //   return setErrorText('Your password must be at least 8 characters')
-        // }
-        // if (password.search(/[a-z]/i) < 0) {
-        //   return setErrorText('Your password must contain at least one letter.')
-        // }
-        // if (password.search(/[0-9]/) < 0) {
-        //   return setErrorText('Your password must contain at least one digit.')
-        // }
+      } 
+      if(form.password.length || form.repeatNewPassword.length) {
+        if (form.password !== form.repeatNewPassword) {
+          return setErrorText('Passwords do not match.')
+        }
+        //if password is changed
         dispatch(update(form))
+      }
+      else {
+        //if password is not changed, don't send it
+        dispatch(update({
+          id: form.id,
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          phone: form.phone,
+          streetAddress: form.streetAddress,
+          line2: form.line2,
+          city: form.city,
+          state: form.state,
+          zipCode: form.zipCode
+        }))
       }
     }
     validateFields()
@@ -347,8 +355,8 @@ export default function EditPersonalInformation(props) {
             <Input
               type="password"
               placeholder="Repeat Password"
-              name="repeatPassword"
-              value={form.repeatPassword}
+              name="repeatNewPassword"
+              value={form.repeatNewPassword}
               onChange={e => changeHandler(e)}
             />
           </span>
