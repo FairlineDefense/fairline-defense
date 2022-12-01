@@ -8,17 +8,11 @@ import PlanStatus from './PlanStatus'
 import styled from 'styled-components'
 import {useEffect, useState} from 'react'
 import {me} from '../../store'
-import {
-  CircularProgressbar,
-  CircularProgressbarWithChildren,
-  buildStyles
-} from 'react-circular-progressbar'
-
+import { Link } from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../theme'
 
-import 'react-circular-progressbar/dist/styles.css'
 import RegisterHeader from '../Register/RegisterHeader'
 const Wrapper = styled.div`
   width: 100vw;
@@ -59,18 +53,6 @@ const Left = styled.div`
     width: 100%;
   }
 `
-const Right = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 35%;
-  justify-content: flex-start;
-
-  @media (max-width: 768px) {
-    justify-content: center;
-    width: 100%;
-    height: 70px;
-  }
-`
 const H1 = styled.h1`
   font-size: 42px;
   font-weight: 500;
@@ -107,27 +89,6 @@ const BlueButton = styled.button`
   font-size: 18px;
   font-weight: 200;
   cursor: pointer;
-`
-const TextBlock = styled.div`
-  display: flex;
-  width: 220px;
-  flex-direction: column;
-  margin-bottom: 0.5rem;
-`
-const Bold = styled.span`
-  font-weight: 500;
-`
-const Small = styled.span`
-  font-weight: 200;
-`
-const ProgressBarWrapper = styled.div`
-  width: 225px;
-  height: 225px;
-  margin-bottom: 2rem;
-  @media (max-width: 768px) {
-    height: 300px;
-    width: 300px;
-  }
 `
 const UserHome = () => {
   const user = useSelector(state => state.user)
@@ -181,7 +142,7 @@ const UserHome = () => {
             <H1>Hi, {user.firstName}</H1>
             <MemberID>#{user.membershipNumber}</MemberID>
             <Button>Membership Card</Button>
-            <Button>Add a spouse</Button>
+            <Link to='/membership/addaspouse'><Button>Add a spouse</Button></Link>
             <BlueButton>Emergency Help</BlueButton>
           </Left>
           <PlanStatus user={user} />

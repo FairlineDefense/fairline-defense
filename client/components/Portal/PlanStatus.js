@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 
 import styled from 'styled-components'
 import {useEffect, useState} from 'react'
-
+import { Link } from 'react-router-dom'
 import {
   CircularProgressbar,
   buildStyles
@@ -95,7 +95,7 @@ export default function PlanStatus(props) {
         </ProgressBarWrapper>
         <WarningBlock>
           <bold>Please update your payment method</bold>
-          <Button>Go to billing</Button>
+          <Link to='/membership'><Button>Go to billing</Button></Link>
         </WarningBlock>
         <TextBlock>
           <bold>Questions</bold>

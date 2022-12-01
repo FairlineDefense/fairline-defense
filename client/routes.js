@@ -15,7 +15,8 @@ import {
   PaymentStatus,
   VerifyEmail,
   VerifyPhone,
-  SecurityHome
+  SecurityHome,
+  MembershipAndBilling
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'

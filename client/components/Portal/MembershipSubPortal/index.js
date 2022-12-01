@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import MembershipNav from './MembershipNav'
 import PersonalInformation from './PersonalInformation'
@@ -23,10 +23,18 @@ const WhiteBackground = styled.div`
     padding: 1rem;
   }
 `
-export default function MembershipSubPortal() {
+export default function MembershipSubPortal(props) {
   const user = useSelector(state => state.user)
   let [state, setState] = useState('')
 
+  useEffect(()=>{
+    if(window.location.pathname.split('/')[2] === 'membershipandbilling') {
+      setState('MembershipAndBilling')
+    }
+    if(window.location.pathname.split('/')[2] === 'addaspouse') {
+      setState('AddASpouse')
+    }
+  },[])
   const switcher = () => {
     switch (state) {
       case 'PersonalInformation':
