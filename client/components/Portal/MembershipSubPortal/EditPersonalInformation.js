@@ -156,7 +156,7 @@ export default function EditPersonalInformation(props) {
         return setErrorText('Invalid state.')
       }
       //if password is changed
-      if(form.password.length || form.repeatNewPassword.length) {
+      if (form.password.length || form.repeatNewPassword.length) {
         if (form.password !== form.repeatNewPassword) {
           return setErrorText('Passwords do not match.')
         }
@@ -175,21 +175,22 @@ export default function EditPersonalInformation(props) {
           return setErrorText('Passwords must contain at least one number')
         }
         dispatch(update(form))
-      }
-      //if password is not changed, don't send it
-      else {
-        dispatch(update({
-          id: form.id,
-          firstName: form.firstName,
-          lastName: form.lastName,
-          email: form.email,
-          phone: form.phone,
-          streetAddress: form.streetAddress,
-          line2: form.line2,
-          city: form.city,
-          state: form.state,
-          zipCode: form.zipCode
-        }))
+      } else {
+        //if password is not changed, don't send it
+        dispatch(
+          update({
+            id: form.id,
+            firstName: form.firstName,
+            lastName: form.lastName,
+            email: form.email,
+            phone: form.phone,
+            streetAddress: form.streetAddress,
+            line2: form.line2,
+            city: form.city,
+            state: form.state,
+            zipCode: form.zipCode
+          })
+        )
       }
     }
     validateFields()
@@ -368,6 +369,7 @@ export default function EditPersonalInformation(props) {
             <Label htmlFor="repeatPassword">Repeat New Password</Label>
             <Input
               type="password"
+              autoComplete="none"
               placeholder="Repeat Password"
               name="repeatNewPassword"
               value={form.repeatNewPassword}

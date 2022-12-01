@@ -125,9 +125,13 @@ export default function MembershipAndBilling(props) {
           </InformationBlock>
           <InformationBlock>
             <header>Credit Card Billed for Membership</header>
-            {user.brand ? <small>
-             {user.brand} ending in {user.last4}
-            </small> : <small>Please update payment information.</small>}
+            {user.brand ? (
+              <small>
+                {user.brand} ending in {user.last4}
+              </small>
+            ) : (
+              <small>Please update payment information.</small>
+            )}
             <Link>
               <a href={portalUrl}>Update Card</a>
             </Link>

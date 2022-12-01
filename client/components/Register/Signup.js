@@ -29,7 +29,7 @@ const H1 = styled.h1`
   margin-bottom: 2rem;
 
   @media (max-width: 800px) {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 `
 const SignupWrapper = styled.div`
@@ -137,10 +137,10 @@ const SignupFormButton = styled.button`
   cursor: pointer;
 `
 const Flag = styled.img`
-width: 37px;
-height: auto;
-margin-left: 10px;
-margin-top: 4px;
+  width: 37px;
+  height: auto;
+  margin-left: 10px;
+  margin-top: 4px;
 `
 const Signup = () => {
   let user = useSelector(state => state.user)
@@ -167,14 +167,13 @@ const Signup = () => {
   })
 
   const changeHandler = e => {
-    if(e.target.name === 'phone'){
+    if (e.target.name === 'phone') {
       let phone = e.target.value
-      if(phone[0] !== '+'){
+      if (phone[0] !== '+') {
         phone = form.dialCode + ' ' + phone
       }
       setForm({...form, phone: phone.slice(form.dialCode.length + 1)})
-    }
-    else {
+    } else {
       setInvalidation({...invalidation, [e.target.name]: false})
       setForm({...form, [e.target.name]: e.target.value})
     }
@@ -185,10 +184,16 @@ const Signup = () => {
     const firstName = form.firstName
     const lastName = form.lastName
     const email = form.email
-    const phone = form.dialCode + form.phone.split('').filter(char =>
-      {if(char !== ' ' && char !== '(' && char !== ')' && char !== '-') {
-      return char
-    }}).join('')
+    const phone =
+      form.dialCode +
+      form.phone
+        .split('')
+        .filter(char => {
+          if (char !== ' ' && char !== '(' && char !== ')' && char !== '-') {
+            return char
+          }
+        })
+        .join('')
     const password = form.password
     const confirmPassword = form.confirmPassword
 
@@ -202,11 +207,7 @@ const Signup = () => {
         setInvalidation({...invalidation, email: true})
         res = false
       }
-      if (
-        !/^[0-9()-+]+$/.test(
-          phone
-        )
-      ) {
+      if (!/^[0-9()-+]+$/.test(phone)) {
         setInvalidation({...invalidation, phone: true})
         res = false
       }
@@ -366,28 +367,51 @@ const Signup = () => {
               error={invalidation.email ? true : false}
             />
             <Phone>
-            <ThemeProvider theme={theme}>
-              <Select
-                disableUnderline={true}
-                style={{
-                  backgroundColor: '#FFF',
-                  borderRadius: 4,
-                  width: 85,
-                }}
-                onChange={e => changeHandler(e)}
-                value={form.dialCode}
-                name='dialCode'
-                required
-              >
-                {countries.map(country => (
-              <MenuItem sx={{p: 5}} key={country.code} value={country.dial_code}>
-                {form.dialCode === country.dial_code ? <ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon>  : <><ListItemIcon><Flag src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`} /></ListItemIcon> {country.name + ' ' + country.dial_code}</>}
-              </MenuItem>
-            ))}
-          </Select>
-          </ThemeProvider>
+              <ThemeProvider theme={theme}>
+                <Select
+                  disableUnderline={true}
+                  style={{
+                    backgroundColor: '#FFF',
+                    borderRadius: 4,
+                    width: 85
+                  }}
+                  onChange={e => changeHandler(e)}
+                  value={form.dialCode}
+                  name="dialCode"
+                  required
+                >
+                  {countries.map(country => (
+                    <MenuItem
+                      sx={{p: 5}}
+                      key={country.code}
+                      value={country.dial_code}
+                    >
+                      {form.dialCode === country.dial_code ? (
+                        <ListItemIcon>
+                          <Flag
+                            src={`https://www.countryflagicons.com/SHINY/64/${
+                              country.code
+                            }.png`}
+                          />
+                        </ListItemIcon>
+                      ) : (
+                        <>
+                          <ListItemIcon>
+                            <Flag
+                              src={`https://www.countryflagicons.com/SHINY/64/${
+                                country.code
+                              }.png`}
+                            />
+                          </ListItemIcon>{' '}
+                          {country.name + ' ' + country.dial_code}
+                        </>
+                      )}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </ThemeProvider>
               <FDTextField
-               fullWidth={window.innerWidth >= 768 ? false : true}
+                fullWidth={window.innerWidth >= 768 ? false : true}
                 label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
                 name="phone"
                 placeholder="123 456 7890"
