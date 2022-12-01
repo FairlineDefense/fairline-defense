@@ -154,16 +154,30 @@ export default function EditPersonalInformation(props) {
       }
       if (form.state === 'state' || form.state === '') {
         return setErrorText('Invalid state.')
-      } 
+      }
+      //if password is changed
       if(form.password.length || form.repeatNewPassword.length) {
         if (form.password !== form.repeatNewPassword) {
           return setErrorText('Passwords do not match.')
         }
-        //if password is changed
+        if (form.password.length < 8) {
+          return setErrorText('Passwords must be min. 8 chars long')
+        }
+        if (form.password.search(/[a-z]/i) < 0) {
+          return setErrorText('Passwords must contain at least one letter')
+        }
+        if (form.password.search(/[!@#\$%\^\&*\)\(+=._-]/i) < 0) {
+          return setErrorText(
+            'Passwords must contain at least one special character'
+          )
+        }
+        if (form.password.search(/[0-9]/) < 0) {
+          return setErrorText('Passwords must contain at least one number')
+        }
         dispatch(update(form))
       }
+      //if password is not changed, don't send it
       else {
-        //if password is not changed, don't send it
         dispatch(update({
           id: form.id,
           firstName: form.firstName,
@@ -341,7 +355,7 @@ export default function EditPersonalInformation(props) {
         </InputGroup>
         <InputGroup>
           <span>
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">New Password</Label>
             <Input
               type="password"
               placeholder="Password"
