@@ -95,7 +95,7 @@ export default function PlanStatus(props) {
         </ProgressBarWrapper>
         <WarningBlock>
           <bold>Please update your payment method</bold>
-          <Link to='/membership'><Button>Go to billing</Button></Link>
+          <Link to='/membership/membershipandbilling'><Button>Go to billing</Button></Link>
         </WarningBlock>
         <TextBlock>
           <bold>Questions</bold>
