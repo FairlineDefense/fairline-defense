@@ -48,6 +48,9 @@ passport.deserializeUser(async (id, done) => {
             if (orders[i].status === 'cancelled') {
               obj.status = 'cancelled'
             }
+            if (orders[i].status === 'incomplete') {
+              obj.status = 'actionRequired'
+            }
 
             obj.planActive = true
             let daysTotal = Math.floor((endDate - startDate) / 86400)
