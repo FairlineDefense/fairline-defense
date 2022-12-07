@@ -145,7 +145,7 @@ const Navbar = () => {
   return (
     <Wrapper display={display}>
       <FairlineLogo>
-        <img src="./images/fdlogo.png" />
+        <a href="/"><img src="./images/fdlogo.png" /></a>
       </FairlineLogo>
       <Nav>
         <HamburgerMenu
