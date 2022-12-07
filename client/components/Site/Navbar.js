@@ -159,13 +159,13 @@ const Navbar = () => {
           <ul>
             {/* The navbar will show these links after you log in */}
             <li>
-              <Link to="/howitworks">How It Works</Link>
+              <a href="#howitworks" onClick={() => setDisplay('none')}>How It Works</a>
             </li>
             <li>
-              <Link to="/coverages">Coverages</Link>
+              <a href="#coverages" onClick={() => setDisplay('none')}>Coverages</a>
             </li>
             <li>
-              <Link to="/testimonials">Testimonials</Link>
+              <a href="#testimonials" onClick={() => setDisplay('none')}>Testimonials</a>
             </li>
             <li>
               <Link to="/security">Security Professionals</Link>
@@ -185,13 +185,13 @@ const Navbar = () => {
           <ul>
             {/* The navbar will show these links before you log in */}
             <li>
-              <a href="#howitworks">How It Works</a>
+              <a href="#howitworks" onClick={() => setDisplay('none')}>How It Works</a>
             </li>
             <li>
-              <a href="#coverages">Coverages</a>
+              <a href="#coverages" onClick={() => setDisplay('none')}>Coverages</a>
             </li>
             <li>
-              <a href="#testimonials">Testimonials</a>
+              <a href="#testimonials" onClick={() => setDisplay('none')}>Testimonials</a>
             </li>
             <li>
               <Link to="/security">Security Professionals</Link>
