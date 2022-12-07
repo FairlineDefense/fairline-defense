@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 const Section = styled.div`
   width: 100vw;
   height: 670px;
@@ -79,7 +80,7 @@ export default function Landing() {
       <SubHeading>
         Fairline Defense protects your family in all defense situations.
       </SubHeading>
-      <StartButton>Get Started</StartButton>
+      <Link to='/signup'><StartButton>Get Started</StartButton></Link>
       <DownArrow />
     </Section>
   )

@@ -168,7 +168,7 @@ const Navbar = () => {
               <a href="#testimonials" onClick={() => setDisplay('none')}>Testimonials</a>
             </li>
             <li>
-              <Link to="/security">Armed Professionals</Link>
+              <Link to="/armedprofessionals">Armed Professionals</Link>
             </li>
             <li>
               <Link to="/home">
@@ -194,7 +194,7 @@ const Navbar = () => {
               <a href="#testimonials" onClick={() => setDisplay('none')}>Testimonials</a>
             </li>
             <li>
-              <Link to="/security">Armed Professionals</Link>
+              <Link to="/armedprofessionals">Armed Professionals</Link>
             </li>
             <li>
               <Link to="/login">
