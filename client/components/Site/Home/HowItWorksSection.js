@@ -107,7 +107,7 @@ export default function HowItWorksSection() {
   //     </Section>
   // )
   return (
-    <Section>
+    <Section id="howitworks">
       <Header>How it Works</Header>
       <Image>
         <img src="./images/randomguy-768x335.png" />

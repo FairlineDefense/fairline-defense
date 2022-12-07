@@ -185,13 +185,13 @@ const Navbar = () => {
           <ul>
             {/* The navbar will show these links before you log in */}
             <li>
-              <Link to="/howitworks">How It Works</Link>
+              <a href="#howitworks">How It Works</a>
             </li>
             <li>
-              <Link to="/coverages">Coverages</Link>
+              <a href="#coverages">Coverages</a>
             </li>
             <li>
-              <Link to="/testimonials">Testimonials</Link>
+              <a href="#testimonials">Testimonials</a>
             </li>
             <li>
               <Link to="/security">Security Professionals</Link>
