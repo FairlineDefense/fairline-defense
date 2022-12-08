@@ -77,7 +77,7 @@ const VerifyEmail = () => {
     e.preventDefault()
     // For bypassing email functionality for testing:
     process.env.NODE_ENV === 'development' &&
-      (await fetch('webhook/klaviyo/verify-email', {
+      (await fetch('webhooks/klaviyo/verify-email', {
         method: 'POST',
         headers: {
           accept: 'application/json',
