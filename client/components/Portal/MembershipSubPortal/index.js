@@ -14,7 +14,7 @@ import EditSpouse from './EditSpouse'
 const WhiteBackground = styled.div`
   width: 100%;
   min-height: 500px;
-  padding: 4rem 6rem 6rem 4rem;
+  padding: 4rem 4rem 6rem 4rem;
   position: relative;
   background-color: #fff;
   border-radius: 4px;
