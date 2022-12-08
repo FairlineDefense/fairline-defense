@@ -50,7 +50,7 @@ router.post('/create-account', async (req, res, next) => {
           'content-type': 'application/json',
           Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
         },
-        body: JSON.stringify({data: [{type: 'profile', id: req.user.klaviyoProfileID}]})
+        body: JSON.stringify({data: [{type: 'profile', id: klaviyoProfileRes.id}]})
       };
     
   fetch('https://a.klaviyo.com/api/lists/VXeuyy/relationships/profiles/', subscribeToNewsletter)
