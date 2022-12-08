@@ -36,9 +36,10 @@ router.post('/create-account', async (req, res, next) => {
     };
     const klaviyoProfileRes = await fetch('https://a.klaviyo.com/api/profiles/', createProfile)
       .then(response => response.json())
-      .then(res => console.log('res', res))
+      .then(res => res.data)
       .catch(err => console.error('ERROR', err));
-    // User.update({klaviyoProfileID: klaviyoProfileRes.id}, {where:{email: req.user.email}})
+      console.log(klaviyoProfileRes)
+    User.update({klaviyoProfileID: klaviyoProfileRes.id}, {where:{email: req.user.email}})
    
     // Add user to newsletter
       const subscribeToNewsletter = {
