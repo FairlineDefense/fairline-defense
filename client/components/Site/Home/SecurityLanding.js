@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 const Section = styled.div`
   width: 100vw;
   height: 670px;
   display: flex;
   flex-direction: column;
-  padding: 13rem 0rem 0rem 6rem;
+  padding: 16rem 0rem 0rem 8rem;
   background-image: url('./images/security.png');
   background-position: center top;
   background-repeat: no-repeat;
@@ -77,7 +77,9 @@ export default function SecurityLanding() {
       <Heading>
         Legal protection for<br />Armed professionals
       </Heading>
-      <Link to='/signup'><StartButton>Get Started</StartButton></Link>
+      <Link to="/signup">
+        <StartButton>Get Started</StartButton>
+      </Link>
       <DownArrow />
     </Section>
   )
