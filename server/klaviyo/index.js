@@ -38,7 +38,8 @@ router.post('/create-account', async (req, res, next) => {
       .then(response => response.json())
       .then(res => res.data)
       .catch(err => console.error('ERROR', err));
-      User.update({klaviyoProfileID: klaviyoProfileRes.id}, {where:{email: req.user.email}})
+      
+      await User.update({klaviyoProfileID: klaviyoProfileRes.id}, {where:{email: req.user.email}})
    
     // Add user to newsletter
       const subscribeToNewsletter = {
@@ -49,7 +50,7 @@ router.post('/create-account', async (req, res, next) => {
           'content-type': 'application/json',
           Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
         },
-        body: JSON.stringify({data: [{type: 'profile', id: klaviyoProfileRes.id}]})
+        body: JSON.stringify({data: [{type: 'profile', id: req.user.klaviyoProfileID}]})
       };
     
   fetch('https://a.klaviyo.com/api/lists/VXeuyy/relationships/profiles/', subscribeToNewsletter)
