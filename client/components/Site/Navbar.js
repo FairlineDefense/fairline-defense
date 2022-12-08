@@ -145,7 +145,9 @@ const Navbar = () => {
   return (
     <Wrapper display={display}>
       <FairlineLogo>
-        <a href="/"><img src="./images/fdlogo.png" /></a>
+        <a href="/">
+          <img src="./images/fdlogo.png" />
+        </a>
       </FairlineLogo>
       <Nav>
         <HamburgerMenu
@@ -159,13 +161,19 @@ const Navbar = () => {
           <ul>
             {/* The navbar will show these links after you log in */}
             <li>
-              <a href="#howitworks" onClick={() => setDisplay('none')}>How It Works</a>
+              <a href="#howitworks" onClick={() => setDisplay('none')}>
+                How It Works
+              </a>
             </li>
             <li>
-              <a href="#coverages" onClick={() => setDisplay('none')}>Coverages</a>
+              <a href="#coverages" onClick={() => setDisplay('none')}>
+                Coverages
+              </a>
             </li>
             <li>
-              <a href="#testimonials" onClick={() => setDisplay('none')}>Testimonials</a>
+              <a href="#testimonials" onClick={() => setDisplay('none')}>
+                Testimonials
+              </a>
             </li>
             <li>
               <Link to="/armedprofessionals">Armed Professionals</Link>
@@ -185,13 +193,19 @@ const Navbar = () => {
           <ul>
             {/* The navbar will show these links before you log in */}
             <li>
-              <a href="#howitworks" onClick={() => setDisplay('none')}>How It Works</a>
+              <a href="#howitworks" onClick={() => setDisplay('none')}>
+                How It Works
+              </a>
             </li>
             <li>
-              <a href="#coverages" onClick={() => setDisplay('none')}>Coverages</a>
+              <a href="#coverages" onClick={() => setDisplay('none')}>
+                Coverages
+              </a>
             </li>
             <li>
-              <a href="#testimonials" onClick={() => setDisplay('none')}>Testimonials</a>
+              <a href="#testimonials" onClick={() => setDisplay('none')}>
+                Testimonials
+              </a>
             </li>
             <li>
               <Link to="/armedprofessionals">Armed Professionals</Link>

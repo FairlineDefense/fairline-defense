@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 const Section = styled.div`
   width: 100vw;
   height: 670px;
@@ -77,7 +77,9 @@ export default function SecurityLanding() {
       <Heading>
         Legal protection for<br />Armed professionals
       </Heading>
-      <Link to='/signup'><StartButton>Get Started</StartButton></Link>
+      <Link to="/signup">
+        <StartButton>Get Started</StartButton>
+      </Link>
       <DownArrow />
     </Section>
   )

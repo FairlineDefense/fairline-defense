@@ -5,15 +5,15 @@ const Wrapper = styled.div`
   width: 100%;
   min-height: 100%;
   flex-direction: column;
-  
+
   div:nth-child(even) {
     background-color: #e8f3f9;
   }
 `
 const Header = styled.span`
-font-weight: 500;
-color: var(--darkblue);
-font-size: 20px;
+  font-weight: 500;
+  color: var(--darkblue);
+  font-size: 20px;
 `
 const Line = styled.div`
   width: 100%;
@@ -33,8 +33,8 @@ const Charge = styled.span`
   color: var(--blueblack);
   margin-left: 8rem;
 
-  @media(max-width: 800px) {
-    width: 50%
+  @media (max-width: 800px) {
+    width: 50%;
   }
 `
 const PDF = styled.span`
@@ -47,8 +47,8 @@ const PDF = styled.span`
     font-weight: 500;
   }
 
-  @media(max-width: 800px) {
-    width: 40%
+  @media (max-width: 800px) {
+    width: 40%;
   }
 `
 export default function Invoices() {
@@ -69,14 +69,23 @@ export default function Invoices() {
 
   return (
     <Wrapper>
-      <Line><Date><Header>Date</Header></Date><Charge><Header>Charge</Header></Charge><PDF><Header>Invoice</Header></PDF></Line>
+      <Line>
+        <Date>
+          <Header>Date</Header>
+        </Date>
+        <Charge>
+          <Header>Charge</Header>
+        </Charge>
+        <PDF>
+          <Header>Invoice</Header>
+        </PDF>
+      </Line>
       {invoices &&
         invoices.map(line => (
           <Line key={line.id}>
-            
-              <Date>{line.date}</Date>
-              <Charge>{line.amount}</Charge>
-            
+            <Date>{line.date}</Date>
+            <Charge>{line.amount}</Charge>
+
             <PDF>
               <a href={line.pdf} target="_blank">
                 View PDF
