@@ -29,27 +29,61 @@ router.put('/:id', async (req, res, next) => {
     city,
     state,
     zipCode,
-    password
+    password,
+    emailReminders,
+    emailNews,
+    emailInsider,
+    emailPromotions
   } = req.body
   try {
-    await User.update(
-      {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        phone: phone,
-        streetAddress: streetAddress,
-        line2: line2,
-        city: city,
-        state: state,
-        zipCode: zipCode
-        // password: password Should have its own route
-      },
-      {
-        where: {id: req.params.id}
-      }
-    )
-    res.status(200).send()
+    if (password) {
+      await User.update(
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phone: phone,
+          streetAddress: streetAddress,
+          line2: line2,
+          city: city,
+          state: state,
+          zipCode: zipCode,
+          emailReminders: emailReminders,
+          emailNews: emailNews,
+          emailInsider: emailInsider,
+          emailPromotions: emailPromotions,
+          password: password
+        },
+        {
+          where: {id: req.params.id},
+          individualHooks: true
+        }
+      )
+      res.status(200).send()
+    } else {
+      await User.update(
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phone: phone,
+          streetAddress: streetAddress,
+          line2: line2,
+          city: city,
+          state: state,
+          zipCode: zipCode,
+          emailReminders: emailReminders,
+          emailNews: emailNews,
+          emailInsider: emailInsider,
+          emailPromotions: emailPromotions
+        },
+        {
+          where: {id: req.params.id},
+          individualHooks: true
+        }
+      )
+      res.status(200).send()
+    }
   } catch (err) {
     console.log(err)
     next(err)

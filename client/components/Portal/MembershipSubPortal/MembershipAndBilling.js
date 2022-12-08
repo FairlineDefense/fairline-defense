@@ -23,12 +23,12 @@ const InformationBlock = styled.div`
   header {
     font-weight: 500;
     font-size: 16px;
-    line-height: 25px;
-    margin-bottom: 0.25rem;
+    line-height: 20px;
+    margin-bottom: 0.5rem;
   }
   small {
     font-weight: 200;
-    font-size: 12px;
+    font-size: 14px;
   }
 `
 const ButtonWrapper = styled.div`
@@ -125,9 +125,13 @@ export default function MembershipAndBilling(props) {
           </InformationBlock>
           <InformationBlock>
             <header>Credit Card Billed for Membership</header>
-            <small>
-              {user.brand} ending in {user.last4}
-            </small>
+            {user.brand ? (
+              <small>
+                {user.brand} ending in {user.last4}
+              </small>
+            ) : (
+              <small>Please update payment information.</small>
+            )}
             <Link>
               <a href={portalUrl}>Update Card</a>
             </Link>

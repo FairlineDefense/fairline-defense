@@ -9,6 +9,7 @@ const Section = styled.div`
   align-items: center;
   margin: 4rem 2rem 4rem 2rem;
   @media (max-width: 800px) {
+    padding-top: 4rem;
     margin: 4rem 0rem 4rem 0rem;
     height: auto;
   }
@@ -66,7 +67,7 @@ const Story = styled.figure`
 `
 export default function Stories() {
   return (
-    <Section>
+    <Section id="testimonials">
       <Header>Hear more stories from protected customers</Header>
       <Wrapper>
         <Story>

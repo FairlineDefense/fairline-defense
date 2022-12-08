@@ -66,7 +66,7 @@ const Story = styled.figure`
 `
 export default function Stories() {
   return (
-    <Section>
+    <Section id="testimonials">
       <Header>Security Gaurds and their Stories</Header>
       <Wrapper>
         <Story>

@@ -6,13 +6,12 @@ const Section = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: column;
-  padding: 6rem;
   align-items: center;
-  padding: 2rem 4rem 2rem 4rem;
+  padding: 4rem 4rem 2rem 4rem;
 
   @media (max-width: 800px) {
     min-height: 300px;
-    padding: 1rem;
+    padding: 5rem 1rem 4rem 1rem;
     flex-direction: column;
     justify-content: center;
   }
@@ -89,7 +88,7 @@ const CyanButton = styled.div`
 `
 export default function WhatDoWeCover() {
   return (
-    <Section>
+    <Section id="coverages">
       <Header>What do we cover?</Header>
       <Wrapper>
         <Text>

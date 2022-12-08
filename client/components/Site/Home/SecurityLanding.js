@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 const Section = styled.div`
   width: 100vw;
   height: 670px;
   display: flex;
   flex-direction: column;
-  padding: 13rem 0rem 0rem 6rem;
+  padding: 16rem 0rem 0rem 8rem;
   background-image: url('./images/security.png');
   background-position: center top;
   background-repeat: no-repeat;
@@ -21,7 +22,7 @@ const Section = styled.div`
 `
 const Heading = styled.div`
   font-size: 48px;
-  font-weight: 600;
+  font-weight: 500;
   color: #fff;
 
   @media (max-width: 800px) {
@@ -50,7 +51,7 @@ const StartButton = styled.div`
   padding: 1rem 2rem 1rem 2rem;
   font-size: 20px;
   font-weight: 400;
-  margin-top: 1rem;
+  margin-top: 2rem;
   outline: none;
   border: none;
   cursor: pointer;
@@ -74,9 +75,11 @@ export default function SecurityLanding() {
   return (
     <Section>
       <Heading>
-        Armed Gaurd Protection<br />Starts Here
+        Legal protection for<br />Armed professionals
       </Heading>
-      <StartButton>Get Started</StartButton>
+      <Link to="/signup">
+        <StartButton>Get Started</StartButton>
+      </Link>
       <DownArrow />
     </Section>
   )

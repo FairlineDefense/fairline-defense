@@ -12,16 +12,25 @@ import styled from 'styled-components'
 import AccountExistsModal from './AccountExistsModal'
 import TermsAndConditions from './TermsAndConditions'
 import Checkbox from '@material-ui/core/Checkbox'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+
+import countries from './phonecodes'
 
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../theme'
 import FDPasswordField from '../FDTextField/password'
-
+import SvgIcon from '@material-ui/core/SvgIcon'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 const H1 = styled.h1`
   font-weight: 400;
   font-size: 30px;
   line-height: 30px;
   margin-bottom: 2rem;
+
+  @media (max-width: 800px) {
+    margin-bottom: 0.5rem;
+  }
 `
 const SignupWrapper = styled.div`
   height: 100%;
@@ -31,7 +40,7 @@ const SignupWrapper = styled.div`
   align-items: center;
   padding: 4rem;
   @media (max-width: 768px) {
-    padding: 4rem 0.5rem 0rem 0.5rem;
+    padding: 4rem 2rem 0rem 1.5rem;
   }
 `
 const SignupForm = styled.form`
@@ -40,6 +49,7 @@ const SignupForm = styled.form`
   justify-content: center;
   max-width: 720px;
   position: relative;
+
   @media (max-width: 768px) {
     max-width: 100%;
   }
@@ -49,6 +59,10 @@ const FinePrint = styled.div`
   flex-direction: column;
   margin: 2rem 0rem 3rem 0rem;
   width: 100%;
+
+  @media (max-width: 768px) {
+    margin: 0rem 0rem 1rem 0rem;
+  }
 `
 const TermsAndConditionsDiv = styled.div`
   display: flex;
@@ -61,6 +75,7 @@ const TermsAndConditionsDiv = styled.div`
   }
 
   @media (max-width: 768px) {
+    font-size: 12px;
     flex-wrap: wrap;
   }
 `
@@ -73,18 +88,34 @@ const InputGroup = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `
 const Phone = styled.span`
   width: 50%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  padding: 8px;
 
   div:nth-child(1) {
     width: 60px;
   }
   div:nth-child(2) {
-    flex-grow: 1;
+    width: 100%;
+    margin-left: 4px;
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
+    justify-content: space-between;
+    padding: 8px 0px 8px 8px;
+
+    div:nth-child(2) {
+      width: 100%;
+    }
   }
 `
 const SignupButtonWrapper = styled.div`
@@ -105,14 +136,11 @@ const SignupFormButton = styled.button`
   margin-bottom: 2rem;
   cursor: pointer;
 `
-const ErrorText = styled.div`
-  height: fit-content;
-  border: 1px solid red;
-  border-radius: 5px;
-  padding: 0.5rem;
-  background-color: #fff;
-  font-size: 0.75rem;
-  color: #000;
+const Flag = styled.img`
+  width: 37px;
+  height: auto;
+  margin-left: 10px;
+  margin-top: 4px;
 `
 const Signup = () => {
   let user = useSelector(state => state.user)
@@ -129,7 +157,8 @@ const Signup = () => {
     firstName: '',
     lastName: '',
     email: '',
-    cc: '',
+    dialCode: '+1',
+    countryCode: 'US',
     phone: '',
     password: '',
     confirmPassword: '',
@@ -138,8 +167,16 @@ const Signup = () => {
   })
 
   const changeHandler = e => {
-    setInvalidation({...invalidation, [e.target.name]: false})
-    setForm({...form, [e.target.name]: e.target.value})
+    if (e.target.name === 'phone') {
+      let phone = e.target.value
+      if (phone[0] !== '+') {
+        phone = form.dialCode + ' ' + phone
+      }
+      setForm({...form, phone: phone.slice(form.dialCode.length + 1)})
+    } else {
+      setInvalidation({...invalidation, [e.target.name]: false})
+      setForm({...form, [e.target.name]: e.target.value})
+    }
   }
 
   const handleSubmit = evt => {
@@ -147,7 +184,16 @@ const Signup = () => {
     const firstName = form.firstName
     const lastName = form.lastName
     const email = form.email
-    const phone = form.cc + form.phone
+    const phone =
+      form.dialCode +
+      form.phone
+        .split('')
+        .filter(char => {
+          if (char !== ' ' && char !== '(' && char !== ')' && char !== '-') {
+            return char
+          }
+        })
+        .join('')
     const password = form.password
     const confirmPassword = form.confirmPassword
 
@@ -161,11 +207,7 @@ const Signup = () => {
         setInvalidation({...invalidation, email: true})
         res = false
       }
-      if (
-        !/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(
-          phone
-        )
-      ) {
+      if (!/^[0-9()-+]+$/.test(phone)) {
         setInvalidation({...invalidation, phone: true})
         res = false
       }
@@ -312,6 +354,7 @@ const Signup = () => {
           </InputGroup>
           <InputGroup>
             <FDTextField
+              fullWidth={window.innerWidth >= 768 ? false : true}
               label={invalidation.email ? 'Invalid email address' : 'Email'}
               name="email"
               placeholder="name@email.com"
@@ -324,25 +367,57 @@ const Signup = () => {
               error={invalidation.email ? true : false}
             />
             <Phone>
+              <ThemeProvider theme={theme}>
+                <Select
+                  disableUnderline={true}
+                  style={{
+                    backgroundColor: '#FFF',
+                    borderRadius: 4,
+                    width: 85
+                  }}
+                  onChange={e => changeHandler(e)}
+                  value={form.dialCode}
+                  name="dialCode"
+                  required
+                >
+                  {countries.map(country => (
+                    <MenuItem
+                      sx={{p: 5}}
+                      key={country.code}
+                      value={country.dial_code}
+                    >
+                      {form.dialCode === country.dial_code ? (
+                        <ListItemIcon>
+                          <Flag
+                            src={`https://www.countryflagicons.com/SHINY/64/${
+                              country.code
+                            }.png`}
+                          />
+                        </ListItemIcon>
+                      ) : (
+                        <>
+                          <ListItemIcon>
+                            <Flag
+                              src={`https://www.countryflagicons.com/SHINY/64/${
+                                country.code
+                              }.png`}
+                            />
+                          </ListItemIcon>{' '}
+                          {country.name + ' ' + country.dial_code}
+                        </>
+                      )}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </ThemeProvider>
               <FDTextField
-                label="+1"
-                name="cc"
-                placeholder="+1"
-                type="text"
-                onChange={e => changeHandler(e)}
-                value={form.cc}
-                style={{margin: 8}}
-                variant="filled"
-                required
-              />
-              <FDTextField
+                fullWidth={window.innerWidth >= 768 ? false : true}
                 label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
                 name="phone"
-                placeholder="123-456-7890"
+                placeholder="123 456 7890"
                 type="tel"
                 onChange={e => changeHandler(e)}
-                value={form.phone}
-                style={{margin: 8}}
+                value={form.dialCode + ' ' + form.phone}
                 variant="filled"
                 error={invalidation.phone ? true : false}
                 required
@@ -376,6 +451,7 @@ const Signup = () => {
               value={form.confirmPassword}
               style={{margin: 8}}
               variant="filled"
+              autocomplete="current-password"
               toggleVisibility={handleClickShowConfirmPassword}
               error={invalidation.confirmPassword ? true : false}
               helperText={passwordErrorText}

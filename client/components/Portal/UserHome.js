@@ -4,25 +4,20 @@ import Navbar from './Navbar'
 import ReferAFriend from './ReferAFriend'
 import Card from './Card'
 import {VerifyEmail, VerifyPhone, ChoosePlan, Footer} from '../'
+import PlanStatus from './PlanStatus'
 import styled from 'styled-components'
 import {useEffect, useState} from 'react'
 import {me} from '../../store'
-import {
-  CircularProgressbar,
-  CircularProgressbarWithChildren,
-  buildStyles
-} from 'react-circular-progressbar'
-
+import {Link} from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../theme'
 
-import 'react-circular-progressbar/dist/styles.css'
 import RegisterHeader from '../Register/RegisterHeader'
 const Wrapper = styled.div`
   width: 100vw;
   padding: 2rem;
-  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  background: linear-gradient(102.57deg, #2a4c78 0%, #0b182d 100%);
 `
 const CenteredWrapper = styled.div`
   width: 100%;
@@ -56,18 +51,6 @@ const Left = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
-  }
-`
-const Right = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 35%;
-  justify-content: flex-start;
-
-  @media (max-width: 768px) {
-    justify-content: center;
-    width: 100%;
-    height: 70px;
   }
 `
 const H1 = styled.h1`
@@ -106,27 +89,6 @@ const BlueButton = styled.button`
   font-size: 18px;
   font-weight: 200;
   cursor: pointer;
-`
-const TextBlock = styled.div`
-  display: flex;
-  width: 220px;
-  flex-direction: column;
-  margin-bottom: 0.5rem;
-`
-const Bold = styled.span`
-  font-weight: 500;
-`
-const Small = styled.span`
-  font-weight: 200;
-`
-const ProgressBarWrapper = styled.div`
-  width: 225px;
-  height: 225px;
-  margin-bottom: 2rem;
-  @media (max-width: 768px) {
-    height: 300px;
-    width: 300px;
-  }
 `
 const UserHome = () => {
   const user = useSelector(state => state.user)
@@ -180,32 +142,12 @@ const UserHome = () => {
             <H1>Hi, {user.firstName}</H1>
             <MemberID>#{user.membershipNumber}</MemberID>
             <Button>Membership Card</Button>
-            <Button>Add a spouse</Button>
+            <Link to="/membership/addaspouse">
+              <Button>Add a spouse</Button>
+            </Link>
             <BlueButton>Emergency Help</BlueButton>
           </Left>
-          <Right>
-            <ProgressBarWrapper>
-              <CircularProgressbar
-                value={user.percentageLeft}
-                text={`${user.daysLeft} days remaining`}
-                styles={buildStyles({
-                  textColor: '#FFF',
-                  pathColor: '#D6AE21',
-                  trailColor: '#FFF',
-                  textSize: '7px',
-                  strokeLinecap: 'butt'
-                })}
-              />
-            </ProgressBarWrapper>
-            <TextBlock>
-              <Bold>Auto Renew</Bold>
-              <Small>{user.periodEnd}</Small>
-            </TextBlock>
-            <TextBlock>
-              <Bold>Questions</Bold>
-              <Small>Call 1 833 201 1463</Small>
-            </TextBlock>
-          </Right>
+          <PlanStatus user={user} />
         </Main>
       </Wrapper>
       <ReferAFriend />

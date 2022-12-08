@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 const Section = styled.div`
   width: 100vw;
   height: 670px;
   display: flex;
   flex-direction: column;
-  padding: 17rem 0rem 0rem 4rem;
-  background-image: url('./images/welcomeimg-1024x476.png');
+  padding: 17rem 0rem 0rem 8rem;
+  background-image: url('./images/landingimg.png');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -79,7 +80,9 @@ export default function Landing() {
       <SubHeading>
         Fairline Defense protects your family in all defense situations.
       </SubHeading>
-      <StartButton>Get Started</StartButton>
+      <Link to="/signup">
+        <StartButton>Get Started</StartButton>
+      </Link>
       <DownArrow />
     </Section>
   )

@@ -132,9 +132,8 @@ router.put('/add-a-spouse', async (req, res) => {
 router.get('/invoices', async (req, res) => {
   try {
     const invoices = await stripe.invoices.list({
-      customer: req.customerId
+      customer: req.user.customerId
     })
-
     const data = invoices.data.map(line => {
       const date = dateIntString(line.created)
       const amount = priceString(line.amount_due)
