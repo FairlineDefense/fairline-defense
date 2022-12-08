@@ -7,9 +7,9 @@ const stripe = require('stripe')(process.env.SECRET_KEY)
 // at https://dashboard.stripe.com/webhooks
 const endpointSecret = process.env.ENDPOINT_SECRET
 const express = require('express')
-const {User, Order} = require('../db/models')
+const {User, Order} = require('../../db/models')
 const router = require('express').Router()
-const dateString = require('../../utils/dateString')
+const dateString = require('../../../utils/dateString')
 
 module.exports = router
 

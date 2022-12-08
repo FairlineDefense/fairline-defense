@@ -20,8 +20,8 @@ module.exports = app
 if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions())
 }
-app.use('/webhook/klaviyo', require('./webhook/klaviyo'))
-app.use('/webhook', require('./webhook'))
+app.use('/webhooks/stripe', require('./webhooks/stripe'))
+app.use('/webhooks/klaviyo', require('./webhooks/klaviyo'))
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
