@@ -71,6 +71,9 @@ const User = db.define('user', {
   emergencyContactPhone: {
     type: Sequelize.STRING
   },
+  klaviyoProfileID: {
+    type: Sequelize.STRING,
+  },
   emailVerified: {
     type: Sequelize.BOOLEAN,
     defaultValue: false

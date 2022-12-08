@@ -9,7 +9,6 @@ router.post(
   async (req, res, next) => {
     try {
       const body = JSON.parse(req.body)
-      console.log(req.body, body)
       await User.update({emailVerified: true}, {where: {email: body.email}})
       return res.status(200).send()
     } catch (err) {
