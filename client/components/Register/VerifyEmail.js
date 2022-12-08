@@ -95,7 +95,7 @@ const VerifyEmail = () => {
           accept: 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email: user.email, phone: user.phone})
+        body: JSON.stringify({email: user.email, phone: user.phone, firstName: user.firstName, lastName: user.lastName})
       })
     }
   }

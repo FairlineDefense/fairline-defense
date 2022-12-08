@@ -13,7 +13,7 @@ module.exports = router
 
 router.post('/create-account', async (req, res, next) => {
   try {
-    console.log(req.user.phone)
+    console.log('create-account', req.body)
     const createProfile = {
       method: 'POST',
       headers: {
@@ -26,20 +26,19 @@ router.post('/create-account', async (req, res, next) => {
         data: {
           type: 'profile',
           attributes: {
-            email: req.user.email,
-            phone_number: '+' + req.user.phone,
-            first_name: req.user.firstName,
-            last_name: req.user.lastName
+            email: req.body.email,
+            phone_number: req.body.phone,
+            first_name: req.body.firstName,
+            last_name: req.body.lastName
           }
         }
       })
     };
     const klaviyoProfileRes = await fetch('https://a.klaviyo.com/api/profiles/', createProfile)
       .then(response => response.json())
-      .then(res => res.data)
+      .then(res => console.log('res', res))
       .catch(err => console.error('ERROR', err));
-      console.log(klaviyoProfileRes)
-    User.update({klaviyoProfileID: klaviyoProfileRes.id}, {where:{email: req.user.email}})
+    // User.update({klaviyoProfileID: klaviyoProfileRes.id}, {where:{email: req.user.email}})
    
     // Add user to newsletter
       const subscribeToNewsletter = {
