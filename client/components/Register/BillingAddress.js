@@ -36,6 +36,11 @@ const Form = styled.form`
   max-width: 700px;
   display: flex;
   flex-wrap: wrap;
+
+  @media(max-width: 800px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `
 const Input = styled.input`
   flex-grow: 1;
@@ -191,7 +196,6 @@ const BillingAddress = props => {
             placeholder="Apt."
             onChange={e => changeHandler(e)}
             value={address.apt}
-            required
           />
           <FDTextField
             name="streetAddress"

@@ -7,7 +7,6 @@ let config
 
 if (process.env.DATABASE_URL) {
   config = {
-    force: true,
     logging: false,
     ssl: true,
     dialectOptions: {
@@ -19,7 +18,6 @@ if (process.env.DATABASE_URL) {
   }
 } else {
   config = {
-    force: true,
     logging: false
   }
 }
