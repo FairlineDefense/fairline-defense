@@ -38,7 +38,7 @@ router.post('/create-account', async (req, res, next) => {
       .then(response => response.json())
       .then(res => res.data)
       .catch(err => console.error('ERROR', err));
-      console.log('klaviyoProfileRes =>',klaviyoProfileRes)
+      
       await User.update({klaviyoProfileID: klaviyoProfileRes.id}, {where:{email: req.user.email}})
       
     // Add user to newsletter
