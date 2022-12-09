@@ -29,7 +29,7 @@ router.post('/create-account', async (req, res, next) => {
             email: req.body.email,
             phone_number: req.body.phone,
             first_name: req.body.firstName,
-            last_name: req.body.lastName
+            last_name: req.body.lastName,
           }
         }
       })
@@ -38,25 +38,53 @@ router.post('/create-account', async (req, res, next) => {
       .then(response => response.json())
       .then(res => res.data)
       .catch(err => console.error('ERROR', err));
-      
+      console.log('klaviyoProfileRes =>',klaviyoProfileRes)
       await User.update({klaviyoProfileID: klaviyoProfileRes.id}, {where:{email: req.user.email}})
-   
+      
     // Add user to newsletter
-      const subscribeToNewsletter = {
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          revision: '2022-10-17',
-          'content-type': 'application/json',
-          Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
-        },
-        body: JSON.stringify({data: [{type: 'profile', id: klaviyoProfileRes.id}]})
-      };
-    
-  fetch('https://a.klaviyo.com/api/lists/VXeuyy/relationships/profiles/', subscribeToNewsletter)
-  // .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
+
+    const url = 'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/';
+const options = {
+  method: 'POST',
+  headers: {
+    accept: 'application/json',
+    revision: '2022-10-17',
+    'content-type': 'application/json',
+    Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+  },
+  body: JSON.stringify({
+    data: {
+      type: 'profile-subscription-bulk-create-job',
+      attributes: {
+        subscriptions: [{email: req.body.email}],
+        list_id: 'VXeuyy',
+      },
+    }
+  })
+};
+
+fetch(url, options)
+  .then(res => console.log(res))
+  // .then(json => console.log(json))
+  .catch(err => console.error('error:' + err));
+
+
+  const addUserToNewsletter = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      revision: '2022-10-17',
+      'content-type': 'application/json',
+      Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+    },
+    body: JSON.stringify({data: [{type: 'profile', id: klaviyoProfileRes.id}]})
+  };
+  
+  fetch('https://a.klaviyo.com/api/lists/VXeuyy/relationships/profiles/', addUserToNewsletter)
+    // .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
+    //
   } catch (err) {
     next(err)
   }
