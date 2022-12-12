@@ -151,7 +151,7 @@ router.post('/verify-phone', async (req, res, next) => {
     .then(response => console.log(response))
     .catch(err => console.error(err))
 
-  // return res.json(code)
+  return res.json(code)
 })
 
 router.post('/phone-code', async (req, res, next) => {
