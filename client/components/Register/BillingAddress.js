@@ -37,7 +37,7 @@ const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     flex-direction: column;
     width: 100%;
   }
