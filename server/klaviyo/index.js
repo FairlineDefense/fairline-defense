@@ -14,12 +14,12 @@ module.exports = router
 router.post('/create-account', async (req, res, next) => {
   try {
     // The three steps to verifying a user's email are as follows:
-    // [1] We create their profile on Klaviyo with their name, email and phone number. The response includes their unique
+    // [1] We create their Klaviyo profile with their name, email and phone number. The response includes their unique
     //     Klaviyo profile ID. We add this to our database for future reference.
-    // [2] We add the user to the email list, Newsletter. This triggers a double opt in process where they must
+    // [2] We add the user to the email list 'Newsletter'. This triggers a double-opt in process: they must
     //     click the confirmation link sent to their email address.
     // [3] Upon clicking the confirmation link a webhook is sent to webhooks/klaviyo on our server which switches their
-    //     email verification from FALSE to TRUE, enabling the use of their Fairline account.
+    //     email verification from FALSE to TRUE enabling the use of their Fairline account.
 
     // Step 1:
     const createKlaviyoProfileBody = {
