@@ -18,7 +18,6 @@ import {
   SecurityHome,
   MembershipAndBilling,
   VerifiedEmail,
-  Fonts
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'
@@ -52,8 +51,6 @@ const Routes = props => {
             <Route path="/verifyemail" component={VerifyEmail} />
             <Route path="/verifyphone" component={VerifyPhone} />
             <Route exact path="/success" component={VerifiedEmail} />
-            <Route exact path="/fonts" component={Fonts} />
-
           </Switch>
         </div>
       ) : (
@@ -68,8 +65,6 @@ const Routes = props => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/success" component={VerifiedEmail} />
-            <Route exact path="/fonts" component={Fonts} />
-
           </Switch>
         </div>
       )}
