@@ -1,6 +1,19 @@
 @font-face {
   font-family: 'Eina';
-  src: url('./fonts/') format('opentype');
+  src: url('./fonts/Extratype\ -\ Eina03-Light.otf') format('opentype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Eina';
+  src: url('./fonts/Extratype\ -\ Eina03-Regular.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Eina';
+  src: url('./fonts/Extratype\ -\ Eina03-SemiBold.otf') format('opentype');
+  font-weight: 500;
 }
 
 * {
@@ -22,7 +35,7 @@
 
 body {
   font-family: 'Eina', sans-serif;
-  font-weight: 200;
+  font-weight: 300;
   overflow-x: hidden;
 }
 
