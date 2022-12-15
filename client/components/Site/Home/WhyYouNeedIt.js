@@ -24,7 +24,7 @@ const Section = styled.div`
 `
 const TextLeft = styled.div`
 color: #fff;
-font-size: 25px
+font-size: 20px;
 line-height: 30px;
 max-width: 526px;
 font-weight: 400;
@@ -41,7 +41,7 @@ p {
 
 const TextRight = styled.div`
 color: #fff;
-font-size: 25px
+font-size: 25px;
 line-height: 30px;
 max-width: 526px;
 font-weight: 400;
@@ -55,6 +55,7 @@ header {
 }
 p {
     margin-bottom: 1rem;
+    font-size: 25px;
 }
 
 @media(max-width: 800px) {
