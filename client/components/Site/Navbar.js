@@ -20,7 +20,7 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
   a {
     color: #fff;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
   }
   ul {
     display: flex;
@@ -56,7 +56,7 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
     }
     li a {
       font-size: 32px;
-      font-weight: 200;
+      font-weight: 400;
     }
   }
 `
