@@ -14,15 +14,15 @@ module.exports = router
 router.post('/create-account', async (req, res, next) => {
   try {
     // The three steps to verifying a user's email are as follows:
-    // [1] We create their profile on Klaviyo with their name, email and phone number. The response includes their unique
+    // [1] We create their Klaviyo profile with their name, email and phone number. The response includes their unique
     //     Klaviyo profile ID. We add this to our database for future reference.
-    // [2] We add the user to the email list, Newsletter. This triggers a double opt in process where they must
+    // [2] We add the user to the email list 'Newsletter'. This triggers a double-opt in process: they must
     //     click the confirmation link sent to their email address.
     // [3] Upon clicking the confirmation link a webhook is sent to webhooks/klaviyo on our server which switches their
-    //     email verification from FALSE to TRUE, enabling the use of their Fairline account.
+    //     email verification from FALSE to TRUE enabling the use of their Fairline account.
 
     // Step 1:
-    const createProfile = {
+    const createKlaviyoProfileBody = {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -37,48 +37,60 @@ router.post('/create-account', async (req, res, next) => {
             email: req.body.email,
             phone_number: req.body.phone,
             first_name: req.body.firstName,
-            last_name: req.body.lastName,
+            last_name: req.body.lastName
           }
         }
       })
-    };
-    const klaviyoProfileRes = await fetch('https://a.klaviyo.com/api/profiles/', createProfile)
+    }
+    const createKlaviyoProfileRes = await fetch(
+      'https://a.klaviyo.com/api/profiles/',
+      createKlaviyoProfileBody
+    )
       .then(response => response.json())
       .then(res => res.data)
-      .catch(err => console.error('ERROR', err));
-      
-      await User.update({klaviyoProfileID: klaviyoProfileRes.id}, {where:{email: req.user.email}})
-      
-    // Step 2:
-    const url = 'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/';
-const options = {
-  method: 'POST',
-  headers: {
-    accept: 'application/json',
-    revision: '2022-10-17',
-    'content-type': 'application/json',
-    Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
-  },
-  body: JSON.stringify({
-    data: {
-      type: 'profile-subscription-bulk-create-job',
-      attributes: {subscriptions: [{email: req.body.email}], list_id: 'VXeuyy'}
-    }
-  })
-};
+      .catch(err => console.error('ERROR', err))
 
-fetch(url, options)
-  .then(res => console.log(res))
-  .catch(err => console.error('error:' + err));
-    
-  // Step 3 is located in ../webhooks/klaviyo
+    if (createKlaviyoProfileRes.id) {
+      await User.update(
+        {klaviyoProfileID: createKlaviyoProfileRes.id},
+        {where: {email: req.user.email}}
+      )
+
+      // Step 2:
+      const addUserToNewsletterBody = {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          revision: '2022-10-17',
+          'content-type': 'application/json',
+          Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+        },
+        body: JSON.stringify({
+          data: {
+            type: 'profile-subscription-bulk-create-job',
+            attributes: {
+              subscriptions: [{email: req.body.email}],
+              list_id: 'VXeuyy'
+            }
+          }
+        })
+      }
+
+      fetch(
+        'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/',
+        addUserToNewsletterBody
+      )
+        .then(res => console.log(res))
+        .catch(err => console.error('error:' + err))
+    }
+
+    // Step 3 is located in ../webhooks/klaviyo
   } catch (err) {
     next(err)
   }
 })
 
 router.post('/verify-phone', async (req, res, next) => {
-
   // The 4 step process for verifying a user's phone number is as follows:
   // [1] A random 6 digit code is generated and added to the user in our database
   // [2] The user's Klaviyo profile object is updated to have a key called code which has a value of the 6 digit code
@@ -94,8 +106,7 @@ router.post('/verify-phone', async (req, res, next) => {
   await User.update({phoneCode: code}, {where: {email: req.user.email}})
 
   // Step 2:
-  const updateProfileUrl = `https://a.klaviyo.com/api/profiles/${req.user.klaviyoProfileID}/`;
-  const options = {
+  const updateProfileWithCodeBody = {
     method: 'PATCH',
     headers: {
       accept: 'application/json',
@@ -103,30 +114,42 @@ router.post('/verify-phone', async (req, res, next) => {
       'content-type': 'application/json',
       Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
     },
-    body: JSON.stringify({data: {type: 'profile', attributes: {properties: {code: code}}, id: req.user.klaviyoProfileID}})
-  };
-  
-  fetch(updateProfileUrl, options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
+    body: JSON.stringify({
+      data: {
+        type: 'profile',
+        attributes: {properties: {code: code}},
+        id: req.user.klaviyoProfileID
+      }
+    })
+  }
 
-    // Step 3:
-    const addUserToSMS = {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        revision: '2022-10-17',
-        'content-type': 'application/json',
-        Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
-      },
-      body: JSON.stringify({data: [{type: 'profile', id: req.user.klaviyoProfileID}]})
-    };
-    
-    fetch('https://a.klaviyo.com/api/lists/SKvZ83/relationships/profiles/', addUserToSMS)
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(err => console.error(err));
+  fetch(
+    `https://a.klaviyo.com/api/profiles/${req.user.klaviyoProfileID}/`,
+    updateProfileWithCodeBody
+  )
+    .then(response => console.log(response))
+    .catch(err => console.error(err))
+
+  // Step 3:
+  const addUserToSMSListBody = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      revision: '2022-10-17',
+      'content-type': 'application/json',
+      Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+    },
+    body: JSON.stringify({
+      data: [{type: 'profile', id: req.user.klaviyoProfileID}]
+    })
+  }
+
+  fetch(
+    'https://a.klaviyo.com/api/lists/SKvZ83/relationships/profiles/',
+    addUserToSMSListBody
+  )
+    .then(response => console.log(response))
+    .catch(err => console.error(err))
 
   return res.json(code)
 })

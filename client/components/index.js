@@ -16,6 +16,7 @@ export {default as PaymentStatus} from './Register/PaymentStatus'
 export {default as VerifyEmail} from './Register/VerifyEmail'
 export {default as VerifyPhone} from './Register/VerifyPhone'
 export {default as RegisterHeader} from './Register/RegisterHeader'
+export {default as VerifiedEmail} from './Register/VerifiedEmail'
 
 // Portal
 export {default as PortalNavbar} from './Portal/Navbar'
