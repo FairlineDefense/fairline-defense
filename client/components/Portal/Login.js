@@ -150,7 +150,7 @@ const Login = () => {
       <svg className="logo" />
       <LoginWrapper>
         <CenteredWrapper>
-          <Logo src="./images/fdlogo.png" />
+          <Link to='/'><Logo src="./images/fdlogo.png" /></Link>
         </CenteredWrapper>
         <CenteredWrapper>
           <H1>Login</H1>

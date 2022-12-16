@@ -34,10 +34,15 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
   }
 
   @media (max-width: 800px) {
-    flex-direction: row-reverse;
-    background-color: #000;
+    flex-direction: row;
+    background-color: #132A4A;
     position: fixed;
     padding: 1rem;
+    justify-content: flex-end;
+    background-image: url('favicon.ico');
+    background-size: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
 
     ul {
       display: ${props => props.display};
@@ -62,13 +67,18 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
 `
 
 const FairlineLogo = styled.div`
-  height: 60px;
+  height: 50px;
+  width: 182px;
+  display: inline-block;
   z-index: 30;
-  img {
-    height: 100%;
-  }
+  background-image: url('./images/fdlogo.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
   @media (max-width: 800px) {
-    height: 40px;
+      display: none;
   }
 `
 const Nav = styled.nav`
@@ -98,6 +108,26 @@ const LoginButton = styled.div`
     padding: 0rem;
     margin: 0rem;
     text-align: left;
+  }
+`
+const MobileCTA = styled.div`
+  background-color: var(--cyan);
+  color: #fff;
+  border-radius: 20px;
+  width: fit-content;
+  padding: .2rem 1rem .4rem 1rem;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  @media(max-width: 800px) {
+    display: flex;
   }
 `
 const Cyan = styled.span`
@@ -144,11 +174,10 @@ const Navbar = () => {
 
   return (
     <Wrapper display={display}>
+      <Link to="/">
       <FairlineLogo>
-        <a href="/">
-          <img src="./images/fdlogo.png" />
-        </a>
       </FairlineLogo>
+      </Link>
       <Nav>
         <HamburgerMenu
           onClick={() => setDisplay(display === 'flex' ? 'none' : 'flex')}
@@ -222,6 +251,11 @@ const Navbar = () => {
             </li>
           </ul>
         )}
+        <Link to="/signup">
+        <MobileCTA>
+          Join Now
+        </MobileCTA>
+        </Link>
       </Nav>
     </Wrapper>
   )
