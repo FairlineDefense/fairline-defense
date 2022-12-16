@@ -33,7 +33,7 @@ const LoginWrapper = styled.div`
   padding: 10rem;
   position: relative;
   @media (max-width: 768px) {
-    padding: 4rem 1rem 0rem 1rem;
+    padding: 4rem 2rem 0rem 1rem;
   }
 `
 const LoginForm = styled.form`

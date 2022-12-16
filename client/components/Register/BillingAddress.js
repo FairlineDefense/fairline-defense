@@ -34,6 +34,7 @@ const Header = styled.h1`
   margin: 0.5rem 0rem 2rem 0rem;
 
   @media(max-width: 800px) {
+    font-size: 22px;
     margin: .5rem;
   }
 `

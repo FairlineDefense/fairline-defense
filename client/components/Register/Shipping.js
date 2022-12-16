@@ -14,6 +14,7 @@ flex-direction: column;
 align-items: center;
 text-align: center;
 padding-top: 4rem;
+position: relative;
 `
 const H1 = styled.h1`
 font-size: 32px;
