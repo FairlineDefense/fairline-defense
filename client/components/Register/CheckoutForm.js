@@ -8,7 +8,7 @@ const FormWrapper = styled.div`
   text-align: center;
 
   @media (max-width: 800px) {
-    width: 100%;
+    width: 90%;
   }
 `
 const Form = styled.form`
@@ -18,6 +18,11 @@ const Form = styled.form`
 `
 const Span = styled.span`
   width: 100%;
+`
+const CenteredWrapper = styled.span`
+width: 100%;
+display: flex;
+justify-content: center;
 `
 const Button = styled.button`
   background-color: var(--blue);
@@ -31,6 +36,10 @@ const Button = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+
+  @media(max-width: 800px) {
+    margin: .5rem;
+  }
 `
 const CheckoutForm = () => {
   const stripe = useStripe()
@@ -75,9 +84,9 @@ const CheckoutForm = () => {
         <Span>
           <PaymentElement />
         </Span>
-        <Span>
+        <CenteredWrapper>
           <Button disabled={!stripe}>Purchase</Button>
-        </Span>
+        </CenteredWrapper>
         {/* Show error message to your customers */}
         {errorMessage && <div>{errorMessage}</div>}
       </Form>

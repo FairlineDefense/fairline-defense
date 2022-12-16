@@ -17,6 +17,13 @@ const ChoosePlan = props => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 4rem;
+    position: relative;
+
+    @media(max-width: 800px) {
+      text-align: center;
+      padding: 4rem 1rem 0rem 1rem;
+    }
   `
   const ButtonWrapper = styled.div`
     display: flex;
@@ -24,6 +31,12 @@ const ChoosePlan = props => {
     width: 500px;
     align-items: center;
     justify-content: space-around;
+    position: relative;
+
+    @media(max-width: 800px) {
+      justify-content: center;
+      width: 100%;
+    }
   `
   const Button = styled.button`
     border: 1px solid #fff;
@@ -41,10 +54,18 @@ const ChoosePlan = props => {
     text-align: center;
     align-items: center;
     cursor: pointer;
-
+    position: relative;
+    
     &:hover {
       background: rgba(0, 171, 224, 0.2);
       border-color: var(--blue);
+    }
+
+    @media(max-width: 800px) {
+      width: 10rem;
+      height: 12rem;
+      margin: .5rem;
+      padding: 1rem;
     }
   `
   const Price = styled.p`
@@ -68,14 +89,13 @@ const ChoosePlan = props => {
     font-size: 32px;
     font-weight: 300;
     margin-bottom: 2rem;
+
+    @media(max-width: 800px) {
+      margin-bottom: 1rem;
+    }
   `
   const H2 = styled.h2`
     font-size: 24px;
-    font-weight: 200;
-    margin-bottom: 2rem;
-  `
-  const H3 = styled.h3`
-    font-size: 18px;
     font-weight: 200;
     margin-bottom: 2rem;
   `
@@ -103,8 +123,6 @@ const ChoosePlan = props => {
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
-        <H1>Congratulations!</H1>
-        <H2>Your account has been created succsefully!</H2>
         <H1>Start Your Protection</H1>
         <ButtonWrapper>
           <Button onClick={e => clickHandler(e)} value="month">
@@ -120,7 +138,7 @@ const ChoosePlan = props => {
         </ButtonWrapper>
         <H2>You are one step away from getting protection you need</H2>
         <H2>
-          Only for <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr ($40 Savings)</Blue>
+          Only <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr ($40 Savings)</Blue>
         </H2>
       </Wrapper>
     </div>
