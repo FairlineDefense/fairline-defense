@@ -23,7 +23,11 @@ const CenteredWrapper = styled.div`
 const H1 = styled.h1`
   font-size: 32px;
   font-weight: 300;
-  margin: 1rem 0rem 2rem 0rem;
+  margin: 2rem 0rem 1rem 0rem;
+
+  @media(max-width: 800px) {
+    margin: 2rem 0rem 0rem 0rem;
+  }
 `
 const ButtonWrapper = styled.div`
   display: flex;

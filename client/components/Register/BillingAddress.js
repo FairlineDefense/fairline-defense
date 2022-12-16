@@ -32,6 +32,10 @@ const Header = styled.h1`
   font-size: 32px;
   font-weight: 300;
   margin: 0.5rem 0rem 2rem 0rem;
+
+  @media(max-width: 800px) {
+    margin: .5rem;
+  }
 `
 const Form = styled.form`
   max-width: 700px;

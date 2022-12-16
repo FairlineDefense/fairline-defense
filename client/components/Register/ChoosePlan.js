@@ -89,14 +89,13 @@ const ChoosePlan = props => {
     font-size: 32px;
     font-weight: 300;
     margin-bottom: 2rem;
+
+    @media(max-width: 800px) {
+      margin-bottom: 1rem;
+    }
   `
   const H2 = styled.h2`
     font-size: 24px;
-    font-weight: 200;
-    margin-bottom: 2rem;
-  `
-  const H3 = styled.h3`
-    font-size: 18px;
     font-weight: 200;
     margin-bottom: 2rem;
   `
