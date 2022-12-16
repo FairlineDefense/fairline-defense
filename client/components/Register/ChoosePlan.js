@@ -31,6 +31,7 @@ const ChoosePlan = props => {
     width: 500px;
     align-items: center;
     justify-content: space-around;
+    position: relative;
 
     @media(max-width: 800px) {
       justify-content: center;
@@ -53,6 +54,7 @@ const ChoosePlan = props => {
     text-align: center;
     align-items: center;
     cursor: pointer;
+    position: relative;
     
     &:hover {
       background: rgba(0, 171, 224, 0.2);
