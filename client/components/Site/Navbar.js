@@ -5,11 +5,12 @@ import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
-  position: absolute;
+const Wrapper = styled.div.attrs(props => ({display: props.display || 'none', backgroundColor: props.backgroundColor || 'none'}))`
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
+  background-color: ${props => props.backgroundColor};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -39,10 +40,6 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
     position: fixed;
     padding: 1rem;
     justify-content: flex-end;
-    background-image: url('favicon.ico');
-    background-size: 40px;
-    background-position: center;
-    background-repeat: no-repeat;
 
     ul {
       display: ${props => props.display};
@@ -78,7 +75,11 @@ const FairlineLogo = styled.div`
   cursor: pointer;
 
   @media (max-width: 800px) {
-      display: none;
+      position: fixed;
+      left: 45%;
+      top: 10px;
+      background-image: url('favicon.ico');
+      width: 50px;
   }
 `
 const Nav = styled.nav`
@@ -171,13 +172,22 @@ const Navbar = () => {
   }
 
   let [display, setDisplay] = useState('none')
-
+  const [backgroundColor, setBackgroundColor] = useState('none');
+  const changeNavbarColor = () =>{
+     if(window.scrollY >= 80){
+       setBackgroundColor('#132A4A');
+     }
+     else{
+       setBackgroundColor('none');
+     }
+  };
+  window.addEventListener('scroll', changeNavbarColor);
   return (
-    <Wrapper display={display}>
-      <Link to="/">
+    <Wrapper display={display} backgroundColor={backgroundColor}>
+      <a href="#top">
       <FairlineLogo>
       </FairlineLogo>
-      </Link>
+      </a>
       <Nav>
         <HamburgerMenu
           onClick={() => setDisplay(display === 'flex' ? 'none' : 'flex')}

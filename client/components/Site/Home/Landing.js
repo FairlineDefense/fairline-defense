@@ -75,7 +75,7 @@ const DownArrow = styled.div`
 `
 export default function Landing() {
   return (
-    <Section>
+    <Section id="top">
       <Heading>Protection Starts Here</Heading>
       <SubHeading>
         Fairline Defense protects your family in all defense situations.
