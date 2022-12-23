@@ -5,11 +5,12 @@ import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
-  position: absolute;
+const Wrapper = styled.div.attrs(props => ({display: props.display || 'none', backgroundColor: props.backgroundColor || 'none'}))`
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
+  background-color: ${props => props.backgroundColor};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -34,10 +35,11 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
   }
 
   @media (max-width: 800px) {
-    flex-direction: row-reverse;
-    background-color: #000;
+    flex-direction: row;
+    background-color: #132A4A;
     position: fixed;
     padding: 1rem;
+    justify-content: flex-end;
 
     ul {
       display: ${props => props.display};
@@ -62,13 +64,22 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
 `
 
 const FairlineLogo = styled.div`
-  height: 60px;
+  height: 50px;
+  width: 182px;
+  display: inline-block;
   z-index: 30;
-  img {
-    height: 100%;
-  }
+  background-image: url('./images/fdlogo.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
   @media (max-width: 800px) {
-    height: 40px;
+      position: fixed;
+      left: 45%;
+      top: 10px;
+      background-image: url('favicon.ico');
+      width: 50px;
   }
 `
 const Nav = styled.nav`
@@ -98,6 +109,26 @@ const LoginButton = styled.div`
     padding: 0rem;
     margin: 0rem;
     text-align: left;
+  }
+`
+const MobileCTA = styled.div`
+  background-color: var(--cyan);
+  color: #fff;
+  border-radius: 20px;
+  width: fit-content;
+  padding: .2rem 1rem .4rem 1rem;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  @media(max-width: 800px) {
+    display: flex;
   }
 `
 const Cyan = styled.span`
@@ -141,14 +172,22 @@ const Navbar = () => {
   }
 
   let [display, setDisplay] = useState('none')
-
+  const [backgroundColor, setBackgroundColor] = useState('none');
+  const changeNavbarColor = () =>{
+     if(window.scrollY >= 80){
+       setBackgroundColor('#132A4A');
+     }
+     else{
+       setBackgroundColor('none');
+     }
+  };
+  window.addEventListener('scroll', changeNavbarColor);
   return (
-    <Wrapper display={display}>
+    <Wrapper display={display} backgroundColor={backgroundColor}>
+      <a href="#top">
       <FairlineLogo>
-        <a href="/">
-          <img src="./images/fdlogo.png" />
-        </a>
       </FairlineLogo>
+      </a>
       <Nav>
         <HamburgerMenu
           onClick={() => setDisplay(display === 'flex' ? 'none' : 'flex')}
@@ -158,6 +197,7 @@ const Navbar = () => {
           <Bar />
         </HamburgerMenu>
         {isLoggedIn ? (
+          <>
           <ul>
             {/* The navbar will show these links after you log in */}
             <li>
@@ -189,7 +229,14 @@ const Navbar = () => {
               </a>
             </li>
           </ul>
+          <Link to="/home">
+          <MobileCTA>
+            Account
+          </MobileCTA>
+          </Link>
+          </>
         ) : (
+          <>
           <ul>
             {/* The navbar will show these links before you log in */}
             <li>
@@ -221,7 +268,14 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+          <Link to="/signup">
+          <MobileCTA>
+            Join Now
+          </MobileCTA>
+          </Link>
+          </>
         )}
+        
       </Nav>
     </Wrapper>
   )
