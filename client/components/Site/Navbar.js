@@ -197,6 +197,7 @@ const Navbar = () => {
           <Bar />
         </HamburgerMenu>
         {isLoggedIn ? (
+          <>
           <ul>
             {/* The navbar will show these links after you log in */}
             <li>
@@ -228,7 +229,14 @@ const Navbar = () => {
               </a>
             </li>
           </ul>
+          <Link to="/home">
+          <MobileCTA>
+            Account
+          </MobileCTA>
+          </Link>
+          </>
         ) : (
+          <>
           <ul>
             {/* The navbar will show these links before you log in */}
             <li>
@@ -260,12 +268,14 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+          <Link to="/signup">
+          <MobileCTA>
+            Join Now
+          </MobileCTA>
+          </Link>
+          </>
         )}
-        <Link to="/signup">
-        <MobileCTA>
-          Join Now
-        </MobileCTA>
-        </Link>
+        
       </Nav>
     </Wrapper>
   )
