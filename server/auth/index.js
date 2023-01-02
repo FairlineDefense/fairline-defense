@@ -28,7 +28,8 @@ router.post('/login', async (req, res, next) => {
 })
 
 router.post('/signup', async (req, res, next) => {
-      // Step 1
+      // A user profile for Klaviyo is created. If both are valid for Klaviyo then we'll create the user in our db as well.
+      // That way we can outsource data validation to Klaviyo.
       try {
       const createKlaviyoProfileBody = {
         method: 'POST',
@@ -60,7 +61,6 @@ router.post('/signup', async (req, res, next) => {
     const user = await User.create({...req.body, klaviyoProfileID: createKlaviyoProfileRes.data.id})
     req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
-    console.log(err.name)
     if (err.name === 'SequelizeValidationError') {
       res.status(400).send('Invalid or unsupported phone number and/or email')
     }
