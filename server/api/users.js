@@ -36,9 +36,8 @@ router.put('/:id', async (req, res, next) => {
     emailInsider,
     emailPromotions
   } = req.body
+  const user = await User.findOne({where: {id: req.params.id}})
   try {
-    const user = await User.findOne({where: {id: req.params.id}})
-
     // API call to Klaviyo using their klaviyoProfileID to update fields, email, phone, name
     const updateKlaviyoProfileUrl = `https://a.klaviyo.com/api/profiles/${user.klaviyoProfileID}/`;
     const options = {
