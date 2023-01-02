@@ -123,6 +123,30 @@ router.put('/:id', async (req, res, next) => {
       .catch(err => console.error('error:' + err));
 
     // API call to Stripe using their customerId to update all relevant fields
+    await stripe.customers.update(
+      user.customerId,
+      {email: email,
+      name: `${firstName} ${lastName}`,
+      phone: `${phone}`,
+      address: {
+        line1: streetAddress,
+        line2: line2,
+        city: city,
+        state: state,
+        postal_code: zipCode,
+      },
+      shipping: {address: {
+        line1: streetAddress,
+        line2: line2,
+        city: city,
+        state: state,
+        postal_code: zipCode,
+      },
+      name: `${firstName} ${lastName}`,
+      phone: phone
+    }
+      }
+    );
   } catch (error) {
     console.log(error)
     res.status(500).send()
