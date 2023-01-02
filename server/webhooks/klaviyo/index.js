@@ -7,6 +7,7 @@ router.post(
   '/verify-email',
   express.raw({type: 'application/json'}),
   async (req, res, next) => {
+    // Step 3
     try {
       const body = JSON.parse(req.body)
       await User.update({emailVerified: true}, {where: {email: body.email}})

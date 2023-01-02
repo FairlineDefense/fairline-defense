@@ -72,7 +72,8 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   klaviyoProfileID: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   emailVerified: {
     type: Sequelize.BOOLEAN,

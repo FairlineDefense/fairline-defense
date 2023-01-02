@@ -21,40 +21,7 @@ router.post('/create-account', async (req, res, next) => {
     // [3] Upon clicking the confirmation link a webhook is sent to webhooks/klaviyo on our server which switches their
     //     email verification from FALSE to TRUE enabling the use of their Fairline account.
 
-    // Step 1:
-    const createKlaviyoProfileBody = {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        revision: '2022-10-17',
-        'content-type': 'application/json',
-        Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
-      },
-      body: JSON.stringify({
-        data: {
-          type: 'profile',
-          attributes: {
-            email: req.body.email,
-            phone_number: req.body.phone,
-            first_name: req.body.firstName,
-            last_name: req.body.lastName
-          }
-        }
-      })
-    }
-    const createKlaviyoProfileRes = await fetch(
-      'https://a.klaviyo.com/api/profiles/',
-      createKlaviyoProfileBody
-    )
-      .then(response => response.json())
-      .then(res => res.data)
-      .catch(err => console.error('ERROR', err))
-
-    if (createKlaviyoProfileRes.id) {
-      await User.update(
-        {klaviyoProfileID: createKlaviyoProfileRes.id},
-        {where: {email: req.user.email}}
-      )
+    // Step 1 is located in server/auth/index.js
 
       // Step 2:
       const addUserToNewsletterBody = {
@@ -82,7 +49,6 @@ router.post('/create-account', async (req, res, next) => {
       )
         .then(res => console.log(res))
         .catch(err => console.error('error:' + err))
-    }
 
     // Step 3 is located in ../webhooks/klaviyo
   } catch (err) {
