@@ -23,44 +23,44 @@ const Section = styled.div`
   }
 `
 const TextLeft = styled.div`
-color: #fff;
-font-size: 20px;
-line-height: 30px;
-max-width: 526px;
-font-weight: 400;
-margin-bottom: 6rem;
-padding-right: 4rem;
-p {
+  color: #fff;
+  font-size: 20px;
+  line-height: 30px;
+  max-width: 526px;
+  font-weight: 400;
+  margin-bottom: 6rem;
+  padding-right: 4rem;
+  p {
     margin-bottom: 1rem;
-}
+  }
 
-@media(max-width: 800px) {
- margin-bottom: 4rem;
-}
+  @media (max-width: 800px) {
+    margin-bottom: 4rem;
+  }
 `
 
 const TextRight = styled.div`
-color: #fff;
-font-size: 25px;
-line-height: 30px;
-max-width: 526px;
-font-weight: 400;
-text-align: center;
-margin-bottom: 4rem;
+  color: #fff;
+  font-size: 25px;
+  line-height: 30px;
+  max-width: 526px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 4rem;
 
-header {
+  header {
     font-weight: 500;
     font-size: 42px;
     margin-bottom: 1.5rem;
-}
-p {
+  }
+  p {
     margin-bottom: 1rem;
     font-size: 25px;
-}
+  }
 
-@media(max-width: 800px) {
+  @media (max-width: 800px) {
     display: none;
-   }
+  }
 `
 export default function WhyYouNeedIt() {
   return (

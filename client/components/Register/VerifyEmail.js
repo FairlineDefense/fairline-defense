@@ -14,8 +14,8 @@ const Wrapper = styled.div`
   align-content: space-between;
   padding: 4rem;
   position: relative;
-  
-  @media(max-width: 800px) {
+
+  @media (max-width: 800px) {
     padding: 4rem 1rem 0rem 1rem;
   }
 `
@@ -28,7 +28,7 @@ const CenteredWrapper = styled.div`
   width: 340px;
   text-align: center;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     width: 100%;
   }
 `

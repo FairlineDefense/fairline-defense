@@ -5,7 +5,10 @@ import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-const Wrapper = styled.div.attrs(props => ({display: props.display || 'none', backgroundColor: props.backgroundColor || 'none'}))`
+const Wrapper = styled.div.attrs(props => ({
+  display: props.display || 'none',
+  backgroundColor: props.backgroundColor || 'none'
+}))`
   position: fixed;
   left: 0;
   right: 0;
@@ -36,7 +39,7 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none', ba
 
   @media (max-width: 800px) {
     flex-direction: row;
-    background-color: #132A4A;
+    background-color: #132a4a;
     position: fixed;
     padding: 1rem;
     justify-content: flex-end;
@@ -75,11 +78,11 @@ const FairlineLogo = styled.div`
   cursor: pointer;
 
   @media (max-width: 800px) {
-      position: fixed;
-      left: 45%;
-      top: 10px;
-      background-image: url('favicon.ico');
-      width: 50px;
+    position: fixed;
+    left: 45%;
+    top: 10px;
+    background-image: url('favicon.ico');
+    width: 50px;
   }
 `
 const Nav = styled.nav`
@@ -116,7 +119,7 @@ const MobileCTA = styled.div`
   color: #fff;
   border-radius: 20px;
   width: fit-content;
-  padding: .2rem 1rem .4rem 1rem;
+  padding: 0.2rem 1rem 0.4rem 1rem;
   font-size: 16px;
   font-weight: 400;
   outline: none;
@@ -127,7 +130,7 @@ const MobileCTA = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     display: flex;
   }
 `
@@ -172,21 +175,19 @@ const Navbar = () => {
   }
 
   let [display, setDisplay] = useState('none')
-  const [backgroundColor, setBackgroundColor] = useState('none');
-  const changeNavbarColor = () =>{
-     if(window.scrollY >= 80){
-       setBackgroundColor('#132A4A');
-     }
-     else{
-       setBackgroundColor('none');
-     }
-  };
-  window.addEventListener('scroll', changeNavbarColor);
+  const [backgroundColor, setBackgroundColor] = useState('none')
+  const changeNavbarColor = () => {
+    if (window.scrollY >= 80) {
+      setBackgroundColor('#132A4A')
+    } else {
+      setBackgroundColor('none')
+    }
+  }
+  window.addEventListener('scroll', changeNavbarColor)
   return (
     <Wrapper display={display} backgroundColor={backgroundColor}>
       <a href="#top">
-      <FairlineLogo>
-      </FairlineLogo>
+        <FairlineLogo />
       </a>
       <Nav>
         <HamburgerMenu
@@ -198,84 +199,79 @@ const Navbar = () => {
         </HamburgerMenu>
         {isLoggedIn ? (
           <>
-          <ul>
-            {/* The navbar will show these links after you log in */}
-            <li>
-              <a href="#howitworks" onClick={() => setDisplay('none')}>
-                How It Works
-              </a>
-            </li>
-            <li>
-              <a href="#coverages" onClick={() => setDisplay('none')}>
-                Coverages
-              </a>
-            </li>
-            <li>
-              <a href="#testimonials" onClick={() => setDisplay('none')}>
-                Testimonials
-              </a>
-            </li>
-            <li>
-              <Link to="/armedprofessionals">Armed Professionals</Link>
-            </li>
-            <li>
-              <Link to="/home">
-                <LoginButton>Account</LoginButton>
-              </Link>
-            </li>
-            <li>
-              <a href="#" onClick={handleClick}>
-                Logout
-              </a>
-            </li>
-          </ul>
-          <Link to="/home">
-          <MobileCTA>
-            Account
-          </MobileCTA>
-          </Link>
+            <ul>
+              {/* The navbar will show these links after you log in */}
+              <li>
+                <a href="#howitworks" onClick={() => setDisplay('none')}>
+                  How It Works
+                </a>
+              </li>
+              <li>
+                <a href="#coverages" onClick={() => setDisplay('none')}>
+                  Coverages
+                </a>
+              </li>
+              <li>
+                <a href="#testimonials" onClick={() => setDisplay('none')}>
+                  Testimonials
+                </a>
+              </li>
+              <li>
+                <Link to="/armedprofessionals">Armed Professionals</Link>
+              </li>
+              <li>
+                <Link to="/home">
+                  <LoginButton>Account</LoginButton>
+                </Link>
+              </li>
+              <li>
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              </li>
+            </ul>
+            <Link to="/home">
+              <MobileCTA>Account</MobileCTA>
+            </Link>
           </>
         ) : (
           <>
-          <ul>
-            {/* The navbar will show these links before you log in */}
-            <li>
-              <a href="#howitworks" onClick={() => setDisplay('none')}>
-                How It Works
-              </a>
-            </li>
-            <li>
-              <a href="#coverages" onClick={() => setDisplay('none')}>
-                Coverages
-              </a>
-            </li>
-            <li>
-              <a href="#testimonials" onClick={() => setDisplay('none')}>
-                Testimonials
-              </a>
-            </li>
-            <li>
-              <Link to="/armedprofessionals">Armed Professionals</Link>
-            </li>
-            <li>
-              <Link to="/login">
-                <Cyan>Login</Cyan>
-              </Link>
-            </li>
-            <li>
-              <Link to="/signup">
-                <LoginButton>Join Now</LoginButton>
-              </Link>
-            </li>
-          </ul>
-          <Link to="/signup">
-          <MobileCTA>
-            Join Now
-          </MobileCTA>
-          </Link>
+            <ul>
+              {/* The navbar will show these links before you log in */}
+              <li>
+                <a href="#howitworks" onClick={() => setDisplay('none')}>
+                  How It Works
+                </a>
+              </li>
+              <li>
+                <a href="#coverages" onClick={() => setDisplay('none')}>
+                  Coverages
+                </a>
+              </li>
+              <li>
+                <a href="#testimonials" onClick={() => setDisplay('none')}>
+                  Testimonials
+                </a>
+              </li>
+              <li>
+                <Link to="/armedprofessionals">Armed Professionals</Link>
+              </li>
+              <li>
+                <Link to="/login">
+                  <Cyan>Login</Cyan>
+                </Link>
+              </li>
+              <li>
+                <Link to="/signup">
+                  <LoginButton>Join Now</LoginButton>
+                </Link>
+              </li>
+            </ul>
+            <Link to="/signup">
+              <MobileCTA>Join Now</MobileCTA>
+            </Link>
           </>
         )}
-        
       </Nav>
     </Wrapper>
   )

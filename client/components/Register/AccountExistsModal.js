@@ -12,11 +12,10 @@ export default function AccountExistsModal(props) {
   return (
     <ThemeProvider theme={theme}>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Account Already Exists</DialogTitle>
+        <DialogTitle>Error Creating Account</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            An Account with that information has already been created. Would you
-            like to login?
+            {user.error.response.data.map(error => error)}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -20,7 +20,7 @@ const ChoosePlan = props => {
     padding: 4rem;
     position: relative;
 
-    @media(max-width: 800px) {
+    @media (max-width: 800px) {
       text-align: center;
       padding: 4rem 1rem 0rem 1rem;
     }
@@ -33,7 +33,7 @@ const ChoosePlan = props => {
     justify-content: space-around;
     position: relative;
 
-    @media(max-width: 800px) {
+    @media (max-width: 800px) {
       justify-content: center;
       width: 100%;
     }
@@ -55,16 +55,16 @@ const ChoosePlan = props => {
     align-items: center;
     cursor: pointer;
     position: relative;
-    
+
     &:hover {
       background: rgba(0, 171, 224, 0.2);
       border-color: var(--blue);
     }
 
-    @media(max-width: 800px) {
+    @media (max-width: 800px) {
       width: 10rem;
       height: 12rem;
-      margin: .5rem;
+      margin: 0.5rem;
       padding: 1rem;
     }
   `
@@ -90,7 +90,7 @@ const ChoosePlan = props => {
     font-weight: 300;
     margin-bottom: 2rem;
 
-    @media(max-width: 800px) {
+    @media (max-width: 800px) {
       margin-bottom: 1rem;
     }
   `

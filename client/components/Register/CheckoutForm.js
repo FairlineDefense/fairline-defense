@@ -20,9 +20,9 @@ const Span = styled.span`
   width: 100%;
 `
 const CenteredWrapper = styled.span`
-width: 100%;
-display: flex;
-justify-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `
 const Button = styled.button`
   background-color: var(--blue);
@@ -37,8 +37,8 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
 
-  @media(max-width: 800px) {
-    margin: .5rem;
+  @media (max-width: 800px) {
+    margin: 0.5rem;
   }
 `
 const CheckoutForm = () => {

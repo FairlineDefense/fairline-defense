@@ -17,7 +17,7 @@ import {
   VerifyPhone,
   SecurityHome,
   MembershipAndBilling,
-  VerifiedEmail,
+  VerifiedEmail
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'

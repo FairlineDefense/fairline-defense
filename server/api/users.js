@@ -2,7 +2,7 @@ const router = require('express').Router()
 const {User, Order} = require('../db/models')
 require('dotenv').config()
 const stripe = require('stripe')(process.env.SECRET_KEY)
-const fetch = require('node-fetch');
+const fetch = require('node-fetch')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -38,8 +38,10 @@ router.put('/:id', async (req, res, next) => {
   } = req.body
   const user = await User.findOne({where: {id: req.params.id}})
   try {
-  //   // API call to Klaviyo using their klaviyoProfileID to update fields, email, phone, name
-    const updateKlaviyoProfileUrl = `https://a.klaviyo.com/api/profiles/${user.klaviyoProfileID}/`;
+    //   // API call to Klaviyo using their klaviyoProfileID to update fields, email, phone, name
+    const updateKlaviyoProfileUrl = `https://a.klaviyo.com/api/profiles/${
+      user.klaviyoProfileID
+    }/`
     const options = {
       method: 'PATCH',
       headers: {
@@ -60,17 +62,16 @@ router.put('/:id', async (req, res, next) => {
           id: user.klaviyoProfileID
         }
       })
-    };
-    
+    }
+
     fetch(updateKlaviyoProfileUrl, options)
       .then(res => res.json())
       .then(json => console.log(json))
-      .catch(err => console.error('error:' + err));
+      .catch(err => console.error('error:' + err))
 
     // API call to Stripe using their customerId to update all relevant fields
-    await stripe.customers.update(
-      user.customerId,
-      {email: email,
+    await stripe.customers.update(user.customerId, {
+      email: email,
       name: `${firstName} ${lastName}`,
       phone: `${phone}`,
       address: {
@@ -78,20 +79,20 @@ router.put('/:id', async (req, res, next) => {
         line2: line2,
         city: city,
         state: state,
-        postal_code: zipCode,
+        postal_code: zipCode
       },
-      shipping: {address: {
-        line1: streetAddress,
-        line2: line2,
-        city: city,
-        state: state,
-        postal_code: zipCode,
-      },
-      name: `${firstName} ${lastName}`,
-      phone: phone
-    }
+      shipping: {
+        address: {
+          line1: streetAddress,
+          line2: line2,
+          city: city,
+          state: state,
+          postal_code: zipCode
+        },
+        name: `${firstName} ${lastName}`,
+        phone: phone
       }
-    );
+    })
   } catch (error) {
     console.log(error)
     res.status(500).send()

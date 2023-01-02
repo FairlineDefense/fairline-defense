@@ -25,7 +25,7 @@ const H1 = styled.h1`
   font-weight: 300;
   margin: 2rem 0rem 1rem 0rem;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     font-size: 22px;
     margin: 2rem 0rem 0rem 0rem;
   }

@@ -7,36 +7,36 @@ import {useStripe, useElements} from '@stripe/react-stripe-js'
 import {Link} from 'react-router-dom'
 
 const Wrapper = styled.div`
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-text-align: center;
-padding-top: 4rem;
-position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 4rem;
+  position: relative;
 `
 const H1 = styled.h1`
-font-size: 32px;
-font-weight: 300;
-margin-bottom: 2rem;
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 2rem;
 `
 const Button = styled.button`
-background-color: var(--blue);
-color: #fff;
-border-radius: 40px;
-width: 340px;
-padding: 1rem 2rem 1rem 2rem;
-font-size: 20px;
-font-weight: 100;
-margin: 1rem;
-outline: none;
-border: none;
-cursor: pointer;
+  background-color: var(--blue);
+  color: #fff;
+  border-radius: 40px;
+  width: 340px;
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 20px;
+  font-weight: 100;
+  margin: 1rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
 
-&::disabled {
-  background-color: #2a4c78;
-}
+  &::disabled {
+    background-color: #2a4c78;
+  }
 `
 
 const Shipping = () => {

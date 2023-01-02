@@ -28,41 +28,50 @@ router.post('/login', async (req, res, next) => {
 })
 
 router.post('/signup', async (req, res, next) => {
-      // A user profile for Klaviyo is created. If both are valid for Klaviyo then we'll create the user in our db as well.
-      // That way we can outsource data validation to Klaviyo.
-      try {
-      const createKlaviyoProfileBody = {
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          revision: '2022-10-17',
-          'content-type': 'application/json',
-          Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
-        },
-        body: JSON.stringify({
-          data: {
-            type: 'profile',
-            attributes: {
-              email: req.body.email,
-              phone_number: req.body.phone,
-              first_name: req.body.firstName,
-              last_name: req.body.lastName
-            }
+  // A user profile for Klaviyo is created. If both are valid for Klaviyo then we'll create the user in our db as well.
+  // That way we can outsource data validation to Klaviyo.
+  let createKlaviyoProfileRes = {}
+  try {
+    const createKlaviyoProfileBody = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        'content-type': 'application/json',
+        Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'profile',
+          attributes: {
+            email: req.body.email,
+            phone_number: req.body.phone,
+            first_name: req.body.firstName,
+            last_name: req.body.lastName
           }
-        })
-      }
-      const createKlaviyoProfileRes = await fetch(
-        'https://a.klaviyo.com/api/profiles/',
-        createKlaviyoProfileBody
-      )
+        }
+      })
+    }
+    createKlaviyoProfileRes = await fetch(
+      'https://a.klaviyo.com/api/profiles/',
+      createKlaviyoProfileBody
+    )
       .then(res => res.json())
-      .catch(err => console.log('error:' + err));
+      .catch(err => console.log('error:' + err))
 
-    const user = await User.create({...req.body, klaviyoProfileID: createKlaviyoProfileRes.data.id})
+    console.log(createKlaviyoProfileRes)
+
+    const user = await User.create({
+      ...req.body,
+      klaviyoProfileID: createKlaviyoProfileRes?.data?.id
+    })
     req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
     if (err.name === 'SequelizeValidationError') {
-      res.status(400).send('Invalid or unsupported phone number and/or email')
+      //This means Klaviyo rejected either the phone number or email as invalid
+      //so we won't create a user with bad info in our db
+      const errors = createKlaviyoProfileRes.errors.map(error => error.detail)
+      res.status(400).send(errors)
     }
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists')

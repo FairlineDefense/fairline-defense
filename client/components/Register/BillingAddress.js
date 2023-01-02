@@ -33,9 +33,9 @@ const Header = styled.h1`
   font-weight: 300;
   margin: 0.5rem 0rem 2rem 0rem;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     font-size: 22px;
-    margin: .5rem;
+    margin: 0.5rem;
   }
 `
 const Form = styled.form`
@@ -45,7 +45,7 @@ const Form = styled.form`
 
   @media (max-width: 800px) {
     width: 90%;
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 `
 const ErrorText = styled.div`

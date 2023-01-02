@@ -23,32 +23,32 @@ router.post('/create-account', async (req, res, next) => {
 
     // Step 1 is located in server/auth/index.js
 
-      // Step 2:
-      const addUserToNewsletterBody = {
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          revision: '2022-10-17',
-          'content-type': 'application/json',
-          Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
-        },
-        body: JSON.stringify({
-          data: {
-            type: 'profile-subscription-bulk-create-job',
-            attributes: {
-              subscriptions: [{email: req.body.email}],
-              list_id: 'VXeuyy'
-            }
+    // Step 2:
+    const addUserToNewsletterBody = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        'content-type': 'application/json',
+        Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'profile-subscription-bulk-create-job',
+          attributes: {
+            subscriptions: [{email: req.body.email}],
+            list_id: 'VXeuyy'
           }
-        })
-      }
+        }
+      })
+    }
 
-      fetch(
-        'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/',
-        addUserToNewsletterBody
-      )
-        .then(res => console.log(res))
-        .catch(err => console.error('error:' + err))
+    fetch(
+      'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/',
+      addUserToNewsletterBody
+    )
+      .then(res => console.log(res))
+      .catch(err => console.error('error:' + err))
 
     // Step 3 is located in ../webhooks/klaviyo
   } catch (err) {
