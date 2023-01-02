@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {User, Order} = require('../db/models')
 require('dotenv').config()
 const stripe = require('stripe')(process.env.SECRET_KEY)
+const fetch = require('node-fetch');
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -35,6 +36,67 @@ router.put('/:id', async (req, res, next) => {
     emailInsider,
     emailPromotions
   } = req.body
+  const user = await User.findOne({where: {id: req.params.id}})
+  try {
+  //   // API call to Klaviyo using their klaviyoProfileID to update fields, email, phone, name
+    const updateKlaviyoProfileUrl = `https://a.klaviyo.com/api/profiles/${user.klaviyoProfileID}/`;
+    const options = {
+      method: 'PATCH',
+      headers: {
+        accept: 'application/json',
+        revision: '2022-10-17',
+        'content-type': 'application/json',
+        Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'profile',
+          attributes: {
+            email: email,
+            phone_number: phone,
+            first_name: firstName,
+            last_name: lastName
+          },
+          id: user.klaviyoProfileID
+        }
+      })
+    };
+    
+    fetch(updateKlaviyoProfileUrl, options)
+      .then(res => res.json())
+      .then(json => console.log(json))
+      .catch(err => console.error('error:' + err));
+
+    // API call to Stripe using their customerId to update all relevant fields
+    await stripe.customers.update(
+      user.customerId,
+      {email: email,
+      name: `${firstName} ${lastName}`,
+      phone: `${phone}`,
+      address: {
+        line1: streetAddress,
+        line2: line2,
+        city: city,
+        state: state,
+        postal_code: zipCode,
+      },
+      shipping: {address: {
+        line1: streetAddress,
+        line2: line2,
+        city: city,
+        state: state,
+        postal_code: zipCode,
+      },
+      name: `${firstName} ${lastName}`,
+      phone: phone
+    }
+      }
+    );
+  } catch (error) {
+    console.log(error)
+    res.status(500).send()
+  }
+
   try {
     if (password) {
       await User.update(
@@ -86,7 +148,6 @@ router.put('/:id', async (req, res, next) => {
     }
   } catch (err) {
     console.log(err)
-    next(err)
   }
 })
 
