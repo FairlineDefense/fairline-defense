@@ -259,6 +259,9 @@ const Signup = () => {
 
     if (validateFields()) {
       dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
+      // Will create a Klaviyo profile first. This way email and phone validation is done on Klaviyo's backend
+      // If Klaviyo approves, then we create a user in our DB. If not, a response is returned indicating
+      // either invalid phone, email, or account exists already. Need to update front end to process these errors.
     }
   }
 

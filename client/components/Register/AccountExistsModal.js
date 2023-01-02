@@ -15,7 +15,8 @@ export default function AccountExistsModal(props) {
         <DialogTitle>Error Creating Account</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {user.error.response.data.map(error => error)}
+            An Account with that information has already been created. Would you
+            like to login?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
