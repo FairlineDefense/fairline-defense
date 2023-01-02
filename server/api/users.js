@@ -37,60 +37,6 @@ router.put('/:id', async (req, res, next) => {
     emailPromotions
   } = req.body
   try {
-    if (password) {
-      await User.update(
-        {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phone: phone,
-          streetAddress: streetAddress,
-          line2: line2,
-          city: city,
-          state: state,
-          zipCode: zipCode,
-          emailReminders: emailReminders,
-          emailNews: emailNews,
-          emailInsider: emailInsider,
-          emailPromotions: emailPromotions,
-          password: password
-        },
-        {
-          where: {id: req.params.id},
-          individualHooks: true
-        }
-      )
-      res.status(200).send()
-    } else {
-      await User.update(
-        {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phone: phone,
-          streetAddress: streetAddress,
-          line2: line2,
-          city: city,
-          state: state,
-          zipCode: zipCode,
-          emailReminders: emailReminders,
-          emailNews: emailNews,
-          emailInsider: emailInsider,
-          emailPromotions: emailPromotions
-        },
-        {
-          where: {id: req.params.id},
-          individualHooks: true
-        }
-      )
-      res.status(200).send()
-    }
-  } catch (err) {
-    console.log(err)
-    next(err)
-  }
-
-  try {
     const user = await User.findOne({where: {id: req.params.id}})
 
     // API call to Klaviyo using their klaviyoProfileID to update fields, email, phone, name
@@ -147,9 +93,64 @@ router.put('/:id', async (req, res, next) => {
     }
       }
     );
+    next()
   } catch (error) {
     console.log(error)
     res.status(500).send()
+  }
+
+  try {
+    if (password) {
+      await User.update(
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phone: phone,
+          streetAddress: streetAddress,
+          line2: line2,
+          city: city,
+          state: state,
+          zipCode: zipCode,
+          emailReminders: emailReminders,
+          emailNews: emailNews,
+          emailInsider: emailInsider,
+          emailPromotions: emailPromotions,
+          password: password
+        },
+        {
+          where: {id: req.params.id},
+          individualHooks: true
+        }
+      )
+      res.status(200).send()
+    } else {
+      await User.update(
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phone: phone,
+          streetAddress: streetAddress,
+          line2: line2,
+          city: city,
+          state: state,
+          zipCode: zipCode,
+          emailReminders: emailReminders,
+          emailNews: emailNews,
+          emailInsider: emailInsider,
+          emailPromotions: emailPromotions
+        },
+        {
+          where: {id: req.params.id},
+          individualHooks: true
+        }
+      )
+      res.status(200).send()
+    }
+  } catch (err) {
+    console.log(err)
+    next(err)
   }
 })
 
