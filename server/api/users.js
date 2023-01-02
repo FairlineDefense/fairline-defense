@@ -38,7 +38,7 @@ router.put('/:id', async (req, res, next) => {
   } = req.body
   const user = await User.findOne({where: {id: req.params.id}})
   try {
-    // API call to Klaviyo using their klaviyoProfileID to update fields, email, phone, name
+  //   // API call to Klaviyo using their klaviyoProfileID to update fields, email, phone, name
     const updateKlaviyoProfileUrl = `https://a.klaviyo.com/api/profiles/${user.klaviyoProfileID}/`;
     const options = {
       method: 'PATCH',
@@ -92,7 +92,6 @@ router.put('/:id', async (req, res, next) => {
     }
       }
     );
-    next()
   } catch (error) {
     console.log(error)
     res.status(500).send()
@@ -149,7 +148,6 @@ router.put('/:id', async (req, res, next) => {
     }
   } catch (err) {
     console.log(err)
-    next(err)
   }
 })
 
