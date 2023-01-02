@@ -56,7 +56,7 @@ router.put('/:id', async (req, res, next) => {
             email: email,
             phone_number: phone,
             first_name: firstName,
-            last_Name: lastName
+            last_name: lastName
           },
           id: user.klaviyoProfileID
         }
