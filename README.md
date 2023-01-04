@@ -8,7 +8,7 @@
 docker-compose up --build
 ```
 
-## Download the Stripe CLI and run in a separate terminal:
+## Download the Stripe CLI, authenticate, and run following in a separate terminal:
 ```
 stripe --api-key <STRIPE SECRET API KEY> listen --forward-to=localhost:8080/webhooks/stripe --skip-verify
 ```
