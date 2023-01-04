@@ -139,6 +139,7 @@ const startListening = () => {
   )
 }
 
+// use db.sync({force: true}) only to clear database of all data and reset tables
 const syncDb = () => db.sync()
 
 async function bootApp() {

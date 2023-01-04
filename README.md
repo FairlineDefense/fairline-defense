@@ -5,7 +5,17 @@
 ## Run locally
 
 ```
-npm run start-dev
+docker-compose up --build
+```
+
+## Download the Stripe CLI and run in a separate terminal:
+```
+stripe --api-key <STRIPE SECRET API KEY> listen --forward-to=localhost:8080/webhooks/stripe --skip-verify
+```
+## Deploy to AWS
+
+```
+docker build -t .
 ```
 
 ## Deploy to Heroku

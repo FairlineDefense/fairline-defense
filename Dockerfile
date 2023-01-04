@@ -10,6 +10,4 @@ RUN npm install
 
 EXPOSE 8080/tcp
 
-EXPOSE 5432/tcp
-
 CMD npm start
