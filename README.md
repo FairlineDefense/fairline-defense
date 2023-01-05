@@ -12,30 +12,22 @@ docker-compose up --build
 ```
 stripe --api-key <STRIPE SECRET API KEY> listen --forward-to=localhost:8080/webhooks/stripe --skip-verify
 ```
-## Deploy to AWS
-
+## Push to AWS using AWS CLI:
+```
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 609103538808.dkr.ecr.us-east-1.amazonaws.com
+```
 ```
 docker build -t .
+```
+```
+docker tag fairline-service-1:latest 609103538808.dkr.ecr.us-east-1.amazonaws.com/fairline-service-1:latest
+```
+```
+docker push 609103538808.dkr.ecr.us-east-1.amazonaws.com/fairline-service-1:latest
 ```
 
 ## Deploy to Heroku
 
 ```
 ./script/deploy
-```
-
-# Set up testing environment:
-
-## Postgres:
-
-```
-createdb fairline
-```
-
-## Listen for Stripe webhooks locally:
-
-Needed for creating an account
-
-```
-stripe --api-key <Stripe Private Key> listen --forward-to=localhost:8080/webhooks/stripe --skip-verify
 ```
