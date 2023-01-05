@@ -1,0 +1,31 @@
+version: "3.0"
+
+services:
+  service:
+    image: fairline-defense:latest
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8080:8080
+    expose:
+      - "8080"
+    build: ./
+    environment:
+      DOCKER_DATABASE_URL: postgresql://user:password@db:5432/fairline
+    tty: true
+
+  db:
+    image: postgres:13.7-bullseye
+    restart: always
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: fairline
+    volumes:
+      - db-data:/db-data/
+
+volumes:
+  db-data:
