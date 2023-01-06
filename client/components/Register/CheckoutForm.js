@@ -62,7 +62,8 @@ const CheckoutForm = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: process.env.NODE_ENV === 'production' ? 'https://fairlinedefense.jeffreylwood.com/paymentstatus' : 'http://localhost:8080/paymentstatus'
+        //Why does an env variable not work here?
+        return_url: 'https://fairlinedefense.jeffreylwood.com/paymentstatus'
       }
     })
 
