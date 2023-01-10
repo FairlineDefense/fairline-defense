@@ -9,6 +9,7 @@ const Section = styled.div`
   padding: 2rem;
   align-items: center;
   padding: 2rem 4rem 2rem 4rem;
+  background-color: #F0F0F0;
 
   @media (max-width: 800px) {
     min-height: 300px;
@@ -23,11 +24,13 @@ const Text = styled.div`
 
   header {
     font-size: 48px;
+    line-height: 48px;
     font-weight: 500;
+    margin-bottom: 1rem;
   }
   div {
     font-size: 24px;
-    line-height: 36px;
+    line-height: 30px;
   }
 
   @media (max-width: 800px) {
