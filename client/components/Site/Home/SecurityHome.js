@@ -17,17 +17,18 @@ import Footer from './Footer'
 import WhyYouNeedIt from './WhyYouNeedIt'
 import WhyWeStartedThis from './WhyWeStartedThis'
 import JoinNowSecurity from './JoinNowSecurity'
+import SecurityNeed from './SecurityNeed'
 
 const SecurityHome = () => {
   return (
     <>
       <Navbar />
       <SecurityLanding />
-      <WhyWeStartedThis />
+      {/* <WhyWeStartedThis /> */}
       <Card />
       <ProtectYourFuture />
       <HowItWorksSection />
-      <WhyYouNeedIt />
+      <SecurityNeed />
       <WhatDoWeCover />
       <WhatWeDontCover />
       <Plans />

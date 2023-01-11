@@ -4,8 +4,7 @@ import styled from 'styled-components'
 const Section = styled.div`
   width: 100vw;
   min-height: 670px;
-  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
-  color: #fff;
+  color: var(--darkblue);
   padding: 4rem;
   display: flex;
   flex-direction: row;
@@ -26,6 +25,7 @@ const Text = styled.div`
   }
   p {
     font-size: 25px;
+    line-height: 35px;
     font-weight: 200;
     margin: 2rem 0rem 2rem 0rem;
   }
@@ -47,43 +47,23 @@ const Image = styled.div`
     padding: 2rem;
   }
 `
-const StartButton = styled.div`
-  background-color: var(--red);
-  color: #fff;
-  border-radius: 40px;
-  width: 280px;
-  padding: 1rem 2rem 1rem 2rem;
-  font-size: 20px;
-  font-weight: 400;
-  margin-top: 1rem;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-  display: none;
-
-  @media (max-width: 800px) {
-    display: block;
-  }
-`
 export default function ProtectYourFuture() {
   return (
     <Section>
-      <StartButton>Get Started</StartButton>
+            <Image>
+        <img src="./images/arrestingman.png" />
+      </Image>
       <Text>
-        <header>Protect your future</header>
+        <header>Why do you need it?</header>
         <p>
-          If you have to defend yourself in a traumatic situation, you will be
-          questioned by the police.
+        After a self-defense situation, you need to protect yourself.
         </p>
         <p>
-          You can even be sued by your attacker or their family. Defending
-          yourself can quickly spiral into a financial problem.
+        You need an experienced lawyer immediately.
+        This situation is expensive and confusing.
+        Fairline Defense is here to step in immediately and protect you.
         </p>
       </Text>
-      <Image>
-        <img src="./images/AdobeStock_169557997-1.png" />
-      </Image>
     </Section>
   )
 }
