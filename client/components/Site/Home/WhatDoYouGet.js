@@ -7,7 +7,8 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  padding: 4rem;
+  
   @media (max-width: 800px) {
     display: none;
   }

@@ -12,7 +12,8 @@ const Section = styled.div`
   margin: 1rem 0rem 2rem 0rem;
 
   @media (max-width: 800px) {
-
+    flex-direction: column;
+    padding: 1rem;
   }
 `
 const TextLeft = styled.div`
@@ -25,7 +26,7 @@ img {
 }
 
 @media(max-width: 800px) {
-
+  width: 100%;
 }
 `
 
@@ -53,7 +54,8 @@ small {
 }
 
 @media(max-width: 800px) {
-    display: none;
+  width: 100%;
+  padding: 2rem;
    }
 `
 export default function WhyYouNeedIt() {
@@ -64,7 +66,8 @@ export default function WhyYouNeedIt() {
       </TextLeft>
       <TextRight>
         <header>Why do you need it?</header>
-        <p>If you are in a dfensive situaiton you will ....</p>
+        <p>If you have to defend yourself in a traumatic situation, you will be questioned by the police.</p>
+        <p>You can even be sued by your attacker or their family. Defending yourself can quickly spiral into a financial problem.</p>
         <small>"Don't be a victim. Protect yourself."</small>
       </TextRight>
     </Section>

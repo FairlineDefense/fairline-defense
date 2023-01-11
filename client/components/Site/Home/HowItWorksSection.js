@@ -2,19 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Section = styled.div`
-  min-height: 400px;
+  height: 400px;
   width: 100vw;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
   align-items: center;
   padding: 2rem 4rem 2rem 4rem;
   justify-content: center;
+  margin: 2rem;
 
   @media (max-width: 800px) {
-    min-height: 800px;
-    padding: 2rem;
-    flex-direction: column;
+    min-height: 400px;
+    margin: 2rem 0rem 2rem 0rem;
     background-image: url('./images/lightredbg.png');
     background-position: left bottom;
     background-repeat: no-repeat;
@@ -27,10 +26,10 @@ const Header = styled.div`
   font-weight: 500;
   color: var(--darkblue);
   text-align: center;
-  margin: 4rem;
+  margin-bottom: 4rem;
 
   @media (max-width: 800px) {
-    width: 240px;
+    width: 100%;
   }
 `
 const Text = styled.div`

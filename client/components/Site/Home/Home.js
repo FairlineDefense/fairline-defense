@@ -26,14 +26,14 @@ const Home = () => {
       <HowItWorksSection />
       <WhyYouNeedIt />
       <Plans />
+      <WhatDoYouGet />
       <WhatDoWeCover />
       <WhatWeDontCover />
-      <Protection />
-      <WhatDoYouGet />
+      {/* <Protection /> */}
       <WhatDoYouGetMobile />
       <PlansMobile />
       <BePrepared />
-      <Stories />
+      {/* <Stories /> */}
       <JoinNow />
       <Footer />
     </>
