@@ -4,7 +4,7 @@ import SecurityLanding from './SecurityLanding'
 import Card from './Card'
 import ProtectYourFuture from './ProtectYourFuture'
 import HowItWorksSection from './HowItWorksSection'
-import WhatDoWeCover from './WhatDoWeCover'
+import SecurityWhatDoWeCover from './SecurityWhatDoWeCover'
 import WhatWeDontCover from './WhatWeDontCover'
 import SecurityPlans from './SecurityPlans'
 import Protection from './Protection'
@@ -31,9 +31,9 @@ const SecurityHome = () => {
       <SecurityNeed />
       <SecurityPlans />
       <WhatDoYouGetMobile />
-      <WhatDoWeCover />
+      <SecurityWhatDoWeCover />
       <WhatWeDontCover />
-      <Protection />
+      {/* <Protection /> */}
       {/* <PlansMobile /> */}
       <BePrepared />
       <SecurityStories />
