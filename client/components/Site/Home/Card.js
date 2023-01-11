@@ -45,8 +45,8 @@ const Text = styled.div`
       margin-bottom: 1rem;
     }
     div {
-      line-height: 30px;
-      font-size: 16px;
+      line-height: 28px;
+      font-size: 20px;
     }
   }
 `
@@ -66,9 +66,12 @@ const CardImage = styled.div`
   img {
     max-width: 515px;
   }
+
   @media (max-width: 800px) {
-    display: none;
+    padding: 0rem;
+    img {max-width: 350px;
   }
+}
 `
 export default function Card() {
   return (
