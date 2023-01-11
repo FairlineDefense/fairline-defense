@@ -152,9 +152,7 @@ const VerifyPhone = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({email: user.email, phone: user.phone})
-      })
-        .then(res => res.json())
-        .then(data => setCode(String(data)))
+      }).catch(error => console.log(error))
     }
   }
 
