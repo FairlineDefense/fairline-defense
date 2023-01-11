@@ -13,9 +13,11 @@ const Section = styled.div`
   background-size: 100%;
 
   @media (max-width: 800px) {
+    margin-top: 60px;
     background-size: cover;
-    height: 80vh;
-    padding: 20rem 1rem 1rem 1rem;
+    background-position: 50% top;
+    height: 500px;
+    padding: .5rem 1rem 1rem 1rem;
     text-align: center;
     align-items: center;
   }
@@ -26,9 +28,10 @@ const Heading = styled.div`
   color: #fff;
 
   @media (max-width: 800px) {
-    line-height: 36px;
     width: 250px;
-    font-size: 32px;
+    font-size: 44px;
+    line-height: 50px;
+    margin-bottom: 2rem;
   }
 `
 const SubHeading = styled.div`
@@ -40,11 +43,14 @@ const SubHeading = styled.div`
 
   @media (max-width: 800px) {
     width: 280px;
-    font-size: 16px;
+    font-size: 22px;
+    line-height: 32px;
+    margin: 0rem 0rem 1rem 0rem;
   }
 `
 const StartButton = styled.div`
-  background-color: var(--red);
+  background-color: #FF1E3E;
+  opacity: .9;
   color: #fff;
   border-radius: 40px;
   width: 280px;
