@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Section = styled.div`
   max-width: 100vw;
-  height: fit-content;
+  height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,6 +11,7 @@ const Section = styled.div`
 
   @media (max-width: 800px) {
     display: block;
+    height: fit-content;
   }
 `
 const Header = styled.div`
@@ -22,6 +23,10 @@ const Header = styled.div`
   color: var(--darkblue);
   margin-bottom: 1rem;
   text-align: center;
+
+  @media(max-width: 800px) {
+    font-size: 36px;
+  }
 `
 const Wrapper = styled.div`
   width: 100vw;

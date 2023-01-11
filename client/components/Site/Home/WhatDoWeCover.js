@@ -10,6 +10,7 @@ const Section = styled.div`
   padding: 4rem 4rem 2rem 4rem;
 
   @media (max-width: 800px) {
+    display: none;
     min-height: 300px;
     padding: 5rem 1rem 4rem 1rem;
     flex-direction: column;
@@ -30,9 +31,9 @@ const Wrapper = styled.div`
   }
 `
 const Text = styled.div`
-  width: 40%;
+  width: 430px;
   color: var(--darkblue);
-  padding: 2rem;
+  margin: 2rem;
   display: flex;
   flex-direction: column;
 
@@ -60,16 +61,17 @@ const Small = styled.div`
   color: var(--darkblue);
   margin: 1.5rem 0rem 1.5rem 0rem;
 `
-const Icons = styled.div`
+const Image = styled.div`
   width: 60%;
-  background-image: url('./images/icons.png');
+  background-image: url('./images/girlwithgun.png');
   background-position: center;
   background-repeat: no-repeat;
+  height: 400px;
+  border-radius: 20px;
 
   @media (max-width: 800px) {
     display: block;
     width: 100%;
-    height: 200px;
     background-size: contain;
   }
 `
@@ -89,14 +91,14 @@ const CyanButton = styled.div`
 export default function WhatDoWeCover() {
   return (
     <Section id="coverages">
-      <Header>What do we cover?</Header>
       <Wrapper>
         <Text>
+          <Header>What do we cover?</Header>
           <Header>Any actions to defend your life.</Header>
           <Small>Click below to see all coverages</Small>
           <CyanButton>All Coverages</CyanButton>
         </Text>
-        <Icons />
+        <Image />
       </Wrapper>
     </Section>
   )

@@ -8,15 +8,14 @@ const Section = styled.div`
   align-items: center;
   justify-content: center;
   background-image: url('./images/21centuryimage.jpg');
-  background-position: center bottom;
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
   text-align: center;
 
   @media (max-width: 800px) {
-    background-size: auto 90%;
     justify-content: flex-end;
-    padding-bottom: 8rem;
+    padding-bottom: 10rem;
   }
 `
 const Heading = styled.div`
@@ -27,13 +26,13 @@ const Heading = styled.div`
   width: 750px;
 
   @media (max-width: 800px) {
-    line-height: 38px;
-    font-size: 32px;
+    line-height: 48px;
+    font-size: 36px;
     width: 290px;
   }
 `
 const StartButton = styled.div`
-  background-color: var(--red);
+  background-color: #FF1E3E;
   color: #fff;
   border-radius: 40px;
   width: 280px;
@@ -47,7 +46,7 @@ const StartButton = styled.div`
   text-align: center;
 
   @media (max-width: 800px) {
-    background-color: #1ea0ff;
+
   }
 `
 export default function JoinNow() {
