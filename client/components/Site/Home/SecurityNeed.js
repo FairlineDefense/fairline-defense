@@ -27,7 +27,10 @@ const Image = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 20px;
-  background-color: pink;
+
+  @media(max-width: 800px) {
+    border-radius: 0px;
+  }
 `
 
 const TextRight = styled.div`
@@ -46,7 +49,9 @@ header {
 @media(max-width: 800px) {
   width: 100%;
   height: 190px;
-  padding: 0rem 2rem 1rem 2rem;
+  margin-right: 0rem;
+  margin-top: 6rem;
+  text-align: center;
 
   header {
     

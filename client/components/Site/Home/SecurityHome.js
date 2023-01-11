@@ -6,7 +6,7 @@ import ProtectYourFuture from './ProtectYourFuture'
 import HowItWorksSection from './HowItWorksSection'
 import WhatDoWeCover from './WhatDoWeCover'
 import WhatWeDontCover from './WhatWeDontCover'
-import Plans from './Plans'
+import SecurityPlans from './SecurityPlans'
 import Protection from './Protection'
 import WhatDoYouGet from './WhatDoYouGet'
 import WhatDoYouGetMobile from './WhatDoYouGetMobile'
@@ -29,13 +29,12 @@ const SecurityHome = () => {
       <ProtectYourFuture />
       <HowItWorksSection />
       <SecurityNeed />
+      <SecurityPlans />
+      <WhatDoYouGetMobile />
       <WhatDoWeCover />
       <WhatWeDontCover />
-      <Plans />
       <Protection />
-      <WhatDoYouGet />
-      <WhatDoYouGetMobile />
-      <PlansMobile />
+      {/* <PlansMobile /> */}
       <BePrepared />
       <SecurityStories />
       <JoinNowSecurity />
