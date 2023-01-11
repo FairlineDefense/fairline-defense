@@ -7,7 +7,6 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  display: none;
   margin: 4rem 0rem 4rem 0rem;
 
   @media (max-width: 800px) {
@@ -15,7 +14,7 @@ const Section = styled.div`
   }
 `
 const Header = styled.div`
-  font-size: 32px;
+  font-size: 48px;
   width: 100%;
   text-align: center;
   font-weight: 600;
@@ -24,32 +23,29 @@ const Header = styled.div`
   margin-bottom: 1rem;
   text-align: center;
 `
-const Subheader = styled.div`
-  font-size: 20px;
-  color: var(--cyan);
-  font-weight: 500;
-  width: 100%;
-  text-align: center;
-`
 const Wrapper = styled.div`
   width: 100vw;
   margin: 4rem 0rem 4rem 0rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+
+  @media(max-width: 800px) {
+    flex-direction: column;
+  }
 `
 const Card = styled.div`
   width: 284px;
   height: 302px;
-  border: 0.5px solid #ccc;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   color: var(--darkblue);
   padding: 2rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-bottom: 2rem;
+  background-color: #F0F0F0;
+  margin: 0rem 2rem 0rem 2rem;
 
   header {
     font-size: 60px;
@@ -65,12 +61,15 @@ const Card = styled.div`
     height: 100px;
     width: 106px;
   }
+
+  @media(max-width: 800px) {
+  margin-bottom: 2rem;
+  }
 `
 export default function WhatDoYouGetMobile() {
   return (
     <Section>
       <Header>What do you get?</Header>
-      <Subheader>Peace of mind at $19.99</Subheader>
       <Wrapper>
         <Card>
           <img src="./images/7.png" />
