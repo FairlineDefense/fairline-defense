@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Section = styled.div`
-  height: 650px;
+  height: fit-content;
   max-width: 100vw;
   display: flex;
   flex-direction: column;
   padding: 4rem;
   align-items: center;
-  margin: 2rem;
+  background-color: #E8F3F9;
 
   @media (max-width: 800px) {
     display: none;
@@ -18,13 +18,12 @@ const Wrapper = styled.div`
   display: flex;
   min-height: fit-content;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   width: 100%;
 `
 const Header = styled.div`
   font-size: 48px;
-  width: 450px;
   text-align: center;
   font-weight: 600;
   line-height: 55px;
@@ -36,15 +35,22 @@ const Header = styled.div`
 `
 const Subheader = styled.div`
   font-size: 35px;
-  color: var(--cyan);
   font-weight: 500;
+  color: var(--darkblue);
+  margin-bottom: 4rem;
+
   @media (max-width: 800px) {
   }
+`
+const Cyan = styled.span`
+color: var(--cyan);
+font-size: inherit;
+font-weight: inherit;
 `
 const Plan = styled.div`
   height: 232px;
   width: 284px;
-  background: #00abe0;
+  background: #223F67;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   color: #fff;
@@ -63,7 +69,8 @@ const Plan = styled.div`
   }
 `
 const Small = styled.div`
-  font-size: 30px;
+  font-size: 32px;
+  line-height: 40px;
   color: var(--darkblue);
   width: 620px;
   padding-right: 300px;
@@ -83,17 +90,18 @@ export default function Plans() {
   return (
     <Section>
       <Header>No Complicated Plans & Options</Header>
-      <Subheader>Peace of mind at $19.99</Subheader>
+      <Subheader>Peace of mind at <Cyan>$19.99</Cyan></Subheader>
+      <Header>Armed Citizen Plan</Header>
       <Wrapper>
         <Plan>
-          <header>$19</header>
+          <header>$19.99</header>
           <small>Billed Monthly</small>
         </Plan>
         <Plan>
           <header>$199</header>
           <small>Billed Annually</small>
         </Plan>
-        <Arrow />
+        {/* <Arrow /> */}
       </Wrapper>
       <Small>
         Add a spouse or family member for <Bold>$5 Monthly</Bold>

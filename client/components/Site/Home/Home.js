@@ -22,12 +22,12 @@ const Home = () => {
       <Navbar />
       <Landing />
       <Card />
-      <ProtectYourFuture />
+      {/* <ProtectYourFuture /> */}
       <HowItWorksSection />
       <WhyYouNeedIt />
+      <Plans />
       <WhatDoWeCover />
       <WhatWeDontCover />
-      <Plans />
       <Protection />
       <WhatDoYouGet />
       <WhatDoYouGetMobile />

@@ -3,59 +3,53 @@ import styled from 'styled-components'
 
 const Section = styled.div`
   width: 100vw;
-  height: 655px;
+  height: fit-content;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  background-image: url('./images/courtroom.png');
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  padding: 8rem;
+  padding: 2rem 6rem 2rem 6rem;
   margin: 1rem 0rem 2rem 0rem;
 
   @media (max-width: 800px) {
-    background-size: auto 90%;
-    align-items: flex-end;
-    flex-direction: column-reverse;
-    padding: 1rem;
+
   }
 `
 const TextLeft = styled.div`
-color: #fff;
-font-size: 20px;
-line-height: 30px;
-max-width: 526px;
-font-weight: 400;
-margin-bottom: 6rem;
-padding-right: 4rem;
-p {
-    margin-bottom: 1rem;
+width: 50%;
+
+img {
+  border-radius: 43px;
+  max-width: 100%;
+  height: 359px;
 }
 
 @media(max-width: 800px) {
- margin-bottom: 4rem;
+
 }
 `
 
 const TextRight = styled.div`
-color: #fff;
-font-size: 25px;
-line-height: 30px;
-max-width: 526px;
+color: var(--darkblue);
+width: 50%;
 font-weight: 400;
-text-align: center;
-margin-bottom: 4rem;
+padding: 4rem;
 
 header {
     font-weight: 500;
-    font-size: 42px;
+    font-size: 38px;
     margin-bottom: 1.5rem;
 }
 p {
     margin-bottom: 1rem;
     font-size: 25px;
+    line-height: 30px;
+}
+
+small {
+  font-size: 20px;
+  font-style: italic;
+  color: #C73232;
 }
 
 @media(max-width: 800px) {
@@ -66,19 +60,12 @@ export default function WhyYouNeedIt() {
   return (
     <Section>
       <TextLeft>
-        <p>
-          As a guard if you are in an altercation or shooting. Majority of the
-          time you will be sewed by the opossing party, property owner, and the
-          business owner.
-        </p>
-        <p>
-          Even though you were in the right, there is a lawyer looking to make
-          money off you.
-        </p>
+        <img src="./images/courtroom.png" />
       </TextLeft>
       <TextRight>
         <header>Why do you need it?</header>
-        <p>"Don't be a victim and protect yourself"</p>
+        <p>If you are in a dfensive situaiton you will ....</p>
+        <small>"Don't be a victim. Protect yourself."</small>
       </TextRight>
     </Section>
   )
