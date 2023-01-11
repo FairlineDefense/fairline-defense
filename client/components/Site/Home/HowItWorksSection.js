@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Section = styled.div`
-  height: 400px;
+  height: 369px;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -12,8 +12,9 @@ const Section = styled.div`
   margin: 2rem;
 
   @media (max-width: 800px) {
-    min-height: 400px;
+    height: 260px;
     margin: 2rem 0rem 2rem 0rem;
+    padding: 0rem;
     background-image: url('./images/lightredbg.png');
     background-position: left bottom;
     background-repeat: no-repeat;
@@ -30,6 +31,9 @@ const Header = styled.div`
 
   @media (max-width: 800px) {
     width: 100%;
+    margin-bottom: 2rem;
+    font-size: 32px;
+    line-height: 38px;
   }
 `
 const Text = styled.div`
@@ -89,9 +93,11 @@ const SubHeader = styled.div`
   text-align: center;
   margin-bottom: 0.5rem;
   width: 100%;
+
   @media (max-width: 800px) {
     width: 100%;
     font-size: 20px;
+    line-height: 28px;
   }
 `
 export default function HowItWorksSection() {

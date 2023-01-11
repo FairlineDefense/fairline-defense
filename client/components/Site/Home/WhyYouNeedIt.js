@@ -3,17 +3,17 @@ import styled from 'styled-components'
 
 const Section = styled.div`
   width: 100vw;
-  height: fit-content;
+  height: 500px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 6rem 2rem 6rem;
-  margin: 1rem 0rem 2rem 0rem;
+  padding: 0rem 6rem 2rem 6rem;
 
   @media (max-width: 800px) {
     flex-direction: column;
     padding: 1rem;
+    height: 620px;
   }
 `
 const TextLeft = styled.div`
@@ -66,9 +66,8 @@ export default function WhyYouNeedIt() {
       </TextLeft>
       <TextRight>
         <header>Why do you need it?</header>
-        <p>If you have to defend yourself in a traumatic situation, you will be questioned by the police.</p>
-        <p>You can even be sued by your attacker or their family. Defending yourself can quickly spiral into a financial problem.</p>
-        <small>"Don't be a victim. Protect yourself."</small>
+        <p>If you are in a defensive situation you could be arrested and financially responsible. </p>
+        <small>-"Don't be a victim. Protect yourself."</small>
       </TextRight>
     </Section>
   )
