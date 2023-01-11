@@ -17,7 +17,7 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none', ba
   justify-content: space-between;
   padding: 2rem;
   max-width: 100vw;
-  z-index: 50;
+  z-index: 60;
   a {
     color: #fff;
     font-size: 16px;
