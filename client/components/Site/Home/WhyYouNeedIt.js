@@ -18,23 +18,26 @@ const Section = styled.div`
   }
 `
 const TextLeft = styled.div`
-width: 50%;
-
-img {
+  width: 50%;
+  background-image: url('./images/AdobeStock_462413265 3.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 43px;
-  max-width: 100%;
+  overflow: hidden;
   height: 359px;
-}
+  display: block;
 
 @media(max-width: 800px) {
   width: 100%;
-  background-image: url('./images/courtroom.png');
+  background-image: url('./images/AdobeStock_462413265 3.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  border-radius: 0px;
 
   img {
     width: 1px;
@@ -99,7 +102,6 @@ export default function WhyYouNeedIt() {
   return (
     <Section>
       <TextLeft>
-        <img src="./images/courtroom.png" />
         <MobileHeader>Why do you need it?</MobileHeader>
       </TextLeft>
       <TextRight>
