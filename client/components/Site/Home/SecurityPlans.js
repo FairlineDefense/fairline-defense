@@ -10,7 +10,7 @@ const Section = styled.div`
   align-items: center;
 
   @media (max-width: 800px) {
-    height: 1150px;
+    height: 900px;
     padding: 2rem;
   }
 `
@@ -65,6 +65,10 @@ color: var(--cyan);
 font-size: 35px;
 font-weight: 500;
 margin: 1rem 0rem 1rem 0rem;
+
+@media(max-width: 800px) {
+  font-size: 25px;
+}
 `
 const PlanWrapper = styled.div`
 display: flex;
