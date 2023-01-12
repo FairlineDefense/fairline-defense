@@ -18,6 +18,7 @@ import WhyYouNeedIt from './WhyYouNeedIt'
 import WhyWeStartedThis from './WhyWeStartedThis'
 import JoinNowSecurity from './JoinNowSecurity'
 import SecurityNeed from './SecurityNeed'
+import FAQ from './FAQ'
 
 const SecurityHome = () => {
   return (
@@ -37,6 +38,7 @@ const SecurityHome = () => {
       {/* <PlansMobile /> */}
       <SecurityBePrepared />
       {/* <SecurityStories /> */}
+      <FAQ />
       <JoinNowSecurity />
       <Footer />
     </>

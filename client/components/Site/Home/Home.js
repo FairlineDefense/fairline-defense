@@ -16,6 +16,7 @@ import Stories from './Stories'
 import JoinNow from './JoinNow'
 import Footer from './Footer'
 import WhyYouNeedIt from './WhyYouNeedIt'
+import FAQ from './FAQ'
 const Home = () => {
   return (
     <>
@@ -34,6 +35,7 @@ const Home = () => {
       <BePrepared />
       {/* <Stories /> */}
       <JoinNow />
+      <FAQ />
       <Footer />
     </>
   )
