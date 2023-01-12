@@ -37,7 +37,8 @@ const Header = styled.div`
   @media (max-width: 800px) {
     font-size: 32px;
     line-height: 38px;
-    width: 420px;
+    width: 100%;
+    text-align: center;
   }
 `
 const Svg = styled.svg`
@@ -46,9 +47,11 @@ const Svg = styled.svg`
   margin-top: 5rem;
   width: 506px;
   height: 530px;
+
   @media (max-width: 800px) {
-    margin-top: 10rem;
+    margin-top: 5rem;
     height: auto;
+    right: 50px;
   }
 `
 export default function SecurityBePrepared() {
