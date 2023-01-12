@@ -7,7 +7,7 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15rem 0rem 0rem 8rem;
-  background-image: url('./images/security.png');
+  background-image: url('./images/AdobeStock_314672886 1.jpg');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: 100%;

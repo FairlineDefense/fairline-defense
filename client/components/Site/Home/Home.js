@@ -34,8 +34,8 @@ const Home = () => {
       <WhatWeDontCover />
       <BePrepared />
       {/* <Stories /> */}
-      <JoinNow />
       <FAQ />
+      <JoinNow />
       <Footer />
     </>
   )

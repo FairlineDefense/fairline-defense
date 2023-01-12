@@ -22,8 +22,8 @@ const Image = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  background-image: url('./images/courtroom.png');
-  background-size: cover;
+  background-image: url('./images/AdobeStock_462413265 3.jpg');
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 20px;
