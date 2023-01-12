@@ -75,7 +75,7 @@ const Phone = styled.span`
 `
 const Copyright = styled.div`
 width: 100%;
-height: 90px;
+height: 120px;
 display: flex;
 justify-content: center;
 align-items: flex-start;

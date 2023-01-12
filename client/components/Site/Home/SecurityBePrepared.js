@@ -31,7 +31,7 @@ const Header = styled.div`
   font-weight: 600;
   line-height: 45px;
   color: #fff;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   position: relative;
 
   @media (max-width: 800px) {
@@ -59,17 +59,17 @@ export default function SecurityBePrepared() {
           <path
             d="M31.2033 68.4848L0 187.72L474.797 119.38L506 0L31.2033 68.4848Z"
             fill="#B32D2D"
-            fill-opacity="0.3"
+            fill-opacity="0.2"
           />
           <path
             d="M31.2033 239.336L0 358.716L474.797 290.231L506 170.996L31.2033 239.336Z"
             fill="#B32D2D"
-            fill-opacity="0.3"
+            fill-opacity="0.2"
           />
           <path
             d="M31.2033 410.764L0 530L194.81 501.885L226.013 382.649L31.2033 410.764Z"
             fill="#B32D2D"
-            fill-opacity="0.3"
+            fill-opacity="0.2"
           />
         </g>
         <defs>

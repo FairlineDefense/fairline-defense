@@ -14,8 +14,9 @@ const Section = styled.div`
 
   @media (max-width: 800px) {
     background-size: cover;
+    background-position: 70% top;
     height: 80vh;
-    padding: 20rem 1rem 1rem 1rem;
+    padding: 26rem 1rem 1rem 1rem;
     text-align: center;
     align-items: center;
   }
@@ -27,9 +28,9 @@ const Heading = styled.div`
   color: #fff;
 
   @media (max-width: 800px) {
-    line-height: 36px;
-    width: 250px;
+    line-height: 40px;
     font-size: 32px;
+    width: 100%;
   }
 `
 const SubHeading = styled.div`
@@ -45,18 +46,21 @@ const SubHeading = styled.div`
   }
 `
 const StartButton = styled.div`
-  background-color: var(--red);
+  background-color: var(--hotred);
+  opacity: .9;
   color: #fff;
   border-radius: 40px;
   width: 280px;
-  padding: 1rem 2rem 1rem 2rem;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 20px;
   font-weight: 400;
   margin-top: 2rem;
   outline: none;
   border: none;
   cursor: pointer;
-  text-align: center;
 `
 const DownArrow = styled.div`
   position: absolute;
