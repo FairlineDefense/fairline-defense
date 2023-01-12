@@ -13,7 +13,7 @@ const Section = styled.div`
 
   @media (max-width: 800px) {
     min-height: 300px;
-    padding: 2rem;
+    padding: 4rem 1rem 2rem 1rem;
     flex-direction: column;
   }
 `
@@ -26,6 +26,7 @@ const Text = styled.div`
   height: 250px;
 
   header {
+    position: relative;
     font-size: 48px;
     line-height: 48px;
     font-weight: 500;
@@ -33,16 +34,14 @@ const Text = styled.div`
 
   @media (max-width: 800px) {
     width: 100%;
+    height: fit-content;
 
     header {
       line-height: 38px;
       margin-bottom: 1rem;
       font-size: 32px;
       margin-bottom: 1rem;
-    }
-    div {
-      line-height: 28px;
-      font-size: 20px;
+      text-align: center;
     }
   }
 `
@@ -74,6 +73,10 @@ ul li {
         width: 25px;
         height: 15px;
     }
+}
+
+@media(max-width: 800px) {
+  width: 100%;
 }
 `
 export default function FAQ() {
