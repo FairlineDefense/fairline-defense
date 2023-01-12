@@ -30,6 +30,8 @@ const Image = styled.div`
 
   @media(max-width: 800px) {
     border-radius: 0px;
+    background-size: cover;
+    background-position: 70% bottom;
   }
 `
 
