@@ -10,6 +10,7 @@ export {default as Footer} from './Site/Home/Footer'
 // Register
 export {default as Signup} from './Register/Signup'
 export {default as ChoosePlan} from './Register/ChoosePlan'
+export {default as ChooseProtection} from './Register/ChooseProtection'
 export {default as Payment} from './Register/Payment'
 export {default as Shipping} from './Register/Shipping'
 export {default as PaymentStatus} from './Register/PaymentStatus'

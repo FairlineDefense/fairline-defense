@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import Navbar from './Navbar'
 import ReferAFriend from './ReferAFriend'
 import Card from './Card'
-import {VerifyEmail, VerifyPhone, ChoosePlan, Footer} from '../'
+import {VerifyEmail, VerifyPhone, ChooseProtection, Footer} from '../'
 import PlanStatus from './PlanStatus'
 import styled from 'styled-components'
 import {useEffect, useState} from 'react'
@@ -131,7 +131,7 @@ const UserHome = () => {
   // }
 
   if (!user.planActive) {
-    return <ChoosePlan />
+    return <ChooseProtection />
   }
   return (
     <>

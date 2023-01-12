@@ -43,11 +43,15 @@ router.post('/create-customer', async (req, res) => {
   router.post('/create-subscription', async (req, res) => {
     const customerId = req.body.customerId
     const priceIds = {
-      month: process.env.MONTH_PRICE_ID,
-      year: process.env.ANNUAL_PRICE_ID,
+      citizen_month: process.env.MONTH_PRICE_ID,
+      citizen_year: process.env.ANNUAL_PRICE_ID,
+      professional_month: process.env.ARMED_PROFESSIONAL_MONTH_PRICE_ID,
+      professional_year: process.env.ARMED_PROFESSIONAL_ANNUAL_PRICE_ID,
       spouse: process.env.MONTH_SPOUSE_PRICE_ID
     }
     let priceId = priceIds[req.body.priceId]
+    console.log('======================>', priceId, customerId)
+
     try {
       // Create the subscription. Note we're expanding the Subscription's
       // latest invoice and that invoice's payment_intent
@@ -68,6 +72,7 @@ router.post('/create-customer', async (req, res) => {
         clientSecret: subscription.latest_invoice.payment_intent.client_secret
       })
     } catch (error) {
+      console.log(error.message)
       return res.status(400).send({error: {message: error.message}})
     }
   })

@@ -3,10 +3,16 @@ import {useDispatch, useSelector} from 'react-redux'
 import css from './register.css'
 import styled from 'styled-components'
 import {useState} from 'react'
-import Payment from './Payment'
+import ChoosePlan from './ChoosePlan'
+import ChoosePlanArmedProfessional from './ChoosePlanArmedProfessional'
 import RegisterHeader from './RegisterHeader'
 
-const Wrapper = styled.div`
+const ChooseProtection = props => {
+  const user = useSelector(state => state.user)
+  const {name, displayName, error} = props
+  const dispatch = useDispatch()
+
+  const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -39,8 +45,8 @@ const Wrapper = styled.div`
     outline: none;
     background: transparent;
     color: #fff;
-    height: 12rem;
-    width: 18rem;
+    height: 140px;
+    width: 240px;
     margin: 2rem 1rem 2rem 1rem;
     padding: 2rem;
     display: flex;
@@ -64,15 +70,15 @@ const Wrapper = styled.div`
     }
   `
   const Price = styled.p`
-    font-size: 40px;
+    font-size: 28px;
+    line-height: 34px;
     color: var(--blue);
-    margin-bottom: 1rem;
     text-align: center;
   `
   const Term = styled.p`
     font-size: 22px;
     font-weight: 200;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     text-align: center;
   `
   const Billing = styled.p`
@@ -83,39 +89,39 @@ const Wrapper = styled.div`
   const H1 = styled.h1`
     font-size: 32px;
     font-weight: 400;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 
     @media(max-width: 800px) {
       margin-bottom: 1rem;
     }
   `
-  const H2 = styled.h2`
+  const Subheader = styled.h2`
     font-size: 24px;
-    font-weight: 200;
-    margin-bottom: 2rem;
+    margin: 1rem 0rem 2rem 0rem;
+    text-align: center;
+    width: 500px;
+
+    p {
+        margin-bottom: 1rem;
+    }
   `
   const Blue = styled.span`
-    font-size: 20px;
-    cursor: pointer;
-    text-decoration: underline;
-    font-weight: inherit;
+    font-size: 24px;
     color: #00ABE0;
   `
 
-const ChoosePlan = props => {
-  const user = useSelector(state => state.user)
-  const {name, displayName, error, protectionType, protectionHandler } = props
-  const dispatch = useDispatch()
+  let [protectionType, setProtectionType] = useState('none')
 
-  let [priceId, setPriceId] = useState('none')
-
-  const clickHandler = e => {
+  const protectionHandler = e => {
     e.preventDefault()
-    setPriceId(e.currentTarget.value)
+    setProtectionType(e.currentTarget.value)
   }
 
-  if (priceId !== 'none') {
-    return <Payment priceId={priceId} clickHandler={clickHandler} protectionType={protectionType} />
+  if (protectionType === 'armedProfessional') {
+    return <ChoosePlanArmedProfessional protectionType={protectionType} protectionHandler={protectionHandler} />
+  }
+  if (protectionType === 'armedCitizen') {
+    return <ChoosePlan protectionType={protectionType} protectionHandler={protectionHandler} />
   }
 
   return (
@@ -125,22 +131,22 @@ const ChoosePlan = props => {
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
-        <H1>Select your plan for Armed Citizen</H1>
-        <Blue onClick={(e)=> protectionHandler(e)} value="armedProfessional">Switch to Armed Professional</Blue>
+        <H1>Congratulations!</H1>
+        <Subheader><p>You are one step away from getting the protection you need.</p>
+        <p>Starting from <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr</Blue></p></Subheader>
+        <H1>Select Your Protection</H1>
         <ButtonWrapper>
-          <Button onClick={e => clickHandler(e)} value="citizen_month">
-            <Price>$19.99</Price>
-            <Term>Per Month</Term>
-            <Billing>Billed Monthly</Billing>
+          <Button onClick={e => protectionHandler(e)} value="armedCitizen">
+          <Term>I am</Term>
+            <Price>Armed Citizen</Price>
           </Button>
-          <Button onClick={e => clickHandler(e)} value="citizen_year">
-            <Price>$199</Price>
-            <Term>Per Year</Term>
-            <Billing>Billed Annually</Billing>
+          <Button onClick={e => protectionHandler(e)} value="armedProfessional">
+          <Term>I am</Term>
+            <Price>Armed Professional</Price>
           </Button>
         </ButtonWrapper>
       </Wrapper>
     </div>
   )
 }
-export default ChoosePlan
+export default ChooseProtection
