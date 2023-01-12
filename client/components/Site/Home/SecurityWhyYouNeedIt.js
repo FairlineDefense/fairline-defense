@@ -12,45 +12,60 @@ const Section = styled.div`
 
   @media (max-width: 800px) {
     flex-direction: column-reverse;
-    min-height: 100vh;
     padding: 1rem;
   }
 `
 const Text = styled.div`
   width: 50%;
   padding: 4rem;
+
   header {
     font-size: 42px;
     font-weight: 600;
   }
+
   p {
     font-size: 25px;
     line-height: 35px;
     font-weight: 200;
     margin: 2rem 0rem 2rem 0rem;
   }
+
   @media (max-width: 800px) {
     width: 100%;
     padding: 0rem;
     text-align: center;
+
+    header {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    p {
+      font-size: 20px;
+      line-height: 33px;
+      font-weight: 300;
+      margin: 1rem;
+    }
   }
 `
 const Image = styled.div`
   width: 50%;
   object-fit: contain;
+
   img {
     width: 100%;
   }
 
   @media (max-width: 800px) {
     width: 100%;
-    padding: 2rem;
+    padding: 0rem;
   }
 `
-export default function ProtectYourFuture() {
+export default function SecurityWhyYouNeedIt() {
   return (
     <Section>
-            <Image>
+      <Image>
         <img src="./images/arrestingman.png" />
       </Image>
       <Text>
