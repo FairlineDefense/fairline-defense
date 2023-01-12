@@ -6,7 +6,7 @@ const Section = styled.div`
   height: 670px;
   display: flex;
   flex-direction: column;
-  padding: 16rem 0rem 0rem 8rem;
+  padding: 15rem 0rem 0rem 8rem;
   background-image: url('./images/security.png');
   background-position: center top;
   background-repeat: no-repeat;
@@ -21,7 +21,8 @@ const Section = styled.div`
   }
 `
 const Heading = styled.div`
-  font-size: 48px;
+  font-size: 40px;
+  line-height: 48px;
   font-weight: 500;
   color: #fff;
 
