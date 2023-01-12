@@ -11,7 +11,7 @@ import Protection from './Protection'
 import WhatDoYouGet from './WhatDoYouGet'
 import WhatDoYouGetMobile from './WhatDoYouGetMobile'
 import PlansMobile from './PlansMobile'
-import BePrepared from './BePrepared'
+import SecurityBePrepared from './SecurityBePrepared'
 import SecurityStories from './SecurityStories'
 import Footer from './Footer'
 import WhyYouNeedIt from './WhyYouNeedIt'
@@ -35,7 +35,7 @@ const SecurityHome = () => {
       <SecurityWhatWeDontCover />
       {/* <Protection /> */}
       {/* <PlansMobile /> */}
-      <BePrepared />
+      <SecurityBePrepared />
       {/* <SecurityStories /> */}
       <JoinNowSecurity />
       <Footer />
