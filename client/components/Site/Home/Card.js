@@ -79,8 +79,8 @@ export default function Card() {
       <Text>
         <header>We are the solution to protect you.</header>
         <div>
-          Fairline defense is a subscription based <Bold>legal team</Bold> that
-          protects you with <Bold>$1.5M</Bold> in legal fees.
+          Fairline Defense is a subscription based <Bold>legal team</Bold> that
+          protects you with up to <Bold>$1.5M</Bold> in legal fees.
         </div>
       </Text>
       <CardImage>
