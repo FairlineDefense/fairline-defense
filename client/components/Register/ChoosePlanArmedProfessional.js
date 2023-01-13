@@ -114,6 +114,12 @@ const ChoosePlanArmedProfessional = props => {
     setPriceId(e.currentTarget.value)
   }
 
+  const protectionClickHandler = (e) => {
+    e.preventDefault()
+    setPriceId('none')
+    protectionHandler(e)
+  }
+
   if (priceId !== 'none') {
     return <Payment priceId={priceId} clickHandler={clickHandler} />
   }
@@ -126,10 +132,10 @@ const ChoosePlanArmedProfessional = props => {
       <RegisterHeader />
       <Wrapper>
         <H1>Select your plan for Armed Professional</H1>
-        <Blue onClick={(e)=> protectionHandler(e)} value="armedCitizen">Switch to Armed Citizen</Blue>
+        <Blue onClick={(e)=> protectionClickHandler(e)} value="armedCitizen">Switch to Armed Citizen</Blue>
         <ButtonWrapper>
           <Button onClick={e => clickHandler(e)} value="professional_month">
-            <Price>$29</Price>
+            <Price>$29.99</Price>
             <Term>Per Month</Term>
             <Billing>Billed Monthly</Billing>
           </Button>

@@ -17,9 +17,10 @@ padding-top: 4rem;
 position: relative;
 `
 const H1 = styled.h1`
-font-size: 32px;
+font-size: 30px;
 font-weight: 300;
 margin-bottom: 2rem;
+margin-top: 1rem;
 `
 const Button = styled.button`
 background-color: var(--blue);
@@ -37,6 +38,16 @@ cursor: pointer;
 &::disabled {
   background-color: #2a4c78;
 }
+`
+
+const Header = styled.div`
+font-size: 60px;
+line-height: 70px;
+font-weight: bold;
+text-align: center;
+color: #fff;
+width: 500px;
+margin-bottom: 3rem;
 `
 
 const Shipping = () => {
@@ -69,7 +80,7 @@ const Shipping = () => {
         // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
         switch (paymentIntent.status) {
           case 'succeeded':
-            setMessage('Success! Payment received.')
+            setMessage('Payment is Successful!')
             break
 
           case 'processing':
@@ -99,9 +110,12 @@ const Shipping = () => {
 
   return (
     <Wrapper>
+        {message === 'Payment is Successful!' ? (<img src="./images/bluecheck.png" />) : null }
+
       <H1>{message}</H1>
       <Link to="/home">
-        <Button>Continue to Account</Button>
+        {message === 'Payment is Successful!' ? (<Header>Welcome to the Fairline Family</Header>) : null }
+        <Button>View my Membership</Button>
       </Link>
     </Wrapper>
   )
