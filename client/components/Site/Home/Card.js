@@ -84,7 +84,7 @@ export default function Card() {
         </div>
       </Text>
       <CardImage>
-        <img src="./images/card.png" />
+        <img src="./images/card.png" onClick={()=>console.log(process.env.PUBLIC_KEY.slice(0,10))} />
       </CardImage>
     </Section>
   )
