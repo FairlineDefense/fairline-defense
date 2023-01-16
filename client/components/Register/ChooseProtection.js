@@ -74,6 +74,11 @@ const ChooseProtection = props => {
     line-height: 34px;
     color: var(--blue);
     text-align: center;
+    
+    @media(max-width: 800px) { 
+      font-size: 24px;
+      line-height: 28px;
+    }
   `
   const Term = styled.p`
     font-size: 22px;
@@ -103,6 +108,9 @@ const ChooseProtection = props => {
 
     p {
         margin-bottom: 1rem;
+    }
+    @media(max-width: 800px) { 
+      width: 100%;
     }
   `
   const Blue = styled.span`

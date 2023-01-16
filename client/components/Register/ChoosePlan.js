@@ -31,6 +31,7 @@ const Wrapper = styled.div`
     @media(max-width: 800px) {
       justify-content: center;
       width: 100%;
+      margin-top: 4rem;
     }
   `
   const Button = styled.button`

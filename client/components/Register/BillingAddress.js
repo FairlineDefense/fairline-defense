@@ -35,7 +35,7 @@ const Header = styled.h1`
 
   @media(max-width: 800px) {
     font-size: 22px;
-    margin: .5rem;
+    margin: 1rem;
   }
 `
 const Form = styled.form`
