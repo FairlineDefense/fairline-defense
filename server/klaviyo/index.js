@@ -69,7 +69,7 @@ router.post('/create-account', async (req, res, next) => {
           data: {
             type: 'profile-subscription-bulk-create-job',
             attributes: {
-              subscriptions: [{email: req.body.email}],
+              subscriptions: [{email: req.body.email, phone_number: req.body.phone}],
               list_id: 'VXeuyy'
             }
           }
