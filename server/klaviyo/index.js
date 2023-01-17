@@ -131,7 +131,7 @@ router.post('/verify-phone', async (req, res, next) => {
     .catch(err => console.error(err))
 
   // Step 3:
-  const addUserToSMSListBody = {
+  const addUserToNewsletterBody = {
     method: 'POST',
     headers: {
       accept: 'application/json',
@@ -140,18 +140,22 @@ router.post('/verify-phone', async (req, res, next) => {
       Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
     },
     body: JSON.stringify({
-      data: [{type: 'profile', id: req.user.klaviyoProfileID}]
+      data: {
+        type: 'profile-subscription-bulk-create-job',
+        attributes: {
+          subscriptions: [{phone_number: req.body.phone}],
+          list_id: 'SKvZ83'
+        }
+      }
     })
   }
 
   fetch(
-    'https://a.klaviyo.com/api/lists/SKvZ83/relationships/profiles/',
-    addUserToSMSListBody
+    'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/',
+    addUserToNewsletterBody
   )
-    .then(response => console.log(response))
-    .catch(err => console.error(err))
-
-  return res.json(code)
+    .then(res => console.log(res))
+    .catch(err => console.error('error:' + err))
 })
 
 router.post('/phone-code', async (req, res, next) => {
