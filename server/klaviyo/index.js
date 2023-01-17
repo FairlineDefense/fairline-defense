@@ -131,7 +131,7 @@ router.post('/verify-phone', async (req, res, next) => {
     .catch(err => console.error(err))
 
   // Step 3:
-  const addUserToSMSBody = {
+  const addUserToNewsletterBody = {
     method: 'POST',
     headers: {
       accept: 'application/json',
@@ -152,7 +152,7 @@ router.post('/verify-phone', async (req, res, next) => {
 
   fetch(
     'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/',
-    addUserToSMSBody
+    addUserToNewsletterBody
   )
     .then(res => console.log(res))
     .catch(err => console.error('error:' + err))
