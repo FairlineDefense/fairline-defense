@@ -34,7 +34,7 @@ const Home = () => {
       <WhatWeDontCover />
       <BePrepared />
       {/* <Stories /> */}
-      <FAQ />
+      {/* <FAQ /> */}
       <JoinNow />
       <Footer />
     </>
