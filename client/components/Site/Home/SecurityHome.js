@@ -38,7 +38,7 @@ const SecurityHome = () => {
       {/* <PlansMobile /> */}
       <SecurityBePrepared />
       {/* <SecurityStories /> */}
-      <FAQ />
+      {/* <FAQ /> */}
       <JoinNowSecurity />
       <Footer />
     </>
