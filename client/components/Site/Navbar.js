@@ -182,9 +182,12 @@ const Navbar = () => {
      }
   };
   window.addEventListener('scroll', changeNavbarColor);
+
+  const citizenOrProfessional = window.location.pathname === '/armedprofessionals' ? <a href="/">Armed Citizens</a> : <a href="/armedprofessionals">Armed Professionals</a>
+
   return (
     <Wrapper display={display} backgroundColor={backgroundColor}>
-      <a href="#top">
+      <a href="/">
       <FairlineLogo>
       </FairlineLogo>
       </a>
@@ -210,13 +213,13 @@ const Navbar = () => {
                 Coverages
               </a>
             </li>
-            <li>
+            {/* <li>
               <a href="#testimonials" onClick={() => setDisplay('none')}>
                 Testimonials
               </a>
-            </li>
+            </li> */}
             <li>
-              <Link to="/armedprofessionals">Armed Professionals</Link>
+              {citizenOrProfessional}
             </li>
             <li>
               <Link to="/home">
@@ -249,13 +252,13 @@ const Navbar = () => {
                 Coverages
               </a>
             </li>
-            <li>
+            {/* <li>
               <a href="#testimonials" onClick={() => setDisplay('none')}>
                 Testimonials
               </a>
-            </li>
+            </li> */}
             <li>
-              <Link to="/armedprofessionals">Armed Professionals</Link>
+            {citizenOrProfessional}
             </li>
             <li>
               <Link to="/login">

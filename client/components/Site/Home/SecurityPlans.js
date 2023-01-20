@@ -159,7 +159,7 @@ const Bold = styled.span`
 `
 export default function SecurityPlans() {
   return (
-    <Section>
+    <Section id="coverages">
       <Header>One simple plan</Header>
       <Subheader>That's easy to understand</Subheader>
         <Cyan>Peace of mind at $29.99</Cyan>

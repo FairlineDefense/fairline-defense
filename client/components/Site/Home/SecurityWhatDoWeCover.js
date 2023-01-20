@@ -115,7 +115,7 @@ export default function SecurityWhatDoWeCover() {
           </clipPath>
         </defs>
       </Svg>
-    <Section id="coverages">
+    <Section>
       <Wrapper>
         <Text>
           <Header>What do we cover?</Header>

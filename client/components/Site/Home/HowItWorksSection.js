@@ -102,7 +102,7 @@ const SubHeader = styled.div`
 `
 export default function HowItWorksSection() {
   return (
-      <Section>
+      <Section id="howitworks">
           <Header>How it Works</Header>
           <SubHeader>
               If anything happens defending your life.

@@ -90,7 +90,7 @@ const CyanButton = styled.div`
 `
 export default function WhatDoWeCover() {
   return (
-    <Section id="coverages">
+    <Section>
       <Wrapper>
         <Text>
           <Header>What do we cover?</Header>
