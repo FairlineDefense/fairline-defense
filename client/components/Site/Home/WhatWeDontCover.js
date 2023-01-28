@@ -9,7 +9,6 @@ const Section = styled.div`
   padding: 4rem;
   align-items: center;
   background-color: var(--bgblue);
-  margin: 2rem;
 
   @media (max-width: 800px) {
     padding: 2rem 0rem 2rem 0rem;

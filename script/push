@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# authenticate using aws cli before running
+
+docker build -t fairline-service-1 .
+
+docker tag fairline-service-1:latest 609103538808.dkr.ecr.us-east-1.amazonaws.com/fairline-service-1:latest
+
+docker push 609103538808.dkr.ecr.us-east-1.amazonaws.com/fairline-service-1:latest

@@ -14,7 +14,7 @@ const Section = styled.div`
     height: auto;
     background-size: 220% auto;
     padding: 22rem 0rem 0rem 1rem;
-    background-position: center bottom;
+    background-position: right bottom;
   }
 `
 const Wrapper = styled.div`

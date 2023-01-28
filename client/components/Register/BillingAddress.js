@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `
 const Button = styled.button`
   background-color: var(--blue);
@@ -31,56 +32,21 @@ const Header = styled.h1`
   font-size: 32px;
   font-weight: 300;
   margin: 0.5rem 0rem 2rem 0rem;
+
+  @media(max-width: 800px) {
+    font-size: 22px;
+    margin: 1rem;
+  }
 `
 const Form = styled.form`
   max-width: 700px;
   display: flex;
   flex-wrap: wrap;
-`
-const Input = styled.input`
-  flex-grow: 1;
-  margin: 0.5rem;
-  padding: 1rem;
-  font-color: #333;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-`
-const City = styled.input`
-  min-width: 300px;
-  margin: 0.5rem;
-  padding: 1rem;
-  font-color: #333;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-`
-const AptNumber = styled.input`
-  width: 100px;
-  margin: 0.5rem;
-  padding: 1rem;
-  font-color: #333;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-`
-const Line2 = styled.input`
-  width: 100%;
-  margin: 0.5rem;
-  padding: 1rem;
-  font-color: #333;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-`
-const State = styled.select`
-  width: 100px;
-  margin: 0.5rem;
-  padding: 1rem;
-  font-color: #333;
-  border: none;
-  border-radius: 4px;
-  outline: none;
+
+  @media (max-width: 800px) {
+    width: 90%;
+    margin-right: .5rem;
+  }
 `
 const ErrorText = styled.div`
   height: 50px;
@@ -186,12 +152,11 @@ const BillingAddress = props => {
             label="Apt."
             variant="filled"
             type="text"
-            style={{margin: 8}}
+            style={{margin: 8, maxWidth: 90}}
             name="apt"
-            placeholder="Apt."
+            placeholder="Apt"
             onChange={e => changeHandler(e)}
             value={address.apt}
-            required
           />
           <FDTextField
             name="streetAddress"
@@ -250,7 +215,7 @@ const BillingAddress = props => {
             placeholder="Zip Code"
             label="Zip Code"
             variant="filled"
-            style={{margin: 8}}
+            style={{margin: 8, flexGrow: 1}}
             onChange={e => changeHandler(e)}
             value={address.zipCode}
             required

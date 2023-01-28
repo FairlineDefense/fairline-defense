@@ -6,17 +6,19 @@ import {useState} from 'react'
 import Payment from './Payment'
 import RegisterHeader from './RegisterHeader'
 
-const ChoosePlan = props => {
-  const user = useSelector(state => state.user)
-  const {name, displayName, error} = props
-  const dispatch = useDispatch()
-
-  const Wrapper = styled.div`
+const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 4rem;
+    position: relative;
+
+    @media(max-width: 800px) {
+      text-align: center;
+      padding: 4rem 1rem 0rem 1rem;
+    }
   `
   const ButtonWrapper = styled.div`
     display: flex;
@@ -24,6 +26,13 @@ const ChoosePlan = props => {
     width: 500px;
     align-items: center;
     justify-content: space-around;
+    position: relative;
+
+    @media(max-width: 800px) {
+      justify-content: center;
+      width: 100%;
+      margin-top: 4rem;
+    }
   `
   const Button = styled.button`
     border: 1px solid #fff;
@@ -41,10 +50,18 @@ const ChoosePlan = props => {
     text-align: center;
     align-items: center;
     cursor: pointer;
-
+    position: relative;
+    
     &:hover {
       background: rgba(0, 171, 224, 0.2);
       border-color: var(--blue);
+    }
+
+    @media(max-width: 800px) {
+      width: 10rem;
+      height: 12rem;
+      margin: .5rem;
+      padding: 1rem;
     }
   `
   const Price = styled.p`
@@ -66,24 +83,30 @@ const ChoosePlan = props => {
   `
   const H1 = styled.h1`
     font-size: 32px;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 2rem;
+
+    @media(max-width: 800px) {
+      margin-bottom: 1rem;
+    }
   `
   const H2 = styled.h2`
     font-size: 24px;
     font-weight: 200;
     margin-bottom: 2rem;
   `
-  const H3 = styled.h3`
-    font-size: 18px;
-    font-weight: 200;
-    margin-bottom: 2rem;
-  `
   const Blue = styled.span`
-    font-size: inherit;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: underline;
     font-weight: inherit;
-    color: var(--blue);
+    color: #00ABE0;
   `
+
+const ChoosePlan = props => {
+  const user = useSelector(state => state.user)
+  const {name, displayName, error, protectionType, protectionHandler } = props
+  const dispatch = useDispatch()
 
   let [priceId, setPriceId] = useState('none')
 
@@ -92,8 +115,14 @@ const ChoosePlan = props => {
     setPriceId(e.currentTarget.value)
   }
 
+  const protectionClickHandler = (e) => {
+    e.preventDefault()
+    setPriceId('none')
+    protectionHandler(e)
+  }
+  
   if (priceId !== 'none') {
-    return <Payment priceId={priceId} clickHandler={clickHandler} />
+    return <Payment priceId={priceId} clickHandler={clickHandler} protectionType={protectionType} />
   }
 
   return (
@@ -103,25 +132,20 @@ const ChoosePlan = props => {
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
-        <H1>Congratulations!</H1>
-        <H2>Your account has been created succsefully!</H2>
-        <H1>Start Your Protection</H1>
+        <H1>Select your plan for Armed Citizen</H1>
+        <Blue onClick={(e)=> protectionClickHandler(e)} value="armedProfessional">Switch to Armed Professional</Blue>
         <ButtonWrapper>
-          <Button onClick={e => clickHandler(e)} value="month">
-            <Price>$19</Price>
+          <Button onClick={e => clickHandler(e)} value="citizen_month">
+            <Price>$19.99</Price>
             <Term>Per Month</Term>
             <Billing>Billed Monthly</Billing>
           </Button>
-          <Button onClick={e => clickHandler(e)} value="year">
+          <Button onClick={e => clickHandler(e)} value="citizen_year">
             <Price>$199</Price>
             <Term>Per Year</Term>
             <Billing>Billed Annually</Billing>
           </Button>
         </ButtonWrapper>
-        <H2>You are one step away from getting protection you need</H2>
-        <H2>
-          Only for <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr ($40 Savings)</Blue>
-        </H2>
       </Wrapper>
     </div>
   )

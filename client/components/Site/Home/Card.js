@@ -9,6 +9,7 @@ const Section = styled.div`
   padding: 2rem;
   align-items: center;
   padding: 2rem 4rem 2rem 4rem;
+  background-color: #F0F0F0;
 
   @media (max-width: 800px) {
     min-height: 300px;
@@ -23,11 +24,13 @@ const Text = styled.div`
 
   header {
     font-size: 48px;
+    line-height: 48px;
     font-weight: 500;
+    margin-bottom: 1rem;
   }
   div {
     font-size: 24px;
-    line-height: 36px;
+    line-height: 30px;
   }
 
   @media (max-width: 800px) {
@@ -42,8 +45,8 @@ const Text = styled.div`
       margin-bottom: 1rem;
     }
     div {
-      line-height: 30px;
-      font-size: 16px;
+      line-height: 28px;
+      font-size: 20px;
     }
   }
 `
@@ -63,9 +66,12 @@ const CardImage = styled.div`
   img {
     max-width: 515px;
   }
+
   @media (max-width: 800px) {
-    display: none;
+    padding: 0rem;
+    img {max-width: 350px;
   }
+}
 `
 export default function Card() {
   return (
@@ -73,8 +79,8 @@ export default function Card() {
       <Text>
         <header>We are the solution to protect you.</header>
         <div>
-          Fairline defense is a subscription based <Bold>legal team</Bold> that
-          protects you with <Bold>$1.5M</Bold> in legal fees.
+          Fairline Defense is a subscription based <Bold>legal team</Bold> that
+          protects you with up to <Bold>$1.5M</Bold> in legal fees.
         </div>
       </Text>
       <CardImage>

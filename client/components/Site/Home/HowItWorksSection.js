@@ -2,19 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Section = styled.div`
-  min-height: 400px;
+  height: 369px;
   width: 100vw;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
   align-items: center;
   padding: 2rem 4rem 2rem 4rem;
   justify-content: center;
+  margin: 2rem;
 
   @media (max-width: 800px) {
-    min-height: 800px;
-    padding: 2rem;
-    flex-direction: column;
+    height: 260px;
+    margin: 2rem 0rem 2rem 0rem;
+    padding: 0rem;
     background-image: url('./images/lightredbg.png');
     background-position: left bottom;
     background-repeat: no-repeat;
@@ -22,14 +22,18 @@ const Section = styled.div`
   }
 `
 const Header = styled.div`
-  font-size: 32px;
+  font-size: 48px;
+  line-height: 48px;
   font-weight: 500;
   color: var(--darkblue);
   text-align: center;
-  margin: 1rem;
+  margin-bottom: 4rem;
 
   @media (max-width: 800px) {
-    width: 240px;
+    width: 100%;
+    margin-bottom: 2rem;
+    font-size: 32px;
+    line-height: 38px;
   }
 `
 const Text = styled.div`
@@ -89,38 +93,40 @@ const SubHeader = styled.div`
   text-align: center;
   margin-bottom: 0.5rem;
   width: 100%;
+
   @media (max-width: 800px) {
     width: 100%;
     font-size: 20px;
+    line-height: 28px;
   }
 `
 export default function HowItWorksSection() {
-  // return (
-  //     <Section>
-  //         <Header>How it Works</Header>
-  //         <SubHeader>
-  //             If anything happens defending your life.
-  //         </SubHeader>
-  //         <SubHeader>
-  //             Fairline Defense is here with a legal and support team.
-  //         </SubHeader>
-  //     </Section>
-  // )
   return (
-    <Section>
-      <Header>How it Works</Header>
-      <Image>
-        <img src="./images/randomguy-768x335.png" />
-      </Image>
-      <Header>It couldn’t be more simple.</Header>
-      <Text>
-        <Blue>Step 1</Blue>
-        <Red>Sign up</Red>
-      </Text>
-      <Text>
-        <Blue>& done</Blue>
-        <Red>You are protected</Red>
-      </Text>
-    </Section>
+      <Section id="howitworks">
+          <Header>How it Works</Header>
+          <SubHeader>
+              If anything happens defending your life.
+          </SubHeader>
+          <SubHeader>
+              Fairline Defense is here with a legal and support team.
+          </SubHeader>
+      </Section>
   )
+  // return (
+  //   <Section id="howitworks">
+  //     <Header>How it Works</Header>
+  //     <Image>
+  //       <img src="./images/randomguy-768x335.png" />
+  //     </Image>
+  //     <Header>It couldn’t be more simple.</Header>
+  //     <Text>
+  //       <Blue>Step 1</Blue>
+  //       <Red>Sign up</Red>
+  //     </Text>
+  //     <Text>
+  //       <Blue>& done</Blue>
+  //       <Red>You are protected</Red>
+  //     </Text>
+  //   </Section>
+  // )
 }

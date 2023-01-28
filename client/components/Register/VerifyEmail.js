@@ -13,6 +13,11 @@ const Wrapper = styled.div`
   justify-content: center;
   align-content: space-between;
   padding: 4rem;
+  position: relative;
+  
+  @media(max-width: 800px) {
+    padding: 4rem 1rem 0rem 1rem;
+  }
 `
 const CenteredWrapper = styled.div`
   width: 100%;
@@ -22,6 +27,10 @@ const CenteredWrapper = styled.div`
   align-items: center;
   width: 340px;
   text-align: center;
+
+  @media(max-width: 800px) {
+    width: 100%;
+  }
 `
 const Heading = styled.span`
   font-size: 32px;
@@ -77,7 +86,7 @@ const VerifyEmail = () => {
     e.preventDefault()
     // For bypassing email functionality for testing:
     process.env.NODE_ENV === 'development' &&
-      (await fetch('webhook/klaviyo/verify-email', {
+      (await fetch('webhooks/klaviyo/verify-email', {
         method: 'POST',
         headers: {
           accept: 'application/json',
@@ -95,7 +104,12 @@ const VerifyEmail = () => {
           accept: 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email: user.email, phone: user.phone})
+        body: JSON.stringify({
+          email: user.email,
+          phone: user.phone,
+          firstName: user.firstName,
+          lastName: user.lastName
+        })
       })
     }
   }

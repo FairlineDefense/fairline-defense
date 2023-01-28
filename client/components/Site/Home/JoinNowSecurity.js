@@ -7,16 +7,16 @@ const Section = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('./images/joinnowsecurity.png');
+  background-image: url('./images/AdobeStock_481396404 1.jpg');
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: 100%;
   text-align: center;
 
   @media (max-width: 800px) {
-    background-size: auto 90%;
+    background-size: cover;
     justify-content: flex-end;
-    padding-bottom: 8rem;
+    padding-bottom: 6rem;
   }
 `
 const Heading = styled.div`
@@ -33,7 +33,7 @@ const Heading = styled.div`
   }
 `
 const StartButton = styled.div`
-  background-color: var(--red);
+  background-color: var(--hotred);
   color: #fff;
   border-radius: 40px;
   width: 280px;
@@ -47,7 +47,7 @@ const StartButton = styled.div`
   text-align: center;
 
   @media (max-width: 800px) {
-    background-color: #1ea0ff;
+    background-color: var(--hotred);
   }
 `
 export default function JoinNowSecurity() {

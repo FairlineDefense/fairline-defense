@@ -9,11 +9,11 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({
-      email: 'jeffreywood.dev@gmail.com',
+      email: 'robertjohnson@gmail.com',
       password: 'fakePassword123!',
       phone: '123-456-7890',
-      firstName: 'Jeffrey',
-      lastName: 'Wood',
+      firstName: 'Robert',
+      lastName: 'Johnson',
       streetAddress: '123 5th Avenue',
       city: 'New York',
       state: 'NY',

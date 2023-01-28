@@ -33,7 +33,7 @@ const LoginWrapper = styled.div`
   padding: 10rem;
   position: relative;
   @media (max-width: 768px) {
-    padding: 4rem 1rem 0rem 1rem;
+    padding: 4rem 2rem 0rem 1rem;
   }
 `
 const LoginForm = styled.form`
@@ -150,7 +150,7 @@ const Login = () => {
       <svg className="logo" />
       <LoginWrapper>
         <CenteredWrapper>
-          <Logo src="./images/fdlogo.png" />
+          <Link to='/'><Logo src="./images/fdlogo.png" /></Link>
         </CenteredWrapper>
         <CenteredWrapper>
           <H1>Login</H1>

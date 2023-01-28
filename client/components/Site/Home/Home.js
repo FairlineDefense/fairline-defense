@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../Navbar'
 import Landing from './Landing'
 import Card from './Card'
-import ProtectYourFuture from './ProtectYourFuture'
+import ProtectYourFuture from './SecurityWhyYouNeedIt'
 import HowItWorksSection from './HowItWorksSection'
 import WhatDoWeCover from './WhatDoWeCover'
 import WhatWeDontCover from './WhatWeDontCover'
@@ -16,24 +16,25 @@ import Stories from './Stories'
 import JoinNow from './JoinNow'
 import Footer from './Footer'
 import WhyYouNeedIt from './WhyYouNeedIt'
+import FAQ from './FAQ'
 const Home = () => {
   return (
     <>
       <Navbar />
       <Landing />
       <Card />
-      <ProtectYourFuture />
+      {/* <ProtectYourFuture /> */}
       <HowItWorksSection />
       <WhyYouNeedIt />
+      <Plans />
+      {/* <Protection /> */}
+      <WhatDoYouGetMobile />
+      {/* <PlansMobile /> */}
       <WhatDoWeCover />
       <WhatWeDontCover />
-      <Plans />
-      <Protection />
-      <WhatDoYouGet />
-      <WhatDoYouGetMobile />
-      <PlansMobile />
       <BePrepared />
-      <Stories />
+      {/* <Stories /> */}
+      {/* <FAQ /> */}
       <JoinNow />
       <Footer />
     </>

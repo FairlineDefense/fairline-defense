@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 `
 const CenteredWrapper = styled.div`
   width: 100%;
@@ -22,7 +23,12 @@ const CenteredWrapper = styled.div`
 const H1 = styled.h1`
   font-size: 32px;
   font-weight: 300;
-  margin: 1rem 0rem 2rem 0rem;
+  margin: 2rem 0rem 1rem 0rem;
+
+  @media(max-width: 800px) {
+    font-size: 22px;
+    margin: 2rem 0rem 0rem 0rem;
+  }
 `
 const ButtonWrapper = styled.div`
   display: flex;
@@ -84,7 +90,7 @@ const Billing = styled.p`
 
 const Payment = props => {
   let user = useSelector(state => state.user)
-  const {priceId, clickHandler} = props
+  const {priceId, clickHandler, protectionType} = props
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
   let [clientSecret, setClientSecret] = useState('none')
 
@@ -166,32 +172,55 @@ const Payment = props => {
       <RegisterHeader />
       <Wrapper>
         <CenteredWrapper>
-          <H1>Selected Plan</H1>
+          {protectionType === 'armedCitizen' ? <H1>Armed Citizen Plan</H1> : <H1>Armed Professional Plan</H1>}
         </CenteredWrapper>
         <ButtonWrapper>
-          {priceId === 'month' ? (
+          {priceId === 'citizen_month' ? (
             <>
-              <SelectedButton value="month">
-                <Price>$19</Price>
+              <SelectedButton value="citizen_month">
+                <Price>$19.99</Price>
                 <Billing>Billed Monthly</Billing>
               </SelectedButton>
-              <Button onClick={e => clickHandler(e)} value="year">
+              <Button onClick={e => clickHandler(e)} value="citizen_year">
                 <Price>$199</Price>
+                <Billing>Billed Annually</Billing>
+              </Button>
+            </>
+          ) : priceId === 'citizen_year' ? (
+          <>
+          <Button onClick={e => clickHandler(e)} value="citizen_month">
+            <Price>$19.99</Price>
+            <Billing>Billed Monthly</Billing>
+          </Button>
+          <SelectedButton value="citizen_year">
+            <Price>$199</Price>
+            <Billing>Billed Annually</Billing>
+          </SelectedButton>
+        </>
+          ) : priceId === 'professional_month' ? (
+            <>
+              <SelectedButton value="professional_month">
+                <Price>$29.99</Price>
+                <Billing>Billed Monthly</Billing>
+              </SelectedButton>
+              <Button onClick={e => clickHandler(e)} value="professional_year">
+                <Price>$299</Price>
                 <Billing>Billed Annually</Billing>
               </Button>
             </>
           ) : (
-            <>
-              <Button onClick={e => clickHandler(e)} value="month">
-                <Price>$19</Price>
-                <Billing>Billed Monthly</Billing>
-              </Button>
-              <SelectedButton value="year">
-                <Price>$199</Price>
-                <Billing>Billed Annually</Billing>
-              </SelectedButton>
-            </>
-          )}
+          <>
+          <Button onClick={e => clickHandler(e)} value="professional_month">
+            <Price>$29.99</Price>
+            <Billing>Billed Monthly</Billing>
+          </Button>
+          <SelectedButton value="professional_year">
+            <Price>$299</Price>
+            <Billing>Billed Annually</Billing>
+          </SelectedButton>
+        </>
+          )
+          }
         </ButtonWrapper>
         {clientSecret === 'none' ? (
           <BillingAddress createCustomer={createCustomer} />

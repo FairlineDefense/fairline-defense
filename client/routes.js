@@ -15,7 +15,9 @@ import {
   PaymentStatus,
   VerifyEmail,
   VerifyPhone,
-  SecurityHome
+  SecurityHome,
+  MembershipAndBilling,
+  VerifiedEmail,
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'
@@ -37,7 +39,7 @@ const Routes = props => {
         <div>
           <Switch>
             <Route exact path="/" component={SiteHome} />
-            <Route exact path="/security" component={SecurityHome} />
+            <Route exact path="/armedprofessionals" component={SecurityHome} />
             <Route exact path="/howitworks" component={HowItWorks} />
             <Route exact path="/coverages" component={Coverages} />
             <Route exact path="/testimonials" component={Testimonials} />
@@ -48,19 +50,21 @@ const Routes = props => {
             <Route path="/paymentstatus" component={PaymentStatus} />
             <Route path="/verifyemail" component={VerifyEmail} />
             <Route path="/verifyphone" component={VerifyPhone} />
+            <Route exact path="/success" component={VerifiedEmail} />
           </Switch>
         </div>
       ) : (
         <div>
           <Switch>
             <Route exact path="/" component={SiteHome} />
-            <Route exact path="/security" component={SecurityHome} />
-            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/armedprofessionals" component={SecurityHome} />
+            <Route exact path="/home" component={Login} />
             <Route exact path="/howitworks" component={HowItWorks} />
             <Route exact path="/coverages" component={Coverages} />
             <Route exact path="/testimonials" component={Testimonials} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/success" component={VerifiedEmail} />
           </Switch>
         </div>
       )}

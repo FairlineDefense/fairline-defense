@@ -6,6 +6,10 @@ import styled from 'styled-components'
 const FormWrapper = styled.div`
   width: 800px;
   text-align: center;
+
+  @media (max-width: 800px) {
+    width: 90%;
+  }
 `
 const Form = styled.form`
   font-size: 18px;
@@ -14,6 +18,11 @@ const Form = styled.form`
 `
 const Span = styled.span`
   width: 100%;
+`
+const CenteredWrapper = styled.span`
+width: 100%;
+display: flex;
+justify-content: center;
 `
 const Button = styled.button`
   background-color: var(--blue);
@@ -27,6 +36,10 @@ const Button = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+
+  @media(max-width: 800px) {
+    margin: .5rem;
+  }
 `
 const CheckoutForm = () => {
   const stripe = useStripe()
@@ -49,7 +62,8 @@ const CheckoutForm = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: 'https://fairline-defense.herokuapp.com/paymentstatus'
+        //Why does an env variable not work here?
+        return_url: 'https://www.fairlinedefense.com/paymentstatus'
       }
     })
 
@@ -71,9 +85,9 @@ const CheckoutForm = () => {
         <Span>
           <PaymentElement />
         </Span>
-        <Span>
+        <CenteredWrapper>
           <Button disabled={!stripe}>Purchase</Button>
-        </Span>
+        </CenteredWrapper>
         {/* Show error message to your customers */}
         {errorMessage && <div>{errorMessage}</div>}
       </Form>

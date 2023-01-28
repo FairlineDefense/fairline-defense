@@ -5,22 +5,23 @@ import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
-  position: absolute;
+const Wrapper = styled.div.attrs(props => ({display: props.display || 'none', backgroundColor: props.backgroundColor || 'none'}))`
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
+  background-color: ${props => props.backgroundColor};
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 2rem;
   max-width: 100vw;
-  z-index: 50;
+  z-index: 60;
   a {
     color: #fff;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
   }
   ul {
     display: flex;
@@ -34,10 +35,11 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
   }
 
   @media (max-width: 800px) {
-    flex-direction: row-reverse;
-    background-color: #000;
+    flex-direction: row;
+    background-color: #132A4A;
     position: fixed;
     padding: 1rem;
+    justify-content: flex-end;
 
     ul {
       display: ${props => props.display};
@@ -56,19 +58,28 @@ const Wrapper = styled.div.attrs(props => ({display: props.display || 'none'}))`
     }
     li a {
       font-size: 32px;
-      font-weight: 200;
+      font-weight: 400;
     }
   }
 `
 
 const FairlineLogo = styled.div`
-  height: 60px;
+  height: 50px;
+  width: 182px;
+  display: inline-block;
   z-index: 30;
-  img {
-    height: 100%;
-  }
+  background-image: url('./images/fdlogo.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
   @media (max-width: 800px) {
-    height: 40px;
+      position: fixed;
+      left: 45%;
+      top: 10px;
+      background-image: url('favicon.ico');
+      width: 50px;
   }
 `
 const Nav = styled.nav`
@@ -98,6 +109,26 @@ const LoginButton = styled.div`
     padding: 0rem;
     margin: 0rem;
     text-align: left;
+  }
+`
+const MobileCTA = styled.div`
+  background-color: var(--cyan);
+  color: #fff;
+  border-radius: 20px;
+  width: fit-content;
+  padding: .2rem 1rem .4rem 1rem;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  @media(max-width: 800px) {
+    display: flex;
   }
 `
 const Cyan = styled.span`
@@ -141,12 +172,25 @@ const Navbar = () => {
   }
 
   let [display, setDisplay] = useState('none')
+  const [backgroundColor, setBackgroundColor] = useState('none');
+  const changeNavbarColor = () =>{
+     if(window.scrollY >= 80){
+       setBackgroundColor('#132A4A');
+     }
+     else{
+       setBackgroundColor('none');
+     }
+  };
+  window.addEventListener('scroll', changeNavbarColor);
+
+  const citizenOrProfessional = window.location.pathname === '/armedprofessionals' ? <a href="/">Armed Citizens</a> : <a href="/armedprofessionals">Armed Professionals</a>
 
   return (
-    <Wrapper display={display}>
+    <Wrapper display={display} backgroundColor={backgroundColor}>
+      <a href="/">
       <FairlineLogo>
-        <img src="./images/fdlogo.png" />
       </FairlineLogo>
+      </a>
       <Nav>
         <HamburgerMenu
           onClick={() => setDisplay(display === 'flex' ? 'none' : 'flex')}
@@ -156,19 +200,26 @@ const Navbar = () => {
           <Bar />
         </HamburgerMenu>
         {isLoggedIn ? (
+          <>
           <ul>
             {/* The navbar will show these links after you log in */}
             <li>
-              <Link to="/howitworks">How It Works</Link>
+              <a href="#howitworks" onClick={() => setDisplay('none')}>
+                How It Works
+              </a>
             </li>
             <li>
-              <Link to="/coverages">Coverages</Link>
+              <a href="#coverages" onClick={() => setDisplay('none')}>
+                Coverages
+              </a>
             </li>
+            {/* <li>
+              <a href="#testimonials" onClick={() => setDisplay('none')}>
+                Testimonials
+              </a>
+            </li> */}
             <li>
-              <Link to="/testimonials">Testimonials</Link>
-            </li>
-            <li>
-              <Link to="/security">Security Professionals</Link>
+              {citizenOrProfessional}
             </li>
             <li>
               <Link to="/home">
@@ -181,20 +232,33 @@ const Navbar = () => {
               </a>
             </li>
           </ul>
+          <Link to="/home">
+          <MobileCTA>
+            Account
+          </MobileCTA>
+          </Link>
+          </>
         ) : (
+          <>
           <ul>
             {/* The navbar will show these links before you log in */}
             <li>
-              <Link to="/howitworks">How It Works</Link>
+              <a href="#howitworks" onClick={() => setDisplay('none')}>
+                How It Works
+              </a>
             </li>
             <li>
-              <Link to="/coverages">Coverages</Link>
+              <a href="#coverages" onClick={() => setDisplay('none')}>
+                Coverages
+              </a>
             </li>
+            {/* <li>
+              <a href="#testimonials" onClick={() => setDisplay('none')}>
+                Testimonials
+              </a>
+            </li> */}
             <li>
-              <Link to="/testimonials">Testimonials</Link>
-            </li>
-            <li>
-              <Link to="/security">Security Professionals</Link>
+            {citizenOrProfessional}
             </li>
             <li>
               <Link to="/login">
@@ -207,7 +271,14 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+          <Link to="/signup">
+          <MobileCTA>
+            Join Now
+          </MobileCTA>
+          </Link>
+          </>
         )}
+        
       </Nav>
     </Wrapper>
   )

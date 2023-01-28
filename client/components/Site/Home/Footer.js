@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 const Section = styled.div`
-  height: 350px;
+  height: 280px;
   padding: 4rem;
   display: flex;
   flex-direction: row;
@@ -73,8 +73,20 @@ const Phone = styled.span`
   font-size: 25px;
   color: #ffd600;
 `
+const Copyright = styled.div`
+width: 100%;
+height: 120px;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+padding: 2rem;
+background-color: var(--darkblue);
+color: #fff;
+font-size: 15px;
+`
 export default function Footer() {
   return (
+    <>
     <Section>
       <Logo>
         <img src="./images/fdlogo.png" />
@@ -83,19 +95,16 @@ export default function Footer() {
         <header>Quick Links</header>
         <ul>
           <li>
-            <Link to="#">Account Details</Link>
+            <Link to="/armedprofessionals">Armed Professionals</Link>
           </li>
           <li>
-            <Link to="#">Membership Benefits</Link>
+            <Link to="#">Testimonials</Link>
           </li>
           <li>
-            <Link to="#">CCW Permit Process</Link>
+            <Link to="/termsofservice">Terms of Service</Link>
           </li>
           <li>
-            <Link to="#">Reciprocity Map & Gun Laws</Link>
-          </li>
-          <li>
-            <Link to="#">Upcoming Fairline Defense Events</Link>
+            <Link to="/privacypolicy">Privacy Policy</Link>
           </li>
         </ul>
       </Links>
@@ -109,10 +118,16 @@ export default function Footer() {
             <Link to="#">Email or Chat with us</Link>
           </li>
           <li>
-            <Link to="#">FAQ & Questions</Link>
+            <Link to="#">FAQs & Questions</Link>
           </li>
         </ul>
       </Support>
     </Section>
+    <Copyright>
+      <span>
+    Ⓒ 2023, Fairline Defense LLC, All Rights Reserved.
+      </span>
+    </Copyright>
+    </>
   )
 }

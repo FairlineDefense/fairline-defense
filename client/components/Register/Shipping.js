@@ -6,6 +6,50 @@ import {useState, useEffect} from 'react'
 import {useStripe, useElements} from '@stripe/react-stripe-js'
 import {Link} from 'react-router-dom'
 
+const Wrapper = styled.div`
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+padding-top: 4rem;
+position: relative;
+`
+const H1 = styled.h1`
+font-size: 30px;
+font-weight: 300;
+margin-bottom: 2rem;
+margin-top: 1rem;
+`
+const Button = styled.button`
+background-color: var(--blue);
+color: #fff;
+border-radius: 40px;
+width: 340px;
+padding: 1rem 2rem 1rem 2rem;
+font-size: 20px;
+font-weight: 100;
+margin: 1rem;
+outline: none;
+border: none;
+cursor: pointer;
+
+&::disabled {
+  background-color: #2a4c78;
+}
+`
+
+const Header = styled.div`
+font-size: 60px;
+line-height: 70px;
+font-weight: bold;
+text-align: center;
+color: #fff;
+width: 500px;
+margin-bottom: 3rem;
+`
+
 const Shipping = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
@@ -13,50 +57,6 @@ const Shipping = () => {
   const elements = useElements()
   const [message, setMessage] = useState(null)
 
-  const Wrapper = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  `
-  const H1 = styled.h1`
-    font-size: 32px;
-    font-weight: 300;
-    margin-bottom: 2rem;
-  `
-  const H2 = styled.h2`
-    font-size: 24px;
-    font-weight: 200;
-    margin-bottom: 2rem;
-  `
-  const H3 = styled.h3`
-    font-size: 18px;
-    font-weight: 200;
-    margin-bottom: 2rem;
-  `
-  const Blue = styled.span`
-    font-size: inherit;
-    font-weight: inherit;
-    color: var(--blue);
-  `
-  const Button = styled.button`
-    background-color: var(--blue);
-    color: #fff;
-    border-radius: 40px;
-    width: 340px;
-    padding: 1rem 2rem 1rem 2rem;
-    font-size: 20px;
-    font-weight: 100;
-    margin: 1rem;
-    outline: none;
-    border: none;
-    cursor: pointer;
-
-    &::disabled {
-      background-color: #2a4c78;
-    }
-  `
   useEffect(
     () => {
       if (!stripe) {
@@ -80,7 +80,7 @@ const Shipping = () => {
         // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
         switch (paymentIntent.status) {
           case 'succeeded':
-            setMessage('Success! Payment received.')
+            setMessage('Payment is Successful!')
             break
 
           case 'processing':
@@ -110,9 +110,12 @@ const Shipping = () => {
 
   return (
     <Wrapper>
+        {message === 'Payment is Successful!' ? (<img src="./images/bluecheck.png" />) : null }
+
       <H1>{message}</H1>
       <Link to="/home">
-        <Button>Continue to Account</Button>
+        {message === 'Payment is Successful!' ? (<Header>Welcome to the Fairline Family</Header>) : null }
+        <Button>View my Membership</Button>
       </Link>
     </Wrapper>
   )

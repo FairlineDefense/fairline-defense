@@ -1,33 +1,36 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 const Section = styled.div`
   width: 100vw;
   height: 670px;
   display: flex;
   flex-direction: column;
-  padding: 13rem 0rem 0rem 6rem;
-  background-image: url('./images/security.png');
+  padding: 15rem 0rem 0rem 8rem;
+  background-image: url('./images/AdobeStock_314672886 1.jpg');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: 100%;
 
   @media (max-width: 800px) {
     background-size: cover;
+    background-position: 70% top;
     height: 80vh;
-    padding: 20rem 1rem 1rem 1rem;
+    padding: 26rem 1rem 1rem 1rem;
     text-align: center;
     align-items: center;
   }
 `
 const Heading = styled.div`
-  font-size: 48px;
-  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 500;
   color: #fff;
 
   @media (max-width: 800px) {
-    line-height: 36px;
-    width: 250px;
+    line-height: 40px;
     font-size: 32px;
+    width: 100%;
   }
 `
 const SubHeading = styled.div`
@@ -43,18 +46,21 @@ const SubHeading = styled.div`
   }
 `
 const StartButton = styled.div`
-  background-color: var(--red);
+  background-color: var(--hotred);
+  opacity: .9;
   color: #fff;
   border-radius: 40px;
   width: 280px;
-  padding: 1rem 2rem 1rem 2rem;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 20px;
   font-weight: 400;
-  margin-top: 1rem;
+  margin-top: 2rem;
   outline: none;
   border: none;
   cursor: pointer;
-  text-align: center;
 `
 const DownArrow = styled.div`
   position: absolute;
@@ -74,9 +80,11 @@ export default function SecurityLanding() {
   return (
     <Section>
       <Heading>
-        Armed Gaurd Protection<br />Starts Here
+        Legal protection for<br />Armed professionals
       </Heading>
-      <StartButton>Get Started</StartButton>
+      <Link to="/signup">
+        <StartButton>Get Started</StartButton>
+      </Link>
       <DownArrow />
     </Section>
   )
