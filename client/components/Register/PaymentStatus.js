@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import {useState, useEffect} from 'react'
 import {useStripe, useElements} from '@stripe/react-stripe-js'
 import {Elements} from '@stripe/react-stripe-js'
-import Shipping from './Shipping'
+import PaymentStatusMessage from './PaymentStatusMessage'
 import {loadStripe} from '@stripe/stripe-js'
 import RegisterHeader from './RegisterHeader'
 
@@ -53,7 +53,7 @@ const PaymentStatus = () => {
       <RegisterHeader />
       <Wrapper>
         <Elements stripe={stripePromise}>
-          <Shipping />
+          <PaymentStatusMessage />
         </Elements>
       </Wrapper>
     </div>
