@@ -7,12 +7,7 @@ import ChoosePlan from './ChoosePlan'
 import ChoosePlanArmedProfessional from './ChoosePlanArmedProfessional'
 import RegisterHeader from './RegisterHeader'
 
-const ChooseProtection = props => {
-  const user = useSelector(state => state.user)
-  const {name, displayName, error} = props
-  const dispatch = useDispatch()
-
-  const Wrapper = styled.div`
+const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -118,6 +113,11 @@ const ChooseProtection = props => {
     color: #00ABE0;
   `
 
+const ChooseProtection = props => {
+  const user = useSelector(state => state.user)
+  const {name, displayName, error} = props
+  const dispatch = useDispatch()
+  
   let [protectionType, setProtectionType] = useState('none')
 
   const protectionHandler = e => {
