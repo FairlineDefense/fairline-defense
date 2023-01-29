@@ -63,7 +63,7 @@ const CheckoutForm = () => {
       elements,
       confirmParams: {
         //Why does an env variable not work here?
-        return_url: 'https://www.fairlinedefense.com/paymentstatus'
+        return_url: process.env.PAYMENT_STATUS_URL || 'http://localhost:8080/paymentstatus',
       }
     })
 
