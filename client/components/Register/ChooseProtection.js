@@ -28,13 +28,14 @@ const ChooseProtection = props => {
   `
   const ButtonWrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 500px;
     align-items: center;
     justify-content: space-around;
     position: relative;
 
     @media(max-width: 800px) {
+      flex-direction: column;
       justify-content: center;
       width: 100%;
     }
