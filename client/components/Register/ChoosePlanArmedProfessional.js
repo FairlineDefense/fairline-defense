@@ -29,6 +29,7 @@ justify-content: space-around;
 position: relative;
 
 @media(max-width: 800px) {
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   margin-top: 4rem;
@@ -58,10 +59,10 @@ position: relative;
 }
 
 @media(max-width: 800px) {
-  width: 10rem;
-  height: 12rem;
+  width: 100%;
+  height: auto;
   margin: .5rem;
-  padding: 1rem;
+  padding: .5rem;
 }
 `
 const Price = styled.p`
@@ -69,12 +70,20 @@ font-size: 40px;
 color: var(--blue);
 margin-bottom: 1rem;
 text-align: center;
+
+@media(max-width: 800px) {
+  margin-bottom: 0;
+}
 `
 const Term = styled.p`
 font-size: 22px;
 font-weight: 200;
 margin-bottom: 3rem;
 text-align: center;
+
+@media(max-width: 800px) {
+  display:none;
+}
 `
 const Billing = styled.p`
 font-size: 18px;
