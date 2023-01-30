@@ -30,6 +30,7 @@ const Wrapper = styled.div`
     position: relative;
 
     @media(max-width: 800px) {
+      flex-direction: column;
       justify-content: center;
       width: 100%;
     }
@@ -58,10 +59,10 @@ const Wrapper = styled.div`
     }
 
     @media(max-width: 800px) {
-      width: 10rem;
-      height: 12rem;
+      height: auto;
+      width: 100%;
       margin: .5rem;
-      padding: 1rem;
+      padding: .5rem;
     }
   `
   const Price = styled.p`
@@ -80,6 +81,10 @@ const Wrapper = styled.div`
     font-weight: 200;
     margin-bottom: 1rem;
     text-align: center;
+
+    @media(max-width: 800px) {
+      margin-bottom: 0;
+    }
   `
   const Billing = styled.p`
     font-size: 18px;
