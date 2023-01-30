@@ -28,7 +28,7 @@ const ChooseProtection = props => {
   `
   const ButtonWrapper = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 500px;
     align-items: center;
     justify-content: space-around;
@@ -63,10 +63,10 @@ const ChooseProtection = props => {
     }
 
     @media(max-width: 800px) {
-      width: 10rem;
-      height: 12rem;
+      height: auto;
+      width: 100%;
       margin: .5rem;
-      padding: 1rem;
+      padding: .5rem;
     }
   `
   const Price = styled.p`
@@ -85,6 +85,10 @@ const ChooseProtection = props => {
     font-weight: 200;
     margin-bottom: 1rem;
     text-align: center;
+
+    @media(max-width: 800px) {
+      margin-bottom: 0;
+    }
   `
   const Billing = styled.p`
     font-size: 18px;
