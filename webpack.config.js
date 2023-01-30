@@ -1,8 +1,7 @@
 const Dotenv = require('dotenv-webpack')
-const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  mode: isDev ? 'development' : 'production',
+  mode: process.env.NODE_ENV,
   entry: [
     '@babel/polyfill', // enables async-await
     './client/index.js'
