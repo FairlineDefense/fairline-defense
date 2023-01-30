@@ -1,4 +1,5 @@
 const Dotenv = require('dotenv-webpack')
+require('dotenv').config()
 
 module.exports = {
   mode: process.env.NODE_ENV,
