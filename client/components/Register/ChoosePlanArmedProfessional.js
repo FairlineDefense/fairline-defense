@@ -82,7 +82,7 @@ margin-bottom: 3rem;
 text-align: center;
 
 @media(max-width: 800px) {
-  display:none;
+  display: none;
 }
 `
 const Billing = styled.p`
