@@ -1,11 +1,7 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import css from './register.css'
+import css from '../register.css'
 import styled from 'styled-components'
-import {useState} from 'react'
-import ChoosePlan from './ChoosePlan'
-import ChoosePlanArmedProfessional from './ChoosePlanArmedProfessional'
-import RegisterHeader from './RegisterHeader'
+import RegisterHeader from '../RegisterHeader'
 
 const Wrapper = styled.div`
     width: 100%;
@@ -109,7 +105,7 @@ const Wrapper = styled.div`
     p {
         margin-bottom: 1rem;
     }
-    @media(max-width: 800px) { 
+    @media(max-width: 800px) {
       width: 100%;
     }
   `
@@ -118,34 +114,8 @@ const Wrapper = styled.div`
     color: #00ABE0;
   `
 
-const ChooseProtection = props => {
-  const user = useSelector(state => state.user)
-  const {name, displayName, error} = props
-  const dispatch = useDispatch()
-  
-  let [protectionType, setProtectionType] = useState('none')
-  let [price, setPrice] = useState('none')
-  let [protectionTypeString, setProtectionTypeString] = useState('none')
-  let [interval, setInterval] = useState('none')
-
-  const protectionHandler = e => {
-    e.preventDefault()
-    setProtectionType(e.currentTarget.value)
-
-    if(e.currentTarget.value === 'armedCitizen') {
-      setProtectionTypeString('Armed Citizen')
-    }
-    if(e.currentTarget.value === 'armedProfessional') {
-      setProtectionTypeString('Armed Professional')
-    }
-  }
-
-  if (protectionType === 'armedProfessional') {
-    return <ChoosePlanArmedProfessional protectionType={protectionType} protectionTypeString={protectionTypeString} protectionHandler={protectionHandler} setInterval={setInterval} interval={interval} setPrice={setPrice} price={price} />
-  }
-  if (protectionType === 'armedCitizen') {
-    return <ChoosePlan protectionType={protectionType} protectionTypeString={protectionTypeString} protectionHandler={protectionHandler} setInterval={setInterval} interval={interval} setPrice={setPrice} price={price} />
-  }
+const ChooseProtection = (props) => {
+  let {protectionClickHandler} = props
 
   return (
     <div className="auth">
@@ -159,11 +129,11 @@ const ChooseProtection = props => {
         <p>Starting from <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr</Blue></p></Subheader>
         <H1>Select Your Protection</H1>
         <ButtonWrapper>
-          <Button onClick={e => protectionHandler(e)} value="armedCitizen">
+          <Button onClick={e => protectionClickHandler(e)} value="armedCitizen">
           <Term>I am</Term>
             <Price>Armed Citizen</Price>
           </Button>
-          <Button onClick={e => protectionHandler(e)} value="armedProfessional">
+          <Button onClick={e => protectionClickHandler(e)} value="armedProfessional">
           <Term>I am</Term>
             <Price>Armed Professional</Price>
           </Button>

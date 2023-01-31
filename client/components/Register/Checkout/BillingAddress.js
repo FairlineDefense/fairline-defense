@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import {useState} from 'react'
-import FDTextField from '../FDTextField'
+import FDTextField from '../../FDTextField'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import {ThemeProvider} from '@material-ui/core'
-import theme from '../theme'
+import theme from '../../theme'
 
 const Wrapper = styled.div`
   width: 100%;

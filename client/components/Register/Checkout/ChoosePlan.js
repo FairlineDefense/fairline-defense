@@ -1,10 +1,9 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import css from './register.css'
+import css from '../register.css'
 import styled from 'styled-components'
 import {useState} from 'react'
 import Payment from './Payment'
-import RegisterHeader from './RegisterHeader'
+import RegisterHeader from '../RegisterHeader'
 
 const Wrapper = styled.div`
     width: 100%;
@@ -104,22 +103,27 @@ const Wrapper = styled.div`
     font-weight: 200;
     margin-bottom: 2rem;
   `
-  const Blue = styled.span`
+  const Blue = styled.button`
     font-size: 20px;
     cursor: pointer;
     text-decoration: underline;
     font-weight: inherit;
     color: #00ABE0;
+    background: transparent;
+    outline: none;
+    border: none;
   `
 
 const ChoosePlan = props => {
-  const user = useSelector(state => state.user)
-  const {name, displayName, error, protectionType, protectionHandler, setPrice, setInterval, interval, protectionTypeString, price} = props
-  const dispatch = useDispatch()
-
+  const {protectionType, protectionClickHandler, setPrice, setInterval, interval, protectionTypeString, price} = props
   let [priceId, setPriceId] = useState('none')
+  // Actual prices set on backend. These are just for display.
+  const yearPrice = protectionType === 'armedCitizen' ? '$19.99' : '$199'
+  const monthPrice = protectionType === 'armedCitizen' ? '$29.99' : '$299'
+  const oppositeProtectionType = protectionType === 'armedCitizen' ? 'armedCitizen' : 'armedProfessional'
+  const oppositeProtectionTypeString = protectionTypeString === 'Armed Citizen' ? 'Armed Professional' : 'Armed Citizen'
 
-  const clickHandler = e => {
+  const planClickHandler = e => {
     e.preventDefault()
     setPriceId(e.currentTarget.value)
 
@@ -132,15 +136,9 @@ const ChoosePlan = props => {
       setPrice('$199')
     }
   }
-
-  const protectionClickHandler = (e) => {
-    e.preventDefault()
-    setPriceId('none')
-    protectionHandler(e)
-  }
   
   if (priceId !== 'none') {
-    return <Payment priceId={priceId} clickHandler={clickHandler} price={price} protectionType={protectionType} protectionTypeString={protectionTypeString} interval={interval} />
+    return <Payment priceId={priceId} planClickHandler={planClickHandler} price={price} protectionType={protectionType} protectionTypeString={protectionTypeString} interval={interval} />
   }
 
   return (
@@ -150,16 +148,16 @@ const ChoosePlan = props => {
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
-        <H1>Select your plan for Armed Citizen</H1>
-        <Blue onClick={(e)=> protectionClickHandler(e)} value="armedProfessional">Switch to Armed Professional</Blue>
+        <H1>Select your plan for {protectionTypeString}</H1>
+        <Blue onClick={(e)=> protectionClickHandler(e)} value='none'>Switch to {oppositeProtectionTypeString}</Blue>
         <ButtonWrapper>
-          <Button onClick={e => clickHandler(e)} value="citizen_month">
-            <Price>$19.99</Price>
+          <Button onClick={e => planClickHandler(e)} value={`${protectionType}_month`}>
+            <Price>{monthPrice}</Price>
             <Term>Per Month</Term>
             <Billing>Billed Monthly</Billing>
           </Button>
-          <Button onClick={e => clickHandler(e)} value="citizen_year">
-            <Price>$199</Price>
+          <Button onClick={e => planClickHandler(e)} value={`${protectionType}_year`}>
+            <Price>{yearPrice}</Price>
             <Term>Per Year</Term>
             <Billing>Billed Annually</Billing>
           </Button>

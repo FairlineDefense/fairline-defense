@@ -3,9 +3,9 @@ import {useSelector} from 'react-redux'
 import {loadStripe} from '@stripe/stripe-js'
 import {useState, useEffect} from 'react'
 import CreateSubscription from './CreateSubscription'
-import css from './register.css'
+import css from '../register.css'
 import styled from 'styled-components'
-import RegisterHeader from './RegisterHeader'
+import RegisterHeader from '../RegisterHeader'
 import BillingAddress from './BillingAddress'
 
 const Wrapper = styled.div`
@@ -90,7 +90,7 @@ const Billing = styled.p`
 
 const Payment = props => {
   let user = useSelector(state => state.user)
-  const {priceId, clickHandler, protectionType, protectionTypeString, price, interval} = props
+  const {priceId, planClickHandler, protectionType, protectionTypeString, price, interval} = props
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
   let [clientSecret, setClientSecret] = useState('none')
 
@@ -176,7 +176,7 @@ const Payment = props => {
         </CenteredWrapper>
         <CenteredWrapper>
         <span>{protectionTypeString}</span><span>{price}</span>
-         <span>Billed {interval}</span><span>Change</span>
+         <span>Billed {interval}</span><span onClick={(e)=>planClickHandler(e)} value="none">Change</span>
          </CenteredWrapper>
         {clientSecret === 'none' ? (
           <BillingAddress createCustomer={createCustomer} />
