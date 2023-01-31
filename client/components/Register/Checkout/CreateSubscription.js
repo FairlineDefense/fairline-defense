@@ -14,19 +14,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `
-const Button = styled.button`
-  background-color: var(--blue);
-  color: #fff;
-  border-radius: 40px;
-  width: 340px;
-  padding: 1rem 2rem 1rem 2rem;
-  font-size: 20px;
-  font-weight: 100;
-  margin: 2rem;
-  outline: none;
-  border: none;
-  cursor: pointer;
-`
+
 const Header = styled.h1`
   font-size: 32px;
   font-weight: 300;
@@ -37,11 +25,7 @@ const Header = styled.h1`
     font-size: 22px;
   }
 `
-const Form = styled.form`
-  max-width: 700px;
-  display: flex;
-  flex-wrap: wrap;
-`
+
 const CreateSubscription = props => {
   const {stripe, options} = props
 

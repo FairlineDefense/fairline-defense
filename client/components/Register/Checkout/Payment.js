@@ -123,7 +123,7 @@ const Payment = props => {
   let user = useSelector(state => state.user)
   const {priceId, planClickHandler, protectionType, protectionTypeString, price, interval} = props
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
-  let [clientSecret, setClientSecret] = useState('none')
+  let [clientSecret, setClientSecret] = useState('pi_3MWPF4IvvF6ba6jU16nvTlLP_secret_5viHMvIkrj1w62gmrHgvOL97y')
 
   let [customerId, setCustomerId] = useState('none')
 
@@ -145,33 +145,33 @@ const Payment = props => {
 
   // Create Customer creates the customer object with their personal information for Stripe.
   // Stripe can then generate a Client Secret to render the PaymentElement in our CheckoutForm
-  const createCustomer = async address => {
-    try {
-      let reqBody = {...user, ...address}
-      const response = await fetch('/payment/create-customer', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(reqBody)
-      })
-      const {customerId: customerId} = await response.json()
-      setCustomerId(customerId)
-    } catch (error) {
-      console.log('create customer error', error)
-    }
-  }
+  // const createCustomer = async address => {
+  //   try {
+  //     let reqBody = {...user, ...address}
+  //     const response = await fetch('/payment/create-customer', {
+  //       method: 'POST',
+  //       headers: {'Content-Type': 'application/json'},
+  //       body: JSON.stringify(reqBody)
+  //     })
+  //     const {customerId: customerId} = await response.json()
+  //     setCustomerId(customerId)
+  //   } catch (error) {
+  //     console.log('create customer error', error)
+  //   }
+  // }
 
-  useEffect(
-    () => {
-      try {
-        if (customerId !== 'none') {
-          fetchCs()
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
-    [customerId]
-  )
+  // useEffect(
+  //   () => {
+  //     try {
+  //       if (customerId !== 'none') {
+  //         fetchCs()
+  //       }
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   },
+  //   [customerId]
+  // )
 
   const options = {
     clientSecret: clientSecret,
@@ -194,7 +194,6 @@ const Payment = props => {
       labels: 'floating'
     }
   }
-
   return (
     <div className="auth">
       <svg className="logo" />
@@ -224,7 +223,7 @@ const Payment = props => {
         </CenteredWrapper>
         <HR />
         
-        {clientSecret === 'none' ? (
+        {process.env.NODE_ENV === 'production' ? (
           <BillingAddress createCustomer={createCustomer} />
         ) : (
           <CreateSubscription stripe={stripePromise} options={options} />
