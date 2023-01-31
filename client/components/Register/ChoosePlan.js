@@ -114,7 +114,7 @@ const Wrapper = styled.div`
 
 const ChoosePlan = props => {
   const user = useSelector(state => state.user)
-  const {name, displayName, error, protectionType, protectionHandler } = props
+  const {name, displayName, error, protectionType, protectionHandler, setPrice, setInterval, interval, protectionTypeString, price} = props
   const dispatch = useDispatch()
 
   let [priceId, setPriceId] = useState('none')
@@ -122,6 +122,15 @@ const ChoosePlan = props => {
   const clickHandler = e => {
     e.preventDefault()
     setPriceId(e.currentTarget.value)
+
+    if(e.currentTarget.value === 'citizen_month') {
+      setInterval('monthly')
+      setPrice('$19.99')
+    }
+    if(e.currentTarget.value === 'citizen_year') {
+      setInterval('annually')
+      setPrice('$199')
+    }
   }
 
   const protectionClickHandler = (e) => {
@@ -131,7 +140,7 @@ const ChoosePlan = props => {
   }
   
   if (priceId !== 'none') {
-    return <Payment priceId={priceId} clickHandler={clickHandler} protectionType={protectionType} />
+    return <Payment priceId={priceId} clickHandler={clickHandler} price={price} protectionType={protectionType} protectionTypeString={protectionTypeString} interval={interval} />
   }
 
   return (

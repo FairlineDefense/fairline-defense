@@ -124,17 +124,27 @@ const ChooseProtection = props => {
   const dispatch = useDispatch()
   
   let [protectionType, setProtectionType] = useState('none')
+  let [price, setPrice] = useState('none')
+  let [protectionTypeString, setProtectionTypeString] = useState('none')
+  let [interval, setInterval] = useState('none')
 
   const protectionHandler = e => {
     e.preventDefault()
     setProtectionType(e.currentTarget.value)
+
+    if(e.currentTarget.value === 'armedCitizen') {
+      setProtectionTypeString('Armed Citizen')
+    }
+    if(e.currentTarget.value === 'armedProfessional') {
+      setProtectionTypeString('Armed Professional')
+    }
   }
 
   if (protectionType === 'armedProfessional') {
-    return <ChoosePlanArmedProfessional protectionType={protectionType} protectionHandler={protectionHandler} />
+    return <ChoosePlanArmedProfessional protectionType={protectionType} protectionTypeString={protectionTypeString} protectionHandler={protectionHandler} setInterval={setInterval} interval={interval} setPrice={setPrice} price={price} />
   }
   if (protectionType === 'armedCitizen') {
-    return <ChoosePlan protectionType={protectionType} protectionHandler={protectionHandler} />
+    return <ChoosePlan protectionType={protectionType} protectionTypeString={protectionTypeString} protectionHandler={protectionHandler} setInterval={setInterval} interval={interval} setPrice={setPrice} price={price} />
   }
 
   return (

@@ -114,7 +114,7 @@ color: #00ABE0;
 
 const ChoosePlanArmedProfessional = props => {
   const user = useSelector(state => state.user)
-  const {name, displayName, error, protectionHandler} = props
+  const {name, displayName, error, protectionHandler, setPrice, setInterval, interval, price} = props
   const dispatch = useDispatch()
 
   let [priceId, setPriceId] = useState('none')
@@ -122,6 +122,15 @@ const ChoosePlanArmedProfessional = props => {
   const clickHandler = e => {
     e.preventDefault()
     setPriceId(e.currentTarget.value)
+
+    if(e.currentTarget.value === 'professional_month') {
+      setInterval('monthly')
+      setPrice('$19.99')
+    }
+    if(e.currentTarget.value === 'professional_year') {
+      setInterval('annually')
+      setPrice('$199')
+    }
   }
 
   const protectionClickHandler = (e) => {
@@ -131,7 +140,7 @@ const ChoosePlanArmedProfessional = props => {
   }
 
   if (priceId !== 'none') {
-    return <Payment priceId={priceId} clickHandler={clickHandler} />
+    return <Payment priceId={priceId} clickHandler={clickHandler} price={price} protectionTypeString={protectionTypeString} interval={interval} />
   }
 
   return (
