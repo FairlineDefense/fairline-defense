@@ -120,20 +120,19 @@ const ChoosePlan = props => {
   // Actual prices set on backend. These are just for display.
   const monthPrice = protectionType === 'armedCitizen' ? '$19.99' : '$29.99'
   const yearPrice = protectionType === 'armedCitizen' ? '$199' : '$299'
-  const oppositeProtectionType = protectionType === 'armedCitizen' ? 'armedCitizen' : 'armedProfessional'
   const oppositeProtectionTypeString = protectionTypeString === 'Armed Citizen' ? 'Armed Professional' : 'Armed Citizen'
 
   const planClickHandler = e => {
     e.preventDefault()
     setPriceId(e.currentTarget.value)
 
-    if(e.currentTarget.value === 'citizen_month') {
+    if(e.currentTarget.value.split('_')[1] === 'month') {
       setInterval('monthly')
-      setPrice('$19.99')
+      setPrice(monthPrice)
     }
-    if(e.currentTarget.value === 'citizen_year') {
+    if(e.currentTarget.value.split('_')[1] === 'year') {
       setInterval('annually')
-      setPrice('$199')
+      setPrice(yearPrice)
     }
   }
   

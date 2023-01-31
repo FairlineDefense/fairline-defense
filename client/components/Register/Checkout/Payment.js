@@ -20,6 +20,27 @@ const CenteredWrapper = styled.div`
   display: flex;
   justify-content: center;
 `
+const SpaceBetweenWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 800px;
+  padding: .2rem 0rem .2rem 0rem;
+
+  @media (max-width: 800px) {
+    width: 90%;
+  }
+`
+const HR = styled.div`
+  height: 1px;
+  color: #fff;
+  display: block;
+  width: 800px;
+
+  @media (max-width: 800px) {
+    width: 90%;
+  }
+`
 const H1 = styled.h1`
   font-size: 32px;
   font-weight: 300;
@@ -86,6 +107,16 @@ const Billing = styled.p`
   font-size: 18px;
   font-weight: 500;
   text-align: center;
+`
+const Blue = styled.button`
+font-size: 20px;
+cursor: pointer;
+text-decoration: underline;
+font-weight: inherit;
+color: #00ABE0;
+background: transparent;
+outline: none;
+border: none;
 `
 
 const Payment = props => {
@@ -174,10 +205,25 @@ const Payment = props => {
         <CenteredWrapper>
           <H1>Plan Summary</H1>
         </CenteredWrapper>
+
+      <CenteredWrapper>
+        <SpaceBetweenWrapper>
+        <div>{protectionTypeString}</div>
+        <div>{price}</div>
+        </SpaceBetweenWrapper>
+
+        </CenteredWrapper>
         <CenteredWrapper>
-        <span>{protectionTypeString}</span><span>{price}</span>
-         <span>Billed {interval}</span><span onClick={(e)=>planClickHandler(e)} value="none">Change</span>
-         </CenteredWrapper>
+
+        <SpaceBetweenWrapper>
+         <div>Billed {interval}</div>
+         <div>
+         <Blue onClick={(e)=>planClickHandler(e)} value="none">Change</Blue>
+         </div>
+         </SpaceBetweenWrapper>
+        </CenteredWrapper>
+        <HR />
+        
         {clientSecret === 'none' ? (
           <BillingAddress createCustomer={createCustomer} />
         ) : (
