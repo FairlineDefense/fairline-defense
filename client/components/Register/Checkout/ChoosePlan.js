@@ -118,8 +118,8 @@ const ChoosePlan = props => {
   const {protectionType, protectionClickHandler, setPrice, setInterval, interval, protectionTypeString, price} = props
   let [priceId, setPriceId] = useState('none')
   // Actual prices set on backend. These are just for display.
-  const yearPrice = protectionType === 'armedCitizen' ? '$19.99' : '$199'
-  const monthPrice = protectionType === 'armedCitizen' ? '$29.99' : '$299'
+  const monthPrice = protectionType === 'armedCitizen' ? '$19.99' : '$29.99'
+  const yearPrice = protectionType === 'armedCitizen' ? '$199' : '$299'
   const oppositeProtectionType = protectionType === 'armedCitizen' ? 'armedCitizen' : 'armedProfessional'
   const oppositeProtectionTypeString = protectionTypeString === 'Armed Citizen' ? 'Armed Professional' : 'Armed Citizen'
 

@@ -11,9 +11,7 @@ const Checkout = () => {
 
   const protectionClickHandler = e => {
     e.preventDefault()
-    const type = e.currentTarget.value
-    console.log(type)
-    setProtectionType(type)
+    setProtectionType(e.currentTarget.value)
   }
 
   useEffect(() => {
