@@ -6,6 +6,9 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../../theme'
+import RegisterHeader from '../RegisterHeader'
+import css from '../register.css'
+import {useSelector} from 'react-redux'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -57,21 +60,57 @@ const ErrorText = styled.div`
   background-color: #fff;
   color: #000;
 `
-const BillingAddress = props => {
-  const {createCustomer, apt, streetAddress, line2, city, zipCode, changeHandler} = props
-// Getting address from parent Payment, passing props to CreateSubscription//Needs checking
+const ContinueButton = styled.button`
+  background-color: var(--blue);
+  color: #fff;
+  border-radius: 40px;
+  width: 340px;
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 20px;
+  font-weight: 100;
+  margin: 2rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+    background-color: #2a4c78;
+    color: #5D789A;
+  }
+`
+const BillingAddress = ({order:{apt, streetAddress, line2, city, state, zipCode}, order, setStep, changeHandler, setOrder}) => {
+  let user = useSelector(state => state.user)
+  
   let [errorText, setErrorText] = useState('')
+  // Create Customer creates the customer object with their personal information for Stripe.
+  // Stripe can then generate a Client Secret to render the PaymentElement in our CheckoutForm
+  const createCustomer = async () => {
+    try {
+      let reqBody = {...user, apt, streetAddress, line2, city, state, zipCode}
+      const response = await fetch('/payment/create-customer', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(reqBody)
+      })
+      const {customerId: customerId} = await response.json()
+      setOrder({...order, customerId: customerId})
+      setStep('CreateSubscription')
+    } catch (error) {
+      console.log('create customer error', error)
+    }
+  }
 
   const clickHandler = e => {
     e.preventDefault()
     function validateFields() {
-      if (!/^\d{5}(-\d{4})?$/.test(address.zipCode)) {
+      if (!/^\d{5}(-\d{4})?$/.test(zipCode)) {
         return setErrorText('Invalid zip code.')
       }
-      if (address.state === '' || address.state === 'state') {
+      if (state === '' || state === 'state') {
         return setErrorText('Invalid state.')
       } else {
-        createCustomer(address)
+        createCustomer({apt, streetAddress, line2, city, state, zipCode})
       }
     }
     validateFields()
@@ -134,7 +173,12 @@ const BillingAddress = props => {
   ]
 
   return (
-    <Wrapper>
+    <div className="auth">
+      <svg className="logo" />
+      <svg className="logo" />
+      <svg className="logo" />
+      <RegisterHeader />
+      <Wrapper>
       <Header>Billing Address</Header>
       <ThemeProvider theme={theme}>
         <Form>
@@ -146,7 +190,7 @@ const BillingAddress = props => {
             name="apt"
             placeholder="Apt"
             onChange={e => changeHandler(e)}
-            value={address.apt}
+            value={apt}
           />
           <FDTextField
             name="streetAddress"
@@ -156,7 +200,7 @@ const BillingAddress = props => {
             variant="filled"
             style={{margin: 8, flexGrow: 1}}
             onChange={e => changeHandler(e)}
-            value={address.streetAddress}
+            value={streetAddress}
             required
           />
           <FDTextField
@@ -168,7 +212,7 @@ const BillingAddress = props => {
             variant="filled"
             style={{margin: 8}}
             onChange={e => changeHandler(e)}
-            value={address.line2}
+            value={line2}
           />
           <FDTextField
             name="city"
@@ -177,7 +221,7 @@ const BillingAddress = props => {
             variant="filled"
             style={{margin: 8, flexGrow: 1}}
             onChange={e => changeHandler(e)}
-            value={address.city}
+            value={city}
             required
           />
           <Select
@@ -190,7 +234,7 @@ const BillingAddress = props => {
               paddingLeft: 20
             }}
             name="state"
-            value={address.state}
+            value={state}
             onChange={e => changeHandler(e)}
             required
           >
@@ -207,14 +251,15 @@ const BillingAddress = props => {
             variant="filled"
             style={{margin: 8, flexGrow: 1}}
             onChange={e => changeHandler(e)}
-            value={address.zipCode}
+            value={zipCode}
             required
           />
         </Form>
       </ThemeProvider>
-      <Button onClick={e => clickHandler(e)}>Continue to Payment</Button>
+      <ContinueButton onClick={(e) => clickHandler(e)}>Continue</ContinueButton>
       {errorText && <ErrorText>{errorText}</ErrorText>}
     </Wrapper>
+    </div>
   )
 }
 export default BillingAddress

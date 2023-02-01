@@ -2,14 +2,20 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import ChoosePlan from './ChoosePlan'
 import ChooseProtection from './ChooseProtection'
+import BillingAddress from './BillingAddress'
+import CreateSubscription from './CreateSubscription'
+import PaymentStatus from './PaymentStatus'
+import {loadStripe} from '@stripe/stripe-js'
 
 const Checkout = () => {
+ const stripePromise = loadStripe(process.env.PUBLIC_KEY)
+
  const [order, setOrder] = useState({
     customerId: '',
     clientSecret: '',
     protectionType: '',
     protectionTypeString: '',
-    billingInterval: '',
+    priceId: '',
     price: '',
     apt: '',
     streetAddress: '',
@@ -26,6 +32,28 @@ const Checkout = () => {
     shippingZipCode: '',
     termsAndConditions: false,
  })
+
+ const options = {
+    clientSecret: order.clientSecret,
+    // Appearance of Stripe form:
+    appearance: {
+      theme: 'stripe',
+
+      variables: {
+        colorText: '#0C192E',
+        colorPrimaryText: '#FFF',
+        colorTextSecondary: '#FFF',
+        colorTextPlaceholder: '#AAB1B9',
+        colorPrimary: '#00abe1',
+        colorBackground: '#FFF',
+        colorDanger: '#FF1E3E',
+        fontFamily: 'Eina, sans-serif',
+        spacingUnit: '5px',
+        borderRadius: '5px'
+      },
+      labels: 'floating'
+    }
+  }
 
  const [step, setStep] = useState('ChooseProtection')
 
@@ -54,10 +82,11 @@ const Checkout = () => {
       );
     case 'BillingAddress':
       return (
-        <ConfirmOrder
+        <BillingAddress
         setStep={setStep}
         changeHandler={changeHandler}
         order={order}
+        setOrder={setOrder}
         />
       );
       case 'CreateSubscription':
@@ -66,8 +95,19 @@ const Checkout = () => {
             setStep={setStep}
             changeHandler={changeHandler}
             order={order}
+            setOrder={setOrder}
+            stripePromise={stripePromise}
+            options={options}
             />
         );
+        case 'PaymentStatus':
+            return (
+                <PaymentStatus
+                setStep={setStep}
+                changeHandler={changeHandler}
+                order={order}
+                />
+            );
     default:
       return <ChooseProtection />;
   }

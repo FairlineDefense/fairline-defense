@@ -57,6 +57,11 @@ const Wrapper = styled.div`
       border-color: var(--blue);
     }
 
+    &:disabled {
+      background: rgba(0, 171, 224, 0.2);
+      border-color: var(--blue);
+    }
+
     @media(max-width: 800px) {
       width: 100%;
       height: auto;
@@ -113,8 +118,26 @@ const Wrapper = styled.div`
     outline: none;
     border: none;
   `
+  const ContinueButton = styled.button`
+  background-color: var(--blue);
+  color: #fff;
+  border-radius: 40px;
+  width: 340px;
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 20px;
+  font-weight: 100;
+  margin: 2rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
 
-const ChoosePlan = ({order: {protectionType}, changeHandler, setStep}) => {
+  &:disabled {
+    cursor: default;
+    background-color: #2a4c78;
+    color: #5D789A;
+  }
+`
+const ChoosePlan = ({order: {protectionType, priceId}, changeHandler, setStep}) => {
   const oppositeProtectionTypeString = protectionTypeString === 'Armed Citizen' ? 'Armed Professional' : 'Armed Citizen'
   const protectionTypeString = protectionType === 'armedCitizen' ? 'Armed Citizen' : 'Armed Professional'
 
@@ -134,17 +157,18 @@ const ChoosePlan = ({order: {protectionType}, changeHandler, setStep}) => {
         <H1>Select your plan for {protectionTypeString}</H1>
         <Blue onClick={()=> setStep('ChooseProtection')}>Switch to {oppositeProtectionTypeString}</Blue>
         <ButtonWrapper>
-          <Button onClick={e => changeHandler(e)} value={`${protectionType}Month`}  name='billingInterval'>
+          <Button onClick={e => changeHandler(e)} value={`${protectionType}Month`} name='priceId' disabled={priceId === `${protectionType}Month`}>
             <Price>{prices[`${protectionType}Month`]}</Price>
             <Term>Per Month</Term>
             <Billing>Billed Monthly</Billing>
           </Button>
-          <Button onClick={e => changeHandler(e)} value={`${protectionType}Year`} name='billingInterval'>
+          <Button onClick={e => changeHandler(e)} value={`${protectionType}Year`} name='priceId' disabled={priceId === `${protectionType}Year`}>
             <Price>{prices[`${protectionType}Year`]}</Price>
             <Term>Per Year</Term>
             <Billing>Billed Annually</Billing>
           </Button>
         </ButtonWrapper>
+        <ContinueButton onClick={() => setStep('BillingAddress')} disabled={!priceId.length}>Continue</ContinueButton>
       </Wrapper>
     </div>
   )

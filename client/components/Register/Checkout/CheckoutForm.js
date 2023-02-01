@@ -77,39 +77,13 @@ const Button = styled.button`
     margin: 2rem;
   }
 `
-const CheckoutForm = (props) => {
-  let user = useSelector(state => state.user)
+const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, shippingApt, shippingStreetAddress, shippingLine2, shippingCity, shippingState, shippingZipCode, differentAddress, termsAndConditions}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
 
   const stripe = useStripe()
   const elements = useElements()
   const dispatch = useDispatch()
 
   const [errorMessage, setErrorMessage] = useState(null)
-  const [show, setShow] = useState(false)
-  let [accept, setAccept] = useState(false)
-
-  let [address, setAddress] = useState({
-    shippingApt: '',
-    shippingStreetAddress: '',
-    shippingAddress2: '',
-    shippingCity: '',
-    shippingState: 'State',
-    shippingZipCode: ''
-  })
-
-  let {
-    apt,
-    streetAddress,
-    line2,
-    city,
-    state,
-    zipCode,
-} = props
-
-  const changeHandler = e => {
-    e.preventDefault()
-    setAddress({...address, [e.target.name]: e.target.value})
-  }
 
   const handleSubmit = async event => {
     // We don't want to let default form submission happen here,
@@ -117,7 +91,7 @@ const CheckoutForm = (props) => {
     event.preventDefault()
 
     // Update user's shipping address in our db
-    show && dispatch(update({...user, address}))
+    differentAddress && dispatch(update({...user, order}))
 
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
@@ -129,8 +103,7 @@ const CheckoutForm = (props) => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        //Why does an env variable not work here?
-        return_url: 'https://www.fairlinedefense.com/paymentstatus'
+        return_url: process.env.PAYMENT_STATUS_URL,
       }
     })
 
@@ -156,7 +129,7 @@ const CheckoutForm = (props) => {
       <LeftWrapper>
       <div>
       <ThemeProvider theme={theme}>
-        <Checkbox color="primary" onChange={() => setShow(!show)} checked={!show} />
+        <Checkbox color="primary" onChange={(e) => changeHandler(e)} name="differentAddress" value={!differentAddress} checked={!differentAddress} />
       </ThemeProvider>
       </div>
       <div>My shipping address is the same as my billing address.
@@ -164,12 +137,12 @@ const CheckoutForm = (props) => {
       </div>
       </LeftWrapper>
 
-      <ShippingAddress show={show} changeHandler={changeHandler} shippingApt={address.shippingApt} shippingStreetAddress={address.shippingStreetAddress} shippingCity={address.shippingCity} shippingState={address.shippingState} shippingZipCode={address.shippingZipCode}  />
+      <ShippingAddress differentAddress={differentAddress} changeHandler={changeHandler} shippingApt={shippingApt} shippingStreetAddress={shippingStreetAddress} shippingLine2={shippingLine2} shippingCity={shippingCity} shippingState={shippingState} shippingZipCode={shippingZipCode}  />
 
       <LeftWrapper>
       <div>
       <ThemeProvider theme={theme}>
-        <Checkbox color="primary" onChange={() => setAccept(!accept)} checked={accept} required />
+        <Checkbox color="primary" onChange={() => changeHandler(!termsAndConditions)} checked={termsAndConditions} required />
       </ThemeProvider>
       </div>
       <div>By starting my Membership, I confirm that I have read and agree to the Fairline Defense Terms & Conditions. I understand that my Membership will automatically renew monthly at the then-current subscription rate, which will be charged to my payment method on file. I understand that I can update my payment method or pause or cancel my Membership at any time in accordance with the Membership Terms by going to my Account Settings at www.fairlinedefense.com/mymembership, and that these changes will take effect at the end of my current billing cycle.</div>
