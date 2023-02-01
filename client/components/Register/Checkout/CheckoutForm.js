@@ -7,8 +7,8 @@ import {ThemeProvider} from '@material-ui/core'
 import theme from '../../theme'
 import {update} from '../../../store/'
 import styled from 'styled-components'
-
 const FormWrapper = styled.div`
+
   width: 800px;
   text-align: center;
 
@@ -78,12 +78,15 @@ const Button = styled.button`
   }
 `
 const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, shippingApt, shippingStreetAddress, shippingLine2, shippingCity, shippingState, shippingZipCode, differentAddress, termsAndConditions}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
-
+  const user = useSelector(state => state.user)
   const stripe = useStripe()
   const elements = useElements()
   const dispatch = useDispatch()
 
   const [errorMessage, setErrorMessage] = useState(null)
+
+  let [terms, setTerms] = useState(false)
+  let [shippingAddress, setshippingAddress] = useState(true)
 
   const handleSubmit = async event => {
     // We don't want to let default form submission happen here,
@@ -129,7 +132,7 @@ const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, s
       <LeftWrapper>
       <div>
       <ThemeProvider theme={theme}>
-        <Checkbox color="primary" onChange={(e) => changeHandler(e)} name="differentAddress" value={!differentAddress} checked={!differentAddress} />
+        <Checkbox color="primary" onChange={() => setOrder({...order, differentAddress: !differentAddress})} name="differentAddress" checked={!differentAddress} />
       </ThemeProvider>
       </div>
       <div>My shipping address is the same as my billing address.
@@ -142,7 +145,7 @@ const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, s
       <LeftWrapper>
       <div>
       <ThemeProvider theme={theme}>
-        <Checkbox color="primary" onChange={() => changeHandler(!termsAndConditions)} checked={termsAndConditions} required />
+        <Checkbox color="primary" onChange={() => setOrder({...order, termsAndConditions: !termsAndConditions})} name="termsAndConditions" checked={termsAndConditions} required />
       </ThemeProvider>
       </div>
       <div>By starting my Membership, I confirm that I have read and agree to the Fairline Defense Terms & Conditions. I understand that my Membership will automatically renew monthly at the then-current subscription rate, which will be charged to my payment method on file. I understand that I can update my payment method or pause or cancel my Membership at any time in accordance with the Membership Terms by going to my Account Settings at www.fairlinedefense.com/mymembership, and that these changes will take effect at the end of my current billing cycle.</div>

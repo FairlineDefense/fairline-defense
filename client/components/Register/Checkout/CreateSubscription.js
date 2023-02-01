@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   position: relative;
 `
 
@@ -173,6 +174,7 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, apt, stre
       <svg className="logo" />
       <svg className="logo" />
       <RegisterHeader />
+      <Wrapper>
       <CenteredWrapper>
           <H1>Plan Summary</H1>
         </CenteredWrapper>
@@ -182,9 +184,6 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, apt, stre
         {/* <div>{protectionTypeString}</div>
         <div>{price}</div> */}
         </SpaceBetweenWrapper>
-
-        </CenteredWrapper>
-        <CenteredWrapper>
 
         <SpaceBetweenWrapper>
          {/* <div>Billed {interval}</div> */}
@@ -198,9 +197,10 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, apt, stre
         <Header>Credit Card</Header>
       <Elements stripe={stripePromise} options={options}>
         <Wrapper>
-          <CheckoutForm order={order} apt={apt} streetAddress={streetAddress} line2={line2} city={city} state={state} zipCode={zipCode} />
+          <CheckoutForm order={order} apt={apt} streetAddress={streetAddress} line2={line2} city={city} state={state} zipCode={zipCode} changeHandler={changeHandler} setOrder={setOrder} />
         </Wrapper>
       </Elements>
+      </Wrapper>
     </div>
     </>
   )
