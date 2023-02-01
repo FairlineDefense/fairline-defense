@@ -5,20 +5,6 @@ const stripe = require('stripe')(process.env.SECRET_KEY)
 const fetch = require('node-fetch');
 module.exports = router
 
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'email', 'emailVerified']
-    })
-    res.json(users)
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.put('/:id', async (req, res, next) => {
   const {
     firstName,
@@ -30,6 +16,11 @@ router.put('/:id', async (req, res, next) => {
     city,
     state,
     zipCode,
+    shippingStreetAddress,
+    shippingLine2,
+    shippingCity,
+    shippingState,
+    shippingZipCode,
     password,
     emailReminders,
     emailNews,
@@ -81,11 +72,11 @@ router.put('/:id', async (req, res, next) => {
         postal_code: zipCode,
       },
       shipping: {address: {
-        line1: streetAddress,
-        line2: line2,
-        city: city,
-        state: state,
-        postal_code: zipCode,
+        line1: shippingStreetAddress,
+        line2: shippingLine2,
+        city: shippingCity,
+        state: shippingState,
+        postal_code: shippingZipCode,
       },
       name: `${firstName} ${lastName}`,
       phone: phone
@@ -134,6 +125,11 @@ router.put('/:id', async (req, res, next) => {
           city: city,
           state: state,
           zipCode: zipCode,
+          shippingStreetAddres: shippingStreetAddress,
+          shippingLine2: shippingLine2,
+          shippingCity: shippingCity,
+          shippingState: shippingState,
+          shippingZipCode: shippingZipCode,
           emailReminders: emailReminders,
           emailNews: emailNews,
           emailInsider: emailInsider,

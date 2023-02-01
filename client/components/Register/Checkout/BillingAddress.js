@@ -58,20 +58,10 @@ const ErrorText = styled.div`
   color: #000;
 `
 const BillingAddress = props => {
-  const {createCustomer} = props
-  let [address, setAddress] = useState({
-    apt: '',
-    streetAddress: '',
-    address2: '',
-    city: '',
-    state: 'State',
-    zipCode: ''
-  })
+  const {createCustomer, apt, streetAddress, line2, city, zipCode, changeHandler} = props
+// Getting address from parent Payment, passing props to CreateSubscription//Needs checking
   let [errorText, setErrorText] = useState('')
-  const changeHandler = e => {
-    e.preventDefault()
-    setAddress({...address, [e.target.name]: e.target.value})
-  }
+
   const clickHandler = e => {
     e.preventDefault()
     function validateFields() {

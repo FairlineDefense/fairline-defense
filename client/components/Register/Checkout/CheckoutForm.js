@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js'
 import ShippingAddress from './ShippingAddress'
-
+import { useDispatch, useSelector } from 'react-redux'
 import Checkbox from '@material-ui/core/Checkbox'
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../../theme'
-
+import {update} from '../../../store/'
 import styled from 'styled-components'
-import user from '../../../store/user'
 
 const FormWrapper = styled.div`
   width: 800px;
@@ -36,7 +35,7 @@ flex-direction: row;
 align-items: flex-start;
 width: 800px;
 text-align: left;
-font-size: 14px;
+font-size: 12px;
 line-height: 20px;
 
 p {
@@ -44,7 +43,8 @@ p {
 }
 
 div {
-  margin-bottom: 1rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
 
   svg {
     fill: white;
@@ -74,23 +74,15 @@ const Button = styled.button`
   cursor: pointer;
 
   @media(max-width: 800px) {
-    margin: .5rem;
+    margin: 2rem;
   }
 `
-const Header = styled.h1`
-  font-size: 32px;
-  font-weight: 300;
-  margin: 0.5rem 0rem 2rem 0rem;
+const CheckoutForm = (props) => {
+  let user = useSelector(state => state.user)
 
-  @media(max-width: 800px) {
-    margin: .5rem;
-    margin-bottom: 1rem;
-    font-size: 22px;
-  }
-`
-const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
+  const dispatch = useDispatch()
 
   const [errorMessage, setErrorMessage] = useState(null)
   const [show, setShow] = useState(false)
@@ -105,25 +97,18 @@ const CheckoutForm = () => {
     shippingZipCode: ''
   })
 
-  let [errorText, setErrorText] = useState('')
+  let {
+    apt,
+    streetAddress,
+    line2,
+    city,
+    state,
+    zipCode,
+} = props
 
   const changeHandler = e => {
     e.preventDefault()
     setAddress({...address, [e.target.name]: e.target.value})
-  }
-  const clickHandler = e => {
-    e.preventDefault()
-    function validateFields() {
-      if (!/^\d{5}(-\d{4})?$/.test(address.shippingZipCode)) {
-        return setErrorText('Invalid zip code.')
-      }
-      if (address.state === '' || address.shippingState === 'state') {
-        return setErrorText('Invalid state.')
-      } else {
-        dispatch(update({...user, address}))
-      }
-    }
-    validateFields()
   }
 
   const handleSubmit = async event => {
@@ -131,7 +116,8 @@ const CheckoutForm = () => {
     // which would refresh the page.
     event.preventDefault()
 
-    clickHandler(event)
+    // Update user's shipping address in our db
+    show && dispatch(update({...user, address}))
 
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
@@ -167,12 +153,6 @@ const CheckoutForm = () => {
           <PaymentElement />
         </Span>
 
-        <CenteredWrapper>
-      <Header>
-        Shipping Address
-      </Header>
-      </CenteredWrapper>
-
       <LeftWrapper>
       <div>
       <ThemeProvider theme={theme}>
@@ -180,16 +160,16 @@ const CheckoutForm = () => {
       </ThemeProvider>
       </div>
       <div>My shipping address is the same as my billing address.
-        <p>{user.streetAddress ||'123 Fake St'} {user.line2 || 'Bottom Floor'} <br />{user.city || 'New York'}, {user.state || 'NY'} {user.zipCode || '12314'}</p>
+        <p>{apt} {streetAddress} {line2} <br />{city}, {state} {zipCode}</p>
       </div>
       </LeftWrapper>
 
-      <ShippingAddress show={show} clickHandler={clickHandler} changeHandler={changeHandler} shippingApt={address.shippingApt} shippingStreetAddress={address.shippingStreetAddress} shippingCity={address.shippingCity} shippingState={address.shippingState} shippingZipCode={address.shippingZipCode}  />
+      <ShippingAddress show={show} changeHandler={changeHandler} shippingApt={address.shippingApt} shippingStreetAddress={address.shippingStreetAddress} shippingCity={address.shippingCity} shippingState={address.shippingState} shippingZipCode={address.shippingZipCode}  />
 
       <LeftWrapper>
       <div>
       <ThemeProvider theme={theme}>
-        <Checkbox color="primary" onChange={() => setAccept(!accept)} checked={accept} />
+        <Checkbox color="primary" onChange={() => setAccept(!accept)} checked={accept} required />
       </ThemeProvider>
       </div>
       <div>By starting my Membership, I confirm that I have read and agree to the Fairline Defense Terms & Conditions. I understand that my Membership will automatically renew monthly at the then-current subscription rate, which will be charged to my payment method on file. I understand that I can update my payment method or pause or cancel my Membership at any time in accordance with the Membership Terms by going to my Account Settings at www.fairlinedefense.com/mymembership, and that these changes will take effect at the end of my current billing cycle.</div>

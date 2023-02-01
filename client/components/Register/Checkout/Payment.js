@@ -44,7 +44,7 @@ const HR = styled.div`
 const H1 = styled.h1`
   font-size: 32px;
   font-weight: 300;
-  margin: 2rem 0rem 1rem 0rem;
+  margin: 1rem 0rem 1rem 0rem;
 
   @media(max-width: 800px) {
     font-size: 22px;
@@ -123,10 +123,25 @@ const Payment = props => {
   let user = useSelector(state => state.user)
   const {priceId, planClickHandler, protectionType, protectionTypeString, price, interval} = props
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)
-  let [clientSecret, setClientSecret] = useState('pi_3MWPF4IvvF6ba6jU16nvTlLP_secret_5viHMvIkrj1w62gmrHgvOL97y')
+  let [clientSecret, setClientSecret] = useState('none')
 
   let [customerId, setCustomerId] = useState('none')
 
+  let [address, setAddress] = useState({
+    apt: '',
+    streetAddress: '',
+    address2: '',
+    city: '',
+    state: 'State',
+    zipCode: ''
+  })
+
+  const changeHandler = e => {
+    e.preventDefault()
+    setAddress({...address, [e.target.name]: e.target.value})
+  }
+
+  
   // Fetch client secret from Stripe with customer and product information
   const fetchCs = async () => {
     const response = await fetch('payment/create-subscription', {
@@ -145,33 +160,33 @@ const Payment = props => {
 
   // Create Customer creates the customer object with their personal information for Stripe.
   // Stripe can then generate a Client Secret to render the PaymentElement in our CheckoutForm
-  // const createCustomer = async address => {
-  //   try {
-  //     let reqBody = {...user, ...address}
-  //     const response = await fetch('/payment/create-customer', {
-  //       method: 'POST',
-  //       headers: {'Content-Type': 'application/json'},
-  //       body: JSON.stringify(reqBody)
-  //     })
-  //     const {customerId: customerId} = await response.json()
-  //     setCustomerId(customerId)
-  //   } catch (error) {
-  //     console.log('create customer error', error)
-  //   }
-  // }
+  const createCustomer = async address => {
+    try {
+      let reqBody = {...user, ...address}
+      const response = await fetch('/payment/create-customer', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(reqBody)
+      })
+      const {customerId: customerId} = await response.json()
+      setCustomerId(customerId)
+    } catch (error) {
+      console.log('create customer error', error)
+    }
+  }
 
-  // useEffect(
-  //   () => {
-  //     try {
-  //       if (customerId !== 'none') {
-  //         fetchCs()
-  //       }
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   },
-  //   [customerId]
-  // )
+  useEffect(
+    () => {
+      try {
+        if (customerId !== 'none') {
+          fetchCs()
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    [customerId]
+  )
 
   const options = {
     clientSecret: clientSecret,
@@ -223,10 +238,10 @@ const Payment = props => {
         </CenteredWrapper>
         <HR />
         
-        {process.env.NODE_ENV === 'production' ? (
+        {clientSecret === 'none' ? (
           <BillingAddress createCustomer={createCustomer} />
         ) : (
-          <CreateSubscription stripe={stripePromise} options={options} />
+          <CreateSubscription stripe={stripePromise} options={options} changeHandler={changeHandler} apt={address.apt} streetAddress={address.streetAddress} line2={address.line2} city={address.city} state={address.state} zipCode={address.zipCode} />
         )}
       </Wrapper>
     </div>

@@ -27,11 +27,11 @@ const Header = styled.h1`
 `
 
 const CreateSubscription = props => {
-  const {stripe, options} = props
+  const {stripe, options, apt, streetAddress, city, state, zipCode} = props
 
-  if (!options.clientSecret || options.clientSecret === 'none') {
-    return 'loading'
-  }
+  // if (!options.clientSecret || options.clientSecret === 'none') {
+  //   return 'loading'
+  // }
   return (
     <>
       <Wrapper>
@@ -39,7 +39,7 @@ const CreateSubscription = props => {
       </Wrapper>
       <Elements stripe={stripe} options={options}>
         <Wrapper>
-          <CheckoutForm />
+          <CheckoutForm apt={apt} streetAddress={streetAddress} city={city} state={state} zipCode={zipCode} />
         </Wrapper>
       </Elements>
     </>

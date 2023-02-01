@@ -42,7 +42,7 @@ router.post('/create-account', async (req, res, next) => {
         }
       })
     }
-    const createKlaviyoProfileRes = await fetch(
+    const createKlaviyoProfileRes = process.env.NODE_ENV === 'production' && await fetch(
       'https://a.klaviyo.com/api/profiles/',
       createKlaviyoProfileBody
     )
@@ -50,9 +50,9 @@ router.post('/create-account', async (req, res, next) => {
       .then(res => res.data)
       .catch(err => console.error('ERROR', err))
 
-    if (createKlaviyoProfileRes.id) {
+    if (createKlaviyoProfileRes.id || process.env.NODE_ENV === 'development') {
       await User.update(
-        {klaviyoProfileID: createKlaviyoProfileRes.id},
+        {klaviyoProfileID: createKlaviyoProfileRes.id || req.user.id},
         {where: {email: req.user.email}}
       )
 
@@ -76,7 +76,7 @@ router.post('/create-account', async (req, res, next) => {
         })
       }
 
-      fetch(
+      process.env.NODE_ENV === 'production' && fetch(
         'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/',
         addUserToNewsletterBody
       )

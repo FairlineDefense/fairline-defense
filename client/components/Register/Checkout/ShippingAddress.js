@@ -28,21 +28,18 @@ const Header = styled.h1`
   }
 `
 const Form = styled.div`
-  max-width: 700px;
+  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 1rem;
 
   @media (max-width: 800px) {
-    width: 100%;
     margin-right: .5rem;
   }
 `
 const ShippingAddress = props => {
-    const user = useSelector(state => state.user)
-    const dispatch = useDispatch()
     
-    let {show, changeHandler, clickHandler, shippingApt, shippingStreetAddress, shippingLine2, shippingCity, shippingState, shippingZipCode} = props
+    let {show, changeHandler, shippingApt, shippingStreetAddress, shippingLine2, shippingCity, shippingState, shippingZipCode} = props
 
   if(!show) {
     return null

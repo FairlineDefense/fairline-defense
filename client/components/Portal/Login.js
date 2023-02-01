@@ -15,8 +15,6 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Button from '@material-ui/core/Button'
 
-import Payment from '../Register/Checkout/Payment'
-
 const Logo = styled.img`
   height: 64px;
   width: auto;
@@ -144,8 +142,7 @@ const Login = () => {
       showPassword: !form.showPassword
     })
   }
-if(process.env.NODE_ENV === 'development'){
-  return (<Payment />)}
+
   return (
     <section className="auth">
       <svg className="logo" />
