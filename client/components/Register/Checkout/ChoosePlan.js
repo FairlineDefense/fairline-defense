@@ -114,32 +114,16 @@ const Wrapper = styled.div`
     border: none;
   `
 
-const ChoosePlan = props => {
-  const {protectionType, protectionClickHandler, setPrice, setInterval, interval, protectionTypeString, price} = props
-  let [priceId, setPriceId] = useState('none')
-  // Actual prices set on backend. These are just for display.
-  const monthPrice = protectionType === 'armedCitizen' ? '$19.99' : '$29.99'
-  const yearPrice = protectionType === 'armedCitizen' ? '$199' : '$299'
+const ChoosePlan = ({order: {protectionType}, changeHandler, setStep}) => {
   const oppositeProtectionTypeString = protectionTypeString === 'Armed Citizen' ? 'Armed Professional' : 'Armed Citizen'
+  const protectionTypeString = protectionType === 'armedCitizen' ? 'Armed Citizen' : 'Armed Professional'
 
-  const planClickHandler = e => {
-    e.preventDefault()
-    setPriceId(e.currentTarget.value)
-
-    if(e.currentTarget.value.split('_')[1] === 'month') {
-      setInterval('monthly')
-      setPrice(monthPrice)
-    }
-    if(e.currentTarget.value.split('_')[1] === 'year') {
-      setInterval('annually')
-      setPrice(yearPrice)
-    }
+  const prices = {
+    armedCitizenMonth: '$19.99',
+    armedCitizenYear: '$199',
+    armedProfessionalMonth: '$29.99',
+    armedProfessionalYear: '$299'
   }
-  
-  if (priceId !== 'none') {
-    return <Payment priceId={priceId} planClickHandler={planClickHandler} price={price} protectionType={protectionType} protectionTypeString={protectionTypeString} interval={interval} />
-  }
-
   return (
     <div className="auth">
       <svg className="logo" />
@@ -148,15 +132,15 @@ const ChoosePlan = props => {
       <RegisterHeader />
       <Wrapper>
         <H1>Select your plan for {protectionTypeString}</H1>
-        <Blue onClick={(e)=> protectionClickHandler(e)} value='none'>Switch to {oppositeProtectionTypeString}</Blue>
+        <Blue onClick={()=> setStep('ChooseProtection')}>Switch to {oppositeProtectionTypeString}</Blue>
         <ButtonWrapper>
-          <Button onClick={e => planClickHandler(e)} value={`${protectionType}_month`}>
-            <Price>{monthPrice}</Price>
+          <Button onClick={e => changeHandler(e)} value={`${protectionType}Month`}  name='billingInterval'>
+            <Price>{prices[`${protectionType}Month`]}</Price>
             <Term>Per Month</Term>
             <Billing>Billed Monthly</Billing>
           </Button>
-          <Button onClick={e => planClickHandler(e)} value={`${protectionType}_year`}>
-            <Price>{yearPrice}</Price>
+          <Button onClick={e => changeHandler(e)} value={`${protectionType}Year`} name='billingInterval'>
+            <Price>{prices[`${protectionType}Year`]}</Price>
             <Term>Per Year</Term>
             <Billing>Billed Annually</Billing>
           </Button>

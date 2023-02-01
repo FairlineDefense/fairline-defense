@@ -54,6 +54,11 @@ const Wrapper = styled.div`
       border-color: var(--blue);
     }
 
+    &:disabled {
+      background: rgba(0, 171, 224, 0.2);
+      border-color: var(--blue);
+    }
+
     @media(max-width: 800px) {
       height: auto;
       width: 100%;
@@ -113,9 +118,27 @@ const Wrapper = styled.div`
     font-size: 24px;
     color: #00ABE0;
   `
+  const ContinueButton = styled.button`
+  background-color: var(--blue);
+  color: #fff;
+  border-radius: 40px;
+  width: 340px;
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 20px;
+  font-weight: 100;
+  margin: 2rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
 
-const ChooseProtection = (props) => {
-  let {protectionClickHandler} = props
+  &:disabled {
+    cursor: default;
+    background-color: #2a4c78;
+    color: #5D789A;
+  }
+`
+
+const ChooseProtection = ({order: {protectionType}, changeHandler, setStep}) => {
 
   return (
     <div className="auth">
@@ -129,15 +152,16 @@ const ChooseProtection = (props) => {
         <p>Starting from <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr</Blue></p></Subheader>
         <H1>Select Your Protection</H1>
         <ButtonWrapper>
-          <Button onClick={e => protectionClickHandler(e)} value="armedCitizen">
+          <Button onClick={e => changeHandler(e)} value="armedCitizen" name="protectionType" disabled={protectionType === 'armedCitizen'}>
           <Term>I am</Term>
             <Price>Armed Citizen</Price>
           </Button>
-          <Button onClick={e => protectionClickHandler(e)} value="armedProfessional">
+          <Button onClick={e => changeHandler(e)} value="armedProfessional" name="protectionType" disabled={protectionType === 'armedProfessional'}>
           <Term>I am</Term>
             <Price>Armed Professional</Price>
           </Button>
         </ButtonWrapper>
+        <ContinueButton onClick={() => setStep('ChoosePlan')} disabled={!protectionType.length}>Continue</ContinueButton>
       </Wrapper>
     </div>
   )
