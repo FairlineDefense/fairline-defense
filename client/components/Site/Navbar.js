@@ -161,7 +161,7 @@ const Bar = styled.div`
   border-radius: 2px;
 `
 
-const Navbar = () => {
+const Navbar = ({shouldShowBackground}) => {
   const user = useSelector(state => state.user)
   const isLoggedIn = user.id
 
@@ -172,9 +172,11 @@ const Navbar = () => {
   }
 
   let [display, setDisplay] = useState('none')
-  const [backgroundColor, setBackgroundColor] = useState('none');
+
+  const navbarDefaultBackground = shouldShowBackground ? '#132A4A' : 'none'
+  const [backgroundColor, setBackgroundColor] = useState(navbarDefaultBackground);
   const changeNavbarColor = () =>{
-     if(window.scrollY >= 80){
+     if(shouldShowBackground || window.scrollY >= 80){
        setBackgroundColor('#132A4A');
      }
      else{
