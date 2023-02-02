@@ -9,6 +9,7 @@ import theme from '../../theme'
 import RegisterHeader from '../RegisterHeader'
 import css from '../register.css'
 import {useSelector} from 'react-redux'
+import PlanSummary from './PlanSummary'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -79,7 +80,7 @@ const ContinueButton = styled.button`
     color: #5D789A;
   }
 `
-const BillingAddress = ({order:{apt, streetAddress, line2, city, state, zipCode}, order, setStep, changeHandler, setOrder}) => {
+const BillingAddress = ({order:{price, protectionTypeString, billingInterval, apt, streetAddress, line2, city, state, zipCode}, order, setStep, changeHandler, setOrder}) => {
   let user = useSelector(state => state.user)
   
   let [errorText, setErrorText] = useState('')
@@ -178,6 +179,7 @@ const BillingAddress = ({order:{apt, streetAddress, line2, city, state, zipCode}
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
+      <PlanSummary price={price} billingInterval={billingInterval} protectionTypeString={protectionTypeString} setStep={setStep} />
       <Header>Billing Address</Header>
       <ThemeProvider theme={theme}>
         <Form>

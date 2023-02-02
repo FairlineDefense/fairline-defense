@@ -11,6 +11,7 @@ import css from '../register.css'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../../theme'
+import PlanSummary from './PlanSummary'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -191,25 +192,7 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, price, bi
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
-      <CenteredWrapper>
-          <H1>Plan Summary</H1>
-        </CenteredWrapper>
-
-      <CenteredWrapper>
-        <SpaceBetweenWrapper>
-        <div>{protectionTypeString}</div>
-        <div>{price}</div>
-        </SpaceBetweenWrapper>
-
-        <SpaceBetweenWrapper>
-         <div>Billed {billingInterval}</div>
-         <div>
-         <Blue onClick={()=>setStep('ChoosePlan')}>Change</Blue>
-         </div>
-         </SpaceBetweenWrapper>
-        </CenteredWrapper>
-        <HR />
-
+      <PlanSummary price={price} billingInterval={billingInterval} protectionTypeString={protectionTypeString} setStep={setStep} />
         <Header>Credit Card</Header>
         <CenteredWrapper>
       <Elements stripe={stripePromise} options={options}>
