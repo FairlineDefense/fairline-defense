@@ -50,8 +50,6 @@ router.post('/create-customer', async (req, res) => {
       spouse: process.env.MONTH_SPOUSE_PRICE_ID
     }
     let priceId = priceIds[req.body.priceId]
-    console.log('======================>', priceId, customerId)
-
     try {
       // Create the subscription. Note we're expanding the Subscription's
       // latest invoice and that invoice's payment_intent
@@ -67,7 +65,6 @@ router.post('/create-customer', async (req, res) => {
         payment_settings: {save_default_payment_method: 'on_subscription'},
         expand: ['latest_invoice.payment_intent']
       })
-      console.log('cs', subscription.latest_invoice.payment_intent.client_secret)
       return res.json({
         subscriptionId: subscription.id,
         clientSecretRes: subscription.latest_invoice.payment_intent.client_secret
@@ -147,7 +144,6 @@ router.get('/invoices', async (req, res) => {
       return {date: date, amount: amount, pdf: pdfUrl}
     })
 
-    console.log(invoices)
     return res.json(data)
   } catch (error) {
     console.log(error)

@@ -1,9 +1,8 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
 import css from '../register.css'
 import styled from 'styled-components'
 import {useState, useEffect} from 'react'
-import {useStripe, useElements} from '@stripe/react-stripe-js'
+import {useStripe} from '@stripe/react-stripe-js'
 import {Link} from 'react-router-dom'
 
 const Wrapper = styled.div`
@@ -21,8 +20,6 @@ font-size: 30px;
 font-weight: 300;
 margin-bottom: 2rem;
 margin-top: 1rem;
-
-
 `
 const Button = styled.button`
 background-color: var(--blue);
@@ -41,7 +38,6 @@ cursor: pointer;
   background-color: #2a4c78;
 }
 `
-
 const Header = styled.div`
 font-size: 60px;
 line-height: 70px;
@@ -58,12 +54,8 @@ margin-bottom: 3rem;
   line-height: 48px;
 }
 `
-
 const PaymentStatusMessage = () => {
-  const user = useSelector(state => state.user)
-  const dispatch = useDispatch()
   const stripe = useStripe()
-  const elements = useElements()
   const [message, setMessage] = useState(null)
 
   useEffect(
