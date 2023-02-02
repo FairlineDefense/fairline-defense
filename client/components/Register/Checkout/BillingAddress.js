@@ -80,7 +80,7 @@ const ContinueButton = styled.button`
     color: #5D789A;
   }
 `
-const BillingAddress = ({order:{price, protectionTypeString, billingInterval, apt, streetAddress, line2, city, state, zipCode}, order, setStep, changeHandler, setOrder}) => {
+const BillingAddress = ({order:{price, priceId, protectionType, protectionTypeString, billingInterval, apt, streetAddress, line2, city, state, zipCode}, order, setStep, changeHandler, setOrder}) => {
   let user = useSelector(state => state.user)
   
   let [errorText, setErrorText] = useState('')
@@ -179,7 +179,7 @@ const BillingAddress = ({order:{price, protectionTypeString, billingInterval, ap
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
-      <PlanSummary price={price} billingInterval={billingInterval} protectionTypeString={protectionTypeString} setStep={setStep} />
+      <PlanSummary price={price} priceId={priceId} protectionTypeString={protectionTypeString} protectionType={protectionType} billingInterval={billingInterval} setStep={setStep} />
       <Header>Billing Address</Header>
       <ThemeProvider theme={theme}>
         <Form>

@@ -21,6 +21,8 @@ font-size: 30px;
 font-weight: 300;
 margin-bottom: 2rem;
 margin-top: 1rem;
+
+
 `
 const Button = styled.button`
 background-color: var(--blue);
@@ -43,14 +45,21 @@ cursor: pointer;
 const Header = styled.div`
 font-size: 60px;
 line-height: 70px;
-font-weight: bold;
+font-weight: 500;
 text-align: center;
 color: #fff;
 width: 500px;
 margin-bottom: 3rem;
+
+@media(max-width: 800px) {
+  width: 100%;
+
+  font-size: 36px;
+  line-height: 48px;
+}
 `
 
-const Shipping = () => {
+const PaymentStatusMessage = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const stripe = useStripe()
@@ -104,10 +113,6 @@ const Shipping = () => {
     [stripe]
   )
 
-  const clickHandler = e => {
-    e.preventDefault()
-  }
-
   return (
     <Wrapper>
         {message === 'Payment is Successful!' ? (<img src="./images/bluecheck.png" />) : null }
@@ -120,4 +125,4 @@ const Shipping = () => {
     </Wrapper>
   )
 }
-export default Shipping
+export default PaymentStatusMessage

@@ -137,7 +137,7 @@ outline: none;
 border: none;
 `
 
-const CreateSubscription = ({order:{priceId, customerId, clientSecret, price, billingInterval, protectionTypeString, apt, streetAddress, line2, city, state, zipCode}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
+const CreateSubscription = ({order:{priceId, customerId, clientSecret, price, protectionType, billingInterval, protectionTypeString, apt, streetAddress, line2, city, state, zipCode}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
   // Fetch client secret from Stripe with customer and product information
   const fetchCs = async () => {
     const response = await fetch('payment/create-subscription', {
@@ -192,7 +192,7 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, price, bi
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
-      <PlanSummary price={price} billingInterval={billingInterval} protectionTypeString={protectionTypeString} setStep={setStep} />
+      <PlanSummary price={price} priceId={priceId} protectionTypeString={protectionTypeString} protectionType={protectionType} billingInterval={billingInterval} setStep={setStep} />
         <Header>Credit Card</Header>
         <CenteredWrapper>
       <Elements stripe={stripePromise} options={options}>
