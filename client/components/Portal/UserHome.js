@@ -126,11 +126,7 @@ const UserHome = () => {
     return <VerifyEmail />
   }
 
-  // if (!user.phoneVerified) {
-  //   return <VerifyPhone />
-  // }
-
-  if (process.env.NODE_ENV === 'development') {
+  if (!user.planActive) {
     return <Checkout />
   }
   return (
