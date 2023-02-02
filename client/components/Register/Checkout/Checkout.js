@@ -90,7 +90,7 @@ const Checkout = () => {
   const billingInterval = billingIntervals[order.priceId]
 
    setOrder({...order, billingInterval: billingInterval, protectionTypeString: protectionTypeString, price: price})
-  }, [order.priceId])
+  }, [order.priceId, step])
 
   switch (step) {
     case 'ChooseProtection':

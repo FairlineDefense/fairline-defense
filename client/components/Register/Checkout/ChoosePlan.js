@@ -138,7 +138,7 @@ const Wrapper = styled.div`
   }
 `
 const ChoosePlan = ({order: {protectionType, priceId}, changeHandler, setStep}) => {
-  const oppositeProtectionTypeString = protectionTypeString === 'Armed Citizen' ? 'Armed Professional' : 'Armed Citizen'
+  const oppositeProtectionTypeString = protectionType === 'armedCitizen' ? 'Armed Professional' : 'Armed Citizen'
   const protectionTypeString = protectionType === 'armedCitizen' ? 'Armed Citizen' : 'Armed Professional'
 
   const prices = {
