@@ -67,9 +67,10 @@ const ProgressBarWrapper = styled.div`
   width: 225px;
   height: 225px;
   margin-bottom: 2rem;
+
   @media (max-width: 768px) {
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
   }
 `
 export default function PlanStatus(props) {

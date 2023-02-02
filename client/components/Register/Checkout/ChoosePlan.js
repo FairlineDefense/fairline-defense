@@ -1,8 +1,6 @@
 import React from 'react'
 import css from '../register.css'
 import styled from 'styled-components'
-import {useState} from 'react'
-import Payment from './Payment'
 import RegisterHeader from '../RegisterHeader'
 
 const Wrapper = styled.div`
