@@ -60,7 +60,7 @@ const Checkout = () => {
   const changeHandler = e => {
     e.preventDefault()
     console.log(order)
-    setOrder({...order, [e.currentTarget.name]:e.currentTarget.value})
+    setOrder({...order, [e.target.name]:e.currentTarget.value})
   }
 
   switch (step) {
