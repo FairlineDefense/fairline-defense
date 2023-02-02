@@ -77,7 +77,7 @@ const Button = styled.button`
     margin: 2rem;
   }
 `
-const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, shippingApt, shippingStreetAddress, shippingLine2, shippingCity, shippingState, shippingZipCode, differentAddress, termsAndConditions}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
+const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, differentAddress, termsAndConditions}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
   const user = useSelector(state => state.user)
   const stripe = useStripe()
   const elements = useElements()

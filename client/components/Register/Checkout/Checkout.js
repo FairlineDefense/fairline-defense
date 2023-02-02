@@ -17,6 +17,7 @@ const Checkout = () => {
     protectionTypeString: '',
     priceId: '',
     price: '',
+    billingInterval: '',
     apt: '',
     streetAddress: '',
     address2: '',
@@ -63,6 +64,33 @@ const Checkout = () => {
     console.log(order)
     setOrder({...order, [e.currentTarget.name]:e.currentTarget.value})
   }
+
+  useEffect(() => {
+    const prices = {
+      armedCitizenMonth: '$19.99',
+      armedCitizenYear: '$199',
+      armedProfessionalMonth: '$29.99',
+      armedProfessionalYear: '$299'
+    }
+
+    const price = prices[order.priceId]
+    const protectionTypeStrings = {
+      armedCitizenMonth: 'Armed Citizen',
+      armedCitizenYear: 'Armed Citizen',
+      armedProfessionalMonth: 'Armed Professional',
+      armedProfessionalYear: 'Armed Professional'
+    }
+    const protectionTypeString = protectionTypeStrings[order.priceId]
+    const billingIntervals = {
+      armedCitizenMonth: 'monthly',
+      armedCitizenYear: 'annually',
+      armedProfessionalMonth: 'monthly',
+      armedProfessionalYear: 'annually'
+   }
+  const billingInterval = billingIntervals[order.priceId]
+
+   setOrder({...order, billingInterval: billingInterval, protectionTypeString: protectionTypeString, price: price})
+  }, [step])
 
   switch (step) {
     case 'ChooseProtection':

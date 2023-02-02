@@ -136,7 +136,7 @@ outline: none;
 border: none;
 `
 
-const CreateSubscription = ({order:{priceId, customerId, clientSecret, apt, streetAddress, line2, city, state, zipCode}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
+const CreateSubscription = ({order:{priceId, customerId, clientSecret, price, billingInterval, protectionTypeString, apt, streetAddress, line2, city, state, zipCode}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
   // Fetch client secret from Stripe with customer and product information
   const fetchCs = async () => {
     const response = await fetch('payment/create-subscription', {
@@ -197,14 +197,14 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, apt, stre
 
       <CenteredWrapper>
         <SpaceBetweenWrapper>
-        {/* <div>{protectionTypeString}</div>
-        <div>{price}</div> */}
+        <div>{protectionTypeString}</div>
+        <div>{price}</div>
         </SpaceBetweenWrapper>
 
         <SpaceBetweenWrapper>
-         {/* <div>Billed {interval}</div> */}
+         <div>Billed {billingInterval}</div>
          <div>
-         {/* <Blue onClick={()=>setStep('')} value="none">Change</Blue> */}
+         <Blue onClick={()=>setStep('ChoosePlan')}>Change</Blue>
          </div>
          </SpaceBetweenWrapper>
         </CenteredWrapper>
