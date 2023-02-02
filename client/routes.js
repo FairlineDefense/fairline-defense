@@ -7,6 +7,7 @@ import {
   PortalNavbar,
   SiteHome,
   Testimonials,
+  TermsOfService,
   Coverages,
   HowItWorks,
   Membership,
@@ -43,6 +44,8 @@ const Routes = props => {
             <Route exact path="/howitworks" component={HowItWorks} />
             <Route exact path="/coverages" component={Coverages} />
             <Route exact path="/testimonials" component={Testimonials} />
+            <Route exact path="/termsofservice" component={TermsOfService} />
+            <Route exact path="/privacypolicy" component={TermsOfService} />
             <Route path="/home" component={UserHome} />
             <Route path="/membership" component={Membership} />
             <Route path="/benefits" component={Benefits} />
@@ -62,6 +65,8 @@ const Routes = props => {
             <Route exact path="/howitworks" component={HowItWorks} />
             <Route exact path="/coverages" component={Coverages} />
             <Route exact path="/testimonials" component={Testimonials} />
+            <Route exact path="/termsofservice" component={TermsOfService} />
+            <Route exact path="/privacypolicy" component={TermsOfService} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/success" component={VerifiedEmail} />
