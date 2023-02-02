@@ -138,15 +138,7 @@ const Checkout = () => {
                 />
             );
     default:
-    //   return <ChooseProtection />;
-      return (<CreateSubscription
-            setStep={setStep}
-            changeHandler={changeHandler}
-            order={order}
-            setOrder={setOrder}
-            stripePromise={stripePromise}
-            options={options}
-            />)
+    return <ChooseProtection />;
   }
 
 }
