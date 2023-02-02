@@ -21,7 +21,7 @@ const Checkout = () => {
     streetAddress: '',
     address2: '',
     city: '',
-    state: 'State',
+    billingState: 'State',
     zipCode: '',
     sameAddress: true,
     shippingApt: '',
@@ -109,7 +109,15 @@ const Checkout = () => {
                 />
             );
     default:
-      return <ChooseProtection />;
+    //   return <ChooseProtection />;
+      return (<CreateSubscription
+            setStep={setStep}
+            changeHandler={changeHandler}
+            order={order}
+            setOrder={setOrder}
+            stripePromise={stripePromise}
+            options={options}
+            />)
   }
 
 }

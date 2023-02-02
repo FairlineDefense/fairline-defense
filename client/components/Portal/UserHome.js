@@ -130,7 +130,7 @@ const UserHome = () => {
   //   return <VerifyPhone />
   // }
 
-  if (!user.planActive) {
+  if (user.planActive) {
     return <Checkout />
   }
   return (

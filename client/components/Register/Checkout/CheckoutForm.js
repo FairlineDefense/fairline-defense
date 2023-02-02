@@ -140,7 +140,7 @@ const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, s
       </div>
       </LeftWrapper>
 
-      <ShippingAddress differentAddress={differentAddress} changeHandler={changeHandler} shippingApt={shippingApt} shippingStreetAddress={shippingStreetAddress} shippingLine2={shippingLine2} shippingCity={shippingCity} shippingState={shippingState} shippingZipCode={shippingZipCode}  />
+      <ShippingAddress order={order} changeHandler={changeHandler} />
 
       <LeftWrapper>
       <div>

@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: relative;
 `
 
@@ -193,13 +194,15 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, apt, stre
          </SpaceBetweenWrapper>
         </CenteredWrapper>
         <HR />
-        
+
         <Header>Credit Card</Header>
+        <CenteredWrapper>
       <Elements stripe={stripePromise} options={options}>
         <Wrapper>
           <CheckoutForm order={order} apt={apt} streetAddress={streetAddress} line2={line2} city={city} state={state} zipCode={zipCode} changeHandler={changeHandler} setOrder={setOrder} />
         </Wrapper>
       </Elements>
+      </CenteredWrapper>
       </Wrapper>
     </div>
     </>

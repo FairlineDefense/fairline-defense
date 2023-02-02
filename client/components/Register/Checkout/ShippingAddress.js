@@ -37,19 +37,17 @@ const Form = styled.div`
     margin-right: .5rem;
   }
 `
-const ShippingAddress = props => {
+const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetAddress, shippingLine2, shippingCity, shippingState, shippingZipCode},  changeHandler}) => {
     
-    let {show, changeHandler, shippingApt, shippingStreetAddress, shippingLine2, shippingCity, shippingState, shippingZipCode} = props
 
-  if(!show) {
+  if(!differentAddress) {
     return null
   }
 
-  const states = [
+  const shippingStates = [
     'State',
     'AL',
     'AK',
-    'AL',
     'AR',
     'AZ',
     'CA',
@@ -111,7 +109,7 @@ const ShippingAddress = props => {
             variant="filled"
             type="text"
             style={{margin: 8, maxWidth: 50}}
-            name="shippinApt"
+            name="shippingApt"
             placeholder="Apt"
             onChange={e => changeHandler(e)}
             value={shippingApt}
@@ -148,7 +146,7 @@ const ShippingAddress = props => {
             value={shippingCity}
             required
           />
-          <Select
+                    <Select
             placeholder="State"
             style={{
               backgroundColor: '#FFF',
@@ -162,9 +160,9 @@ const ShippingAddress = props => {
             onChange={e => changeHandler(e)}
             required
           >
-            {states.map(state => (
-              <MenuItem key={state} value={state}>
-                {state}
+            {shippingStates.map(shippingState => (
+              <MenuItem key={shippingState} value={shippingState}>
+                {shippingState}
               </MenuItem>
             ))}
           </Select>

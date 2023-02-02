@@ -79,7 +79,7 @@ const ContinueButton = styled.button`
     color: #5D789A;
   }
 `
-const BillingAddress = ({order:{apt, streetAddress, line2, city, state, zipCode}, order, setStep, changeHandler, setOrder}) => {
+const BillingAddress = ({order:{apt, streetAddress, line2, city, billingState, zipCode}, order, setStep, changeHandler, setOrder}) => {
   let user = useSelector(state => state.user)
   
   let [errorText, setErrorText] = useState('')
@@ -120,7 +120,6 @@ const BillingAddress = ({order:{apt, streetAddress, line2, city, state, zipCode}
     'State',
     'AL',
     'AK',
-    'AL',
     'AR',
     'AZ',
     'CA',
@@ -234,7 +233,7 @@ const BillingAddress = ({order:{apt, streetAddress, line2, city, state, zipCode}
               paddingLeft: 20
             }}
             name="state"
-            value={state}
+            value={billingState}
             onChange={e => changeHandler(e)}
             required
           >
