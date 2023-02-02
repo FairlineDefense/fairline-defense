@@ -95,16 +95,16 @@ export default function Footer() {
         <header>Quick Links</header>
         <ul>
           <li>
-            <Link to="/armedprofessionals">Armed Professionals</Link>
+            <a href="/armedprofessionals">Armed Professionals</a>
           </li>
           <li>
-            <Link to="#">Testimonials</Link>
+            <a href="#">Testimonials</a>
           </li>
           <li>
-            <Link to="/termsofservice">Terms of Service</Link>
+            <a href="/termsofservice">Terms of Service</a>
           </li>
           <li>
-            <Link to="/privacypolicy">Privacy Policy</Link>
+            <a href="/privacypolicy">Privacy Policy</a>
           </li>
         </ul>
       </Links>
