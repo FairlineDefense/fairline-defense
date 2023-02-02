@@ -41,16 +41,6 @@ const SpaceBetweenWrapper = styled.div`
     width: 90%;
   }
 `
-const HR = styled.div`
-  height: 1px;
-  color: #fff;
-  display: block;
-  width: 800px;
-
-  @media (max-width: 800px) {
-    width: 90%;
-  }
-`
 const Blue = styled.button`
 font-size: 20px;
 cursor: pointer;

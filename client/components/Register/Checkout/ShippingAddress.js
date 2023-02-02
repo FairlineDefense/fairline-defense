@@ -111,11 +111,13 @@ const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetA
             style={{margin: 8, maxWidth: 50}}
             name="shippingApt"
             placeholder="Apt"
+            autoComplete="apt"
             onChange={e => changeHandler(e)}
             value={shippingApt}
           />
           <FDTextField
             name="shippingStreetAddress"
+            autoComplete="street-address"
             label="Street Address"
             placeholder="Street Address"
             type="text"
@@ -128,6 +130,7 @@ const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetA
           <FDTextField
             fullWidth
             name="shippingLine2"
+            autoComplete="street-address line2"
             label="Street Address Line 2"
             placeholder="Street Address Line 2"
             type="text"
@@ -138,6 +141,7 @@ const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetA
           />
           <FDTextField
             name="shippingCity"
+            autoComplete="city"
             placeholder="City"
             label="City"
             variant="filled"
@@ -146,8 +150,9 @@ const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetA
             value={shippingCity}
             required
           />
-                    <Select
+           <Select
             placeholder="State"
+            autoComplete='state'
             style={{
               backgroundColor: '#FFF',
               borderRadius: 4,
@@ -169,6 +174,7 @@ const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetA
           <FDTextField
             name="shippingZipCode"
             placeholder="Zip Code"
+            autoComplete="zip-code"
             label="Zip Code"
             variant="filled"
             style={{margin: 8, flexGrow: 1}}

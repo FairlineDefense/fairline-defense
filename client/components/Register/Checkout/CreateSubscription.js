@@ -49,16 +49,6 @@ const SpaceBetweenWrapper = styled.div`
     width: 90%;
   }
 `
-const HR = styled.div`
-  height: 1px;
-  color: #fff;
-  display: block;
-  width: 800px;
-
-  @media (max-width: 800px) {
-    width: 90%;
-  }
-`
 const H1 = styled.h1`
   font-size: 32px;
   font-weight: 300;
