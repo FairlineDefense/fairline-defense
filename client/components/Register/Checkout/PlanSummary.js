@@ -35,7 +35,7 @@ const SpaceBetweenWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 800px;
-  padding: .2rem 0rem .2rem 0rem;
+  padding: .2rem 0rem .4rem 0rem;
 
   @media (max-width: 800px) {
     width: 90%;
@@ -67,6 +67,9 @@ display: none;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+div:nth-child(3) {
+border-bottom: 1px solid #fff;
+}
 
 @media(max-width: 800px) {
 display: flex;
@@ -149,7 +152,7 @@ font-size: 18px;
 font-weight: 500;
 text-align: center;
 `
-const PlanSummary = ({price, priceId, billingInterval, protectionTypeString, protectionType, setStep}) => {
+const PlanSummary = ({price, priceId, billingInterval, protectionTypeString, protectionType, setStep, changeHandler}) => {
 
     const prices = {
         armedCitizenMonth: '$19.99',
@@ -166,15 +169,14 @@ const PlanSummary = ({price, priceId, billingInterval, protectionTypeString, pro
         <SpaceBetweenWrapper>
         <div>{protectionTypeString}</div>
         <div>{price}</div>
-        
         </SpaceBetweenWrapper>
+        
         <SpaceBetweenWrapper>
          <div>Billed {billingInterval}</div>
          <div>
          <Blue onClick={()=>setStep('ChoosePlan')}>Change</Blue>
          </div>
          </SpaceBetweenWrapper>
-        <HR />
         </MobileWrapper>
 
     <DesktopWrapper>

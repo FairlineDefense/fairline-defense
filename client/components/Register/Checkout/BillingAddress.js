@@ -179,7 +179,7 @@ const BillingAddress = ({order:{price, priceId, protectionType, protectionTypeSt
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
-      <PlanSummary price={price} priceId={priceId} protectionTypeString={protectionTypeString} protectionType={protectionType} billingInterval={billingInterval} setStep={setStep} />
+      <PlanSummary price={price} priceId={priceId} changeHandler={changeHandler} protectionTypeString={protectionTypeString} protectionType={protectionType} billingInterval={billingInterval} setStep={setStep} />
       <Header>Billing Address</Header>
       <ThemeProvider theme={theme}>
         <Form>

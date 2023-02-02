@@ -192,7 +192,7 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, price, pr
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
-      <PlanSummary price={price} priceId={priceId} protectionTypeString={protectionTypeString} protectionType={protectionType} billingInterval={billingInterval} setStep={setStep} />
+      <PlanSummary price={price} priceId={priceId} protectionTypeString={protectionTypeString} protectionType={protectionType} billingInterval={billingInterval} setStep={setStep} changeHandler={changeHandler} />
         <Header>Credit Card</Header>
         <CenteredWrapper>
       <Elements stripe={stripePromise} options={options}>

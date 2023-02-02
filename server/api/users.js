@@ -71,15 +71,16 @@ router.put('/:id', async (req, res, next) => {
         state: state && state,
         postal_code: zipCode && zipCode,
       },
-      shipping: {address: {
+      shipping: {
+        name: `${req.user.firstName} ${req.user.lastName}`,
+        address: {
         line1: shippingStreetAddress && shippingStreetAddress,
         line2: shippingLine2 && shippingLine2,
         city: shippingCity && shippingCity,
         state: shippingState && shippingState,
         postal_code: shippingZipCode && shippingZipCode,
       },
-      name: name && name,
-      phone: phone && phone,
+      phone: req.user.phone,
     }
       }
     );
