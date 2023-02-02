@@ -43,10 +43,10 @@ router.put('/:id', async (req, res, next) => {
         data: {
           type: 'profile',
           attributes: {
-            email: email,
-            phone_number: phone,
-            first_name: firstName,
-            last_name: lastName
+            email: email && email,
+            phone_number: phone && `${phone}`,
+            first_name: firstName && firstName,
+            last_name: lastName && lastName,
           },
           id: user.klaviyoProfileID
         }
@@ -57,29 +57,29 @@ router.put('/:id', async (req, res, next) => {
       .then(res => res.json())
       .then(json => console.log(json))
       .catch(err => console.error('error:' + err));
-
+    const name = firstName && lastName && `${firstName} ${lastName}`
     // API call to Stripe using their customerId to update all relevant fields
     await stripe.customers.update(
       user.customerId,
-      {email: email,
-      name: `${firstName} ${lastName}`,
-      phone: `${phone}`,
+      {email: email && email,
+      name: firstName && lastName && `${firstName} ${lastName}`,
+      phone: phone && `${phone}`,
       address: {
-        line1: streetAddress,
-        line2: line2,
-        city: city,
-        state: state,
-        postal_code: zipCode,
+        line1: streetAddress && streetAddress,
+        line2: line2 && line2,
+        city: city && city,
+        state: state && state,
+        postal_code: zipCode && zipCode,
       },
       shipping: {address: {
-        line1: shippingStreetAddress,
-        line2: shippingLine2,
-        city: shippingCity,
-        state: shippingState,
-        postal_code: shippingZipCode,
+        line1: shippingStreetAddress && shippingStreetAddress,
+        line2: shippingLine2 && shippingLine2,
+        city: shippingCity && shippingCity,
+        state: shippingState && shippingState,
+        postal_code: shippingZipCode && shippingZipCode,
       },
-      name: `${firstName} ${lastName}`,
-      phone: phone
+      name: name && name,
+      phone: phone && phone,
     }
       }
     );
@@ -89,23 +89,27 @@ router.put('/:id', async (req, res, next) => {
   }
 
   try {
-    if (password) {
       await User.update(
         {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phone: phone,
-          streetAddress: streetAddress,
-          line2: line2,
-          city: city,
-          state: state,
-          zipCode: zipCode,
-          emailReminders: emailReminders,
-          emailNews: emailNews,
-          emailInsider: emailInsider,
-          emailPromotions: emailPromotions,
-          password: password
+          firstName: firstName && firstName,
+          lastName: lastName && lastName,
+          email: email && email,
+          phone: phone && phone,
+          streetAddress: streetAddress && streetAddress,
+          line2: line2 && line2,
+          city: city && city,
+          state: state && state,
+          zipCode: zipCode && zipCode,
+          shippingStreetAddress: shippingStreetAddress && shippingStreetAddress,
+          shippingLine2: shippingLine2 && shippingLine2,
+          shippingCity: shippingCity && shippingCity,
+          shippingState: shippingState && shippingState,
+          shippingZipCode: shippingZipCode && shippingZipCode,
+          emailReminders: emailReminders && emailReminders,
+          emailNews: emailNews && emailNews,
+          emailInsider: emailInsider && emailInsider,
+          emailPromotions: emailPromotions && emailPromotions,
+          password: password && password
         },
         {
           where: {id: req.params.id},
@@ -113,35 +117,6 @@ router.put('/:id', async (req, res, next) => {
         }
       )
       res.status(200).send()
-    } else {
-      await User.update(
-        {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phone: phone,
-          streetAddress: streetAddress,
-          line2: line2,
-          city: city,
-          state: state,
-          zipCode: zipCode,
-          shippingStreetAddres: shippingStreetAddress,
-          shippingLine2: shippingLine2,
-          shippingCity: shippingCity,
-          shippingState: shippingState,
-          shippingZipCode: shippingZipCode,
-          emailReminders: emailReminders,
-          emailNews: emailNews,
-          emailInsider: emailInsider,
-          emailPromotions: emailPromotions
-        },
-        {
-          where: {id: req.params.id},
-          individualHooks: true
-        }
-      )
-      res.status(200).send()
-    }
   } catch (err) {
     console.log(err)
   }

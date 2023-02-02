@@ -37,14 +37,14 @@ const Form = styled.div`
     margin-right: .5rem;
   }
 `
-const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetAddress, shippingLine2, shippingCity, shippingState, shippingZipCode},  changeHandler}) => {
+const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetAddress, shippingLine2, shippingCity, shippingState, shippingZipCode}, order, setOrder, changeHandler}) => {
     
 
   if(!differentAddress) {
     return null
   }
 
-  const shippingStates = [
+  const states = [
     'State',
     'AL',
     'AK',
@@ -157,12 +157,12 @@ const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetA
             }}
             name="shippingState"
             value={shippingState}
-            onChange={e => changeHandler(e)}
+            onChange={(e) => setOrder({...order, shippingState: e.target.value})}
             required
           >
-            {shippingStates.map(shippingState => (
-              <MenuItem key={shippingState} value={shippingState}>
-                {shippingState}
+            {states.map(state => (
+              <MenuItem key={state} value={state}>
+                {state}
               </MenuItem>
             ))}
           </Select>

@@ -85,22 +85,19 @@ const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, s
 
   const [errorMessage, setErrorMessage] = useState(null)
 
-  let [terms, setTerms] = useState(false)
-  let [shippingAddress, setshippingAddress] = useState(true)
-
   const handleSubmit = async event => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault()
-
-    // Update user's shipping address in our db
-    differentAddress && dispatch(update({...user, order}))
 
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
       return
     }
+
+    // Update user's shipping address in our db
+     dispatch(update({id: user.id, ...order}))
 
     const {error} = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
@@ -140,7 +137,7 @@ const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, s
       </div>
       </LeftWrapper>
 
-      <ShippingAddress order={order} changeHandler={changeHandler} />
+      <ShippingAddress order={order} changeHandler={changeHandler} setOrder={setOrder} />
 
       <LeftWrapper>
       <div>

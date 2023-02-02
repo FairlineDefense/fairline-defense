@@ -130,7 +130,7 @@ const UserHome = () => {
   //   return <VerifyPhone />
   // }
 
-  if (user.planActive) {
+  if (process.env.NODE_ENV === 'development') {
     return <Checkout />
   }
   return (

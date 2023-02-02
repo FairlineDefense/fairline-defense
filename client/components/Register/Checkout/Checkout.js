@@ -21,7 +21,7 @@ const Checkout = () => {
     streetAddress: '',
     address2: '',
     city: '',
-    billingState: 'State',
+    state: 'State',
     zipCode: '',
     sameAddress: true,
     shippingApt: '',
@@ -59,8 +59,9 @@ const Checkout = () => {
 
   const changeHandler = e => {
     e.preventDefault()
+    console.log(e.currentTarget.name, e.currentTarget.value)
     console.log(order)
-    setOrder({...order, [e.target.name]:e.currentTarget.value})
+    setOrder({...order, [e.currentTarget.name]:e.currentTarget.value})
   }
 
   switch (step) {

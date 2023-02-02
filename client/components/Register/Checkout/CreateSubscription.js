@@ -8,6 +8,9 @@ import {PaymentElement} from '@stripe/react-stripe-js'
 import CheckoutForm from './CheckoutForm'
 import RegisterHeader from '../RegisterHeader'
 import css from '../register.css'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import {ThemeProvider} from '@material-ui/core'
+import theme from '../../theme'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -18,7 +21,6 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
 `
-
 const Header = styled.h1`
   font-size: 32px;
   font-weight: 300;
@@ -165,9 +167,22 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, apt, stre
     [customerId]
   )
 
-  if (!clientSecret || clientSecret === '') {
-    return 'loading'
-  }
+  if (!clientSecret || clientSecret === '' || !stripePromise) {
+      return (
+        <div className="auth">
+          <svg className="logo" />
+          <svg className="logo" />
+          <svg className="logo" />
+          <RegisterHeader />
+          <CenteredWrapper>
+            <ThemeProvider theme={theme}>
+              <CircularProgress color={theme.palette.primary.main} />
+            </ThemeProvider>
+          </CenteredWrapper>
+        </div>
+      )
+    }
+
   return (
     <>
       <div className="auth">
