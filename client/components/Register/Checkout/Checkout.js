@@ -9,10 +9,10 @@ import {loadStripe} from '@stripe/stripe-js'
 import {useSelector} from 'react-redux'
 
 const Checkout = () => {
- const user = useSelector(state => state.user)
- const stripePromise = loadStripe(process.env.PUBLIC_KEY)
+  const user = useSelector(state => state.user)
+  const stripePromise = loadStripe(process.env.PUBLIC_KEY)
 
- const [order, setOrder] = useState({
+  const [order, setOrder] = useState({
     customerId: '',
     clientSecret: '',
     protectionType: '',
@@ -33,10 +33,10 @@ const Checkout = () => {
     shippingCity: '',
     shippingState: 'State',
     shippingZipCode: '',
-    termsAndConditions: false,
- })
+    termsAndConditions: false
+  })
 
- const options = {
+  const options = {
     clientSecret: order.clientSecret,
     // Appearance of Stripe form:
     appearance: {
@@ -58,46 +58,62 @@ const Checkout = () => {
     }
   }
 
- const [step, setStep] = useState('ChooseProtection')
+  const [step, setStep] = useState('ChooseProtection')
 
   const changeHandler = e => {
     e.preventDefault()
-    setOrder({...order, [e.currentTarget.name]:e.currentTarget.value})
+    setOrder({...order, [e.currentTarget.name]: e.currentTarget.value})
   }
 
   //1) priceId is set in ChoosePlan.js, and is used to set the plan information in the useEffect below
-  useEffect(() => {
-    const prices = {
-      armedCitizenMonth: '$19.99',
-      armedCitizenYear: '$199',
-      armedProfessionalMonth: '$29.99',
-      armedProfessionalYear: '$299'
-    }
-    const price = prices[order.priceId]
+  useEffect(
+    () => {
+      const prices = {
+        armedCitizenMonth: '$19.99',
+        armedCitizenYear: '$199',
+        armedProfessionalMonth: '$29.99',
+        armedProfessionalYear: '$299'
+      }
+      const price = prices[order.priceId]
 
-    const protectionTypeStrings = {
-      armedCitizenMonth: 'Armed Citizen',
-      armedCitizenYear: 'Armed Citizen',
-      armedProfessionalMonth: 'Armed Professional',
-      armedProfessionalYear: 'Armed Professional'
-    }
-    const protectionTypeString = protectionTypeStrings[order.priceId]
+      const protectionTypeStrings = {
+        armedCitizenMonth: 'Armed Citizen',
+        armedCitizenYear: 'Armed Citizen',
+        armedProfessionalMonth: 'Armed Professional',
+        armedProfessionalYear: 'Armed Professional'
+      }
+      const protectionTypeString = protectionTypeStrings[order.priceId]
 
-    const billingIntervals = {
-      armedCitizenMonth: 'monthly',
-      armedCitizenYear: 'annually',
-      armedProfessionalMonth: 'monthly',
-      armedProfessionalYear: 'annually'
-   }
-    const billingInterval = billingIntervals[order.priceId]
+      const billingIntervals = {
+        armedCitizenMonth: 'monthly',
+        armedCitizenYear: 'annually',
+        armedProfessionalMonth: 'monthly',
+        armedProfessionalYear: 'annually'
+      }
+      const billingInterval = billingIntervals[order.priceId]
 
-   setOrder({...order, billingInterval: billingInterval, protectionTypeString: protectionTypeString, price: price})
-  }, [order.priceId, step])
+      setOrder({
+        ...order,
+        billingInterval: billingInterval,
+        protectionTypeString: protectionTypeString,
+        price: price
+      })
+    },
+    [order.priceId, step]
+  )
 
   //2) A customer is created via the Stripe API from their info in BillingAddress.js which returns a customer id.
   const createCustomer = async () => {
     try {
-      let reqBody = {...user, apt: order.apt, streetAddress: order.streetAddress, line2: order.line2, city: order.city, state:order.state, zipCode:order.zipCode}
+      let reqBody = {
+        ...user,
+        apt: order.apt,
+        streetAddress: order.streetAddress,
+        line2: order.line2,
+        city: order.city,
+        state: order.state,
+        zipCode: order.zipCode
+      }
       const response = await fetch('/payment/create-customer', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -110,15 +126,18 @@ const Checkout = () => {
       console.log('create customer error', error)
     }
   }
-  useEffect(() => {
-  if (order.customerId === 'createCustomer') {
-    try {
-      createCustomer()
-    } catch (error) {
-      console.log('error creating customer,', error)
-    }
-  }
-  }, [order.customerId])
+  useEffect(
+    () => {
+      if (order.customerId === 'createCustomer') {
+        try {
+          createCustomer()
+        } catch (error) {
+          console.log('error creating customer,', error)
+        }
+      }
+    },
+    [order.customerId]
+  )
 
   //3) This customer id is used to render a payment intent (credit card form) in CreditCardInfo.js
   const fetchClientSecret = async () => {
@@ -135,15 +154,18 @@ const Checkout = () => {
     const {clientSecretRes} = await response.json()
     setOrder({...order, clientSecret: clientSecretRes})
   }
-  useEffect(() => {
-    if (order.customerId !== '' && order.customerId !== 'createCustomer') {
-      try {
-      fetchClientSecret()
-      } catch (error) {
-        console.log('error getting client secret,', error)
+  useEffect(
+    () => {
+      if (order.customerId !== '' && order.customerId !== 'createCustomer') {
+        try {
+          fetchClientSecret()
+        } catch (error) {
+          console.log('error getting client secret,', error)
+        }
       }
-    }
-  }, [order.customerId])
+    },
+    [order.customerId]
+  )
 
   //4) In CreditCardInfo.js, submitHandler sends the payment intent to Stripe, which returns a payment status
 
@@ -155,7 +177,7 @@ const Checkout = () => {
           changeHandler={changeHandler}
           order={order}
         />
-      );
+      )
     case 'ChoosePlan':
       return (
         <ChoosePlan
@@ -163,38 +185,37 @@ const Checkout = () => {
           changeHandler={changeHandler}
           order={order}
         />
-      );
+      )
     case 'BillingAddress':
       return (
         <BillingAddress
-        setStep={setStep}
-        changeHandler={changeHandler}
-        order={order}
-        setOrder={setOrder}
+          setStep={setStep}
+          changeHandler={changeHandler}
+          order={order}
+          setOrder={setOrder}
         />
-      );
-      case 'PaymentInfo':
-        return (
-            <PaymentInfo
-            setStep={setStep}
-            changeHandler={changeHandler}
-            order={order}
-            setOrder={setOrder}
-            stripePromise={stripePromise}
-            options={options}
-            />
-        );
-        case 'PaymentStatus':
-            return (
-                <PaymentStatus
-                setStep={setStep}
-                changeHandler={changeHandler}
-                order={order}
-                />
-            );
+      )
+    case 'PaymentInfo':
+      return (
+        <PaymentInfo
+          setStep={setStep}
+          changeHandler={changeHandler}
+          order={order}
+          setOrder={setOrder}
+          stripePromise={stripePromise}
+          options={options}
+        />
+      )
+    case 'PaymentStatus':
+      return (
+        <PaymentStatus
+          setStep={setStep}
+          changeHandler={changeHandler}
+          order={order}
+        />
+      )
     default:
-    return <ChooseProtection />;
+      return <ChooseProtection />
   }
-
 }
 export default Checkout

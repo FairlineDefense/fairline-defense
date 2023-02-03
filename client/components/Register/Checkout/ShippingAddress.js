@@ -19,7 +19,7 @@ const Header = styled.h1`
   font-weight: 300;
   margin: 0.5rem 0rem 2rem 0rem;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     font-size: 22px;
     margin: 1rem;
   }
@@ -31,13 +31,24 @@ const Form = styled.div`
   margin-bottom: 1rem;
 
   @media (max-width: 800px) {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 `
-const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetAddress, shippingLine2, shippingCity, shippingState, shippingZipCode}, order, setOrder, changeHandler}) => {
-    
-
-  if(!differentAddress) {
+const ShippingAddress = ({
+  order: {
+    differentAddress,
+    shippingApt,
+    shippingStreetAddress,
+    shippingLine2,
+    shippingCity,
+    shippingState,
+    shippingZipCode
+  },
+  order,
+  setOrder,
+  changeHandler
+}) => {
+  if (!differentAddress) {
     return null
   }
 
@@ -95,7 +106,7 @@ const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetA
     'WV',
     'WY'
   ]
-  
+
   return (
     <Wrapper>
       <Header>Shipping Address</Header>
@@ -147,9 +158,9 @@ const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetA
             value={shippingCity}
             required
           />
-           <Select
+          <Select
             placeholder="State"
-            autoComplete='state'
+            autoComplete="state"
             style={{
               backgroundColor: '#FFF',
               borderRadius: 4,
@@ -159,7 +170,7 @@ const ShippingAddress = ({order: {differentAddress, shippingApt, shippingStreetA
             }}
             name="shippingState"
             value={shippingState}
-            onChange={(e) => setOrder({...order, shippingState: e.target.value})}
+            onChange={e => setOrder({...order, shippingState: e.target.value})}
             required
           >
             {states.map(state => (

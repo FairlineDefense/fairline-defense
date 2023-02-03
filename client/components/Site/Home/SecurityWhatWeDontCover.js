@@ -70,7 +70,7 @@ const Header = styled.div`
   color: var(--darkblue);
   font-weight: 600;
   margin-bottom: 1rem;
-  
+
   @media (max-width: 800px) {
     font-size: 30px;
     line-height: 30px;
@@ -83,7 +83,7 @@ const SubHeader = styled.div`
   font-weight: 400;
   color: var(--darkblue);
   margin-bottom: 1rem;
-  
+
   @media (max-width: 800px) {
     font-size: 20px;
     line-height: 30px;
@@ -111,15 +111,15 @@ const CuffsIcon = styled.div`
 export default function SecurityWhatWeDontCover() {
   return (
     <Section>
-        <Blue>
-      <Wrapper>
-        <CuffsIcon />
-        <Text>
-          <Header>What we don't cover.</Header>
-          <SubHeader>Any actions with criminal intent.</SubHeader>
-          <Small>Don't be a criminal, it never works out.</Small>
-        </Text>
-      </Wrapper>
+      <Blue>
+        <Wrapper>
+          <CuffsIcon />
+          <Text>
+            <Header>What we don't cover.</Header>
+            <SubHeader>Any actions with criminal intent.</SubHeader>
+            <Small>Don't be a criminal, it never works out.</Small>
+          </Text>
+        </Wrapper>
       </Blue>
     </Section>
   )

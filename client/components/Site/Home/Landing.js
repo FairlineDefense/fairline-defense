@@ -17,7 +17,7 @@ const Section = styled.div`
     background-size: cover;
     background-position: 50% top;
     height: 500px;
-    padding: .5rem 1rem 1rem 1rem;
+    padding: 0.5rem 1rem 1rem 1rem;
     text-align: center;
     align-items: center;
   }
@@ -49,8 +49,8 @@ const SubHeading = styled.div`
   }
 `
 const StartButton = styled.div`
-  background-color: #FF1E3E;
-  opacity: .9;
+  background-color: #ff1e3e;
+  opacity: 0.9;
   color: #fff;
   border-radius: 40px;
   width: 280px;

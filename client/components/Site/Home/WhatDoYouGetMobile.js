@@ -24,7 +24,7 @@ const Header = styled.div`
   margin-bottom: 1rem;
   text-align: center;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     font-size: 36px;
   }
 `
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     flex-direction: column;
   }
 `
@@ -49,7 +49,7 @@ const Card = styled.div`
   justify-content: flex-end;
   color: var(--darkblue);
   padding: 2rem;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   margin: 0rem 2rem 0rem 2rem;
 
   header {
@@ -67,8 +67,8 @@ const Card = styled.div`
     width: 106px;
   }
 
-  @media(max-width: 800px) {
-  margin-bottom: 2rem;
+  @media (max-width: 800px) {
+    margin-bottom: 2rem;
   }
 `
 export default function WhatDoYouGetMobile() {

@@ -6,11 +6,11 @@ import PaymentStatusMessage from './PaymentStatusMessage'
 import {loadStripe} from '@stripe/stripe-js'
 import RegisterHeader from '../RegisterHeader'
 const Wrapper = styled.div`
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 const PaymentStatus = () => {
   const stripePromise = loadStripe(process.env.PUBLIC_KEY)

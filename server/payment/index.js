@@ -67,7 +67,8 @@ router.post('/create-customer', async (req, res) => {
       })
       return res.json({
         subscriptionId: subscription.id,
-        clientSecretRes: subscription.latest_invoice.payment_intent.client_secret
+        clientSecretRes:
+          subscription.latest_invoice.payment_intent.client_secret
       })
     } catch (error) {
       console.log(error.message)

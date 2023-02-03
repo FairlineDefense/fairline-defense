@@ -36,7 +36,7 @@ const Header = styled.h1`
   font-weight: 300;
   margin: 0.5rem 0rem 2rem 0rem;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     font-size: 22px;
     margin: 1rem;
   }
@@ -48,7 +48,7 @@ const Form = styled.form`
 
   @media (max-width: 800px) {
     width: 90%;
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 `
 const ErrorText = styled.div`
@@ -76,10 +76,28 @@ const ContinueButton = styled.button`
   &:disabled {
     cursor: default;
     background-color: #2a4c78;
-    color: #5D789A;
+    color: #5d789a;
   }
 `
-const BillingAddress = ({order:{price, priceId, protectionType, protectionTypeString, billingInterval, apt, streetAddress, line2, city, state, zipCode}, order, setStep, changeHandler, setOrder}) => {
+const BillingAddress = ({
+  order: {
+    price,
+    priceId,
+    protectionType,
+    protectionTypeString,
+    billingInterval,
+    apt,
+    streetAddress,
+    line2,
+    city,
+    state,
+    zipCode
+  },
+  order,
+  setStep,
+  changeHandler,
+  setOrder
+}) => {
   let [errorText, setErrorText] = useState('')
 
   const clickHandler = e => {
@@ -91,6 +109,7 @@ const BillingAddress = ({order:{price, priceId, protectionType, protectionTypeSt
       if (state === '' || state === 'state') {
         return setErrorText('Invalid state.')
       } else {
+        //Set order to create customer to trigger stripe customer creation
         setOrder({...order, customerId: 'createCustomer'})
       }
     }
@@ -159,87 +178,95 @@ const BillingAddress = ({order:{price, priceId, protectionType, protectionTypeSt
       <svg className="logo" />
       <RegisterHeader />
       <Wrapper>
-      <PlanSummary price={price} priceId={priceId} changeHandler={changeHandler} protectionTypeString={protectionTypeString} protectionType={protectionType} billingInterval={billingInterval} setStep={setStep} />
-      <Header>Billing Address</Header>
-      <ThemeProvider theme={theme}>
-        <Form>
-          <FDTextField
-            label="Apt."
-            variant="filled"
-            type="text"
-            style={{margin: 8, maxWidth: 90}}
-            name="apt"
-            placeholder="Apt"
-            onChange={e => changeHandler(e)}
-            value={apt}
-          />
-          <FDTextField
-            name="streetAddress"
-            label="Street Address"
-            placeholder="Street Address"
-            type="text"
-            variant="filled"
-            style={{margin: 8, flexGrow: 1}}
-            onChange={e => changeHandler(e)}
-            value={streetAddress}
-            required
-          />
-          <FDTextField
-            fullWidth
-            name="line2"
-            label="Street Address Line 2"
-            placeholder="Street Address Line 2"
-            type="text"
-            variant="filled"
-            style={{margin: 8}}
-            onChange={e => changeHandler(e)}
-            value={line2}
-          />
-          <FDTextField
-            name="city"
-            placeholder="City"
-            label="City"
-            variant="filled"
-            style={{margin: 8, flexGrow: 1}}
-            onChange={e => changeHandler(e)}
-            value={city}
-            required
-          />
-          <Select
-            placeholder="State"
-            style={{
-              backgroundColor: '#FFF',
-              borderRadius: 4,
-              margin: 8,
-              width: 100,
-              paddingLeft: 20
-            }}
-            name="state"
-            value={state}
-            onChange={e => setOrder({...order, state: e.target.value})}
-            required
-          >
-            {states.map(state => (
-              <MenuItem key={state} value={state}>
-                {state}
-              </MenuItem>
-            ))}
-          </Select>
-          <FDTextField
-            name="zipCode"
-            placeholder="Zip Code"
-            label="Zip Code"
-            variant="filled"
-            style={{margin: 8, flexGrow: 1}}
-            onChange={e => changeHandler(e)}
-            value={zipCode}
-            required
-          />
-        </Form>
-      </ThemeProvider>
-      <ContinueButton onClick={(e) => clickHandler(e)}>Continue</ContinueButton>
-      {errorText && <ErrorText>{errorText}</ErrorText>}
-    </Wrapper>
+        <PlanSummary
+          price={price}
+          priceId={priceId}
+          changeHandler={changeHandler}
+          protectionTypeString={protectionTypeString}
+          protectionType={protectionType}
+          billingInterval={billingInterval}
+          setStep={setStep}
+        />
+        <Header>Billing Address</Header>
+        <ThemeProvider theme={theme}>
+          <Form>
+            <FDTextField
+              label="Apt."
+              variant="filled"
+              type="text"
+              style={{margin: 8, maxWidth: 90}}
+              name="apt"
+              placeholder="Apt"
+              onChange={e => changeHandler(e)}
+              value={apt}
+            />
+            <FDTextField
+              name="streetAddress"
+              label="Street Address"
+              placeholder="Street Address"
+              type="text"
+              variant="filled"
+              style={{margin: 8, flexGrow: 1}}
+              onChange={e => changeHandler(e)}
+              value={streetAddress}
+              required
+            />
+            <FDTextField
+              fullWidth
+              name="line2"
+              label="Street Address Line 2"
+              placeholder="Street Address Line 2"
+              type="text"
+              variant="filled"
+              style={{margin: 8}}
+              onChange={e => changeHandler(e)}
+              value={line2}
+            />
+            <FDTextField
+              name="city"
+              placeholder="City"
+              label="City"
+              variant="filled"
+              style={{margin: 8, flexGrow: 1}}
+              onChange={e => changeHandler(e)}
+              value={city}
+              required
+            />
+            <Select
+              placeholder="State"
+              style={{
+                backgroundColor: '#FFF',
+                borderRadius: 4,
+                margin: 8,
+                width: 100,
+                paddingLeft: 20
+              }}
+              name="state"
+              value={state}
+              onChange={e => setOrder({...order, state: e.target.value})}
+              required
+            >
+              {states.map(state => (
+                <MenuItem key={state} value={state}>
+                  {state}
+                </MenuItem>
+              ))}
+            </Select>
+            <FDTextField
+              name="zipCode"
+              placeholder="Zip Code"
+              label="Zip Code"
+              variant="filled"
+              style={{margin: 8, flexGrow: 1}}
+              onChange={e => changeHandler(e)}
+              value={zipCode}
+              required
+            />
+          </Form>
+        </ThemeProvider>
+        <ContinueButton onClick={e => clickHandler(e)}>Continue</ContinueButton>
+        {errorText && <ErrorText>{errorText}</ErrorText>}
+      </Wrapper>
     </div>
   )
 }

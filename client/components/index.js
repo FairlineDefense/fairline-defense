@@ -12,7 +12,9 @@ export {default as Signup} from './Register/Signup'
 export {default as Checkout} from './Register/Checkout/Checkout'
 export {default as ChoosePlan} from './Register/Checkout/ChoosePlan'
 export {default as ChooseProtection} from './Register/Checkout/ChooseProtection'
-export {default as PaymentStatusMessage} from './Register/Checkout/PaymentStatusMessage'
+export {
+  default as PaymentStatusMessage
+} from './Register/Checkout/PaymentStatusMessage'
 export {default as PaymentStatus} from './Register/Checkout/PaymentStatus'
 export {default as VerifyEmail} from './Register/VerifyEmail'
 export {default as VerifyPhone} from './Register/VerifyPhone'

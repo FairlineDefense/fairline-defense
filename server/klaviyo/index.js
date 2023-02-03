@@ -42,13 +42,15 @@ router.post('/create-account', async (req, res, next) => {
         }
       })
     }
-    const createKlaviyoProfileRes = process.env.NODE_ENV === 'production' && await fetch(
-      'https://a.klaviyo.com/api/profiles/',
-      createKlaviyoProfileBody
-    )
-      .then(response => response.json())
-      .then(res => res.data)
-      .catch(err => console.error('ERROR', err))
+    const createKlaviyoProfileRes =
+      process.env.NODE_ENV === 'production' &&
+      (await fetch(
+        'https://a.klaviyo.com/api/profiles/',
+        createKlaviyoProfileBody
+      )
+        .then(response => response.json())
+        .then(res => res.data)
+        .catch(err => console.error('ERROR', err)))
 
     if (createKlaviyoProfileRes.id || process.env.NODE_ENV === 'development') {
       await User.update(
@@ -69,19 +71,22 @@ router.post('/create-account', async (req, res, next) => {
           data: {
             type: 'profile-subscription-bulk-create-job',
             attributes: {
-              subscriptions: [{email: req.body.email, phone_number: req.body.phone}],
+              subscriptions: [
+                {email: req.body.email, phone_number: req.body.phone}
+              ],
               list_id: 'VXeuyy'
             }
           }
         })
       }
 
-      process.env.NODE_ENV === 'production' && fetch(
-        'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/',
-        addUserToNewsletterBody
-      )
-        .then(res => console.log(res))
-        .catch(err => console.error('error:' + err))
+      process.env.NODE_ENV === 'production' &&
+        fetch(
+          'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/',
+          addUserToNewsletterBody
+        )
+          .then(res => console.log(res))
+          .catch(err => console.error('error:' + err))
     }
 
     // Step 3 is located in ../webhooks/klaviyo

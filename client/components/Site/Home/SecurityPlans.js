@@ -32,7 +32,7 @@ const Header = styled.div`
   font-weight: 600;
   line-height: 55px;
   color: var(--darkblue);
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 
   @media (max-width: 800px) {
     font-size: 32px;
@@ -49,48 +49,48 @@ const Subheader = styled.div`
   }
 `
 const Title = styled.div`
-font-size: 40px;
-line-height: 38px;
-text-align: center;
-font-weight: 500;
-color: var(--darkblue);
-margin: 2rem 0rem 2rem 0rem;
+  font-size: 40px;
+  line-height: 38px;
+  text-align: center;
+  font-weight: 500;
+  color: var(--darkblue);
+  margin: 2rem 0rem 2rem 0rem;
 
   @media (max-width: 800px) {
     font-size: 24px;
   }
 `
 const Cyan = styled.span`
-color: var(--cyan);
-font-size: 35px;
-font-weight: 500;
-margin: 1rem 0rem 1rem 0rem;
+  color: var(--cyan);
+  font-size: 35px;
+  font-weight: 500;
+  margin: 1rem 0rem 1rem 0rem;
 
-@media(max-width: 800px) {
-  font-size: 25px;
-}
+  @media (max-width: 800px) {
+    font-size: 25px;
+  }
 `
 const PlanWrapper = styled.div`
-display: flex;
-justify-content: center;
-align-items: flex-start;
-height: 450px;
-width: 400px;
-flex-direction: column;
-margin: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 450px;
+  width: 400px;
+  flex-direction: column;
+  margin: 2rem;
 
-@media(max-width: 800px) {
-  margin: 0rem;
-  align-items: center;
-  width: 100%;
-  height: fit-content;
-  margin-bottom: 1rem;
-}
+  @media (max-width: 800px) {
+    margin: 0rem;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 1rem;
+  }
 `
 const Plan = styled.div`
   min-height: 232px;
   min-width: 400px;
-  background: #00ABE0;
+  background: #00abe0;
   color: #fff;
   display: block;
   text-align: center;
@@ -107,7 +107,7 @@ const Plan = styled.div`
     font-size: 30px;
   }
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     min-width: 280px;
   }
 `
@@ -120,7 +120,7 @@ const Small = styled.div`
   flex-direction: column;
   height: 200px;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     width: 280px;
     height: fit-content;
     font-size: 24px;
@@ -137,7 +137,7 @@ const Savings = styled.div`
   text-align: center;
   font-weight: bold;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     width: 280px;
     height: fit-content;
   }
@@ -162,24 +162,24 @@ export default function SecurityPlans() {
     <Section id="coverages">
       <Header>One simple plan</Header>
       <Subheader>That's easy to understand</Subheader>
-        <Cyan>Peace of mind at $29.99</Cyan>
+      <Cyan>Peace of mind at $29.99</Cyan>
       <Title>Armed Professional Plan</Title>
       <Wrapper>
         <PlanWrapper>
-        <Plan>
-          <header>$29.99</header>
-          <small>Billed Monthly</small>
-        </Plan>
-        <Small>
-        Add a spouse or family member for <Bold>$5 Monthly</Bold>
-      </Small>
+          <Plan>
+            <header>$29.99</header>
+            <small>Billed Monthly</small>
+          </Plan>
+          <Small>
+            Add a spouse or family member for <Bold>$5 Monthly</Bold>
+          </Small>
         </PlanWrapper>
         <PlanWrapper>
-        <Plan>
-          <header>$299</header>
-          <small>Billed Annually</small>
-        </Plan>
-        <Savings>
+          <Plan>
+            <header>$299</header>
+            <small>Billed Annually</small>
+          </Plan>
+          <Savings>
             {/* <Arrow><img src="./images/cyanarrow.png" /></Arrow>*/}
             Save $80!
           </Savings>

@@ -91,22 +91,19 @@ const Svg = styled.svg`
 export default function SecurityWhatDoWeCover() {
   return (
     <>
-    <Svg viewBox="0 0 506 530" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <Svg viewBox="0 0 506 530" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_673_27)">
           <path
             d="M31.2033 68.4848L0 187.72L474.797 119.38L506 0L31.2033 68.4848Z"
             fill="#F9FAFD"
-            
           />
           <path
             d="M31.2033 239.336L0 358.716L474.797 290.231L506 170.996L31.2033 239.336Z"
             fill="#F9FAFD"
-            
           />
           <path
             d="M31.2033 410.764L0 530L194.81 501.885L226.013 382.649L31.2033 410.764Z"
             fill="#F9FAFD"
-            
           />
         </g>
         <defs>
@@ -115,16 +112,20 @@ export default function SecurityWhatDoWeCover() {
           </clipPath>
         </defs>
       </Svg>
-    <Section>
-      <Wrapper>
-        <Text>
-          <Header>What do we cover?</Header>
-          <Header>Any self-defense situation.</Header>
-          <Small>You can never be prepared 100% for when a situation happens, thats why Fairline Defense will cover you no matter what means you took to save your life. </Small>
-        </Text>
-        <Image />
-      </Wrapper>
-    </Section>
+      <Section>
+        <Wrapper>
+          <Text>
+            <Header>What do we cover?</Header>
+            <Header>Any self-defense situation.</Header>
+            <Small>
+              You can never be prepared 100% for when a situation happens, thats
+              why Fairline Defense will cover you no matter what means you took
+              to save your life.{' '}
+            </Small>
+          </Text>
+          <Image />
+        </Wrapper>
+      </Section>
     </>
   )
 }
