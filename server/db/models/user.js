@@ -65,22 +65,19 @@ const User = db.define('user', {
   zipCode: {
     type: Sequelize.STRING
   },
-  shippingStreetAddress: {
+  shippingstreetaddress: {
     type: Sequelize.STRING
   },
-  shippingLine2: {
+  shippingline2: {
     type: Sequelize.STRING
   },
-  shippingCity: {
+  shippingcity: {
     type: Sequelize.STRING
   },
-  shippingState: {
+  shippingstate: {
     type: Sequelize.STRING
   },
-  shippingCountry: {
-    type: Sequelize.STRING
-  },
-  shippingZipCode: {
+  shippingzipcode: {
     type: Sequelize.STRING
   },
   emergencyContactName: {
