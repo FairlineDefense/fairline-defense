@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import {useEffect} from 'react'
 import {Elements} from '@stripe/react-stripe-js'
-import CheckoutForm from './CheckoutForm'
+import CreditCardInfo from './CreditCardInfo'
 import RegisterHeader from '../RegisterHeader'
 import css from '../register.css'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -34,35 +33,7 @@ const CenteredWrapper = styled.div`
   display: flex;
   justify-content: center;
 `
-const CreateSubscription = ({order:{priceId, customerId, clientSecret, price, protectionType, billingInterval, protectionTypeString, apt, streetAddress, line2, city, state, zipCode}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
-  // Fetch client secret from Stripe with customer and product information
-  const fetchCs = async () => {
-    const response = await fetch('payment/create-subscription', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        priceId: priceId,
-        customerId: customerId
-      })
-    })
-    const {clientSecretRes} = await response.json()
-    setOrder({...order, clientSecret: clientSecretRes})
-  }
-
-    useEffect(
-    () => {
-      try {
-        if (customerId !== '') {
-          fetchCs()
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
-    [customerId]
-  )
+const PaymentInfo = ({order:{priceId, customerId, clientSecret, price, protectionType, billingInterval, protectionTypeString, apt, streetAddress, line2, city, state, zipCode}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
 
   if (!clientSecret || clientSecret === '' || !stripePromise) {
       return (
@@ -71,11 +42,13 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, price, pr
           <svg className="logo" />
           <svg className="logo" />
           <RegisterHeader />
+          <Wrapper>
           <CenteredWrapper>
             <ThemeProvider theme={theme}>
               <CircularProgress color={theme.palette.primary.main} />
             </ThemeProvider>
           </CenteredWrapper>
+          </Wrapper>
         </div>
       )
     }
@@ -93,7 +66,7 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, price, pr
         <CenteredWrapper>
       <Elements stripe={stripePromise} options={options}>
         <Wrapper>
-          <CheckoutForm order={order} apt={apt} streetAddress={streetAddress} line2={line2} city={city} state={state} zipCode={zipCode} changeHandler={changeHandler} setOrder={setOrder} />
+          <CreditCardInfo order={order} apt={apt} streetAddress={streetAddress} line2={line2} city={city} state={state} zipCode={zipCode} changeHandler={changeHandler} setOrder={setOrder} />
         </Wrapper>
       </Elements>
       </CenteredWrapper>
@@ -102,4 +75,4 @@ const CreateSubscription = ({order:{priceId, customerId, clientSecret, price, pr
     </>
   )
 }
-export default CreateSubscription
+export default PaymentInfo

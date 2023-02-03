@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import Checkbox from '@material-ui/core/Checkbox'
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../../theme'
-import {update} from '../../../store/'
+import {update} from '../../../store'
 import styled from 'styled-components'
-const FormWrapper = styled.div`
 
+const FormWrapper = styled.div`
   width: 800px;
   text-align: center;
 
@@ -77,7 +77,7 @@ const Button = styled.button`
     margin: 2rem;
   }
 `
-const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, differentAddress, termsAndConditions}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
+const CreditCardInfo = ({order:{apt, streetAddress, line2, city, state, zipCode, differentAddress, termsAndConditions}, order, options, stripePromise, setOrder, changeHandler, setStep}) => {
   const user = useSelector(state => state.user)
   const stripe = useStripe()
   const elements = useElements()
@@ -89,7 +89,6 @@ const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, d
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault()
-
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
@@ -123,6 +122,7 @@ const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, d
     <FormWrapper>
       <Form onSubmit={handleSubmit}>
         <Span>
+          {/* PaymentElement is the Stripe component that renders a credit card info form */}
           <PaymentElement />
         </Span>
 
@@ -158,4 +158,4 @@ const CheckoutForm = ({order:{apt, streetAddress, line2, city, state, zipCode, d
   )
 }
 
-export default CheckoutForm
+export default CreditCardInfo

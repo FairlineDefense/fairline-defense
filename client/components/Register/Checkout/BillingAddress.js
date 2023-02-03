@@ -8,7 +8,6 @@ import {ThemeProvider} from '@material-ui/core'
 import theme from '../../theme'
 import RegisterHeader from '../RegisterHeader'
 import css from '../register.css'
-import {useSelector} from 'react-redux'
 import PlanSummary from './PlanSummary'
 
 const Wrapper = styled.div`
@@ -81,26 +80,7 @@ const ContinueButton = styled.button`
   }
 `
 const BillingAddress = ({order:{price, priceId, protectionType, protectionTypeString, billingInterval, apt, streetAddress, line2, city, state, zipCode}, order, setStep, changeHandler, setOrder}) => {
-  let user = useSelector(state => state.user)
-  
   let [errorText, setErrorText] = useState('')
-  // Create Customer creates the customer object with their personal information for Stripe.
-  // Stripe can then generate a Client Secret to render the PaymentElement in our CheckoutForm
-  const createCustomer = async () => {
-    try {
-      let reqBody = {...user, apt, streetAddress, line2, city, state, zipCode}
-      const response = await fetch('/payment/create-customer', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(reqBody)
-      })
-      const {customerId: customerId} = await response.json()
-      setOrder({...order, customerId: customerId})
-      setStep('CreateSubscription')
-    } catch (error) {
-      console.log('create customer error', error)
-    }
-  }
 
   const clickHandler = e => {
     e.preventDefault()
@@ -111,7 +91,7 @@ const BillingAddress = ({order:{price, priceId, protectionType, protectionTypeSt
       if (state === '' || state === 'state') {
         return setErrorText('Invalid state.')
       } else {
-        createCustomer({apt, streetAddress, line2, city, state, zipCode})
+        setOrder({...order, customerId: 'createCustomer'})
       }
     }
     validateFields()
