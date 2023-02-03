@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 800px) {
     text-align: center;
-    padding: 4rem 1rem 0rem 1rem;
+    padding: 1rem 1rem 0rem 1rem;
   }
 `
 const ButtonWrapper = styled.div`

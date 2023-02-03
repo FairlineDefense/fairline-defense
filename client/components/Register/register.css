@@ -147,6 +147,7 @@
   transform: rotate(-5deg) skew(-20deg);
   background: rgba(151, 203, 220, 0.2);
   left: -10%;
+  display: block;
 }
 
 .auth svg.logo:nth-child(1) {

@@ -40,7 +40,7 @@ const SignupWrapper = styled.div`
   align-items: center;
   padding: 4rem;
   @media (max-width: 768px) {
-    padding: 4rem 2rem 0rem 1.5rem;
+    padding: 2rem 2rem 0rem 1.5rem;
   }
 `
 const SignupForm = styled.form`
