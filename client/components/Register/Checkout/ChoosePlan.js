@@ -3,6 +3,36 @@ import css from '../register.css'
 import styled from 'styled-components'
 import RegisterHeader from '../RegisterHeader'
 
+const Gradient = styled.div`
+width: 100vw;
+min-height: 100vh;
+background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
+color: #fff;
+overflow-x: hidden;
+
+a {
+  color: var(--blue);
+}
+
+a:visited {
+  color: var(--blue);
+}
+
+a:hover {
+  color: var(--blue);
+}
+`
+const BackgroundImage = styled.div`
+height: 100%;
+width: 100%;
+background-image: url('./images/background.png');
+background-repeat: no-repeat;
+background-position: -120px -100px;
+
+@media (max-width: 800px) {
+background-image: none;
+}
+`
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -152,10 +182,8 @@ const ChoosePlan = ({
     armedProfessionalYear: '$299'
   }
   return (
-    <div className="auth">
-      <svg className="logo" />
-      <svg className="logo" />
-      <svg className="logo" />
+    <Gradient>
+      <BackgroundImage>
       <RegisterHeader />
       <Wrapper>
         <H1>Select your plan for {protectionTypeString}</H1>
@@ -191,7 +219,8 @@ const ChoosePlan = ({
           Continue
         </ContinueButton>
       </Wrapper>
-    </div>
+    </BackgroundImage>
+    </Gradient>
   )
 }
 export default ChoosePlan

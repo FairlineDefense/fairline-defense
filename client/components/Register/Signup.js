@@ -6,22 +6,49 @@ import {useState, useEffect} from 'react'
 import RegisterHeader from './RegisterHeader'
 import FDTextField from '../FDTextField'
 import history from '../../history'
-import css from './register.css'
 import styled from 'styled-components'
-
 import AccountExistsModal from './AccountExistsModal'
 import TermsAndConditions from './TermsAndConditions'
 import Checkbox from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-
 import countries from './phonecodes'
-
 import {ThemeProvider} from '@material-ui/core'
 import theme from '../theme'
 import FDPasswordField from '../FDTextField/password'
 import SvgIcon from '@material-ui/core/SvgIcon'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
+
+const Gradient = styled.div`
+width: 100vw;
+min-height: 100vh;
+background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
+color: #fff;
+overflow-x: hidden;
+
+a {
+  color: var(--blue);
+}
+
+a:visited {
+  color: var(--blue);
+}
+
+a:hover {
+  color: var(--blue);
+}
+`
+const BackgroundImage = styled.div`
+height: 100%;
+width: 100%;
+background-image: url('./images/background.png');
+background-repeat: no-repeat;
+background-position: -120px -100px;
+
+@media (max-width: 800px) {
+background-image: none;
+}
+`
 const H1 = styled.h1`
   font-weight: 400;
   font-size: 30px;
@@ -317,11 +344,8 @@ const Signup = () => {
   }
 
   return (
-    <section className="auth">
-      <svg className="logo" />
-      <svg className="logo" />
-      <svg className="logo" />
-
+    <Gradient>
+      <BackgroundImage>
       <RegisterHeader />
       <SignupWrapper>
         <H1>Get Started</H1>
@@ -497,7 +521,8 @@ const Signup = () => {
         handleClick={handleClick}
       />
       <TermsAndConditions openTerms={openTerms} setOpenTerms={setOpenTerms} />
-    </section>
+    </BackgroundImage>
+    </Gradient>
   )
 }
 export default Signup
