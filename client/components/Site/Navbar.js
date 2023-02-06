@@ -5,15 +5,16 @@ import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-const Wrapper = styled.div.attrs(props => ({
+
+const Wrapper = styled.div.attrs((props) => ({
   display: props.display || 'none',
-  backgroundColor: props.backgroundColor || 'none'
+  backgroundColor: props.backgroundColor || 'none',
 }))`
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
-  background-color: ${props => props.backgroundColor};
+  background-color: ${(props) => props.backgroundColor};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -45,7 +46,7 @@ const Wrapper = styled.div.attrs(props => ({
     justify-content: flex-end;
 
     ul {
-      display: ${props => props.display};
+      display: ${(props) => props.display};
       position: fixed;
       left: 0;
       top: 0;
@@ -164,8 +165,8 @@ const Bar = styled.div`
   border-radius: 2px;
 `
 
-const Navbar = () => {
-  const user = useSelector(state => state.user)
+const Navbar = ({shouldShowBackground}) => {
+  const user = useSelector((state) => state.user)
   const isLoggedIn = user.id
 
   const dispatch = useDispatch()
@@ -175,16 +176,18 @@ const Navbar = () => {
   }
 
   let [display, setDisplay] = useState('none')
-  const [backgroundColor, setBackgroundColor] = useState('none')
+  const navbarDefaultBackground = shouldShowBackground ? '#132A4A' : 'none'
+  const [backgroundColor, setBackgroundColor] = useState(
+    navbarDefaultBackground
+  )
   const changeNavbarColor = () => {
-    if (window.scrollY >= 80) {
+    if (shouldShowBackground || window.scrollY >= 80) {
       setBackgroundColor('#132A4A')
     } else {
       setBackgroundColor('none')
     }
   }
   window.addEventListener('scroll', changeNavbarColor)
-
   const citizenOrProfessional =
     window.location.pathname === '/armedprofessionals' ? (
       <a href="/">Armed Citizens</a>
@@ -195,7 +198,7 @@ const Navbar = () => {
   return (
     <Wrapper display={display} backgroundColor={backgroundColor}>
       <a href="/">
-        <FairlineLogo />
+        <FairlineLogo></FairlineLogo>
       </a>
       <Nav>
         <HamburgerMenu
