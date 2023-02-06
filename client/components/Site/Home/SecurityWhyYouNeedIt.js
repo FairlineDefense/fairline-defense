@@ -70,13 +70,11 @@ export default function SecurityWhyYouNeedIt() {
       </Image>
       <Text>
         <header>Why do you need it?</header>
+        <p>After a self-defense situation, you need to protect yourself.</p>
         <p>
-        After a self-defense situation, you need to protect yourself.
-        </p>
-        <p>
-        You need an experienced lawyer immediately.
-        This situation is expensive and confusing.
-        Fairline Defense is here to step in immediately and protect you.
+          You need an experienced lawyer immediately. This situation is
+          expensive and confusing. Fairline Defense is here to step in
+          immediately and protect you.
         </p>
       </Text>
     </Section>

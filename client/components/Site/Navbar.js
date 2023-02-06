@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {useState} from 'react'
 
+
 const Wrapper = styled.div.attrs((props) => ({
   display: props.display || 'none',
   backgroundColor: props.backgroundColor || 'none',
@@ -175,7 +176,6 @@ const Navbar = ({shouldShowBackground}) => {
   }
 
   let [display, setDisplay] = useState('none')
-
   const navbarDefaultBackground = shouldShowBackground ? '#132A4A' : 'none'
   const [backgroundColor, setBackgroundColor] = useState(
     navbarDefaultBackground
@@ -188,7 +188,6 @@ const Navbar = ({shouldShowBackground}) => {
     }
   }
   window.addEventListener('scroll', changeNavbarColor)
-
   const citizenOrProfessional =
     window.location.pathname === '/armedprofessionals' ? (
       <a href="/">Armed Citizens</a>

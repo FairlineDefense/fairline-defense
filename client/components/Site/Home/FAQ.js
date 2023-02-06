@@ -46,38 +46,38 @@ const Text = styled.div`
   }
 `
 const Questions = styled.div`
-width: 50%;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-ul {
+  ul {
     width: 100%;
 
     li:last-child {
-        border-bottom: none;
+      border-bottom: none;
     }
-}
-ul li {
+  }
+  ul li {
     font-size: 20px;
     color: var(--darkblue);
     font-weight: 500;
-    padding: .75rem;
+    padding: 0.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--darkblue);
 
     img {
-        width: 25px;
-        height: 15px;
+      width: 25px;
+      height: 15px;
     }
-}
+  }
 
-@media(max-width: 800px) {
-  width: 100%;
-}
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `
 export default function FAQ() {
   return (
@@ -88,11 +88,21 @@ export default function FAQ() {
       </Text>
       <Questions>
         <ul>
-            <li>Why do I need this?<img src="./images/cyandownarrow.png" /></li>
-            <li>Why do I need this?<img src="./images/cyandownarrow.png" /></li>
-            <li>Why do I need this?<img src="./images/cyandownarrow.png" /></li>
-            <li>Why do I need this?<img src="./images/cyandownarrow.png" /></li>
-            <li>Why do I need this?<img src="./images/cyandownarrow.png" /></li>
+          <li>
+            Why do I need this?<img src="./images/cyandownarrow.png" />
+          </li>
+          <li>
+            Why do I need this?<img src="./images/cyandownarrow.png" />
+          </li>
+          <li>
+            Why do I need this?<img src="./images/cyandownarrow.png" />
+          </li>
+          <li>
+            Why do I need this?<img src="./images/cyandownarrow.png" />
+          </li>
+          <li>
+            Why do I need this?<img src="./images/cyandownarrow.png" />
+          </li>
         </ul>
       </Questions>
     </Section>

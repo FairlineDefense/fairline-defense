@@ -32,7 +32,7 @@ const Heading = styled.div`
   }
 `
 const StartButton = styled.div`
-  background-color: #FF1E3E;
+  background-color: #ff1e3e;
   color: #fff;
   border-radius: 40px;
   width: 280px;
@@ -46,7 +46,6 @@ const StartButton = styled.div`
   text-align: center;
 
   @media (max-width: 800px) {
-
   }
 `
 export default function JoinNow() {

@@ -102,15 +102,13 @@ const SubHeader = styled.div`
 `
 export default function HowItWorksSection() {
   return (
-      <Section id="howitworks">
-          <Header>How it Works</Header>
-          <SubHeader>
-              If anything happens defending your life.
-          </SubHeader>
-          <SubHeader>
-              Fairline Defense is here with a legal and support team.
-          </SubHeader>
-      </Section>
+    <Section id="howitworks">
+      <Header>How it Works</Header>
+      <SubHeader>If anything happens defending your life.</SubHeader>
+      <SubHeader>
+        Fairline Defense is here with a legal and support team.
+      </SubHeader>
+    </Section>
   )
   // return (
   //   <Section id="howitworks">

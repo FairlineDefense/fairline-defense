@@ -1,60 +1,61 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import css from './register.css'
+import css from '../register.css'
 import styled from 'styled-components'
 import {useState, useEffect} from 'react'
-import {useStripe, useElements} from '@stripe/react-stripe-js'
+import {useStripe} from '@stripe/react-stripe-js'
 import {Link} from 'react-router-dom'
 
 const Wrapper = styled.div`
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-text-align: center;
-padding-top: 4rem;
-position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 4rem;
+  position: relative;
 `
 const H1 = styled.h1`
-font-size: 30px;
-font-weight: 300;
-margin-bottom: 2rem;
-margin-top: 1rem;
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 `
 const Button = styled.button`
-background-color: var(--blue);
-color: #fff;
-border-radius: 40px;
-width: 340px;
-padding: 1rem 2rem 1rem 2rem;
-font-size: 20px;
-font-weight: 100;
-margin: 1rem;
-outline: none;
-border: none;
-cursor: pointer;
+  background-color: var(--blue);
+  color: #fff;
+  border-radius: 40px;
+  width: 340px;
+  padding: 1rem 2rem 1rem 2rem;
+  font-size: 20px;
+  font-weight: 100;
+  margin: 1rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
 
-&::disabled {
-  background-color: #2a4c78;
-}
+  &::disabled {
+    background-color: #2a4c78;
+  }
 `
-
 const Header = styled.div`
-font-size: 60px;
-line-height: 70px;
-font-weight: bold;
-text-align: center;
-color: #fff;
-width: 500px;
-margin-bottom: 3rem;
-`
+  font-size: 60px;
+  line-height: 70px;
+  font-weight: 500;
+  text-align: center;
+  color: #fff;
+  width: 500px;
+  margin-bottom: 3rem;
 
-const Shipping = () => {
-  const user = useSelector(state => state.user)
-  const dispatch = useDispatch()
+  @media (max-width: 800px) {
+    width: 100%;
+
+    font-size: 36px;
+    line-height: 48px;
+  }
+`
+const PaymentStatusMessage = () => {
   const stripe = useStripe()
-  const elements = useElements()
   const [message, setMessage] = useState(null)
 
   useEffect(
@@ -104,20 +105,20 @@ const Shipping = () => {
     [stripe]
   )
 
-  const clickHandler = e => {
-    e.preventDefault()
-  }
-
   return (
     <Wrapper>
-        {message === 'Payment is Successful!' ? (<img src="./images/bluecheck.png" />) : null }
+      {message === 'Payment is Successful!' ? (
+        <img src="./images/bluecheck.png" />
+      ) : null}
 
       <H1>{message}</H1>
       <Link to="/home">
-        {message === 'Payment is Successful!' ? (<Header>Welcome to the Fairline Family</Header>) : null }
+        {message === 'Payment is Successful!' ? (
+          <Header>Welcome to the Fairline Family</Header>
+        ) : null}
         <Button>View my Membership</Button>
       </Link>
     </Wrapper>
   )
 }
-export default Shipping
+export default PaymentStatusMessage

@@ -47,7 +47,7 @@ const SubHeading = styled.div`
 `
 const StartButton = styled.div`
   background-color: var(--hotred);
-  opacity: .9;
+  opacity: 0.9;
   color: #fff;
   border-radius: 40px;
   width: 280px;

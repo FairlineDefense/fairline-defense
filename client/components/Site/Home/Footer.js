@@ -74,15 +74,15 @@ const Phone = styled.span`
   color: #ffd600;
 `
 const Copyright = styled.div`
-width: 100%;
-height: 120px;
-display: flex;
-justify-content: center;
-align-items: flex-start;
-padding: 2rem;
-background-color: var(--darkblue);
-color: #fff;
-font-size: 15px;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  background-color: var(--darkblue);
+  color: #fff;
+  font-size: 15px;
 `
 export default function Footer() {
   return (

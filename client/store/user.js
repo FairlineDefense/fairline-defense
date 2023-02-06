@@ -53,6 +53,7 @@ export const signup = (
 
   try {
     dispatch(getUser(res.data))
+    console.log('res.data get user', res)
     history.push('/verifyemail')
   } catch (dispatchOrHistoryErr) {
     dispatch(getUser(dispatchOrHistoryErr))

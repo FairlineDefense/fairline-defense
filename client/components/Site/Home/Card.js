@@ -9,7 +9,7 @@ const Section = styled.div`
   padding: 2rem;
   align-items: center;
   padding: 2rem 4rem 2rem 4rem;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 
   @media (max-width: 800px) {
     min-height: 300px;
@@ -69,9 +69,10 @@ const CardImage = styled.div`
 
   @media (max-width: 800px) {
     padding: 0rem;
-    img {max-width: 350px;
+    img {
+      max-width: 350px;
+    }
   }
-}
 `
 export default function Card() {
   return (

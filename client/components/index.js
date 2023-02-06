@@ -10,11 +10,13 @@ export {default as Footer} from './Site/Home/Footer'
 
 // Register
 export {default as Signup} from './Register/Signup'
-export {default as ChoosePlan} from './Register/ChoosePlan'
-export {default as ChooseProtection} from './Register/ChooseProtection'
-export {default as Payment} from './Register/Payment'
-export {default as Shipping} from './Register/Shipping'
-export {default as PaymentStatus} from './Register/PaymentStatus'
+export {default as Checkout} from './Register/Checkout/Checkout'
+export {default as ChoosePlan} from './Register/Checkout/ChoosePlan'
+export {default as ChooseProtection} from './Register/Checkout/ChooseProtection'
+export {
+  default as PaymentStatusMessage
+} from './Register/Checkout/PaymentStatusMessage'
+export {default as PaymentStatus} from './Register/Checkout/PaymentStatus'
 export {default as VerifyEmail} from './Register/VerifyEmail'
 export {default as VerifyPhone} from './Register/VerifyPhone'
 export {default as RegisterHeader} from './Register/RegisterHeader'

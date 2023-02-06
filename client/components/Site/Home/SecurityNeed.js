@@ -28,7 +28,7 @@ const Image = styled.div`
   background-position: center;
   border-radius: 20px;
 
-  @media(max-width: 800px) {
+  @media (max-width: 800px) {
     border-radius: 0px;
     background-size: cover;
     background-position: 70% bottom;
@@ -36,38 +36,37 @@ const Image = styled.div`
 `
 
 const TextRight = styled.div`
-width: 300px;
-text-align: right;
-margin-right: 9rem;
+  width: 300px;
+  text-align: right;
+  margin-right: 9rem;
 
-header {
-    color: #FFF;
+  header {
+    color: #fff;
     font-weight: 500;
     font-size: 48px;
     line-height: 48px;
     margin-bottom: 1.5rem;
-}
-
-@media(max-width: 800px) {
-  width: 100%;
-  height: 190px;
-  margin-right: 0rem;
-  margin-top: 6rem;
-  text-align: center;
-
-  header {
-    
   }
-   }
+
+  @media (max-width: 800px) {
+    width: 100%;
+    height: 190px;
+    margin-right: 0rem;
+    margin-top: 6rem;
+    text-align: center;
+
+    header {
+    }
+  }
 `
 export default function SecurityNeed() {
   return (
     <Section>
-        <Image>
+      <Image>
         <TextRight>
-        <header>You need experienced teams to protect you</header>
-      </TextRight>
-        </Image>
+          <header>You need experienced teams to protect you</header>
+        </TextRight>
+      </Image>
     </Section>
   )
 }

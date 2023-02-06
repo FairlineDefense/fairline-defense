@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import Navbar from './Navbar'
 import ReferAFriend from './ReferAFriend'
 import Card from './Card'
-import {VerifyEmail, VerifyPhone, ChooseProtection, Footer} from '../'
+import {VerifyEmail, Checkout, Footer} from '../'
 import PlanStatus from './PlanStatus'
 import styled from 'styled-components'
 import {useEffect, useState} from 'react'
@@ -14,6 +14,37 @@ import {ThemeProvider} from '@material-ui/core'
 import theme from '../theme'
 
 import RegisterHeader from '../Register/RegisterHeader'
+
+const Gradient = styled.div`
+width: 100vw;
+min-height: 100vh;
+background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
+color: #fff;
+overflow-x: hidden;
+
+a {
+  color: var(--blue);
+}
+
+a:visited {
+  color: var(--blue);
+}
+
+a:hover {
+  color: var(--blue);
+}
+`
+const BackgroundImage = styled.div`
+height: 100%;
+width: 100%;
+background-image: url('./images/background.png');
+background-repeat: no-repeat;
+background-position: -120px -100px;
+
+@media (max-width: 800px) {
+background-image: none;
+}
+`
 const Wrapper = styled.div`
   width: 100vw;
   padding: 2rem;
@@ -109,29 +140,24 @@ const UserHome = () => {
 
   if (!loaded) {
     return (
-      <div className="auth">
-        <svg className="logo" />
-        <svg className="logo" />
-        <svg className="logo" />
+     <Gradient>
+      <BackgroundImage>
         <RegisterHeader />
         <CenteredWrapper>
           <ThemeProvider theme={theme}>
             <CircularProgress color={theme.palette.primary.main} />
           </ThemeProvider>
         </CenteredWrapper>
-      </div>
+        </BackgroundImage>
+      </Gradient>
     )
   }
   if (!user.emailVerified) {
     return <VerifyEmail />
   }
 
-  // if (!user.phoneVerified) {
-  //   return <VerifyPhone />
-  // }
-
   if (!user.planActive) {
-    return <ChooseProtection />
+    return <Checkout />
   }
   return (
     <>

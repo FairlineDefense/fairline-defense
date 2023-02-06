@@ -5,6 +5,37 @@ import history from '../../history'
 import RegisterHeader from './RegisterHeader'
 import {useEffect} from 'react'
 import {Link} from 'react-router-dom'
+
+const Gradient = styled.div`
+width: 100vw;
+min-height: 100vh;
+background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
+color: #fff;
+overflow-x: hidden;
+
+a {
+  color: var(--blue);
+}
+
+a:visited {
+  color: var(--blue);
+}
+
+a:hover {
+  color: var(--blue);
+}
+`
+const BackgroundImage = styled.div`
+height: 100%;
+width: 100%;
+background-image: url('./images/background.png');
+background-repeat: no-repeat;
+background-position: -120px -100px;
+
+@media (max-width: 800px) {
+background-image: none;
+}
+`
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -62,11 +93,8 @@ const Button = styled.button`
 const VerifiedEmail = () => {
   console.log(document.referrer)
   return (
-    <div className="auth">
-      <svg className="logo" />
-      <svg className="logo" />
-      <svg className="logo" />
-      <RegisterHeader />
+   <Gradient>
+    <BackgroundImage>
       <Wrapper>
         <CenteredWrapper>
           <SubHeading>
@@ -92,7 +120,8 @@ const VerifiedEmail = () => {
           </Link>
         </CenteredWrapper>
       </Wrapper>
-    </div>
+    </BackgroundImage>
+    </Gradient>
   )
 }
 export default VerifiedEmail
