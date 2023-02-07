@@ -8,6 +8,7 @@ import {
   SiteHome,
   Testimonials,
   TermsOfService,
+  ContactUs,
   Coverages,
   HowItWorks,
   Membership,
@@ -24,8 +25,8 @@ import {me} from './store'
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
-const Routes = props => {
-  const user = useSelector(state => state.user)
+const Routes = (props) => {
+  const user = useSelector((state) => state.user)
   const isLoggedIn = user.id
 
   const dispatch = useDispatch()
@@ -46,6 +47,7 @@ const Routes = props => {
             <Route exact path="/testimonials" component={Testimonials} />
             <Route exact path="/termsofservice" component={TermsOfService} />
             <Route exact path="/privacypolicy" component={TermsOfService} />
+            <Route exact path="/contactus" component={ContactUs} />
             <Route path="/home" component={UserHome} />
             <Route path="/membership" component={Membership} />
             <Route path="/benefits" component={Benefits} />
@@ -67,6 +69,7 @@ const Routes = props => {
             <Route exact path="/testimonials" component={Testimonials} />
             <Route exact path="/termsofservice" component={TermsOfService} />
             <Route exact path="/privacypolicy" component={TermsOfService} />
+            <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/success" component={VerifiedEmail} />

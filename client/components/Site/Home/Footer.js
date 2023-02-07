@@ -74,60 +74,61 @@ const Phone = styled.span`
   color: #ffd600;
 `
 const Copyright = styled.div`
-width: 100%;
-height: 120px;
-display: flex;
-justify-content: center;
-align-items: flex-start;
-padding: 2rem;
-background-color: var(--darkblue);
-color: #fff;
-font-size: 15px;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  background-color: var(--darkblue);
+  color: #fff;
+  font-size: 15px;
 `
 export default function Footer() {
   return (
     <>
-    <Section>
-      <Logo>
-        <img src="./images/fdlogo.png" />
-      </Logo>
-      <Links>
-        <header>Quick Links</header>
-        <ul>
-          <li>
-            <a href="/armedprofessionals">Armed Professionals</a>
-          </li>
-          <li>
-            <a href="#">Testimonials</a>
-          </li>
-          <li>
-            <a href="/termsofservice">Terms of Service</a>
-          </li>
-          <li>
-            <a href="/privacypolicy">Privacy Policy</a>
-          </li>
-        </ul>
-      </Links>
-      <Support>
-        <header>Support</header>
-        <ul>
-          <li>
-            <Phone>1-833-201-1463</Phone>
-          </li>
-          <li>
-            <Link to="#">Email or Chat with us</Link>
-          </li>
-          <li>
-            <Link to="#">FAQs & Questions</Link>
-          </li>
-        </ul>
-      </Support>
-    </Section>
-    <Copyright>
-      <span>
-    Ⓒ 2023, Fairline Defense LLC, All Rights Reserved.
-      </span>
-    </Copyright>
+      <Section>
+        <Logo>
+          <img src="./images/fdlogo.png" />
+        </Logo>
+        <Links>
+          <header>Quick Links</header>
+          <ul>
+            <li>
+              <a href="/armedprofessionals">Armed Professionals</a>
+            </li>
+            <li>
+              <a href="#">Testimonials</a>
+            </li>
+            <li>
+              <a href="/termsofservice">Terms of Service</a>
+            </li>
+            <li>
+              <a href="/privacypolicy">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="/contactus">Contact Us</a>
+            </li>
+          </ul>
+        </Links>
+        <Support>
+          <header>Support</header>
+          <ul>
+            <li>
+              <Phone>1-833-201-1463</Phone>
+            </li>
+            <li>
+              <Link to="#">Email or Chat with us</Link>
+            </li>
+            <li>
+              <Link to="#">FAQs & Questions</Link>
+            </li>
+          </ul>
+        </Support>
+      </Section>
+      <Copyright>
+        <span>Ⓒ 2023, Fairline Defense LLC, All Rights Reserved.</span>
+      </Copyright>
     </>
   )
 }
