@@ -220,7 +220,7 @@ const ContactUs = () => {
               value={form.email}
               variant="filled"
               required
-              error={invalidation.email ? true : false}
+              error={invalidation.email}
             />
           </NameAndEmailContainer>
           <FDTextField
