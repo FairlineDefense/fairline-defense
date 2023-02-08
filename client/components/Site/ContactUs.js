@@ -165,7 +165,6 @@ const ContactUs = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    console.log('hi')
 
     function validateEmail() {
       let res = true
