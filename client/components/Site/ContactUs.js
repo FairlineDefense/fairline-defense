@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
+import emailjs from '@emailjs/browser'
 import styled from 'styled-components'
 
 import Navbar from './Navbar'
@@ -35,7 +36,7 @@ const ContactFairlineSection = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 3rem 1rem 4rem;
   background: rgba(196, 196, 196, 0.25);
 
   h1 {
@@ -47,7 +48,7 @@ const ContactFairlineSection = styled.div`
   }
 `
 
-const FormContainer = styled.div`
+const ContactForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,13 +91,13 @@ const NameAndEmailContainer = styled.div`
   }
 `
 
-const SendMessageButton = styled.div`
+const SendMessageButton = styled.button`
   display: flex;
   background-color: var(--cyan);
   color: #fff;
   border-radius: 20px;
-  width: fit-content;
-  padding: 0.2rem 1rem 0.4rem 1rem;
+  width: 40%;
+  padding: 0.5rem 1rem;
   font-size: 16px;
   font-weight: 400;
   outline: none;
@@ -105,10 +106,84 @@ const SendMessageButton = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
-  margin-bottom: 3rem;
+  margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 const ContactUs = () => {
+  const formRef = useRef()
+
+  const [form, setForm] = useState({
+    fullName: '',
+    email: '',
+    subject: '',
+    message: '',
+  })
+  const [isSubmitted, setSubmitted] = useState(false)
+  let [invalidation, setInvalidation] = useState({
+    fullName: false,
+    email: false,
+    subject: false,
+    message: false,
+  })
+
+  const handleChange = (e) => {
+    if (isSubmitted) {
+      setSubmitted(false)
+    }
+    setInvalidation({...invalidation, [e.target.name]: false})
+    setForm({...form, [e.target.name]: e.target.value})
+  }
+
+  const sendEmail = () => {
+    emailjs
+      .sendForm(
+        'service_z9fptlx',
+        'template_s5fzwk1',
+        formRef.current,
+        '_aXICqV2wDs06SAdU'
+      )
+      .then(
+        (result) => {
+          console.log(result.text)
+          setSubmitted(true)
+          setForm({
+            fullName: '',
+            email: '',
+            subject: '',
+            message: '',
+          })
+        },
+        (error) => {
+          console.log(error.text)
+        }
+      )
+  }
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault()
+
+    function validateEmail() {
+      let res = true
+      if (
+        !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          form.email
+        )
+      ) {
+        setInvalidation({...invalidation, email: true})
+        res = false
+      }
+      return res
+    }
+
+    if (validateEmail()) {
+      sendEmail(evt)
+    }
+  }
+
   return (
     <>
       <Navbar shouldShowBackground />
@@ -118,7 +193,7 @@ const ContactUs = () => {
       </HereToHelpSection>
       <ContactFairlineSection>
         <Header>Contact Fairline Defense</Header>
-        <FormContainer>
+        <ContactForm ref={formRef} onSubmit={handleSubmit} name="contact">
           <p>
             Fairline Defense team is here to connect and answer any questions.
           </p>
@@ -131,22 +206,21 @@ const ContactUs = () => {
               name="fullName"
               variant="filled"
               type="text"
-              // onChange={(e) => changeHandler(e)}
-              // value={form.firstName}
+              onChange={handleChange}
+              value={form.fullName}
               required
             />
             <FDTextField
               fullWidth
-              label="Email"
-              // label={invalidation.email ? 'Invalid email address' : 'Email'}
+              label={invalidation.email ? 'Invalid email address' : 'Email'}
               name="email"
               placeholder="Contact Email"
               type="text"
-              // onChange={(e) => changeHandler(e)}
-              // value={form.email}
+              onChange={handleChange}
+              value={form.email}
               variant="filled"
               required
-              // error={invalidation.email ? true : false}
+              error={invalidation.email}
             />
           </NameAndEmailContainer>
           <FDTextField
@@ -156,8 +230,8 @@ const ContactUs = () => {
             name="subject"
             variant="filled"
             type="text"
-            // onChange={(e) => changeHandler(e)}
-            // value={form.firstName}
+            onChange={handleChange}
+            value={form.subject}
             style={{margin: 8}}
             required
           />
@@ -168,15 +242,19 @@ const ContactUs = () => {
             name="message"
             variant="filled"
             type="text"
-            // onChange={(e) => changeHandler(e)}
-            // value={form.firstName}
+            onChange={handleChange}
+            value={form.message}
             style={{margin: 8}}
             multiline
             minRows={8}
             required
           />
-        </FormContainer>
-        <SendMessageButton>Send Message</SendMessageButton>
+          {!isSubmitted ? (
+            <SendMessageButton type="submit">Send Message</SendMessageButton>
+          ) : (
+            <h3>Message sent!</h3>
+          )}
+        </ContactForm>
       </ContactFairlineSection>
       <Footer />
     </>
