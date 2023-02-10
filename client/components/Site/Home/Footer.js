@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+
 const Section = styled.div`
   height: 280px;
   padding: 4rem;
@@ -9,6 +10,11 @@ const Section = styled.div`
   justify-content: space-between;
   color: #fff;
   background-color: var(--darkblue);
+
+  @media (max-width: 800px) {
+    height: 100%;
+    flex-direction: column;
+  }
 `
 const Logo = styled.div`
   width: 25%;
@@ -25,8 +31,29 @@ const Logo = styled.div`
     width: 100%;
   }
 `
-const Links = styled.div`
-  width: 50%;
+const LinksWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-left: 2rem;
+
+  > :first-child {
+    margin-right: 3rem;
+  }
+
+  @media (max-width: 800px) {
+    margin-left: 0;
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    flex-direction: column;
+
+    > :first-child {
+      display: none;
+    }
+  }
+`
+
+const LinkGroup = styled.div`
   display: flex;
   flex-direction: column;
   header {
@@ -42,9 +69,6 @@ const Links = styled.div`
   }
   a {
     color: #fff;
-  }
-  @media (max-width: 800px) {
-    display: none;
   }
 `
 const Support = styled.div`
@@ -66,7 +90,7 @@ const Support = styled.div`
     color: #fff;
   }
   @media (max-width: 800px) {
-    display: none;
+    width: 100%;
   }
 `
 const Phone = styled.span`
@@ -83,6 +107,10 @@ const Copyright = styled.div`
   background-color: var(--darkblue);
   color: #fff;
   font-size: 15px;
+
+  @media (max-width: 800px) {
+    text-align: center;
+  }
 `
 export default function Footer() {
   return (
@@ -91,26 +119,39 @@ export default function Footer() {
         <Logo>
           <img src="./images/fdlogo.png" />
         </Logo>
-        <Links>
-          <header>Quick Links</header>
-          <ul>
-            <li>
-              <a href="/armedprofessionals">Armed Professionals</a>
-            </li>
-            <li>
-              <a href="#">Testimonials</a>
-            </li>
-            <li>
-              <a href="/termsofservice">Terms of Service</a>
-            </li>
-            <li>
-              <a href="/privacypolicy">Privacy Policy</a>
-            </li>
-            <li>
-              <a href="/contactus">Contact Us</a>
-            </li>
-          </ul>
-        </Links>
+        <LinksWrapper>
+          <LinkGroup>
+            <header>About</header>
+            <ul>
+              <li>
+                <a href="#">Our Story</a>
+              </li>
+              <li>
+                <a href="#">Testimonials</a>
+              </li>
+              <li>
+                <a href="#">Fairline Defense Reviews</a>
+              </li>
+              <li>
+                <a href="#">FAQs</a>
+              </li>
+            </ul>
+          </LinkGroup>
+          <LinkGroup>
+            <header>Quick Links</header>
+            <ul>
+              <li>
+                <a href="#">Armed Citizen</a>
+              </li>
+              <li>
+                <a href="/armedprofessionals">Armed Professional</a>
+              </li>
+              <li>
+                <a href="#">Reviews & Testimonials</a>
+              </li>
+            </ul>
+          </LinkGroup>
+        </LinksWrapper>
         <Support>
           <header>Support</header>
           <ul>
@@ -118,10 +159,7 @@ export default function Footer() {
               <Phone>1-833-201-1463</Phone>
             </li>
             <li>
-              <Link to="#">Email or Chat with us</Link>
-            </li>
-            <li>
-              <Link to="#">FAQs & Questions</Link>
+              <Link to="/contactus">Email Us</Link>
             </li>
           </ul>
         </Support>
