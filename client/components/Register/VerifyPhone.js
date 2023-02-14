@@ -143,7 +143,7 @@ const VerifyPhone = () => {
 
   let [code, setCode] = useState('')
   let [loader, setLoader] = useState(false)
-  let [incorrect, setIncorrect] = useState(false)
+  let [incorrect, setIncorrect] = useState('verify your phone number')
 
   const clickHandler = async e => {
     e.preventDefault()
@@ -172,22 +172,38 @@ const VerifyPhone = () => {
     }, 2000)
   }
 
-  const sendText = async () => {
-    if (user.id) {
-      await fetch('klaviyo/verify-phone', {
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: user.email, phone: user.phone})
-      }).catch(error => console.log(error))
+  async function sendOtp() {
+    try {
+      const response = await fetch("twilio/verify-phone", {
+        method: "POST",
+        body: {phone: user.phone},
+      });
+
+      const json = await response.json();
+
+      if (response.status == 429) {
+        setIncorrect(
+          `You have attempted to verify '${user.phone}' too many times. If you received a code, enter it in the form. Otherwise, please wait 10 minutes and try again.`,
+        );
+      } else if (response.status >= 400) {
+        setIncorrect(json.error);
+      } else {
+        if (json.success) {
+          setIncorrect(`Sent verification code to ${to}`);
+        } else {
+          showError(json.error);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      setIncorrect(`Something went wrong while sending code to ${user.phone}.`);
     }
   }
 
+
   useEffect(() => {
     try {
-      sendText()
+      sendOtp()
     } catch (error) {
       console.log(error)
     }
@@ -195,11 +211,11 @@ const VerifyPhone = () => {
 
   const resend = e => {
     e.preventDefault()
-    sendText()
+    sendOtp()
     setLoader(true)
     setTimeout(() => {
       setLoader(false)
-      setIncorrect(false)
+      setIncorrect('Verify your phone number')
     }, 2000)
   }
 
@@ -260,9 +276,7 @@ const VerifyPhone = () => {
         </Form>
         <CenteredWrapper>
           <SubHeading>
-            {incorrect
-              ? 'That code was incorrect. Please try again or send a new code.'
-              : 'Please enter the verification code received by SMS.'}
+            {incorrect}
           </SubHeading>
           <Button onClick={e => clickHandler(e)}>Continue</Button>
         </CenteredWrapper>
