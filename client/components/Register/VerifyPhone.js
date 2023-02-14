@@ -143,31 +143,31 @@ const VerifyPhone = () => {
 
   let [code, setCode] = useState('')
   let [loader, setLoader] = useState(false)
-  let [incorrect, setIncorrect] = useState('verify your phone number')
+  let [text, setText] = useState(``)
 
   const clickHandler = async e => {
     e.preventDefault()
 
     setLoader(true)
 
-    const verifyCode = await fetch('klaviyo/phone-code', {
+    const verifyCode = await fetch('twilio/phone-code', {
       method: 'POST',
       headers: {
         accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({code: code})
+      body: JSON.stringify({code: code, phone: user.phone})
     })
     const res = verifyCode
 
     setTimeout(() => {
       setLoader(false)
 
-      if (res.status === 200) {
+      if (res.success === true) {
         history.push('/home')
       }
-      if (res.status === 403) {
-        setIncorrect(true)
+      if (res.success === false) {
+        setText(res.error)
       }
     }, 2000)
   }
@@ -180,23 +180,23 @@ const VerifyPhone = () => {
       });
 
       const json = await response.json();
-
+      console.log(json)
       if (response.status == 429) {
-        setIncorrect(
-          `You have attempted to verify '${user.phone}' too many times. If you received a code, enter it in the form. Otherwise, please wait 10 minutes and try again.`,
+        setText(
+          `You have attempted to verify '${user.phone}' too many times. Please wait 10 minutes and try again.`,
         );
       } else if (response.status >= 400) {
-        setIncorrect(json.error);
+        setText(json.error);
       } else {
         if (json.success) {
-          setIncorrect(`Sent verification code to ${to}`);
+          setText(`Sent verification code to ${to}`);
         } else {
           showError(json.error);
         }
       }
     } catch (error) {
       console.error(error);
-      setIncorrect(`Something went wrong while sending code to ${user.phone}.`);
+      setText(`Something went wrong while sending code to ${user.phone}.`);
     }
   }
 
@@ -215,7 +215,7 @@ const VerifyPhone = () => {
     setLoader(true)
     setTimeout(() => {
       setLoader(false)
-      setIncorrect('Verify your phone number')
+      setText('Verify your phone number')
     }, 2000)
   }
 
@@ -276,7 +276,7 @@ const VerifyPhone = () => {
         </Form>
         <CenteredWrapper>
           <SubHeading>
-            {incorrect}
+            {text}
           </SubHeading>
           <Button onClick={e => clickHandler(e)}>Continue</Button>
         </CenteredWrapper>

@@ -12,50 +12,51 @@ const client = require("twilio")(accountSid, authToken);
 module.exports = router
 
 router.post('/verify-phone', async (req, res, next) => {
+    const response = {}
+    response.header = {'Content-Type': 'application/json'};
+    try {
     client.verify.v2
     .services(verifySid)
     .verifications.create({ to: "+16313038236", channel: "sms" })
     .then((verification) => console.log(verification.status))
 
-    res.status(200).send()
+    response.statusCode(200);
+    response.body({ success: true });
+    console.log('response', response)
+    res.send(response)
+}
+    catch(error) {
+        const statusCode = error.status || 400;
+        response.statusCode = statusCode;
+        response.body = {
+          success: false,
+          error: error.message,
+        }
+    }
 })
 
-// router.post('/phone-code', async (req, res, next) => {
-//   try {
-//     const user = await User.findOne({where: {email: req.user.email}})
+router.post('/phone-code', async (req, res, next) => {
+    const response = {}
+    response.header = {'Content-Type': 'application/json'};
+    const user = await User.findOne({where: {email: req.user.email}})
+  try {
+    client.verify.v2.services(process.env.VERIFY_SID)
+      .verificationChecks
+      .create({to: '+16313038236', code: req.body.code})
+      .then(verification_check => console.log(verification_check.status));
 
-//     const client = context.getTwilioClient();
-//     const service = context.VERIFY_SERVICE_SID;
-//     const { to } = event;
-//     const channel =
-//       typeof event.channel === 'undefined' ? 'sms' : event.channel;
-//     const locale = typeof event.locale === 'undefined' ? 'en' : event.locale;
-
-//     const verification = await client.verify
-//       .services(service)
-//       .verifications.create({
-//         to,
-//         channel,
-//         locale,
-//       });
-
-//     console.log(`Sent verification: '${verification.sid}'`);
-//     response.setStatusCode(200);
-//     response.setBody({ success: true });
-//     return callback(null, response);
-//   } catch (error) {
-//     const statusCode = error.status || 400;
-//     response.setStatusCode(statusCode);
-//     response.setBody({
-//       success: false,
-//       error: error.message,
-//     });
-//     return callback(null, response);
-//   }
-// };
-
-//       return res.status(403).send()
-//   } catch (error) {
-//     console.log(error)
-//   }
-// })
+      response.statusCode(200);
+      response.body({ success: true });
+      await user.update({phoneVerified: true})
+      res.send(response)
+  }
+  catch(error) {
+    console.log(error)
+    const statusCode = error.status || 400;
+    response.statusCode = statusCode;
+    response.body = {
+      success: false,
+      error: error.message,
+    }
+    }
+})
