@@ -11,19 +11,19 @@ const client = require("twilio")(accountSid, authToken);
 
 module.exports = router
 
-router.post('/verify-phone', async (req, res, next) => {
+router.post('/start-verify', async (req, res, next) => {
     const response = {}
-    response.header = {'Content-Type': 'application/json'};
+    console.log('req.user.phone', req.user.phone)
+    response.headers = {'Content-Type': 'application/json'};
     try {
     client.verify.v2
     .services(verifySid)
-    .verifications.create({ to: "+16313038236", channel: "sms" })
+    .verifications.create({ to: req.user.phone, channel: "sms" })
     .then((verification) => console.log(verification.status))
 
-    response.statusCode(200);
-    response.body({ success: true });
-    console.log('response', response)
-    res.send(response)
+    response.statusCode = 200;
+    response.body = { success: true };
+    return res.send(response)
 }
     catch(error) {
         const statusCode = error.status || 400;
@@ -35,28 +35,24 @@ router.post('/verify-phone', async (req, res, next) => {
     }
 })
 
-router.post('/phone-code', async (req, res, next) => {
-    const response = {}
-    response.header = {'Content-Type': 'application/json'};
-    const user = await User.findOne({where: {email: req.user.email}})
+router.post('/check-verify', async (req, res, next) => {
+  const user = await User.findOne({where: {email: req.user.email}})
   try {
-    client.verify.v2.services(process.env.VERIFY_SID)
+      client.verify.v2.services(process.env.VERIFY_SID)
       .verificationChecks
-      .create({to: '+16313038236', code: req.body.code})
-      .then(verification_check => console.log(verification_check.status));
-
-      response.statusCode(200);
-      response.body({ success: true });
-      await user.update({phoneVerified: true})
-      res.send(response)
+      .create({to: req.user.phone, code: req.body.code})
+      .then(verification_check => {
+         const status = verification_check.status
+         console.log('STATUS FROM TWILIO RES:', status)
+         if (verification_check.status = 'approved'){
+         user.update({phoneVerified: true})
+         }
+         return res.send({status: verification_check.status})
+        });
   }
   catch(error) {
     console.log(error)
     const statusCode = error.status || 400;
-    response.statusCode = statusCode;
-    response.body = {
-      success: false,
-      error: error.message,
-    }
+    return res.status(statusCode).send()
     }
 })

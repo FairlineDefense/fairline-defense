@@ -152,7 +152,7 @@ const UserHome = () => {
       </Gradient>
     )
   }
-  if (!user.emailVerified) {
+  if (!user.phoneVerified) {
     return <VerifyPhone />
   }
 

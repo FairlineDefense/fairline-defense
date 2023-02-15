@@ -143,44 +143,17 @@ const VerifyPhone = () => {
 
   let [code, setCode] = useState('')
   let [loader, setLoader] = useState(false)
-  let [text, setText] = useState(``)
+  let [text, setText] = useState('Please enter the code we sent to your phone.')
 
-  const clickHandler = async e => {
-    e.preventDefault()
-
-    setLoader(true)
-
-    const verifyCode = await fetch('twilio/phone-code', {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({code: code, phone: user.phone})
-    })
-    const res = verifyCode
-
-    setTimeout(() => {
-      setLoader(false)
-
-      if (res.success === true) {
-        history.push('/home')
-      }
-      if (res.success === false) {
-        setText(res.error)
-      }
-    }, 2000)
-  }
-
+  //Send One Time Password
   async function sendOtp() {
     try {
-      const response = await fetch("twilio/verify-phone", {
+      const response = await fetch("twilio/start-verify", {
         method: "POST",
         body: {phone: user.phone},
       });
 
       const json = await response.json();
-      console.log(json)
       if (response.status == 429) {
         setText(
           `You have attempted to verify '${user.phone}' too many times. Please wait 10 minutes and try again.`,
@@ -191,13 +164,42 @@ const VerifyPhone = () => {
         if (json.success) {
           setText(`Sent verification code to ${to}`);
         } else {
-          showError(json.error);
+          console.log(json.error);
         }
       }
     } catch (error) {
       console.error(error);
       setText(`Something went wrong while sending code to ${user.phone}.`);
     }
+  }
+
+  const clickHandler = async e => {
+    e.preventDefault()
+
+    setLoader(true)
+
+    //Check user entered One Time Password
+    const checkVerify = await fetch('twilio/check-verify', {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({code: code, phone: user.phone})
+    }).then(res => res.json())
+
+    console.log('checkVerify:', checkVerify)
+
+    setTimeout(() => {
+      setLoader(false)
+
+      if (checkVerify.status === 'approved') {
+        history.push('/home')
+      }
+      if (checkVerify.status === 'pending') {
+        setText('Invalid code. Please try again.')
+      }
+    }, 2000)
   }
 
 
@@ -254,10 +256,8 @@ const VerifyPhone = () => {
     )
   }
   return (
-    <div className="auth">
-      <svg className="logo" />
-      <svg className="logo" />
-      <svg className="logo" />
+    <Gradient>
+      <BackgroundImage>
       <RegisterHeader />
       <Wrapper>
         <Heading>Verify your phone</Heading>
@@ -291,7 +291,8 @@ const VerifyPhone = () => {
           <span>Edit Phone Number</span>
         </BottomWrapper>
       </Wrapper>
-    </div>
+      </BackgroundImage>
+      </Gradient>
   )
 }
 export default VerifyPhone
