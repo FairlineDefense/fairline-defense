@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import Navbar from './Navbar'
 import ReferAFriend from './ReferAFriend'
 import Card from './Card'
-import {VerifyEmail, VerifyPhone, Checkout, Footer} from '../'
+import {VerifyEmail, Checkout, Footer} from '../'
 import PlanStatus from './PlanStatus'
 import styled from 'styled-components'
 import {useEffect, useState} from 'react'
@@ -152,8 +152,8 @@ const UserHome = () => {
       </Gradient>
     )
   }
-  if (!user.phoneVerified) {
-    return <VerifyPhone />
+  if (!user.emailVerified) {
+    return <VerifyEmail />
   }
 
   if (!user.planActive) {
