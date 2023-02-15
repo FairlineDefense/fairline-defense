@@ -47,7 +47,7 @@ router.post('/check-verify', async (req, res, next) => {
          if (verification_check.status = 'approved'){
          user.update({phoneVerified: true})
          }
-         return res.send({status: verification_check.status})
+         return res.send({status: status})
         });
   }
   catch(error) {

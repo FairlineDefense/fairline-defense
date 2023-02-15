@@ -143,7 +143,7 @@ const VerifyPhone = () => {
 
   let [code, setCode] = useState('')
   let [loader, setLoader] = useState(false)
-  let [text, setText] = useState('Please enter the code we sent to your phone.')
+  let [text, setText] = useState('Please enter the verification code received by SMS.')
 
   //Send One Time Password
   async function sendOtp() {
@@ -162,7 +162,7 @@ const VerifyPhone = () => {
         setText(json.error);
       } else {
         if (json.success) {
-          setText(`Sent verification code to ${to}`);
+          setText(`Sent verification code to ${user.phone}`);
         } else {
           console.log(json.error);
         }
@@ -194,6 +194,7 @@ const VerifyPhone = () => {
       setLoader(false)
 
       if (checkVerify.status === 'approved') {
+        setText('Phone number verified.')
         history.push('/home')
       }
       if (checkVerify.status === 'pending') {
@@ -217,7 +218,7 @@ const VerifyPhone = () => {
     setLoader(true)
     setTimeout(() => {
       setLoader(false)
-      setText('Verify your phone number')
+      setText('Please enter the verification code received by SMS.')
     }, 2000)
   }
 
