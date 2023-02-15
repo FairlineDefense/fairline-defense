@@ -1,6 +1,3 @@
-// Download the helper library from https://www.twilio.com/docs/node/install
-// Set environment variables for your credentials
-// Read more at http://twil.io/secure
 const router = require('express').Router()
 const {User} = require('../db/models')
 require('dotenv').config()
@@ -13,7 +10,6 @@ module.exports = router
 
 router.post('/start-verify', async (req, res, next) => {
     const response = {}
-    console.log('req.user.phone', req.user.phone)
     response.headers = {'Content-Type': 'application/json'};
     try {
     client.verify.v2
