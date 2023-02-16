@@ -28,27 +28,27 @@ passport.serializeUser((user, done) => done(null, user.id))
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findOne({where: {id: id}, include: {model: Order}})
-    const data = JSON.stringify(user, 2, null)
-    let obj = JSON.parse(data)
+    const user = await User.findOne({where: {id: id}})
+
+    const subscription = await stripe.subscriptions.retrieve(
+      /* User's subscription id in the Orders database. Should just attach to their user database upon creation */
+    );
+    
     const getStatus = async () => {
-      const date = Date.now() / 1000
-      const orders = obj.orders
-      for (let i = 0; i < orders.length; i++) {
-        const startDate = orders[i].periodStart
-        const endDate = orders[i].periodEnd
-        if (startDate < date) {
-          if (endDate > date) {
-            if (orders[i].status === 'actionRequired') {
+        const date = Date.now() / 1000
+        const startDate = subscription.periodStart
+        const endDate = subscription.periodEnd
+
+            if (subscription.status === 'actionRequired') {
               obj.status = 'actionRequired'
             }
-            if (orders[i].status === 'paid') {
+            if (subscription.status === 'paid') {
               obj.status = 'paid'
             }
-            if (orders[i].status === 'cancelled') {
+            if (subscription.status === 'cancelled') {
               obj.status = 'cancelled'
             }
-            if (orders[i].status === 'incomplete') {
+            if (subscription.status === 'incomplete') {
               obj.status = 'actionRequired'
             }
 
@@ -58,18 +58,15 @@ passport.deserializeUser(async (id, done) => {
             let percentageLeft = Math.floor(100 - daysLeft / daysTotal * 100)
             let periodStartString = dateString(startDate)
             let periodEndString = dateString(endDate)
-            obj.subscription = orders[i].orderId
-            obj.interval = orders[i].interval
+            obj.subscription = subscription.orderId
+            obj.interval = subscription.interval
             obj.periodStart = periodStartString
             obj.periodEnd = periodEndString
             obj.daysTotal = daysTotal
             obj.daysLeft = daysLeft
             obj.percentageLeft = percentageLeft
           }
-        }
-        break
-      }
-    }
+    
     getStatus()
     done(null, obj)
   } catch (err) {
