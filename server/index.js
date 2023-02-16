@@ -44,7 +44,7 @@ passport.deserializeUser(async (id, done) => {
     const getStatus = async () => {
         const date = Date.now() / 1000
         /*
-        See Github project board for an example of what the subscription
+        See https://stripe.com/docs/api/subscriptions/retrieve?lang=node for an example of what the subscription
         object looks like. The below subscription.<property> is just an example. 
         EG: subscription.periodStart should be subscription.current_period_start
         */
