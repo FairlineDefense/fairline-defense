@@ -28,47 +28,59 @@ passport.serializeUser((user, done) => done(null, user.id))
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findOne({where: {id: id}})
+    const user = await User.findOne({where: {id: id}, include: {model: Order}})
+    const data = JSON.stringify(user, 2, null)
+    let profile = JSON.parse(data)
 
     const subscription = await stripe.subscriptions.retrieve(
-      /* User's subscription id in the Orders database. Should just attach to their user database upon creation */
+      /* String of user's subscription id in the Orders database.
+      Should just attach to their user database upon creation and deprecate the Orders model because
+      the id is all we need.
+      
+      Currently it would be something like: profile.orders[0].orderId
+      */
     );
     
     const getStatus = async () => {
         const date = Date.now() / 1000
+        /*
+        See Github project board for an example of what the subscription
+        object looks like. The below subscription.<property> is just an example. 
+        EG: subscription.periodStart should be subscription.current_period_start
+        */
         const startDate = subscription.periodStart
         const endDate = subscription.periodEnd
 
             if (subscription.status === 'actionRequired') {
-              obj.status = 'actionRequired'
+              profile.status = 'actionRequired'
             }
             if (subscription.status === 'paid') {
-              obj.status = 'paid'
+              profile.status = 'paid'
             }
             if (subscription.status === 'cancelled') {
-              obj.status = 'cancelled'
+              profile.status = 'cancelled'
             }
             if (subscription.status === 'incomplete') {
-              obj.status = 'actionRequired'
+              profile.status = 'actionRequired'
             }
 
-            obj.planActive = true
+            profile.planActive = true
             let daysTotal = Math.floor((endDate - startDate) / 86400)
             let daysLeft = Math.floor((endDate - date) / 86400)
             let percentageLeft = Math.floor(100 - daysLeft / daysTotal * 100)
             let periodStartString = dateString(startDate)
             let periodEndString = dateString(endDate)
-            obj.subscription = subscription.orderId
-            obj.interval = subscription.interval
-            obj.periodStart = periodStartString
-            obj.periodEnd = periodEndString
-            obj.daysTotal = daysTotal
-            obj.daysLeft = daysLeft
-            obj.percentageLeft = percentageLeft
+            profile.subscription = subscription.orderId
+            profile.interval = subscription.interval
+            profile.periodStart = periodStartString
+            profile.periodEnd = periodEndString
+            profile.daysTotal = daysTotal
+            profile.daysLeft = daysLeft
+            profile.percentageLeft = percentageLeft
           }
     
     getStatus()
-    done(null, obj)
+    done(null, profile)
   } catch (err) {
     done(err)
   }
