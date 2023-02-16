@@ -50,7 +50,11 @@ passport.deserializeUser(async (id, done) => {
         */
         const startDate = subscription.periodStart
         const endDate = subscription.periodEnd
-
+        /* The code below is from when we were getting the subscription info from our orders table
+            That isn't a good solution. It is more accurate to get it directly from the Stripe API 
+            based on the subscription id. So some of the below could be updated to reflect the new
+            data object we are referencing.
+        */
             if (subscription.status === 'actionRequired') {
               profile.status = 'actionRequired'
             }
