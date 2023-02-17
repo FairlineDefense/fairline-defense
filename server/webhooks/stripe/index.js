@@ -94,30 +94,13 @@ router.post(
     }
     switch (event.type) {
       case 'customer.subscription.created':
-        const invoice = event.data.object
+        const subscription = event.data.object
         try {
-          const user = await User.findOne({
-            where: {customerId: invoice.customer}
-          })
-          // Add logic to translate datestamps and add to user plan start, end, days left, planActive etc
-          // This is a catch all for invoice payment succeeded, so in the event a spouse is added, do we want the
-          // above logic here?
-          const order = await Order.create({
-            orderId: invoice.id,
-            customerId: invoice.customer,
-            plan: invoice.plan.id,
-            product: invoice.plan.product,
-            interval: invoice.plan.interval,
-            paidAt: 'n/a',
-            amountDue: invoice.plan.amount,
-            amountPaid: 'n/a',
-            amountRemaining: invoice.plan.amount,
-            invoicePDF: 'n/a',
-            periodEnd: invoice.current_period_end,
-            periodStart: invoice.current_period_start,
-            status: invoice.status
-          })
-          await user.addOrder(order)
+           await User.update({
+            subscriptionId: subscription.id,
+            }, {
+            where: {customerId: subscription.customer}
+            })
         } catch (error) {
           console.log(error)
         }
