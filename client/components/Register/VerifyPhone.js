@@ -143,51 +143,70 @@ const VerifyPhone = () => {
 
   let [code, setCode] = useState('')
   let [loader, setLoader] = useState(false)
-  let [incorrect, setIncorrect] = useState(false)
+  let [text, setText] = useState('Please enter the verification code received by SMS.')
+
+  //Send One Time Password
+  async function sendOtp() {
+    try {
+      const response = await fetch("twilio/start-verify", {
+        method: "POST",
+        body: {phone: user.phone},
+      });
+
+      const json = await response.json();
+      if (response.status == 429) {
+        setText(
+          `You have attempted to verify '${user.phone}' too many times. Please wait 10 minutes and try again.`,
+        );
+      } else if (response.status >= 400) {
+        setText(json.error);
+      } else {
+        if (json.success) {
+          setText(`Sent verification code to ${user.phone}`);
+        } else {
+          console.log(json.error);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      setText(`Something went wrong while sending code to ${user.phone}.`);
+    }
+  }
 
   const clickHandler = async e => {
     e.preventDefault()
 
     setLoader(true)
 
-    const verifyCode = await fetch('klaviyo/phone-code', {
+    //Check user entered One Time Password
+    const checkVerify = await fetch('twilio/check-verify', {
       method: 'POST',
       headers: {
         accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({code: code})
-    })
-    const res = verifyCode
+      body: JSON.stringify({code: code, phone: user.phone})
+    }).then(res => res.json())
+
+    console.log('checkVerify:', checkVerify)
 
     setTimeout(() => {
       setLoader(false)
 
-      if (res.status === 200) {
+      if (checkVerify.status === 'approved') {
+        setText('Phone number verified.')
         history.push('/home')
       }
-      if (res.status === 403) {
-        setIncorrect(true)
+      if (checkVerify.status === 'pending') {
+        setText('Invalid code. Please try again.')
       }
     }, 2000)
   }
 
-  const sendText = async () => {
-    if (user.id) {
-      await fetch('klaviyo/verify-phone', {
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: user.email, phone: user.phone})
-      }).catch(error => console.log(error))
-    }
-  }
 
   useEffect(() => {
     try {
-      sendText()
+      sendOtp()
     } catch (error) {
       console.log(error)
     }
@@ -195,11 +214,11 @@ const VerifyPhone = () => {
 
   const resend = e => {
     e.preventDefault()
-    sendText()
+    sendOtp()
     setLoader(true)
     setTimeout(() => {
       setLoader(false)
-      setIncorrect(false)
+      setText('Please enter the verification code received by SMS.')
     }, 2000)
   }
 
@@ -238,10 +257,8 @@ const VerifyPhone = () => {
     )
   }
   return (
-    <div className="auth">
-      <svg className="logo" />
-      <svg className="logo" />
-      <svg className="logo" />
+    <Gradient>
+      <BackgroundImage>
       <RegisterHeader />
       <Wrapper>
         <Heading>Verify your phone</Heading>
@@ -260,9 +277,7 @@ const VerifyPhone = () => {
         </Form>
         <CenteredWrapper>
           <SubHeading>
-            {incorrect
-              ? 'That code was incorrect. Please try again or send a new code.'
-              : 'Please enter the verification code received by SMS.'}
+            {text}
           </SubHeading>
           <Button onClick={e => clickHandler(e)}>Continue</Button>
         </CenteredWrapper>
@@ -277,7 +292,8 @@ const VerifyPhone = () => {
           <span>Edit Phone Number</span>
         </BottomWrapper>
       </Wrapper>
-    </div>
+      </BackgroundImage>
+      </Gradient>
   )
 }
 export default VerifyPhone

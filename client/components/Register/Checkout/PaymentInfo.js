@@ -103,11 +103,8 @@ const PaymentInfo = ({
   }
 
   return (
-    <>
-      <div className="auth">
-        <svg className="logo" />
-        <svg className="logo" />
-        <svg className="logo" />
+    <Gradient>
+    <BackgroundImage>
         <RegisterHeader />
         <Wrapper>
           <PlanSummary
@@ -138,8 +135,8 @@ const PaymentInfo = ({
             </Elements>
           </CenteredWrapper>
         </Wrapper>
-      </div>
-    </>
+      </BackgroundImage>
+    </Gradient>
   )
 }
 export default PaymentInfo
