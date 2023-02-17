@@ -124,6 +124,11 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     unique: true
   },
+  subscriptionId: {
+    type: Sequelize.STRING,
+    unique: true,
+    defaultValue: 'n/a'
+  },
   emailReminders: {
     type: Sequelize.BOOLEAN,
     defaultValue: true

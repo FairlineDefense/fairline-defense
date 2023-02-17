@@ -125,7 +125,7 @@ const UserHome = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
   let [loaded, setLoaded] = useState(false)
-
+  console.log('user', user)
   useEffect(() => {
     setTimeout(() => {
       dispatch(me())

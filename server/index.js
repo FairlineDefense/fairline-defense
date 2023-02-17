@@ -28,50 +28,81 @@ passport.serializeUser((user, done) => done(null, user.id))
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findOne({where: {id: id}, include: {model: Order}})
+    const user = await User.findOne({where: {id: id}})
     const data = JSON.stringify(user, 2, null)
-    let obj = JSON.parse(data)
-    const getStatus = async () => {
-      const date = Date.now() / 1000
-      const orders = obj.orders
-      for (let i = 0; i < orders.length; i++) {
-        const startDate = orders[i].periodStart
-        const endDate = orders[i].periodEnd
-        if (startDate < date) {
-          if (endDate > date) {
-            if (orders[i].status === 'actionRequired') {
-              obj.status = 'actionRequired'
-            }
-            if (orders[i].status === 'paid') {
-              obj.status = 'paid'
-            }
-            if (orders[i].status === 'cancelled') {
-              obj.status = 'cancelled'
-            }
-            if (orders[i].status === 'incomplete') {
-              obj.status = 'actionRequired'
-            }
+    let profile = JSON.parse(data)
+    console.log('profile.subscriptionId', profile.subscriptionId)
 
-            obj.planActive = true
+    const getStatus = async () => {
+      let subscription
+      if(profile.subscriptionId === 'n/a') {
+        return;
+      } else {
+        subscription = await stripe.subscriptions.retrieve(
+          /* String of user's subscription id in the Orders database.
+          Should just attach to their user database upon creation and deprecate the Orders model because
+          the id is all we need.
+          
+          Currently it would be something like: profile.orders[0].orderId
+          */
+         profile.subscriptionId
+        )
+      }
+      
+    console.log('subscription', subscription)
+
+        const date = Date.now() / 1000
+        /*
+        See https://stripe.com/docs/api/subscriptions/retrieve?lang=node for an example of what the subscription
+        object looks like. The below subscription.<property> is just an example. 
+        EG: subscription.periodStart should be subscription.current_period_start
+        */
+        const startDate = subscription.current_period_start
+        const endDate = subscription.current_period_end
+        /* The code below is from when we were getting the subscription info from our orders table
+            That isn't a good solution. It is more accurate to get it directly from the Stripe API 
+            based on the subscription id. So some of the below could be updated to reflect the new
+            data object we are referencing.
+        */
+            if (subscription.status === 'past_due') {
+              profile.status = 'actionRequired'
+            }
+            if (subscription.status === 'active') {
+              profile.status = 'paid'
+            }
+            if (subscription.status === 'cancelled') {
+              profile.status = 'cancelled'
+            }
+            if (subscription.status === 'incomplete') {
+              profile.status = 'actionRequired'
+            }
+            if (subscription.status === 'unpaid') {
+              profile.status = 'actionRequired'
+            }
+            if (subscription.status === 'incomplete') {
+              profile.status = 'actionRequired'
+            }
+            if (subscription.status === 'incomplete_expired') {
+              profile.status = 'actionRequired'
+            }
+            profile.planActive = true
+            console.log('SUB STATUS', subscription.status)
             let daysTotal = Math.floor((endDate - startDate) / 86400)
             let daysLeft = Math.floor((endDate - date) / 86400)
             let percentageLeft = Math.floor(100 - daysLeft / daysTotal * 100)
             let periodStartString = dateString(startDate)
             let periodEndString = dateString(endDate)
-            obj.subscription = orders[i].orderId
-            obj.interval = orders[i].interval
-            obj.periodStart = periodStartString
-            obj.periodEnd = periodEndString
-            obj.daysTotal = daysTotal
-            obj.daysLeft = daysLeft
-            obj.percentageLeft = percentageLeft
+            profile.subscription = subscription.id
+            profile.interval = subscription?.items?.data[0]?.price?.recurring?.interval || 'month'
+            profile.periodStart = periodStartString
+            profile.periodEnd = periodEndString
+            profile.daysTotal = daysTotal
+            profile.daysLeft = daysLeft
+            profile.percentageLeft = percentageLeft
           }
-        }
-        break
-      }
-    }
-    getStatus()
-    done(null, obj)
+    await getStatus()
+    console.log('profile',profile.planActive)
+    done(null, profile)
   } catch (err) {
     done(err)
   }
