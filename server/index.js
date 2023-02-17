@@ -39,6 +39,7 @@ passport.deserializeUser(async (id, done) => {
       
       Currently it would be something like: profile.orders[0].orderId
       */
+     profile.orders[0].orderId
     );
     
     const getStatus = async () => {
@@ -48,17 +49,17 @@ passport.deserializeUser(async (id, done) => {
         object looks like. The below subscription.<property> is just an example. 
         EG: subscription.periodStart should be subscription.current_period_start
         */
-        const startDate = subscription.periodStart
-        const endDate = subscription.periodEnd
+        const startDate = subscription.current_period_start
+        const endDate = subscription.curren_period_end
         /* The code below is from when we were getting the subscription info from our orders table
             That isn't a good solution. It is more accurate to get it directly from the Stripe API 
             based on the subscription id. So some of the below could be updated to reflect the new
             data object we are referencing.
         */
-            if (subscription.status === 'actionRequired') {
+            if (subscription.status === 'past_due') {
               profile.status = 'actionRequired'
             }
-            if (subscription.status === 'paid') {
+            if (subscription.status === 'active') {
               profile.status = 'paid'
             }
             if (subscription.status === 'cancelled') {
@@ -67,22 +68,30 @@ passport.deserializeUser(async (id, done) => {
             if (subscription.status === 'incomplete') {
               profile.status = 'actionRequired'
             }
+            if (subscription.status === 'unpaid') {
+              profile.status = 'actionRequired'
+            }
+            if (subscription.status === 'incomplete') {
+              profile.status = 'actionRequired'
+            }
+            if (subscription.status === 'incomplete_expired') {
+              profile.status = 'actionRequired'
+            }
 
-            profile.planActive = true
+            profile.planActive = profile.status === 'active' ? true : false
             let daysTotal = Math.floor((endDate - startDate) / 86400)
             let daysLeft = Math.floor((endDate - date) / 86400)
             let percentageLeft = Math.floor(100 - daysLeft / daysTotal * 100)
             let periodStartString = dateString(startDate)
             let periodEndString = dateString(endDate)
-            profile.subscription = subscription.orderId
-            profile.interval = subscription.interval
+            profile.subscription = subscription.id
+            profile.interval = subscription?.items?.data[0]?.price?.recurring?.interval || 'month'
             profile.periodStart = periodStartString
             profile.periodEnd = periodEndString
             profile.daysTotal = daysTotal
             profile.daysLeft = daysLeft
             profile.percentageLeft = percentageLeft
           }
-    
     getStatus()
     done(null, profile)
   } catch (err) {
