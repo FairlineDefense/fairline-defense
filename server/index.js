@@ -136,6 +136,7 @@ const createApp = () => {
   app.use('/api', require('./api'))
   app.use('/payment', require('./payment'))
   app.use('/klaviyo', require('./klaviyo'))
+  app.use('/twilio', require('./twilio'))
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
 
