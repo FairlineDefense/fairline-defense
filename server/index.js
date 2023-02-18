@@ -173,7 +173,7 @@ const startListening = () => {
 
 // WARNING use db.sync({force: true}) to clear database of all data and
 // reset tables ONLY in local development environment. NOT PRODUCTION.
-const syncDb = () => db.sync({force: true})
+const syncDb = () => db.sync()
 
 async function bootApp() {
   await sessionStore.sync()
