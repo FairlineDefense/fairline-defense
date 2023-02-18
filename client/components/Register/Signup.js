@@ -50,7 +50,7 @@ background-image: none;
 }
 `
 const H1 = styled.h1`
-  font-weight: 400;
+  font-weight: 500;
   font-size: 30px;
   line-height: 30px;
   margin-bottom: 2rem;
