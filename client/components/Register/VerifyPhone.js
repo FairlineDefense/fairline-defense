@@ -185,7 +185,7 @@ const VerifyPhone = () => {
         accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({code: code, phone: user.phone})
+      body: JSON.stringify({code: code, channel: 'sms'})
     }).then(res => res.json())
 
     console.log('checkVerify:', checkVerify)

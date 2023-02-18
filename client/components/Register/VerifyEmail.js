@@ -111,48 +111,6 @@ const Button = styled.button`
 
 const VerifyEmail = () => {
   const user = useSelector(state => state.user)
-  const dispatch = useDispatch()
-
-  const clickHandler = async e => {
-    e.preventDefault()
-    // For bypassing email functionality for testing:
-    process.env.NODE_ENV === 'development' &&
-      (await fetch('webhooks/klaviyo/verify-email', {
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: user.email})
-      }).then(() => history.push('/home')))
-  }
-
-  const sendEmail = async () => {
-    if (user.id && !user.emailVerified) {
-      await fetch('klaviyo/create-account', {
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: user.email,
-          phone: user.phone,
-          firstName: user.firstName,
-          lastName: user.lastName
-        })
-      })
-    }
-  }
-
-  useEffect(() => {
-    try {
-      sendEmail()
-    } catch (error) {
-      console.log(error)
-    }
-  }, [])
-
   return (
     <Gradient>
       <BackgroundImage>

@@ -172,6 +172,26 @@ const ChooseProtection = ({
   changeHandler,
   setStep
 }) => {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
+  const to = params.get("to");
+
+  // Twilio functions do not accept multipart/form-data
+  const data = new URLSearchParams();
+  data.append("to", to);
+  data.append("verification_code", token);
+
+  token && fetch("twilio/check-verify", {
+      method: 'POST',
+      body: data
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log(json.success)
+    })
+    .catch(err => {
+      console.log(err);
+    });
   return (
     <Gradient><BackgroundImage>
       <RegisterHeader />

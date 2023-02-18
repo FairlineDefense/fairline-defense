@@ -11,10 +11,22 @@ module.exports = router
 router.post('/start-verify', async (req, res, next) => {
     const response = {}
     response.headers = {'Content-Type': 'application/json'};
+    const channel = req.body.channel
+    const to = channel === 'sms' ? req.user.phone : 'jeffreywood.dev@gmail.com'
+    const callbackUrl = process.env.NODE_ENV === 'production' ? 
+    'https://fairlinedefense.com/chooseprotection' : 
+    'https://localhost:8080/chooseprotection'
+    const channelConfig = channel === 'sms' ? {} : {
+      substitutions: {
+        email: to,
+        callback_url: callbackUrl,
+      },
+    }
+
     try {
     client.verify.v2
     .services(verifySid)
-    .verifications.create({ to: req.user.phone, channel: "sms" })
+    .verifications.create({ to: to, channel: channel, channelConfiguration: channelConfig })
     .then((verification) => console.log(verification.status))
 
     response.statusCode = 200;
@@ -33,15 +45,18 @@ router.post('/start-verify', async (req, res, next) => {
 
 router.post('/check-verify', async (req, res, next) => {
   const user = await User.findOne({where: {email: req.user.email}})
+  const channel = req.body.channel
+  const to = channel === 'sms' ? req.user.phone : req.user.email
+  const code = req.body.code
   try {
       client.verify.v2.services(process.env.VERIFY_SID)
       .verificationChecks
-      .create({to: req.user.phone, code: req.body.code})
+      .create({to: to, code: code})
       .then(verification_check => {
          const status = verification_check.status
-         console.log('STATUS FROM TWILIO RES:', status)
          if (verification_check.status = 'approved'){
-         user.update({phoneVerified: true})
+          channel === 'sms' ? user.update({emailVerified: true}) :
+          user.update({phoneVerified: true})
          }
          return res.send({status: status})
         });
