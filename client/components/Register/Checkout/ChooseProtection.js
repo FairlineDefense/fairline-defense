@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4rem;
+  padding: 2rem;
   position: relative;
 
   @media (max-width: 800px) {
@@ -121,6 +121,15 @@ const Billing = styled.p`
   font-weight: 500;
   text-align: center;
 `
+const SemiBold = styled.h1`
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+
+  @media (max-width: 800px) {
+    margin-bottom: 1rem;
+  }
+`
 const H1 = styled.h1`
   font-size: 32px;
   font-weight: 400;
@@ -135,6 +144,7 @@ const Subheader = styled.h2`
   margin: 1rem 0rem 2rem 0rem;
   text-align: center;
   width: 500px;
+  font-weight: 400;
 
   p {
     margin-bottom: 1rem;
@@ -176,14 +186,14 @@ const ChooseProtection = ({
     <Gradient><BackgroundImage>
       <RegisterHeader />
       <Wrapper>
-        <H1>Congratulations!</H1>
+        <SemiBold>Congratulations!</SemiBold>
         <Subheader>
           <p>You are one step away from getting the protection you need.</p>
           <p>
             Starting from <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr</Blue>
           </p>
         </Subheader>
-        <H1>Select Your Protection</H1>
+        <SemiBold>Select Your Protection</SemiBold>
         <ButtonWrapper>
           <Button
             onClick={e => changeHandler(e)}

@@ -65,7 +65,7 @@ const CenteredWrapper = styled.div`
 `
 const Heading = styled.span`
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: 1.5rem;
 `
 const SubHeading = styled.span`
