@@ -64,7 +64,7 @@ const Button = styled.button`
 `
 const Header = styled.h1`
   font-size: 32px;
-  font-weight: 300;
+  font-weight: 500;
   margin: 0.5rem 0rem 2rem 0rem;
 
   @media (max-width: 800px) {

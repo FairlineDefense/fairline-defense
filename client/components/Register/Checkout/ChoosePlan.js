@@ -124,7 +124,7 @@ const Billing = styled.p`
 `
 const H1 = styled.h1`
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: 2rem;
 
   @media (max-width: 800px) {
