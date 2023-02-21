@@ -35,7 +35,6 @@ router.post(
         return response.sendStatus(400)
       }
     }
-    console.log(event.type, ':', event.data.object)
     // Handle the event
     // switch (event.type) {
     //   case 'charge.succeeded':
@@ -189,7 +188,7 @@ router.post(
         break
       default:
         // Unexpected event type
-        console.log(`Unhandled event type ${event.type}.`)
+        console.log(`Unhandled event type`)
     }
 
     // Return a 200 response to acknowledge receipt of the event
