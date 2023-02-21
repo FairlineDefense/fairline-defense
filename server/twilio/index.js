@@ -12,7 +12,7 @@ router.post('/start-verify', async (req, res, next) => {
     const response = {}
     response.headers = {'Content-Type': 'application/json'};
     const channel = req.body.channel
-    const to = channel === 'sms' ? req.user.phone : req.body.email
+    const to = channel === 'sms' ? req.body.phone : req.body.email
     const callbackUrl = process.env.NODE_ENV === 'production' ? 
     'https://fairlinedefense.com/chooseprotection' : 
     'http://localhost:8080/chooseprotection'
@@ -45,7 +45,7 @@ router.post('/start-verify', async (req, res, next) => {
 
 router.post('/check-verify', async (req, res, next) => {
   const channel = req.body.channel
-  const to = channel === 'sms' ? req.user.phone : req.body.email
+  const to = channel === 'sms' ? req.body.phone : req.body.email
   const code = req.body.code
   try {
       client.verify.v2.services(verifySid)
@@ -55,7 +55,7 @@ router.post('/check-verify', async (req, res, next) => {
          const status = check.status
          if (check.status = 'approved'){
           channel === 'sms' ? User.update({phoneVerified: true}, {where: {email: req.body.email}}) :
-          User.update({emailVerified: true}, {where: {phone: req.user.phone}})
+          User.update({emailVerified: true}, {where: {phone: req.body.phone}})
          }
          return res.send({status: status})
         });

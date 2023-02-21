@@ -75,6 +75,7 @@ const Routes = (props) => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/success" component={VerifiedEmail} />
+            <Route exact path="/chooseprotection" component={Checkout} />
           </Switch>
         </div>
       )}

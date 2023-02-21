@@ -31,11 +31,10 @@ passport.deserializeUser(async (id, done) => {
     const user = await User.findOne({where: {id: id}})
     const data = JSON.stringify(user, 2, null)
     let profile = JSON.parse(data)
-    console.log('profile.subscriptionId', profile.subscriptionId)
 
     const getStatus = async () => {
       let subscription
-      if(profile.subscriptionId === 'n/a') {
+      if(profile?.subscriptionId === 'n/a' || !profile?.subscriptionId) {
         return;
       } else {
         subscription = await stripe.subscriptions.retrieve(
@@ -45,12 +44,10 @@ passport.deserializeUser(async (id, done) => {
           
           Currently it would be something like: profile.orders[0].orderId
           */
-         profile.subscriptionId
+         profile?.subscriptionId
         )
       }
       
-    console.log('subscription', subscription)
-
         const date = Date.now() / 1000
         /*
         See https://stripe.com/docs/api/subscriptions/retrieve?lang=node for an example of what the subscription
@@ -86,7 +83,6 @@ passport.deserializeUser(async (id, done) => {
               profile.status = 'actionRequired'
             }
             profile.planActive = true
-            console.log('SUB STATUS', subscription.status)
             let daysTotal = Math.floor((endDate - startDate) / 86400)
             let daysLeft = Math.floor((endDate - date) / 86400)
             let percentageLeft = Math.floor(100 - daysLeft / daysTotal * 100)
@@ -101,7 +97,6 @@ passport.deserializeUser(async (id, done) => {
             profile.percentageLeft = percentageLeft
           }
     await getStatus()
-    console.log('profile',profile.planActive)
     done(null, profile)
   } catch (err) {
     done(err)

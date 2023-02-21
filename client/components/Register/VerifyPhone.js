@@ -150,7 +150,7 @@ const VerifyPhone = () => {
     try {
       const response = await fetch("twilio/start-verify", {
         method: "POST",
-        body: {phone: user.phone},
+        body: {channel: 'sms', phone: user.phone},
       });
 
       const json = await response.json();
@@ -185,7 +185,7 @@ const VerifyPhone = () => {
         accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({code: code, channel: 'sms'})
+      body: JSON.stringify({code: code, channel: 'sms', phone: user.phone})
     }).then(res => res.json())
 
 
