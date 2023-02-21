@@ -205,30 +205,6 @@ const Signup = () => {
       setForm({...form, [e.target.name]: e.target.value})
     }
   }
-  
-  const sendVerifyEmail = async () => {
-    const data = new URLSearchParams();
-    data.append("channel", "email");
-    data.append("email", form.email);
-        fetch("twilio/start-verify", {
-          method: "POST",
-          body: data
-        })
-          .then(response => {
-            return response.json()
-          })
-          .then(json => {
-            if (json.success) {
-              console.log("Successfully sent email.");
-            } else {
-              console.log(json.error);
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
-    
 
   const handleSubmit = evt => {
     evt.preventDefault()
@@ -310,7 +286,6 @@ const Signup = () => {
 
     if (validateFields()) {
       dispatch(signup(firstName, lastName, email, phone, password, 'signup'))
-      sendVerifyEmail()
     }
   }
 

@@ -31,21 +31,25 @@ passport.deserializeUser(async (id, done) => {
     const user = await User.findOne({where: {id: id}})
     const data = JSON.stringify(user, 2, null)
     let profile = JSON.parse(data)
-
+    let subscriptionId = profile.subscriptionId
     const getStatus = async () => {
       let subscription
-      if(profile?.subscriptionId === 'n/a' || !profile?.subscriptionId) {
+      if(subscriptionId === 'n/a' || !subscriptionId) {
         return;
       } else {
-        subscription = await stripe.subscriptions.retrieve(
-          /* String of user's subscription id in the Orders database.
-          Should just attach to their user database upon creation and deprecate the Orders model because
-          the id is all we need.
-          
-          Currently it would be something like: profile.orders[0].orderId
-          */
-         profile?.subscriptionId
-        )
+        try {
+          subscription = subscriptionId && await stripe.subscriptions.retrieve(
+            /* String of user's subscription id in the Orders database.
+            Should just attach to their user database upon creation and deprecate the Orders model because
+            the id is all we need.
+            
+            Currently it would be something like: profile.orders[0].orderId
+            */
+           subscriptionId
+          )
+        } catch (error) {
+          console.log('at get status',error)
+        }
       }
       
         const date = Date.now() / 1000

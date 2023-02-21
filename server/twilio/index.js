@@ -54,8 +54,8 @@ router.post('/check-verify', async (req, res, next) => {
       .then(check => {
          const status = check.status
          if (check.status = 'approved'){
-          channel === 'sms' ? User.update({phoneVerified: true}, {where: {email: req.body.email}}) :
-          User.update({emailVerified: true}, {where: {phone: req.body.phone}})
+          channel === 'sms' ? User.update({phoneVerified: true}, {where: {phone: req.body.phone}}) :
+          User.update({emailVerified: true}, {where: {email: req.body.email}})
          }
          return res.send({status: status})
         });
