@@ -31,7 +31,7 @@ passport.deserializeUser(async (id, done) => {
     const user = await User.findOne({where: {id: id}})
     const data = JSON.stringify(user, 2, null)
     let profile = JSON.parse(data)
-    let subscriptionId = profile.subscriptionId
+    let subscriptionId = profile?.subscriptionId
     const getStatus = async () => {
       let subscription
       if(subscriptionId === 'n/a' || !subscriptionId) {
