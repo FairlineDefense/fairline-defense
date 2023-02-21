@@ -19,7 +19,8 @@ import {
   VerifyPhone,
   SecurityHome,
   MembershipAndBilling,
-  VerifiedEmail
+  VerifiedEmail,
+  Checkout
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'
@@ -56,6 +57,7 @@ const Routes = (props) => {
             <Route path="/verifyemail" component={VerifyEmail} />
             <Route path="/verifyphone" component={VerifyPhone} />
             <Route exact path="/success" component={VerifiedEmail} />
+            <Route exact path="/chooseprotection" component={Checkout} />
           </Switch>
         </div>
       ) : (

@@ -208,9 +208,8 @@ const Signup = () => {
   
   const sendVerifyEmail = async () => {
     const data = new URLSearchParams();
-        data.append("channel", "email");
-        data.append("to", form.email);
-  
+    data.append("channel", "email");
+    data.append("email", form.email);
         fetch("twilio/start-verify", {
           method: "POST",
           body: data

@@ -11,11 +11,12 @@ module.exports = router
 router.post('/start-verify', async (req, res, next) => {
     const response = {}
     response.headers = {'Content-Type': 'application/json'};
+    console.log('start verify called req.body', req.body)
     const channel = req.body.channel
-    const to = channel === 'sms' ? req.user.phone : 'jeffreywood.dev@gmail.com'
+    const to = channel === 'sms' ? req.user.phone : req.body.email
     const callbackUrl = process.env.NODE_ENV === 'production' ? 
     'https://fairlinedefense.com/chooseprotection' : 
-    'https://localhost:8080/chooseprotection'
+    'http://localhost:8080/chooseprotection'
     const channelConfig = channel === 'sms' ? {} : {
       substitutions: {
         email: to,
@@ -27,7 +28,7 @@ router.post('/start-verify', async (req, res, next) => {
     client.verify.v2
     .services(verifySid)
     .verifications.create({ to: to, channel: channel, channelConfiguration: channelConfig })
-    .then((verification) => console.log(verification.status))
+    .then((verification) => console.log('verification started:', channel, 'verification status:', verification.status))
 
     response.statusCode = 200;
     response.body = { success: true };
@@ -46,15 +47,18 @@ router.post('/start-verify', async (req, res, next) => {
 router.post('/check-verify', async (req, res, next) => {
   const user = await User.findOne({where: {email: req.user.email}})
   const channel = req.body.channel
-  const to = channel === 'sms' ? req.user.phone : req.user.email
+  const to = channel === 'sms' ? req.body.phone : req.body.email
   const code = req.body.code
+  console.log(req.body, 'check verify called')
+  console.log('to', to, 'code', code)
   try {
-      client.verify.v2.services(process.env.VERIFY_SID)
+      client.verify.v2.services(verifySid)
       .verificationChecks
-      .create({to: to, code: code})
-      .then(verification_check => {
-         const status = verification_check.status
-         if (verification_check.status = 'approved'){
+      .create({to, code})
+      .then(check => {
+         const status = check.status
+         console.log('status', status)
+         if (check.status = 'approved'){
           channel === 'sms' ? user.update({emailVerified: true}) :
           user.update({phoneVerified: true})
          }
