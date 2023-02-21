@@ -47,6 +47,7 @@ router.post('/check-verify', async (req, res, next) => {
   const channel = req.body.channel
   const to = channel === 'sms' ? req.body.phone : req.body.email
   const code = req.body.code
+  console.log('req.body', req.body)
   try {
       client.verify.v2.services(verifySid)
       .verificationChecks

@@ -192,7 +192,8 @@ const ChooseProtection = ({
       const data = new URLSearchParams();
       data.append("email", email);
       data.append("code", token);
-    
+      data.append("channel", "email");
+      console.log('data',data)
       token && fetch("twilio/check-verify", {
           method: 'POST',
           body: data
