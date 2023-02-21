@@ -188,7 +188,6 @@ const VerifyPhone = () => {
       body: JSON.stringify({code: code, channel: 'sms'})
     }).then(res => res.json())
 
-    console.log('checkVerify:', checkVerify)
 
     setTimeout(() => {
       setLoader(false)

@@ -11,7 +11,6 @@ module.exports = router
 router.post('/start-verify', async (req, res, next) => {
     const response = {}
     response.headers = {'Content-Type': 'application/json'};
-    console.log('start verify called req.body', req.body)
     const channel = req.body.channel
     const to = channel === 'sms' ? req.user.phone : req.body.email
     const callbackUrl = process.env.NODE_ENV === 'production' ? 
@@ -45,22 +44,18 @@ router.post('/start-verify', async (req, res, next) => {
 })
 
 router.post('/check-verify', async (req, res, next) => {
-  const user = await User.findOne({where: {email: req.user.email}})
   const channel = req.body.channel
-  const to = channel === 'sms' ? req.body.phone : req.body.email
+  const to = channel === 'sms' ? req.user.phone : req.body.email
   const code = req.body.code
-  console.log(req.body, 'check verify called')
-  console.log('to', to, 'code', code)
   try {
       client.verify.v2.services(verifySid)
       .verificationChecks
       .create({to, code})
       .then(check => {
          const status = check.status
-         console.log('status', status)
          if (check.status = 'approved'){
-          channel === 'sms' ? user.update({emailVerified: true}) :
-          user.update({phoneVerified: true})
+          channel === 'sms' ? User.update({phoneVerified: true}, {where: {email: req.body.email}}) :
+          User.update({emailVerified: true}, {where: {phone: req.user.phone}})
          }
          return res.send({status: status})
         });

@@ -2,6 +2,7 @@ import React from 'react'
 import css from '../register.css'
 import styled from 'styled-components'
 import RegisterHeader from '../RegisterHeader'
+import { useEffect } from 'react'
 const Gradient = styled.div`
 width: 100vw;
 min-height: 100vh;
@@ -172,26 +173,28 @@ const ChooseProtection = ({
   changeHandler,
   setStep
 }) => {
-  const params = new URLSearchParams(window.location.search);
-  const token = params.get("token");
-  const email = params.get("to");
-
-  // Twilio functions do not accept multipart/form-data
-  const data = new URLSearchParams();
-  data.append("email", email);
-  data.append("code", token);
-
-  token && fetch("twilio/check-verify", {
-      method: 'POST',
-      body: data
-    })
-    .then(response => response.json())
-    .then(json => {
-      console.log(json.success)
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    useEffect(() => {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+      const email = params.get("to");
+    
+      // Twilio functions do not accept multipart/form-data
+      const data = new URLSearchParams();
+      data.append("email", email);
+      data.append("code", token);
+    
+      token && fetch("twilio/check-verify", {
+          method: 'POST',
+          body: data
+        })
+        .then(response => response.json())
+        .then(json => {
+          console.log(json.success)
+        })
+        .catch(err => {
+          console.log(err);
+        });
+     }, []);
   return (
     <Gradient><BackgroundImage>
       <RegisterHeader />
