@@ -3,6 +3,8 @@ import css from '../register.css'
 import styled from 'styled-components'
 import RegisterHeader from '../RegisterHeader'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { me } from '../../../store/user'
 const Gradient = styled.div`
 width: 100vw;
 min-height: 100vh;
@@ -183,6 +185,7 @@ const ChooseProtection = ({
   changeHandler,
   setStep
 }) => {
+  const dispatch = useDispatch()  
     useEffect(() => {
       const params = new URLSearchParams(window.location.search);
       const token = params.get("token");
@@ -201,7 +204,7 @@ const ChooseProtection = ({
         .then(response => response.json())
         .then(json => {
           console.log(json.success)
-        })
+        }).then(()=>{dispatch(me())})
         .catch(err => {
           console.log(err);
         });
