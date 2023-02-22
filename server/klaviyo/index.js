@@ -11,7 +11,7 @@ const fetch = require('node-fetch')
 
 module.exports = router
 
-router.post('/create-account', async (req, res, next) => {
+router.post('/deprecated', async (req, res, next) => {
   try {
     // The three steps to verifying a user's email are as follows:
     // [1] We create their Klaviyo profile with their name, email and phone number. The response includes their unique
@@ -95,7 +95,7 @@ router.post('/create-account', async (req, res, next) => {
   }
 })
 
-router.post('/verify-phone', async (req, res, next) => {
+router.post('/deprecated-1', async (req, res, next) => {
   // The 4 step process for verifying a user's phone number is as follows:
   // [1] A random 6 digit code is generated and added to the user in our database
   // [2] The user's Klaviyo profile object is updated to have a key called code which has a value of the 6 digit code
@@ -159,7 +159,7 @@ router.post('/verify-phone', async (req, res, next) => {
   return res.json(code)
 })
 
-router.post('/phone-code', async (req, res, next) => {
+router.post('/deprecated-3', async (req, res, next) => {
   try {
     const user = await User.findOne({where: {email: req.user.email}})
     // Step 4:

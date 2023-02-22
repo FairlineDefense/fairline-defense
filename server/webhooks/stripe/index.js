@@ -101,7 +101,7 @@ router.post(
             where: {customerId: subscription.customer}
             })
         } catch (error) {
-          console.log(error)
+          console.log('subscription created, user updated subscription id',error)
         }
         break
     }

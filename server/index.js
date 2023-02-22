@@ -33,6 +33,7 @@ passport.deserializeUser(async (id, done) => {
     let profile = JSON.parse(data)
     let subscriptionId = profile?.subscriptionId || 'n/a'
     const getStatus = async () => {
+      console.log('subscriptionId', subscriptionId)
       let subscription
       if(subscriptionId === 'n/a' || !subscriptionId) {
         return;
@@ -103,6 +104,7 @@ passport.deserializeUser(async (id, done) => {
     await getStatus()
     done(null, profile)
   } catch (err) {
+    console.log('error in deserializeUser', err)
     done(err)
   }
 })

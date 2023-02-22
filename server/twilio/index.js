@@ -47,7 +47,10 @@ router.post('/check-verify', async (req, res, next) => {
   const channel = req.body.channel
   const to = channel === 'sms' ? req.body.phone : req.body.email
   const code = req.body.code
-  console.log('req.body', req.body)
+  
+  const user = channel === 'sms' ? await User.findOne({where: {phone: req.body.phone}}) :
+  await User.findOne({where: {email: req.body.email}})
+
   try {
       client.verify.v2.services(verifySid)
       .verificationChecks
@@ -57,6 +60,7 @@ router.post('/check-verify', async (req, res, next) => {
          if (check.status = 'approved'){
           channel === 'sms' ? User.update({phoneVerified: true}, {where: {phone: req.body.phone}}) :
           User.update({emailVerified: true}, {where: {email: req.body.email}})
+          req.login(user, err => (err ? next(err) : console.log('logged in')))
          }
          return res.send({status: status})
         });

@@ -33,7 +33,7 @@ router.post('/create-customer', async (req, res) => {
       },
       {where: {email: req.body.email}}
     )
-
+    console.log('customer created', customer.id, req.body.email)
     return res.json({customerId: customer.id})
   } catch (error) {
     console.log(error)
@@ -65,13 +65,21 @@ router.post('/create-customer', async (req, res) => {
         payment_settings: {save_default_payment_method: 'on_subscription'},
         expand: ['latest_invoice.payment_intent']
       })
+
+      await User.update(
+        {
+          subscriptionId: subscription.id,
+        },
+        {where: {customerId: customerId}}
+      )
+        console.log('subscription created', subscription.id, customerId)
       return res.json({
         subscriptionId: subscription.id,
         clientSecretRes:
           subscription.latest_invoice.payment_intent.client_secret
       })
     } catch (error) {
-      console.log(error.message)
+      console.log('create subscription error =>', error.message)
       return res.status(400).send({error: {message: error.message}})
     }
   })
