@@ -55,10 +55,10 @@ router.put('/:id', async (req, res, next) => {
       })
     }
 
-    fetch(updateKlaviyoProfileUrl, options)
-      .then(res => res.json())
-      .then(json => console.log(json))
-      .catch(err => console.error('error:' + err))
+    // fetch(updateKlaviyoProfileUrl, options)
+    //   .then(res => res.json())
+    //   .then(json => console.log(json))
+    //   .catch(err => console.error('error:' + err))
     const name = firstName && lastName && `${firstName} ${lastName}`
     // API call to Stripe using their customerId to update all relevant fields
     await stripe.customers.update(user.customerId, {
