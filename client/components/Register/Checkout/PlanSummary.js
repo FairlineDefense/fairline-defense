@@ -41,6 +41,9 @@ const SpaceBetweenWrapper = styled.div`
     width: 90%;
   }
 `
+const Bold = styled.div`
+  font-weight: 500;
+`
 const Blue = styled.button`
   font-size: 20px;
   cursor: pointer;
@@ -149,13 +152,13 @@ const PlanSummary = ({
   protectionTypeString,
   protectionType,
   setStep,
-  changeHandler
+  changeHandler,
 }) => {
   const prices = {
     armedCitizenMonth: '$19.99',
     armedCitizenYear: '$199',
     armedProfessionalMonth: '$29.99',
-    armedProfessionalYear: '$299'
+    armedProfessionalYear: '$299',
   }
   return (
     <Wrapper>
@@ -163,8 +166,8 @@ const PlanSummary = ({
         <Header>Plan Summary</Header>
 
         <SpaceBetweenWrapper>
-          <div>{protectionTypeString}</div>
-          <div>{price}</div>
+          <Bold>{protectionTypeString}</Bold>
+          <Bold>{price}</Bold>
         </SpaceBetweenWrapper>
 
         <SpaceBetweenWrapper>
@@ -179,7 +182,7 @@ const PlanSummary = ({
         <Header>{protectionTypeString}</Header>
         <ButtonWrapper>
           <Button
-            onClick={e => changeHandler(e)}
+            onClick={(e) => changeHandler(e)}
             value={`${protectionType}Month`}
             name="priceId"
             disabled={priceId === `${protectionType}Month`}
@@ -188,7 +191,7 @@ const PlanSummary = ({
             <Billing>Billed Monthly</Billing>
           </Button>
           <Button
-            onClick={e => changeHandler(e)}
+            onClick={(e) => changeHandler(e)}
             value={`${protectionType}Year`}
             name="priceId"
             disabled={priceId === `${protectionType}Year`}
