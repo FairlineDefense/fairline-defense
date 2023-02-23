@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
 
 const Section = styled.div`
   height: 280px;
@@ -159,7 +158,7 @@ export default function Footer() {
               <Phone>1-833-201-1463</Phone>
             </li>
             <li>
-              <Link to="/contactus">Email Us</Link>
+              <a href="/contactus">Email Us</a>
             </li>
           </ul>
         </Support>
