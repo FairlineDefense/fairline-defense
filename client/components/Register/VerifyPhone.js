@@ -147,10 +147,13 @@ const VerifyPhone = () => {
 
   //Send One Time Password
   async function sendOtp() {
+    const data = new URLSearchParams();
+    data.append("channel", "sms");
+    data.append("phone", user.phone);
     try {
       const response = await fetch("twilio/start-verify", {
         method: "POST",
-        body: {phone: user.phone},
+        body: data,
       });
 
       const json = await response.json();
@@ -185,10 +188,9 @@ const VerifyPhone = () => {
         accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({code: code, phone: user.phone})
+      body: JSON.stringify({code: code, channel: 'sms', phone: user.phone})
     }).then(res => res.json())
 
-    console.log('checkVerify:', checkVerify)
 
     setTimeout(() => {
       setLoader(false)

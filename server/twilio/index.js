@@ -11,11 +11,23 @@ module.exports = router
 router.post('/start-verify', async (req, res, next) => {
     const response = {}
     response.headers = {'Content-Type': 'application/json'};
+    const channel = req.body.channel
+    const to = channel === 'sms' ? req.body.phone : req.body.email
+    const callbackUrl = process.env.NODE_ENV === 'production' ? 
+    'https://fairlinedefense.com/chooseprotection' : 
+    'http://localhost:8080/chooseprotection'
+    const channelConfig = channel === 'sms' ? {} : {
+      substitutions: {
+        email: to,
+        callback_url: callbackUrl,
+      },
+    }
+
     try {
     client.verify.v2
     .services(verifySid)
-    .verifications.create({ to: req.user.phone, channel: "sms" })
-    .then((verification) => console.log(verification.status))
+    .verifications.create({ to: to, channel: channel, channelConfiguration: channelConfig })
+    .then((verification) => console.log('verification started:', channel, 'verification status:', verification.status))
 
     response.statusCode = 200;
     response.body = { success: true };
@@ -32,16 +44,23 @@ router.post('/start-verify', async (req, res, next) => {
 })
 
 router.post('/check-verify', async (req, res, next) => {
-  const user = await User.findOne({where: {email: req.user.email}})
+  const channel = req.body.channel
+  const to = channel === 'sms' ? req.body.phone : req.body.email
+  const code = req.body.code
+  
+  const user = channel === 'sms' ? await User.findOne({where: {phone: req.body.phone}}) :
+  await User.findOne({where: {email: req.body.email}})
+
   try {
-      client.verify.v2.services(process.env.VERIFY_SID)
+      client.verify.v2.services(verifySid)
       .verificationChecks
-      .create({to: req.user.phone, code: req.body.code})
-      .then(verification_check => {
-         const status = verification_check.status
-         console.log('STATUS FROM TWILIO RES:', status)
-         if (verification_check.status = 'approved'){
-         user.update({phoneVerified: true})
+      .create({to, code})
+      .then(check => {
+         const status = check.status
+         if (check.status = 'approved'){
+          channel === 'sms' ? User.update({phoneVerified: true}, {where: {phone: req.body.phone}}) :
+          User.update({emailVerified: true}, {where: {email: req.body.email}})
+          req.login(user, err => (err ? next(err) : console.log('logged in')))
          }
          return res.send({status: status})
         });

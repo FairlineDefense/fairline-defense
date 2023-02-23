@@ -111,48 +111,32 @@ const Button = styled.button`
 
 const VerifyEmail = () => {
   const user = useSelector(state => state.user)
-  const dispatch = useDispatch()
 
-  const clickHandler = async e => {
-    e.preventDefault()
-    // For bypassing email functionality for testing:
-    process.env.NODE_ENV === 'development' &&
-      (await fetch('webhooks/klaviyo/verify-email', {
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: user.email})
-      }).then(() => history.push('/home')))
-  }
-
-  const sendEmail = async () => {
-    if (user.id && !user.emailVerified) {
-      await fetch('klaviyo/create-account', {
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: user.email,
-          phone: user.phone,
-          firstName: user.firstName,
-          lastName: user.lastName
+  const sendVerifyEmail = async () => {
+    const data = new URLSearchParams();
+    data.append("channel", "email");
+    data.append("email", user.email);
+        fetch("twilio/start-verify", {
+          method: "POST",
+          body: data
         })
-      })
-    }
-  }
-
-  useEffect(() => {
-    try {
-      sendEmail()
-    } catch (error) {
-      console.log(error)
-    }
-  }, [])
-
+          .then(response => {
+            return response.json()
+          })
+          .then(json => {
+            if (json.success) {
+              console.log("Successfully sent email.");
+            } else {
+              console.log(json.error);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+      useEffect(() => { 
+        sendVerifyEmail()
+      }, [])
   return (
     <Gradient>
       <BackgroundImage>

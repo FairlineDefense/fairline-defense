@@ -2,6 +2,9 @@ import React from 'react'
 import css from '../register.css'
 import styled from 'styled-components'
 import RegisterHeader from '../RegisterHeader'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { me } from '../../../store/user'
 const Gradient = styled.div`
 width: 100vw;
 min-height: 100vh;
@@ -182,6 +185,30 @@ const ChooseProtection = ({
   changeHandler,
   setStep
 }) => {
+  const dispatch = useDispatch()  
+    useEffect(() => {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+      const email = params.get("to");
+    
+      // Twilio functions do not accept multipart/form-data
+      const data = new URLSearchParams();
+      data.append("email", email);
+      data.append("code", token);
+      data.append("channel", "email");
+      console.log('data',data)
+      token && fetch("twilio/check-verify", {
+          method: 'POST',
+          body: data
+        })
+        .then(response => response.json())
+        .then(json => {
+          console.log(json.success)
+        }).then(()=>{dispatch(me())})
+        .catch(err => {
+          console.log(err);
+        });
+     }, []);
   return (
     <Gradient><BackgroundImage>
       <RegisterHeader />

@@ -31,26 +31,28 @@ passport.deserializeUser(async (id, done) => {
     const user = await User.findOne({where: {id: id}})
     const data = JSON.stringify(user, 2, null)
     let profile = JSON.parse(data)
-    console.log('profile.subscriptionId', profile.subscriptionId)
-
+    let subscriptionId = profile?.subscriptionId || 'n/a'
     const getStatus = async () => {
+      console.log('subscriptionId', subscriptionId)
       let subscription
-      if(profile.subscriptionId === 'n/a') {
+      if(subscriptionId === 'n/a' || !subscriptionId) {
         return;
       } else {
-        subscription = await stripe.subscriptions.retrieve(
-          /* String of user's subscription id in the Orders database.
-          Should just attach to their user database upon creation and deprecate the Orders model because
-          the id is all we need.
-          
-          Currently it would be something like: profile.orders[0].orderId
-          */
-         profile.subscriptionId
-        )
+        try {
+          subscription = subscriptionId && await stripe.subscriptions.retrieve(
+            /* String of user's subscription id in the Orders database.
+            Should just attach to their user database upon creation and deprecate the Orders model because
+            the id is all we need.
+            
+            Currently it would be something like: profile.orders[0].orderId
+            */
+           subscriptionId
+          )
+        } catch (error) {
+          console.log('at get status',error)
+        }
       }
       
-    console.log('subscription', subscription)
-
         const date = Date.now() / 1000
         /*
         See https://stripe.com/docs/api/subscriptions/retrieve?lang=node for an example of what the subscription
@@ -86,7 +88,6 @@ passport.deserializeUser(async (id, done) => {
               profile.status = 'actionRequired'
             }
             profile.planActive = true
-            console.log('SUB STATUS', subscription.status)
             let daysTotal = Math.floor((endDate - startDate) / 86400)
             let daysLeft = Math.floor((endDate - date) / 86400)
             let percentageLeft = Math.floor(100 - daysLeft / daysTotal * 100)
@@ -101,9 +102,9 @@ passport.deserializeUser(async (id, done) => {
             profile.percentageLeft = percentageLeft
           }
     await getStatus()
-    console.log('profile',profile.planActive)
     done(null, profile)
   } catch (err) {
+    console.log('error in deserializeUser', err)
     done(err)
   }
 })
@@ -173,7 +174,7 @@ const startListening = () => {
 
 // WARNING use db.sync({force: true}) to clear database of all data and
 // reset tables ONLY in local development environment. NOT PRODUCTION.
-const syncDb = () => process.env.NODE_ENV === 'production' ? db.sync() : db.sync()
+const syncDb = () => process.env.NODE_ENV === 'production' ? db.sync() : db.sync({force:true})
 
 async function bootApp() {
   await sessionStore.sync()
