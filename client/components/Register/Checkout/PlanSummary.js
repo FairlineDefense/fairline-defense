@@ -21,6 +21,7 @@ const Header = styled.h1`
   @media (max-width: 800px) {
     margin: 0.5rem;
     font-size: 22px;
+    font-weight: 500;
   }
 `
 const CenteredWrapper = styled.div`
