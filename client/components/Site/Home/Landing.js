@@ -10,7 +10,7 @@ const Section = styled.div`
   background-image: url('./images/AdobeStock_127045648 2.jpg');
   background-position: center top;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
 
   @media (max-width: 800px) {
     margin-top: 60px;
@@ -72,7 +72,7 @@ const DownArrow = styled.div`
   width: 50px;
   display: block;
   z-index: 50;
-  top: 74%;
+  top: 600px;
   left: 50%;
 
   @media (max-width: 800px) {
