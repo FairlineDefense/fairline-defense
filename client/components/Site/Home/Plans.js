@@ -143,16 +143,14 @@ const Savings = styled.div`
     height: fit-content;
   }
 `
-const Arrow = styled.div`
-  text-align: center;
+const Arrow = styled.img`
   width: 100%;
   height: fit-content;
-  img {
-    position: relative;
-    top: -28px;
-    width: 120px;
-    height: 87px;
-  }
+  position: relative;
+  top: -48px;
+  left: 88px;
+  width: 120px;
+  height: 87px;
 `
 const Bold = styled.span`
   font-weight: 600;
@@ -182,7 +180,7 @@ export default function Plans() {
             <small>Billed Annually</small>
           </Plan>
           <Savings>
-            {/* <Arrow><img src="./images/cyanarrow.png" /></Arrow>*/}
+            <Arrow src="./images/cyanarrow.png" />
             Save $40!
           </Savings>
         </PlanWrapper>

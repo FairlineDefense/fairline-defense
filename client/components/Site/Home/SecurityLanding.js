@@ -10,7 +10,7 @@ const Section = styled.div`
   background-image: url('./images/AdobeStock_314672886 1.jpg');
   background-position: center top;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
 
   @media (max-width: 800px) {
     background-size: cover;
@@ -69,7 +69,7 @@ const DownArrow = styled.div`
   height: 50px;
   width: 50px;
   display: block;
-  top: 74%;
+  top: 600px;
   left: 50%;
 
   @media (max-width: 800px) {
@@ -80,7 +80,9 @@ export default function SecurityLanding() {
   return (
     <Section>
       <Heading>
-        Legal protection for<br />Armed professionals
+        Legal protection for
+        <br />
+        Armed professionals
       </Heading>
       <Link to="/signup">
         <StartButton>Get Started</StartButton>
