@@ -66,10 +66,10 @@ const StartButton = styled.div`
 
 const DownArrow = styled.div`
   position: absolute;
-  background-image: url('./images/downarrow.png');
+  background-image: url('./images/doubleDownArrow.png');
   background-repeat: no-repeat;
   height: 50px;
-  width: 50px;
+  width: 100px;
   display: block;
   z-index: 50;
   top: 600px;
