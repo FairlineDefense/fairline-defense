@@ -60,7 +60,7 @@ router.post('/check-verify', async (req, res, next) => {
          if (check.status = 'approved'){
           channel === 'sms' ? User.update({phoneVerified: true}, {where: {phone: req.body.phone}}) :
           User.update({emailVerified: true}, {where: {email: req.body.email}})
-          req.login(user, err => (err ? next(err) : console.log('logged in')))
+          req.login(user, err => (err ? next(err) : console.log('logged in user:', user)))
          }
          return res.send({status: status})
         });

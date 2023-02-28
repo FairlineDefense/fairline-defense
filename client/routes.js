@@ -31,8 +31,10 @@ const Routes = (props) => {
   const isLoggedIn = user.id
 
   const dispatch = useDispatch()
+  console.log('isloggedin', isLoggedIn)
 
   useEffect(() => {
+    console.log('dispatching me')
     dispatch(me())
   }, [])
 
