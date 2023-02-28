@@ -190,13 +190,15 @@ const ChooseProtection = ({
       const params = new URLSearchParams(window.location.search);
       const token = params.get("token");
       const email = params.get("to");
-    
+      params.delete("token");
+      params.delete("to");
       // Twilio functions do not accept multipart/form-data
       const data = new URLSearchParams();
       data.append("email", email);
       data.append("code", token);
       data.append("channel", "email");
       console.log('data',data)
+      console.log('verify email called')
       token && fetch("twilio/check-verify", {
           method: 'POST',
           body: data

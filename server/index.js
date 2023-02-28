@@ -28,6 +28,7 @@ passport.serializeUser((user, done) => done(null, user.id))
 
 passport.deserializeUser(async (id, done) => {
   try {
+    console.log('deserialize id', id)
     const user = await User.findOne({where: {id: id}})
     const data = JSON.stringify(user, 2, null)
     let profile = JSON.parse(data)
