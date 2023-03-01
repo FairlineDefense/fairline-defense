@@ -53,90 +53,17 @@ passport.use(new MagicLinkStrategy({
 }));
 
 // passport registration
-passport.serializeUser((user, done) => done(null, user.id))
+passport.serializeUser(function(user, cb) {
+  process.nextTick(function() {
+    cb(null, { id: user.id, email: user.email });
+  });
+});
 
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findOne({where: {id: id}})
-    const data = JSON.stringify(user, 2, null)
-    let profile = JSON.parse(data)
-    let subscriptionId = profile?.subscriptionId || 'n/a'
-    const getStatus = async () => {
-      console.log('subscriptionId', subscriptionId)
-      let subscription
-      if(subscriptionId === 'n/a' || !subscriptionId) {
-        return;
-      } else {
-        try {
-          subscription = subscriptionId && await stripe.subscriptions.retrieve(
-            /* String of user's subscription id in the Orders database.
-            Should just attach to their user database upon creation and deprecate the Orders model because
-            the id is all we need.
-            
-            Currently it would be something like: profile.orders[0].orderId
-            */
-           subscriptionId
-          )
-        } catch (error) {
-          console.log('at get status',error)
-        }
-      }
-      
-        const date = Date.now() / 1000
-        /*
-        See https://stripe.com/docs/api/subscriptions/retrieve?lang=node for an example of what the subscription
-        object looks like. The below subscription.<property> is just an example. 
-        EG: subscription.periodStart should be subscription.current_period_start
-        */
-        const startDate = subscription.current_period_start
-        const endDate = subscription.current_period_end
-        /* The code below is from when we were getting the subscription info from our orders table
-            That isn't a good solution. It is more accurate to get it directly from the Stripe API 
-            based on the subscription id. So some of the below could be updated to reflect the new
-            data object we are referencing.
-        */
-            if (subscription.status === 'past_due') {
-              profile.status = 'actionRequired'
-            }
-            if (subscription.status === 'active') {
-              profile.status = 'paid'
-            }
-            if (subscription.status === 'cancelled') {
-              profile.status = 'cancelled'
-            }
-            if (subscription.status === 'incomplete') {
-              profile.status = 'actionRequired'
-            }
-            if (subscription.status === 'unpaid') {
-              profile.status = 'actionRequired'
-            }
-            if (subscription.status === 'incomplete') {
-              profile.status = 'actionRequired'
-            }
-            if (subscription.status === 'incomplete_expired') {
-              profile.status = 'actionRequired'
-            }
-            profile.planActive = true
-            let daysTotal = Math.floor((endDate - startDate) / 86400)
-            let daysLeft = Math.floor((endDate - date) / 86400)
-            let percentageLeft = Math.floor(100 - daysLeft / daysTotal * 100)
-            let periodStartString = dateString(startDate)
-            let periodEndString = dateString(endDate)
-            profile.subscription = subscription.id
-            profile.interval = subscription?.items?.data[0]?.price?.recurring?.interval || 'month'
-            profile.periodStart = periodStartString
-            profile.periodEnd = periodEndString
-            profile.daysTotal = daysTotal
-            profile.daysLeft = daysLeft
-            profile.percentageLeft = percentageLeft
-          }
-    await getStatus()
-    done(null, profile)
-  } catch (err) {
-    console.log('error in deserializeUser', err)
-    done(err)
-  }
-})
+passport.deserializeUser(function(user, cb) {
+  process.nextTick(function() {
+    return cb(null, user);
+  });
+});
 
 const createApp = () => {
   // logging middleware
