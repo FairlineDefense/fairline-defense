@@ -185,26 +185,11 @@ const ChooseProtection = ({
   changeHandler,
   setStep
 }) => {
-  const dispatch = useDispatch()  
     useEffect(() => {
-      const params = new URLSearchParams(window.location.search);
-      const token = params.get("token");
-      const email = params.get("to");
-    
-      // Twilio functions do not accept multipart/form-data
-      const data = new URLSearchParams();
-      data.append("email", email);
-      data.append("code", token);
-      data.append("channel", "email");
-      console.log('data',data)
-      token && fetch("twilio/check-verify", {
-          method: 'POST',
-          body: data
+      fetch("twilio/check-verify-email", {
+          method: 'GET',
         })
         .then(response => response.json())
-        .then(json => {
-          console.log(json.success)
-        }).then(()=>{dispatch(me())})
         .catch(err => {
           console.log(err);
         });

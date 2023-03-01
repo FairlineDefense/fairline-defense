@@ -114,21 +114,13 @@ const VerifyEmail = () => {
 
   const sendVerifyEmail = async () => {
     const data = new URLSearchParams();
-    data.append("channel", "email");
     data.append("email", user.email);
-        fetch("twilio/start-verify", {
+        fetch("twilio/verify-email", {
           method: "POST",
           body: data
         })
           .then(response => {
             return response.json()
-          })
-          .then(json => {
-            if (json.success) {
-              console.log("Successfully sent email.");
-            } else {
-              console.log(json.error);
-            }
           })
           .catch(err => {
             console.log(err);

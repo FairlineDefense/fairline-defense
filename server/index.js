@@ -13,6 +13,8 @@ const {User, Order} = require('./db/models')
 const dateString = require('../utils/dateString')
 require('dotenv').config()
 const stripe = require('stripe')(process.env.SECRET_KEY)
+var MagicLinkStrategy = require('passport-magic-link').Strategy;
+var sendgrid = require('@sendgrid/mail');
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -22,6 +24,33 @@ if (process.env.NODE_ENV === 'test') {
 }
 app.use('/webhooks/stripe', require('./webhooks/stripe'))
 app.use('/webhooks/klaviyo', require('./webhooks/klaviyo'))
+
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
+
+passport.use(new MagicLinkStrategy({
+  secret: 'my best friend is Cody.',
+  userFields: [ 'email' ],
+  tokenField: 'token',
+  verifyUserAfterToken: true
+}, async function send(user, token) {
+  var link = process.env.NODE_ENV === 'production' ? 'https://fairlinedefense.com/chooseprotection?token=' + token : 'http://localhost:8080/chooseprotection?token=' + token;
+  var msg = {
+    to: user.email,
+    from: 'support@fairlinedefense.com',
+    subject: 'Confirm Your Email for Fairline Defense',
+    text: 'Hello! Click the link below to finish signing up for Fairline Defense.\r\n\r\n' + link,
+    html: '<h3>Hello!</h3><p>Click the link below to finish signing up for Fairline Defense.</p><p><a href="' + link + '">Sign in</a></p>',
+  };
+  await User.update({emailVerified: true}, {where: {email: user.email}})
+  console.log('user update called for', user.email)
+  return sendgrid.send(msg);
+}, function verify(user) {
+  console.log('promise func called for', user.email)
+  return new Promise(function(resolve, reject) {
+   const res = User.update({emailVerified: true}, {where: {email: user.email}})
+        return resolve(res);
+  });
+}));
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))

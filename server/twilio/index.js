@@ -5,6 +5,7 @@ const accountSid = process.env.ACCOUNT_SID
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const verifySid = process.env.VERIFY_SID
 const client = require("twilio")(accountSid, authToken);
+const passport = require('passport')
 
 module.exports = router
 
@@ -71,3 +72,16 @@ router.post('/check-verify', async (req, res, next) => {
     return res.status(statusCode).send()
     }
 })
+
+router.post('/verify-email', passport.authenticate('magiclink', {
+  action: 'requestToken',
+  failureRedirect: '/login',
+  failureMessage: true
+}), function(req, res, next) {
+  res.status(200).send()
+});
+
+router.get('/check-verify-email', passport.authenticate('magiclink', {
+  successReturnToOrRedirect: '/',
+  failureRedirect: '/login'
+}));
