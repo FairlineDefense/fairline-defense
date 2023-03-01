@@ -15,7 +15,6 @@ require('dotenv').config()
 const stripe = require('stripe')(process.env.SECRET_KEY)
 var MagicLinkStrategy = require('passport-magic-link').Strategy;
 var sendgrid = require('@sendgrid/mail');
-var cookieParser = require('cookie-parser')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -34,7 +33,7 @@ passport.use(new MagicLinkStrategy({
   tokenField: 'token',
   verifyUserAfterToken: true
 }, async function send(user, token) {
-  var link = process.env.NODE_ENV === 'production' ? 'https://fairlinedefense.com/chooseprotection?token=' + token : 'http://localhost:8080/chooseprotection?token=' + token;
+  var link = process.env.NODE_ENV === 'production' ? 'fairlinedefense.com/chooseprotection?token=' + token : 'http://localhost:8080/chooseprotection?token=' + token;
   var msg = {
     to: user.email,
     from: 'support@fairlinedefense.com',
@@ -78,7 +77,6 @@ const createApp = () => {
   app.use(compression())
 
   // session middleware with passport
-  app.use(cookieParser('my best friend is Cody'))
   app.use(
     session({
       secret: process.env.SESSION_SECRET || 'my best friend is Cody',
