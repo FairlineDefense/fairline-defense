@@ -15,6 +15,7 @@ require('dotenv').config()
 const stripe = require('stripe')(process.env.SECRET_KEY)
 var MagicLinkStrategy = require('passport-magic-link').Strategy;
 var sendgrid = require('@sendgrid/mail');
+var cookieParser = require('cookie-parser')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -28,7 +29,7 @@ app.use('/webhooks/klaviyo', require('./webhooks/klaviyo'))
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 passport.use(new MagicLinkStrategy({
-  secret: 'my best friend is Cody.',
+  secret: 'my best friend is Cody',
   userFields: [ 'email' ],
   tokenField: 'token',
   verifyUserAfterToken: true
@@ -77,6 +78,7 @@ const createApp = () => {
   app.use(compression())
 
   // session middleware with passport
+  app.use(cookieParser('my best friend is Cody'))
   app.use(
     session({
       secret: process.env.SESSION_SECRET || 'my best friend is Cody',
@@ -86,7 +88,7 @@ const createApp = () => {
     })
   )
   app.use(passport.initialize())
-  app.use(passport.session())
+  app.use(passport.authenticate('session'))
 
   // auth and api routes
   app.use('/auth', require('./auth'))
