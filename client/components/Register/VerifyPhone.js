@@ -2,7 +2,7 @@ import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import history from '../../history'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import RegisterHeader from './RegisterHeader'
 import ReactInputVerificationCode from 'react-input-verification-code'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -142,6 +142,7 @@ const VerifyPhone = () => {
   const dispatch = useDispatch()
 
   let [code, setCode] = useState('')
+  let codeField = useRef(null)
   let [loader, setLoader] = useState(false)
   let [text, setText] = useState(
     'Please enter the verification code received by SMS.'
@@ -224,6 +225,15 @@ const VerifyPhone = () => {
     }, 2000)
   }
 
+  useEffect(() => {
+    let interval = setInterval(() => {
+      if(codeField.current) {
+        setCode(codeField.current.value)
+        clearInterval(interval)
+      }
+    }, 100)
+      })
+
   if (loader) {
     return (
       <Gradient>
@@ -271,6 +281,7 @@ const VerifyPhone = () => {
           </CenteredWrapper>
           <Form>
             <ReactInputVerificationCode
+              ref={codeField}
               autoFocus
               length={6}
               placeholder=""
