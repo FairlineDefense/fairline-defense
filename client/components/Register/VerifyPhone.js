@@ -147,7 +147,6 @@ const VerifyPhone = () => {
     'Please enter the verification code received by SMS.'
   )
 
-  console.log(code)
   //Send One Time Password
   async function sendOtp() {
     const data = new URLSearchParams()
