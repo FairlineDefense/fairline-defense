@@ -9,34 +9,34 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import {ThemeProvider} from 'styled-components'
 import theme from '../theme'
 const Gradient = styled.div`
-width: 100vw;
-min-height: 100vh;
-background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
-color: #fff;
-overflow-x: hidden;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  color: #fff;
+  overflow-x: hidden;
 
-a {
-  color: var(--blue);
-}
+  a {
+    color: var(--blue);
+  }
 
-a:visited {
-  color: var(--blue);
-}
+  a:visited {
+    color: var(--blue);
+  }
 
-a:hover {
-  color: var(--blue);
-}
+  a:hover {
+    color: var(--blue);
+  }
 `
 const BackgroundImage = styled.div`
-height: 100%;
-width: 100%;
-background-image: url('./images/background.png');
-background-repeat: no-repeat;
-background-position: -120px -100px;
+  height: 100%;
+  width: 100%;
+  background-image: url('./images/background.png');
+  background-repeat: no-repeat;
+  background-position: -120px -100px;
 
-@media (max-width: 800px) {
-background-image: none;
-}
+  @media (max-width: 800px) {
+    background-image: none;
+  }
 `
 const Wrapper = styled.div`
   width: 100%;
@@ -138,45 +138,48 @@ const ProgressWrapper = styled.div`
   align-items: center;
 `
 const VerifyPhone = () => {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
   let [code, setCode] = useState('')
   let [loader, setLoader] = useState(false)
-  let [text, setText] = useState('Please enter the verification code received by SMS.')
+  let [text, setText] = useState(
+    'Please enter the verification code received by SMS.'
+  )
 
+  console.log(code)
   //Send One Time Password
   async function sendOtp() {
-    const data = new URLSearchParams();
-    data.append("channel", "sms");
-    data.append("phone", user.phone);
+    const data = new URLSearchParams()
+    data.append('channel', 'sms')
+    data.append('phone', user.phone)
     try {
-      const response = await fetch("twilio/start-verify", {
-        method: "POST",
+      const response = await fetch('twilio/start-verify', {
+        method: 'POST',
         body: data,
-      });
+      })
 
-      const json = await response.json();
+      const json = await response.json()
       if (response.status == 429) {
         setText(
-          `You have attempted to verify '${user.phone}' too many times. Please wait 10 minutes and try again.`,
-        );
+          `You have attempted to verify '${user.phone}' too many times. Please wait 10 minutes and try again.`
+        )
       } else if (response.status >= 400) {
-        setText(json.error);
+        setText(json.error)
       } else {
         if (json.success) {
-          setText(`Sent verification code to ${user.phone}`);
+          setText(`Sent verification code to ${user.phone}`)
         } else {
-          console.log(json.error);
+          console.log(json.error)
         }
       }
     } catch (error) {
-      console.error(error);
-      setText(`Something went wrong while sending code to ${user.phone}.`);
+      console.error(error)
+      setText(`Something went wrong while sending code to ${user.phone}.`)
     }
   }
 
-  const clickHandler = async e => {
+  const clickHandler = async (e) => {
     e.preventDefault()
 
     setLoader(true)
@@ -186,11 +189,10 @@ const VerifyPhone = () => {
       method: 'POST',
       headers: {
         accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({code: code, channel: 'sms', phone: user.phone})
-    }).then(res => res.json())
-
+      body: JSON.stringify({code: code, channel: 'sms', phone: user.phone}),
+    }).then((res) => res.json())
 
     setTimeout(() => {
       setLoader(false)
@@ -205,7 +207,6 @@ const VerifyPhone = () => {
     }, 2000)
   }
 
-
   useEffect(() => {
     try {
       sendOtp()
@@ -214,7 +215,7 @@ const VerifyPhone = () => {
     }
   }, [])
 
-  const resend = e => {
+  const resend = (e) => {
     e.preventDefault()
     sendOtp()
     setLoader(true)
@@ -228,6 +229,39 @@ const VerifyPhone = () => {
     return (
       <Gradient>
         <BackgroundImage>
+          <RegisterHeader />
+          <Wrapper>
+            <Heading>Verify your phone</Heading>
+            <CenteredWrapper>
+              <PhoneIcon src="./images/confirmphone.png" />
+              <SubHeading>A verification code has been sent to</SubHeading>
+              <SemiBold>{user.phone}</SemiBold>
+            </CenteredWrapper>
+            <CenteredWrapper>
+              <ThemeProvider theme={theme}>
+                <ProgressWrapper>
+                  <CircularProgress color={theme.palette.primary.main} />
+                </ProgressWrapper>
+              </ThemeProvider>
+            </CenteredWrapper>
+            <CenteredWrapper>
+              <SubHeading>
+                Please enter the verification code received by SMS.
+              </SubHeading>
+              <Button onClick={(e) => clickHandler(e)}>Continue</Button>
+            </CenteredWrapper>
+            <BottomWrapper>
+              <span>Resend SMS Code</span>
+              <span>Edit Phone Number</span>
+            </BottomWrapper>
+          </Wrapper>
+        </BackgroundImage>
+      </Gradient>
+    )
+  }
+  return (
+    <Gradient>
+      <BackgroundImage>
         <RegisterHeader />
         <Wrapper>
           <Heading>Verify your phone</Heading>
@@ -236,66 +270,33 @@ const VerifyPhone = () => {
             <SubHeading>A verification code has been sent to</SubHeading>
             <SemiBold>{user.phone}</SemiBold>
           </CenteredWrapper>
+          <Form>
+            <ReactInputVerificationCode
+              autoFocus
+              length={6}
+              placeholder=""
+              onChange={setCode}
+              onCompleted={setCode}
+              value={code}
+            />
+          </Form>
           <CenteredWrapper>
-            <ThemeProvider theme={theme}>
-              <ProgressWrapper>
-                <CircularProgress color={theme.palette.primary.main} />
-              </ProgressWrapper>
-            </ThemeProvider>
-          </CenteredWrapper>
-          <CenteredWrapper>
-            <SubHeading>
-              Please enter the verification code received by SMS.
-            </SubHeading>
-            <Button onClick={e => clickHandler(e)}>Continue</Button>
+            <SubHeading>{text}</SubHeading>
+            <Button onClick={(e) => clickHandler(e)}>Continue</Button>
           </CenteredWrapper>
           <BottomWrapper>
-            <span>Resend SMS Code</span>
+            <span
+              onClick={(e) => {
+                resend(e)
+              }}
+            >
+              Resend SMS Code
+            </span>
             <span>Edit Phone Number</span>
           </BottomWrapper>
         </Wrapper>
       </BackgroundImage>
-      </Gradient>
-    )
-  }
-  return (
-    <Gradient>
-      <BackgroundImage>
-      <RegisterHeader />
-      <Wrapper>
-        <Heading>Verify your phone</Heading>
-        <CenteredWrapper>
-          <PhoneIcon src="./images/confirmphone.png" />
-          <SubHeading>A verification code has been sent to</SubHeading>
-          <SemiBold>{user.phone}</SemiBold>
-        </CenteredWrapper>
-        <Form>
-          <ReactInputVerificationCode
-            length={6}
-            placeholder=""
-            onChange={setCode}
-            value={code}
-          />
-        </Form>
-        <CenteredWrapper>
-          <SubHeading>
-            {text}
-          </SubHeading>
-          <Button onClick={e => clickHandler(e)}>Continue</Button>
-        </CenteredWrapper>
-        <BottomWrapper>
-          <span
-            onClick={e => {
-              resend(e)
-            }}
-          >
-            Resend SMS Code
-          </span>
-          <span>Edit Phone Number</span>
-        </BottomWrapper>
-      </Wrapper>
-      </BackgroundImage>
-      </Gradient>
+    </Gradient>
   )
 }
 export default VerifyPhone
