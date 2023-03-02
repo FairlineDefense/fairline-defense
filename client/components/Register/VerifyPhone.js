@@ -182,9 +182,9 @@ const VerifyPhone = () => {
     e.preventDefault()
 
     setLoader(true)
-
+    setCode()
     //Check user entered One Time Password
-    const checkVerify = await fetch('twilio/check-verify', {
+    const checkVerify = code !== '' && await fetch('twilio/check-verify', {
       method: 'POST',
       headers: {
         accept: 'application/json',
