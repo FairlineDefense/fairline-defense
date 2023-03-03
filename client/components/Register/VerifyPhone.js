@@ -58,7 +58,7 @@ const CenteredWrapper = styled.div`
   text-align: center;
   margin: 1rem;
 `
-const Form = styled.form`
+const Form = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -180,11 +180,12 @@ const VerifyPhone = () => {
 
   const clickHandler = async (e) => {
     e.preventDefault()
-
+    if(code === '' || code.length < 5) {
+      return;
+    }
     setLoader(true)
-
     //Check user entered One Time Password
-    const checkVerify = await fetch('twilio/check-verify', {
+    const checkVerify = code !== '' && await fetch('twilio/check-verify', {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -247,7 +248,7 @@ const VerifyPhone = () => {
               <SubHeading>
                 Please enter the verification code received by SMS.
               </SubHeading>
-              <Button onClick={(e) => clickHandler(e)}>Continue</Button>
+              <Button onClick={(e) => clickHandler(e)} disabled={!code.length}>Continue</Button>
             </CenteredWrapper>
             <BottomWrapper>
               <span>Resend SMS Code</span>
@@ -275,13 +276,13 @@ const VerifyPhone = () => {
               length={6}
               placeholder=""
               onChange={setCode}
-              onCompleted={setCode}
+              onComplete={console.log(code)}
               value={code}
             />
           </Form>
           <CenteredWrapper>
             <SubHeading>{text}</SubHeading>
-            <Button onClick={(e) => clickHandler(e)}>Continue</Button>
+            <Button onClick={(e) => clickHandler(e)} disabled={!code.length}>Continue</Button>
           </CenteredWrapper>
           <BottomWrapper>
             <span
