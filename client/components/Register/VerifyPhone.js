@@ -179,7 +179,6 @@ const VerifyPhone = () => {
   }
 
   const clickHandler = async (e) => {
-    console.log(code)
     e.preventDefault()
     if(code === '' || code.length < 5) {
       return;
