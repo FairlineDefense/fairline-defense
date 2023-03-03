@@ -180,19 +180,21 @@ const VerifyPhone = () => {
 
   const clickHandler = async (e) => {
     e.preventDefault()
-    if(code === '' || code.length < 5) {
-      return;
+    if (code === '' || code.length < 5) {
+      return
     }
     setLoader(true)
     //Check user entered One Time Password
-    const checkVerify = code !== '' && await fetch('twilio/check-verify', {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({code: code, channel: 'sms', phone: user.phone}),
-    }).then((res) => res.json())
+    const checkVerify =
+      code !== '' &&
+      (await fetch('twilio/check-verify', {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({code: code, channel: 'sms', phone: user.phone}),
+      }).then((res) => res.json()))
 
     setTimeout(() => {
       setLoader(false)
@@ -248,7 +250,9 @@ const VerifyPhone = () => {
               <SubHeading>
                 Please enter the verification code received by SMS.
               </SubHeading>
-              <Button onClick={(e) => clickHandler(e)} disabled={!code.length}>Continue</Button>
+              <Button onClick={(e) => clickHandler(e)} disabled={!code.length}>
+                Continue
+              </Button>
             </CenteredWrapper>
             <BottomWrapper>
               <span>Resend SMS Code</span>
@@ -282,7 +286,9 @@ const VerifyPhone = () => {
           </Form>
           <CenteredWrapper>
             <SubHeading>{text}</SubHeading>
-            <Button onClick={(e) => clickHandler(e)} disabled={!code.length}>Continue</Button>
+            <Button onClick={(e) => clickHandler(e)} disabled={!code.length}>
+              Continue
+            </Button>
           </CenteredWrapper>
           <BottomWrapper>
             <span

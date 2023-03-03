@@ -57,7 +57,7 @@ export default function Invoices() {
   const getInvoices = async () => {
     const res = await fetch('/payment/invoices', {
       method: 'GET',
-      headers: {'Content-type': 'application/json'}
+      headers: {'Content-type': 'application/json'},
     })
     const body = await res.json()
     setInvoices(body)
@@ -81,7 +81,7 @@ export default function Invoices() {
         </PDF>
       </Line>
       {invoices &&
-        invoices.map(line => (
+        invoices.map((line) => (
           <Line key={line.id}>
             <Date>{line.date}</Date>
             <Charge>{line.amount}</Charge>

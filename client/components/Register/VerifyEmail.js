@@ -6,34 +6,34 @@ import RegisterHeader from './RegisterHeader'
 import {useEffect} from 'react'
 
 const Gradient = styled.div`
-width: 100vw;
-min-height: 100vh;
-background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
-color: #fff;
-overflow-x: hidden;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  color: #fff;
+  overflow-x: hidden;
 
-a {
-  color: var(--blue);
-}
+  a {
+    color: var(--blue);
+  }
 
-a:visited {
-  color: var(--blue);
-}
+  a:visited {
+    color: var(--blue);
+  }
 
-a:hover {
-  color: var(--blue);
-}
+  a:hover {
+    color: var(--blue);
+  }
 `
 const BackgroundImage = styled.div`
-height: 100%;
-width: 100%;
-background-image: url('./images/background.png');
-background-repeat: no-repeat;
-background-position: -120px -100px;
+  height: 100%;
+  width: 100%;
+  background-image: url('./images/background.png');
+  background-repeat: no-repeat;
+  background-position: -120px -100px;
 
-@media (max-width: 800px) {
-background-image: none;
-}
+  @media (max-width: 800px) {
+    background-image: none;
+  }
 `
 const Wrapper = styled.div`
   width: 100%;
@@ -110,54 +110,54 @@ const Button = styled.button`
 `
 
 const VerifyEmail = () => {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user)
 
   const sendVerifyEmail = async () => {
-    const data = new URLSearchParams();
-    data.append("channel", "email");
-    data.append("email", user.email);
-        fetch("twilio/start-verify", {
-          method: "POST",
-          body: data
-        })
-          .then(response => {
-            return response.json()
-          })
-          .then(json => {
-            if (json.success) {
-              console.log("Successfully sent email.");
-            } else {
-              console.log(json.error);
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
-      useEffect(() => { 
-        sendVerifyEmail()
-      }, [])
+    const data = new URLSearchParams()
+    data.append('channel', 'email')
+    data.append('email', user.email)
+    fetch('twilio/start-verify', {
+      method: 'POST',
+      body: data,
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        if (json.success) {
+          console.log('Successfully sent email.')
+        } else {
+          console.log(json.error)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  useEffect(() => {
+    sendVerifyEmail()
+  }, [])
   return (
     <Gradient>
       <BackgroundImage>
-      <RegisterHeader />
-      <Wrapper>
-        <Heading>Verify your email</Heading>
-        <CenteredWrapper>
-          <EmailIcon src="./images/confirmemail.png" />
-          <SubHeading>A confirmation link has been sent to</SubHeading>
-          <SubHeading>
-            <SemiBold>{user.email}</SemiBold>
-          </SubHeading>
-        </CenteredWrapper>
-        <BottomWrapper>
-          <SubHeading>
-            In order to proceed, please check your email and click the
-            confirmation link.
-          </SubHeading>
-          <Button onClick={e => clickHandler(e)}>Continue</Button>
-        </BottomWrapper>
-      </Wrapper>
+        <RegisterHeader />
+        <Wrapper>
+          <Heading>Verify your email</Heading>
+          <CenteredWrapper>
+            <EmailIcon src="./images/confirmemail.png" />
+            <SubHeading>A confirmation link has been sent to</SubHeading>
+            <SubHeading>
+              <SemiBold>{user.email}</SemiBold>
+            </SubHeading>
+          </CenteredWrapper>
+          <BottomWrapper>
+            <SubHeading>
+              In order to proceed, please check your email and click the
+              confirmation link.
+            </SubHeading>
+            <Button onClick={(e) => clickHandler(e)}>Continue</Button>
+          </BottomWrapper>
+        </Wrapper>
       </BackgroundImage>
     </Gradient>
   )

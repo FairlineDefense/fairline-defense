@@ -119,20 +119,20 @@ export default function EditPersonalInformation(props) {
     zipCode: user.zipCode,
     //New password:
     password: '',
-    repeatNewPassword: ''
+    repeatNewPassword: '',
   })
   let [errorText, setErrorText] = useState('')
 
-  const changeHandler = e => {
+  const changeHandler = (e) => {
     e.preventDefault()
     setForm({...form, [e.target.name]: e.target.value})
   }
-  const cancelHandler = e => {
+  const cancelHandler = (e) => {
     e.preventDefault()
     //Insert warning to save or continue
     setState('PersonalInformation')
   }
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault()
     function validateFields() {
       if (
@@ -188,7 +188,7 @@ export default function EditPersonalInformation(props) {
             line2: form.line2,
             city: form.city,
             state: form.state,
-            zipCode: form.zipCode
+            zipCode: form.zipCode,
           })
         )
       }
@@ -207,7 +207,7 @@ export default function EditPersonalInformation(props) {
               placeholder="First Name"
               name="firstName"
               value={form.firstName}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
               required
             />
           </span>
@@ -218,7 +218,7 @@ export default function EditPersonalInformation(props) {
               placeholder="Last Name"
               name="lastName"
               value={form.lastName}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
               required
             />
           </span>
@@ -231,7 +231,7 @@ export default function EditPersonalInformation(props) {
               placeholder="Email Address"
               name="email"
               value={form.email}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
               required
             />
           </span>
@@ -242,7 +242,7 @@ export default function EditPersonalInformation(props) {
               placeholder="Phone Number"
               name="phone"
               value={form.phone}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
               required
             />
           </span>
@@ -255,7 +255,7 @@ export default function EditPersonalInformation(props) {
               placeholder="Street Address"
               name="streetAddress"
               value={form.streetAddress}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
               required
             />
           </span>
@@ -266,14 +266,14 @@ export default function EditPersonalInformation(props) {
               placeholder="City"
               name="city"
               value={form.city}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
               required
             />
             <State
               placeholder="State"
               name="state"
               value={form.state}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
               required
             >
               <option value="AL">AL</option>
@@ -339,7 +339,7 @@ export default function EditPersonalInformation(props) {
               placeholder="Optional"
               name="line2"
               value={form.line2}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
             />
           </span>
           <span>
@@ -349,7 +349,7 @@ export default function EditPersonalInformation(props) {
               placeholder="Zip."
               name="zipCode"
               value={form.zipCode}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
               required
             />
           </span>
@@ -363,7 +363,7 @@ export default function EditPersonalInformation(props) {
               placeholder="Password"
               name="password"
               value={form.password}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
             />
           </span>
           <span>
@@ -374,12 +374,12 @@ export default function EditPersonalInformation(props) {
               placeholder="Repeat Password"
               name="repeatNewPassword"
               value={form.repeatNewPassword}
-              onChange={e => changeHandler(e)}
+              onChange={(e) => changeHandler(e)}
             />
           </span>
         </InputGroup>
         <InputGroup>
-          <Button type="button" onClick={e => cancelHandler(e)}>
+          <Button type="button" onClick={(e) => cancelHandler(e)}>
             Cancel
           </Button>
           <CyanButton type="submit">Save Edits</CyanButton>

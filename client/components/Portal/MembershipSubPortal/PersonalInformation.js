@@ -51,7 +51,7 @@ const EditButton = styled.button`
 `
 export default function PersonalInformation(props) {
   let {user, setState} = props
-  const clickHandler = e => {
+  const clickHandler = (e) => {
     e.preventDefault()
     setState('EditPersonalInformation')
   }
@@ -74,9 +74,7 @@ export default function PersonalInformation(props) {
         <InformationBlock>
           <header>Shipping Address</header>
           <small>
-            {`${user.streetAddress}, ${user.city}, ${user.state}, ${
-              user.zipCode
-            }`}
+            {`${user.streetAddress}, ${user.city}, ${user.state}, ${user.zipCode}`}
             {user.line2 && `, ${user.line2}`}
           </small>
         </InformationBlock>
@@ -86,7 +84,7 @@ export default function PersonalInformation(props) {
         </InformationBlock>
       </InformationWrapper>
       <EditWrapper>
-        <EditButton onClick={e => clickHandler(e)}>Edit Profile</EditButton>
+        <EditButton onClick={(e) => clickHandler(e)}>Edit Profile</EditButton>
       </EditWrapper>
     </Wrapper>
   )

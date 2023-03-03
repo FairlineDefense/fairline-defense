@@ -90,7 +90,9 @@ export default function WhatDoYouGetMobile() {
           <img src="./images/9.png" />
           <header>$1.5M</header>
           <small>
-            In Legal<br />Fees
+            In Legal
+            <br />
+            Fees
           </small>
         </Card>
       </Wrapper>

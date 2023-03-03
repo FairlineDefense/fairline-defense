@@ -19,8 +19,8 @@ async function seed() {
       state: 'NY',
       zipCode: '10012',
       customerId: 'cus_MgDPAElk6VULUe',
-      orderId: 1
-    })
+      orderId: 1,
+    }),
   ])
   const orders = await Promise.all([
     Order.create({
@@ -41,8 +41,8 @@ async function seed() {
       status: 'paid',
       createdAt: '2022-10-22T14:30:38.351Z',
       updatedAt: '2022-10-22T14:30:38.401Z',
-      userId: 1
-    })
+      userId: 1,
+    }),
   ])
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${orders.length} orders`)

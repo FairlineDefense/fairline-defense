@@ -16,5 +16,5 @@ Order.belongsTo(User)
  */
 module.exports = {
   User,
-  Order
+  Order,
 }

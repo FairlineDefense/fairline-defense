@@ -9,9 +9,9 @@ const Wrapper = styled.div`
   position: relative;
 
   @media (max-width: 800px) {
-    padding: .5rem;
+    padding: 0.5rem;
     height: 55px;
-    background-color: #132A4A;
+    background-color: #132a4a;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +25,7 @@ const Logo = styled.img`
   @media (max-width: 800px) {
     height: 32px;
   }
-  `
+`
 
 export default function RegisterHeader() {
   return (

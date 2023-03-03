@@ -71,7 +71,7 @@ const MobileMenu = styled.ul`
 `
 
 const Navbar = () => {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user)
   const isLoggedIn = user.id
 
   const dispatch = useDispatch()
@@ -83,7 +83,7 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
@@ -139,7 +139,7 @@ const Navbar = () => {
                   width: 32,
                   height: 32,
                   ml: -0.5,
-                  mr: 1
+                  mr: 1,
                 },
                 '&:before': {
                   content: '""',
@@ -151,9 +151,9 @@ const Navbar = () => {
                   height: 10,
                   bgcolor: 'background.paper',
                   transform: 'translateY(-50%) rotate(45deg)',
-                  zIndex: 0
-                }
-              }
+                  zIndex: 0,
+                },
+              },
             }}
             transformOrigin={{horizontal: 'right', vertical: 'top'}}
             anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}

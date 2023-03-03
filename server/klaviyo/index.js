@@ -28,7 +28,7 @@ router.post('/deprecated', async (req, res, next) => {
         accept: 'application/json',
         revision: '2022-10-17',
         'content-type': 'application/json',
-        Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+        Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`,
       },
       body: JSON.stringify({
         data: {
@@ -37,10 +37,10 @@ router.post('/deprecated', async (req, res, next) => {
             email: req.body.email,
             phone_number: req.body.phone,
             first_name: req.body.firstName,
-            last_name: req.body.lastName
-          }
-        }
-      })
+            last_name: req.body.lastName,
+          },
+        },
+      }),
     }
     const createKlaviyoProfileRes =
       process.env.NODE_ENV === 'production' &&
@@ -48,9 +48,9 @@ router.post('/deprecated', async (req, res, next) => {
         'https://a.klaviyo.com/api/profiles/',
         createKlaviyoProfileBody
       )
-        .then(response => response.json())
-        .then(res => res.data)
-        .catch(err => console.error('ERROR', err)))
+        .then((response) => response.json())
+        .then((res) => res.data)
+        .catch((err) => console.error('ERROR', err)))
 
     if (createKlaviyoProfileRes.id || process.env.NODE_ENV === 'development') {
       await User.update(
@@ -65,19 +65,19 @@ router.post('/deprecated', async (req, res, next) => {
           accept: 'application/json',
           revision: '2022-10-17',
           'content-type': 'application/json',
-          Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+          Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`,
         },
         body: JSON.stringify({
           data: {
             type: 'profile-subscription-bulk-create-job',
             attributes: {
               subscriptions: [
-                {email: req.body.email, phone_number: req.body.phone}
+                {email: req.body.email, phone_number: req.body.phone},
               ],
-              list_id: 'VXeuyy'
-            }
-          }
-        })
+              list_id: 'VXeuyy',
+            },
+          },
+        }),
       }
 
       process.env.NODE_ENV === 'production' &&
@@ -85,8 +85,8 @@ router.post('/deprecated', async (req, res, next) => {
           'https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/',
           addUserToNewsletterBody
         )
-          .then(res => console.log(res))
-          .catch(err => console.error('error:' + err))
+          .then((res) => console.log(res))
+          .catch((err) => console.error('error:' + err))
     }
 
     // Step 3 is located in ../webhooks/klaviyo
@@ -117,23 +117,23 @@ router.post('/deprecated-1', async (req, res, next) => {
       accept: 'application/json',
       revision: '2022-10-17',
       'content-type': 'application/json',
-      Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+      Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`,
     },
     body: JSON.stringify({
       data: {
         type: 'profile',
         attributes: {properties: {code: code}},
-        id: req.user.klaviyoProfileID
-      }
-    })
+        id: req.user.klaviyoProfileID,
+      },
+    }),
   }
 
   fetch(
     `https://a.klaviyo.com/api/profiles/${req.user.klaviyoProfileID}/`,
     updateProfileWithCodeBody
   )
-    .then(response => console.log(response))
-    .catch(err => console.error(err))
+    .then((response) => console.log(response))
+    .catch((err) => console.error(err))
 
   // Step 3:
   const addUserToSMSListBody = {
@@ -142,19 +142,19 @@ router.post('/deprecated-1', async (req, res, next) => {
       accept: 'application/json',
       revision: '2022-10-17',
       'content-type': 'application/json',
-      Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`
+      Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_PRIVATE_KEY}`,
     },
     body: JSON.stringify({
-      data: [{type: 'profile', id: req.user.klaviyoProfileID}]
-    })
+      data: [{type: 'profile', id: req.user.klaviyoProfileID}],
+    }),
   }
 
   fetch(
     'https://a.klaviyo.com/api/lists/SKvZ83/relationships/profiles/',
     addUserToSMSListBody
   )
-    .then(response => console.log(response))
-    .catch(err => console.error(err))
+    .then((response) => console.log(response))
+    .catch((err) => console.error(err))
 
   return res.json(code)
 })

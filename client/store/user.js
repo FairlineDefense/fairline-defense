@@ -15,14 +15,14 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
+const getUser = (user) => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const updateUser = user => ({type: UPDATE_USER, user})
+const updateUser = (user) => ({type: UPDATE_USER, user})
 
 /**
  * THUNK CREATORS
  */
-export const me = () => async dispatch => {
+export const me = () => async (dispatch) => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
@@ -30,36 +30,30 @@ export const me = () => async dispatch => {
     console.error(err)
   }
 }
-export const signup = (
-  firstName,
-  lastName,
-  email,
-  phone,
-  password,
-  method
-) => async dispatch => {
-  let res
-  try {
-    res = await axios.post(`/auth/${method}`, {
-      firstName,
-      lastName,
-      email,
-      phone,
-      password
-    })
-  } catch (authError) {
-    return dispatch(getUser({error: authError}))
-  }
+export const signup =
+  (firstName, lastName, email, phone, password, method) => async (dispatch) => {
+    let res
+    try {
+      res = await axios.post(`/auth/${method}`, {
+        firstName,
+        lastName,
+        email,
+        phone,
+        password,
+      })
+    } catch (authError) {
+      return dispatch(getUser({error: authError}))
+    }
 
-  try {
-    dispatch(getUser(res.data))
-    console.log('res.data get user', res)
-    history.push('/verifyemail')
-  } catch (dispatchOrHistoryErr) {
-    dispatch(getUser(dispatchOrHistoryErr))
+    try {
+      dispatch(getUser(res.data))
+      console.log('res.data get user', res)
+      history.push('/verifyemail')
+    } catch (dispatchOrHistoryErr) {
+      dispatch(getUser(dispatchOrHistoryErr))
+    }
   }
-}
-export const auth = (email, password, method) => async dispatch => {
+export const auth = (email, password, method) => async (dispatch) => {
   let res
   try {
     res = await axios.post(`/auth/${method}`, {email, password})
@@ -75,7 +69,7 @@ export const auth = (email, password, method) => async dispatch => {
   }
 }
 
-export const update = body => async dispatch => {
+export const update = (body) => async (dispatch) => {
   try {
     await axios.put(`/api/users/${body.id}`, body)
     dispatch(updateUser(body))
@@ -83,7 +77,7 @@ export const update = body => async dispatch => {
     console.error(error)
   }
 }
-export const logout = () => async dispatch => {
+export const logout = () => async (dispatch) => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
@@ -96,7 +90,7 @@ export const logout = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user

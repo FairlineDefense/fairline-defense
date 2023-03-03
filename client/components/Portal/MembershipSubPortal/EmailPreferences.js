@@ -92,15 +92,15 @@ export default function EmailPreferences(props) {
     emailInsider: user.emailInsider,
     emailNews: user.emailNews,
     emailPromotions: user.emailPromotions,
-    id: user.id
+    id: user.id,
   })
 
-  const changeHandler = e => {
+  const changeHandler = (e) => {
     e.preventDefault()
     setForm({...form, [e.target.name]: !form[e.target.name]})
   }
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault()
     dispatch(update(form))
   }
@@ -128,7 +128,7 @@ export default function EmailPreferences(props) {
               <li>
                 <Checkbox
                   color="primary"
-                  onChange={e => changeHandler(e)}
+                  onChange={(e) => changeHandler(e)}
                   name="emailReminders"
                   checked={form.emailReminders}
                 />
@@ -137,7 +137,7 @@ export default function EmailPreferences(props) {
               <li>
                 <Checkbox
                   color="primary"
-                  onChange={e => changeHandler(e)}
+                  onChange={(e) => changeHandler(e)}
                   name="emailInsider"
                   checked={form.emailInsider}
                 />
@@ -146,7 +146,7 @@ export default function EmailPreferences(props) {
               <li>
                 <Checkbox
                   color="primary"
-                  onChange={e => changeHandler(e)}
+                  onChange={(e) => changeHandler(e)}
                   name="emailNews"
                   checked={form.emailNews}
                 />
@@ -155,14 +155,14 @@ export default function EmailPreferences(props) {
               <li>
                 <Checkbox
                   color="primary"
-                  onChange={e => changeHandler(e)}
+                  onChange={(e) => changeHandler(e)}
                   name="emailPromotions"
                   checked={form.emailPromotions}
                 />
                 Promotions
               </li>
               <li>
-                <Button type="submit" onClick={e => submitHandler(e)}>
+                <Button type="submit" onClick={(e) => submitHandler(e)}>
                   Save Changes
                 </Button>
               </li>

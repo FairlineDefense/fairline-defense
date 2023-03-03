@@ -24,7 +24,7 @@ const WhiteBackground = styled.div`
   }
 `
 export default function MembershipSubPortal(props) {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user)
   let [state, setState] = useState('')
 
   useEffect(() => {

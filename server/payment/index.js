@@ -17,8 +17,8 @@ router.post('/create-customer', async (req, res) => {
         line2: req.body.line2,
         city: req.body.city,
         state: req.body.state,
-        postal_code: req.body.zipCode
-      }
+        postal_code: req.body.zipCode,
+      },
     })
 
     await User.update(
@@ -29,7 +29,7 @@ router.post('/create-customer', async (req, res) => {
         city: req.body.city,
         state: req.body.state,
         zipCode: req.body.zipCode,
-        customerId: customer.id
+        customerId: customer.id,
       },
       {where: {email: req.body.email}}
     )
@@ -47,7 +47,7 @@ router.post('/create-customer', async (req, res) => {
       armedCitizenYear: process.env.ANNUAL_PRICE_ID,
       armedProfessionalMonth: process.env.ARMED_PROFESSIONAL_MONTH_PRICE_ID,
       armedProfessionalYear: process.env.ARMED_PROFESSIONAL_ANNUAL_PRICE_ID,
-      spouse: process.env.MONTH_SPOUSE_PRICE_ID
+      spouse: process.env.MONTH_SPOUSE_PRICE_ID,
     }
     let priceId = priceIds[req.body.priceId]
     try {
@@ -58,12 +58,12 @@ router.post('/create-customer', async (req, res) => {
         customer: customerId,
         items: [
           {
-            price: priceId
-          }
+            price: priceId,
+          },
         ],
         payment_behavior: 'default_incomplete',
         payment_settings: {save_default_payment_method: 'on_subscription'},
-        expand: ['latest_invoice.payment_intent']
+        expand: ['latest_invoice.payment_intent'],
       })
 
       await User.update(
@@ -72,11 +72,11 @@ router.post('/create-customer', async (req, res) => {
         },
         {where: {customerId: customerId}}
       )
-        console.log('subscription created', subscription.id, customerId)
+      console.log('subscription created', subscription.id, customerId)
       return res.json({
         subscriptionId: subscription.id,
         clientSecretRes:
-          subscription.latest_invoice.payment_intent.client_secret
+          subscription.latest_invoice.payment_intent.client_secret,
       })
     } catch (error) {
       console.log('create subscription error =>', error.message)
@@ -87,7 +87,7 @@ router.post('/create-customer', async (req, res) => {
 router.post('/add-a-spouse', async (req, res) => {
   const priceIds = {
     month: process.env.MONTH_SPOUSE_PRICE_ID,
-    year: process.env.ANNUAL_SPOUSE_PRICE_ID
+    year: process.env.ANNUAL_SPOUSE_PRICE_ID,
   }
   try {
     const response = await stripe.quotes.create({
@@ -95,14 +95,14 @@ router.post('/add-a-spouse', async (req, res) => {
       line_items: [
         {
           price: priceIds[req.body.interval],
-          quantity: 1
-        }
-      ]
+          quantity: 1,
+        },
+      ],
     })
     const totalString = `${response.amount_total / 100}`
     return res.json({
       total: totalString,
-      interval: response.computed.recurring.interval
+      interval: response.computed.recurring.interval,
     })
   } catch (error) {
     console.log(error)
@@ -115,23 +115,23 @@ router.put('/add-a-spouse', async (req, res) => {
   console.log(sub)
   const priceIds = {
     month: process.env.MONTH_SPOUSE_PRICE_ID,
-    year: process.env.ANNUAL_SPOUSE_PRICE_ID
+    year: process.env.ANNUAL_SPOUSE_PRICE_ID,
   }
   try {
     const subscription = await stripe.subscriptions.update(sub, {
       items: [
         {
-          price: priceIds[req.body.interval]
-        }
+          price: priceIds[req.body.interval],
+        },
       ],
-      proration_behavior: 'always_invoice'
+      proration_behavior: 'always_invoice',
     })
     await User.update(
       {
         addSpouse: true,
         spouseName: req.body.spouseName,
         spouseEmail: req.body.spouseEmail,
-        spousePhone: req.body.spousePhone
+        spousePhone: req.body.spousePhone,
       },
       {where: {id: req.body.id}}
     )
@@ -144,9 +144,9 @@ router.put('/add-a-spouse', async (req, res) => {
 router.get('/invoices', async (req, res) => {
   try {
     const invoices = await stripe.invoices.list({
-      customer: req.user.customerId
+      customer: req.user.customerId,
     })
-    const data = invoices.data.map(line => {
+    const data = invoices.data.map((line) => {
       const date = dateIntString(line.created)
       const amount = priceString(line.amount_due)
       const pdfUrl = line.hosted_invoice_url

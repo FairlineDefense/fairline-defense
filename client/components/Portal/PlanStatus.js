@@ -88,7 +88,7 @@ export default function PlanStatus(props) {
               pathColor: '#D6AE21',
               trailColor: '#FFF',
               textSize: '7px',
-              strokeLinecap: 'butt'
+              strokeLinecap: 'butt',
             })}
           />
         </ProgressBarWrapper>
@@ -116,7 +116,7 @@ export default function PlanStatus(props) {
             pathColor: '#D6AE21',
             trailColor: '#FFF',
             textSize: '7px',
-            strokeLinecap: 'butt'
+            strokeLinecap: 'butt',
           })}
         />
       </ProgressBarWrapper>

@@ -58,13 +58,13 @@ router.post(
             last4: undefined,
             exp_year: undefined,
             exp_month: undefined,
-            brand: undefined
+            brand: undefined,
           }
 
           if (customer.invoice_settings.default_payment_method) {
             await stripe.paymentMethods
               .retrieve(customer.invoice_settings.default_payment_method)
-              .then(res => (card = res.card))
+              .then((res) => (card = res.card))
           }
 
           await User.update(
@@ -82,7 +82,7 @@ router.post(
               last4: card.last4 && card.last4,
               expYear: card.exp_year && card.exp_year,
               expMonth: card.exp_month && card.exp_month,
-              brand: card.brand && card.brand
+              brand: card.brand && card.brand,
             },
             {where: {customerId: customer.id}}
           )
@@ -95,13 +95,19 @@ router.post(
       case 'customer.subscription.created':
         const subscription = event.data.object
         try {
-           await User.update({
-            subscriptionId: subscription.id,
-            }, {
-            where: {customerId: subscription.customer}
-            })
+          await User.update(
+            {
+              subscriptionId: subscription.id,
+            },
+            {
+              where: {customerId: subscription.customer},
+            }
+          )
         } catch (error) {
-          console.log('subscription created, user updated subscription id',error)
+          console.log(
+            'subscription created, user updated subscription id',
+            error
+          )
         }
         break
     }
@@ -125,7 +131,7 @@ router.post(
                 last4: paymentMethod.card.last4,
                 expYear: paymentMethod.card.exp_year,
                 expMonth: paymentMethod.card.exp_month,
-                brand: paymentMethod.card.brand
+                brand: paymentMethod.card.brand,
               },
               {where: {customerId: invoice.customer}}
             )
@@ -143,7 +149,7 @@ router.post(
             planActive: false,
             spouseName: 'n/a',
             spouseEmail: 'n/a',
-            spousePhone: 'n/a'
+            spousePhone: 'n/a',
           })
           const order = Order.findOne({where: {orderId: subscription.id}})
           await order.destroy()
@@ -178,7 +184,7 @@ router.post(
               amountPaid: invoice.amount_paid,
               amountRemaining: invoice.amount_remaining,
               invoicePDF: invoice.invoice_pdf,
-              status: invoice.status
+              status: invoice.status,
             },
             {where: {orderId: invoice.subscription}}
           )

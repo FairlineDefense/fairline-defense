@@ -16,34 +16,34 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Button from '@material-ui/core/Button'
 
 const Gradient = styled.div`
-width: 100vw;
-min-height: 100vh;
-background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
-color: #fff;
-overflow-x: hidden;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  color: #fff;
+  overflow-x: hidden;
 
-a {
-  color: var(--blue);
-}
+  a {
+    color: var(--blue);
+  }
 
-a:visited {
-  color: var(--blue);
-}
+  a:visited {
+    color: var(--blue);
+  }
 
-a:hover {
-  color: var(--blue);
-}
+  a:hover {
+    color: var(--blue);
+  }
 `
 const BackgroundImage = styled.div`
-height: 100%;
-width: 100%;
-background-image: url('./images/background.png');
-background-repeat: no-repeat;
-background-position: -120px -100px;
+  height: 100%;
+  width: 100%;
+  background-image: url('./images/background.png');
+  background-repeat: no-repeat;
+  background-position: -120px -100px;
 
-@media (max-width: 800px) {
-background-image: none;
-}
+  @media (max-width: 800px) {
+    background-image: none;
+  }
 `
 const Logo = styled.img`
   height: 64px;
@@ -128,16 +128,16 @@ const ErrorText = styled.span`
 `
 
 const Login = () => {
-  let user = useSelector(state => state.user)
+  let user = useSelector((state) => state.user)
   const dispatch = useDispatch()
   let [errorText, setErrorText] = useState('')
   let [form, setForm] = useState({email: '', password: '', showPassword: false})
 
-  const changeHandler = e => {
+  const changeHandler = (e) => {
     e.preventDefault()
     setForm({...form, [e.target.name]: e.target.value})
   }
-  const handleSubmit = evt => {
+  const handleSubmit = (evt) => {
     evt.preventDefault()
     const email = form.email
     const password = form.password
@@ -151,105 +151,102 @@ const Login = () => {
     user.error = ''
   }
 
-  const handleClose = value => {
+  const handleClose = (value) => {
     setOpen(false)
     user.error = ''
     setSelectedValue(value)
   }
 
-  useEffect(
-    () => {
-      if (user.error) {
-        setOpen(true)
-      }
-    },
-    [user]
-  )
+  useEffect(() => {
+    if (user.error) {
+      setOpen(true)
+    }
+  }, [user])
 
   const handleClickShowPassword = () => {
     setForm({
       ...form,
-      showPassword: !form.showPassword
+      showPassword: !form.showPassword,
     })
   }
 
   return (
     <Gradient>
       <BackgroundImage>
-      <LoginWrapper>
-        <CenteredWrapper>
-          <Link to="/">
-            <Logo src="./images/fdlogo.png" />
-          </Link>
-        </CenteredWrapper>
-        <CenteredWrapper>
-          <H1>Login</H1>
-        </CenteredWrapper>
-        <CenteredWrapper>
-          <LoginForm onSubmit={handleSubmit} name="login">
-            <div>
-              <FDTextField
-                fullWidth
-                label="Email"
-                name="email"
-                variant="filled"
-                type="text"
-                value={form.email}
-                onChange={e => changeHandler(e)}
-                style={{margin: 8}}
-                required
-              />
-            </div>
-            <div>
-              <FDPasswordField
-                fullWidth
-                label="Password"
-                placeholder="Password"
-                name="password"
-                type={form.showPassword ? 'text' : 'password'}
-                onChange={e => changeHandler(e)}
-                value={form.password}
-                style={{margin: 8}}
-                variant="filled"
-                toggleVisibility={handleClickShowPassword}
-                required
-              />
-            </div>
-            <ForgotPassword>
-              <Link to="#">Forgot your password?</Link>
-            </ForgotPassword>
-            <div>
-              <LoginFormButton type="submit">Log In</LoginFormButton>
-            </div>
-          </LoginForm>
-        </CenteredWrapper>
-        <CenteredWrapper>
-          <BottomText>
-            <span>Don't have an account?</span>
-            <Link to="/signup">Register</Link>
-          </BottomText>
-        </CenteredWrapper>
-        <CenteredWrapper>
-          {errorText && <ErrorText>{errorText}</ErrorText>}
-        </CenteredWrapper>
-      </LoginWrapper>
+        <LoginWrapper>
+          <CenteredWrapper>
+            <Link to="/">
+              <Logo src="./images/fdlogo.png" />
+            </Link>
+          </CenteredWrapper>
+          <CenteredWrapper>
+            <H1>Login</H1>
+          </CenteredWrapper>
+          <CenteredWrapper>
+            <LoginForm onSubmit={handleSubmit} name="login">
+              <div>
+                <FDTextField
+                  fullWidth
+                  label="Email"
+                  name="email"
+                  variant="filled"
+                  type="text"
+                  value={form.email}
+                  onChange={(e) => changeHandler(e)}
+                  style={{margin: 8}}
+                  required
+                />
+              </div>
+              <div>
+                <FDPasswordField
+                  fullWidth
+                  label="Password"
+                  placeholder="Password"
+                  name="password"
+                  type={form.showPassword ? 'text' : 'password'}
+                  onChange={(e) => changeHandler(e)}
+                  value={form.password}
+                  style={{margin: 8}}
+                  variant="filled"
+                  toggleVisibility={handleClickShowPassword}
+                  required
+                />
+              </div>
+              <ForgotPassword>
+                <Link to="#">Forgot your password?</Link>
+              </ForgotPassword>
+              <div>
+                <LoginFormButton type="submit">Log In</LoginFormButton>
+              </div>
+            </LoginForm>
+          </CenteredWrapper>
+          <CenteredWrapper>
+            <BottomText>
+              <span>Don't have an account?</span>
+              <Link to="/signup">Register</Link>
+            </BottomText>
+          </CenteredWrapper>
+          <CenteredWrapper>
+            {errorText && <ErrorText>{errorText}</ErrorText>}
+          </CenteredWrapper>
+        </LoginWrapper>
 
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Invalid Login Credentials</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Account not found. Did you forget your password?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClick}>Sign up instead</Button>
-          <Button onClick={handleClose} autoFocus>
-            Go back
-          </Button>
-        </DialogActions>
-      </Dialog>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Invalid Login Credentials</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Account not found. Did you forget your password?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClick}>Sign up instead</Button>
+            <Button onClick={handleClose} autoFocus>
+              Go back
+            </Button>
+          </DialogActions>
+        </Dialog>
       </BackgroundImage>
-      </Gradient>
+    </Gradient>
   )
 }
 export default Login

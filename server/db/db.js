@@ -11,12 +11,12 @@ const config = process.env.DATABASE_URL
       dialect: 'postgres',
       dialectOptions: {
         ssl: {
-          require: true
-        }
-      }
+          require: true,
+        },
+      },
     }
   : {
-      logging: false
+      logging: false,
     }
 
 const db = new Sequelize(dbUrl, config)

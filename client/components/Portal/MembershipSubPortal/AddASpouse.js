@@ -97,11 +97,11 @@ export default function AddASpouse(props) {
   let [form, setForm] = useState({
     spouseName: '',
     spouseEmail: '',
-    spousePhone: ''
+    spousePhone: '',
   })
   let [quote, setQuote] = useState({})
   let [errorText, setErrorText] = useState('')
-  const changeHandler = e => {
+  const changeHandler = (e) => {
     e.preventDefault()
     setForm({...form, [e.target.name]: e.target.value})
   }
@@ -110,9 +110,9 @@ export default function AddASpouse(props) {
     const res = await fetch('/payment/add-a-spouse', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(user),
     })
     const body = await res.json()
     console.log(body)
@@ -133,14 +133,14 @@ export default function AddASpouse(props) {
       const response = await fetch('/payment/add-a-spouse', {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(reqBody)
+        body: JSON.stringify(reqBody),
       })
     } catch (error) {
       console.log('create customer error', error)
     }
   }
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault()
     function validateFields() {
       if (
@@ -174,7 +174,7 @@ export default function AddASpouse(props) {
               <Input
                 name="spouseName"
                 value={form.spouseName}
-                onChange={e => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
                 required
               />
             </span>
@@ -183,7 +183,7 @@ export default function AddASpouse(props) {
               <Input
                 name="spouseEmail"
                 value={form.spouseEmailAddress}
-                onChange={e => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
                 required
               />
             </span>
@@ -192,7 +192,7 @@ export default function AddASpouse(props) {
               <Input
                 name="spousePhone"
                 value={form.spousePhone}
-                onChange={e => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
                 required
               />
             </span>

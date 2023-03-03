@@ -6,7 +6,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import {alpha, styled} from '@material-ui/core/styles'
 
-const FDPasswordField = styled(props => (
+const FDPasswordField = styled((props) => (
   <TextField
     InputProps={{
       disableUnderline: true,
@@ -20,25 +20,25 @@ const FDPasswordField = styled(props => (
             {props.type === 'text' ? <VisibilityOff /> : <Visibility />}
           </IconButton>
         </InputAdornment>
-      )
+      ),
     }}
     {...props}
   />
 ))(({theme}) => ({
   '& label.Mui': {
-    color: '#333'
+    color: '#333',
   },
   '& label.Mui-focused': {
-    color: '#AAB1B9'
+    color: '#AAB1B9',
   },
   '& .MuiFormHelperText-root': {
-    color: '#FFF'
+    color: '#FFF',
   },
   '& .MuiFormHelperText-root.Mui-error': {
-    color: '#f44336'
+    color: '#f44336',
   },
   '& .MuiFilledInput-root.Mui-error': {
-    borderColor: `#f44336`
+    borderColor: `#f44336`,
   },
   '& .MuiFilledInput-root': {
     border: '1px solid #e2e2e1',
@@ -48,17 +48,17 @@ const FDPasswordField = styled(props => (
     transition: theme.transitions.create([
       'border-color',
       'background-color',
-      'box-shadow'
+      'box-shadow',
     ]),
     '&:hover': {
-      backgroundColor: '#FFF'
+      backgroundColor: '#FFF',
     },
     '&.Mui-focused': {
       backgroundColor: '#FFF',
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
-      borderColor: `#00abe1`
-    }
-  }
+      borderColor: `#00abe1`,
+    },
+  },
 }))
 
 export default FDPasswordField

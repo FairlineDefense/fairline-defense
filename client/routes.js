@@ -20,7 +20,7 @@ import {
   SecurityHome,
   MembershipAndBilling,
   VerifiedEmail,
-  Checkout
+  Checkout,
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'

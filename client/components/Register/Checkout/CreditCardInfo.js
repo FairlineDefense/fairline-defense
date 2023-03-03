@@ -86,23 +86,23 @@ const CreditCardInfo = ({
     state,
     zipCode,
     differentAddress,
-    termsAndConditions
+    termsAndConditions,
   },
   order,
   options,
   stripePromise,
   setOrder,
   changeHandler,
-  setStep
+  setStep,
 }) => {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user)
   const stripe = useStripe()
   const elements = useElements()
   const dispatch = useDispatch()
 
   const [errorMessage, setErrorMessage] = useState(null)
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault()
@@ -119,8 +119,8 @@ const CreditCardInfo = ({
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: process.env.PAYMENT_STATUS_URL
-      }
+        return_url: process.env.PAYMENT_STATUS_URL,
+      },
     })
 
     if (error) {

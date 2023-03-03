@@ -37,7 +37,7 @@ const Header = styled.header`
   font-size: 30px;
 `
 const Membership = () => {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user)
 
   if (!user.phoneVerified) {
     return <VerifyPhone />

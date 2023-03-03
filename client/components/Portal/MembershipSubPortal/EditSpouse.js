@@ -100,14 +100,14 @@ export default function EditPersonalInformation(props) {
   let [form, setForm] = useState()
   let [errorText, setErrorText] = useState('')
 
-  const changeHandler = e => {
+  const changeHandler = (e) => {
     e.preventDefault()
     setForm({...form, [e.target.name]: e.target.value})
   }
-  const cancelHandler = e => {
+  const cancelHandler = (e) => {
     e.preventDefault()
   }
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault()
   }
 
@@ -122,7 +122,7 @@ export default function EditPersonalInformation(props) {
               <Input
                 name="spouseName"
                 value={form.spouseName}
-                onChange={e => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
                 required
               />
             </span>
@@ -131,7 +131,7 @@ export default function EditPersonalInformation(props) {
               <Input
                 name="spouseEmail"
                 value={form.spouseEmailAddress}
-                onChange={e => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
                 required
               />
             </span>
@@ -140,7 +140,7 @@ export default function EditPersonalInformation(props) {
               <Input
                 name="spousePhone"
                 value={form.spousePhone}
-                onChange={e => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
                 required
               />
             </span>

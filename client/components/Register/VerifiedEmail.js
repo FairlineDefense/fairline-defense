@@ -7,34 +7,34 @@ import {useEffect} from 'react'
 import {Link} from 'react-router-dom'
 
 const Gradient = styled.div`
-width: 100vw;
-min-height: 100vh;
-background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
-color: #fff;
-overflow-x: hidden;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  color: #fff;
+  overflow-x: hidden;
 
-a {
-  color: var(--blue);
-}
+  a {
+    color: var(--blue);
+  }
 
-a:visited {
-  color: var(--blue);
-}
+  a:visited {
+    color: var(--blue);
+  }
 
-a:hover {
-  color: var(--blue);
-}
+  a:hover {
+    color: var(--blue);
+  }
 `
 const BackgroundImage = styled.div`
-height: 100%;
-width: 100%;
-background-image: url('./images/background.png');
-background-repeat: no-repeat;
-background-position: -120px -100px;
+  height: 100%;
+  width: 100%;
+  background-image: url('./images/background.png');
+  background-repeat: no-repeat;
+  background-position: -120px -100px;
 
-@media (max-width: 800px) {
-background-image: none;
-}
+  @media (max-width: 800px) {
+    background-image: none;
+  }
 `
 const Wrapper = styled.div`
   width: 100%;
@@ -93,34 +93,34 @@ const Button = styled.button`
 const VerifiedEmail = () => {
   console.log(document.referrer)
   return (
-   <Gradient>
-    <BackgroundImage>
-      <Wrapper>
-        <CenteredWrapper>
-          <SubHeading>
-            <SemiBold>Congratulations!</SemiBold>
-          </SubHeading>
-          <SubHeading>Your account has been successfully created.</SubHeading>
-        </CenteredWrapper>
-        <CenteredWrapper>
-          <SubHeading>
-            You are one step away from getting the protection you need.
-          </SubHeading>
-        </CenteredWrapper>
-        <CenteredWrapper>
-          <SubHeading>
-            Only <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr ($40 Savings)</Blue>
-          </SubHeading>
-        </CenteredWrapper>
-        <CenteredWrapper>
-          <Heading>Start your protection</Heading>
-          <img src="./images/downarrow.png" />
-          <Link to="/home">
-            <Button>Get Protected</Button>
-          </Link>
-        </CenteredWrapper>
-      </Wrapper>
-    </BackgroundImage>
+    <Gradient>
+      <BackgroundImage>
+        <Wrapper>
+          <CenteredWrapper>
+            <SubHeading>
+              <SemiBold>Congratulations!</SemiBold>
+            </SubHeading>
+            <SubHeading>Your account has been successfully created.</SubHeading>
+          </CenteredWrapper>
+          <CenteredWrapper>
+            <SubHeading>
+              You are one step away from getting the protection you need.
+            </SubHeading>
+          </CenteredWrapper>
+          <CenteredWrapper>
+            <SubHeading>
+              Only <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr ($40 Savings)</Blue>
+            </SubHeading>
+          </CenteredWrapper>
+          <CenteredWrapper>
+            <Heading>Start your protection</Heading>
+            <img src="./images/downarrow.png" />
+            <Link to="/home">
+              <Button>Get Protected</Button>
+            </Link>
+          </CenteredWrapper>
+        </Wrapper>
+      </BackgroundImage>
     </Gradient>
   )
 }

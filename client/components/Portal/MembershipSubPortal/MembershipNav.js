@@ -21,7 +21,7 @@ export default function MembershipNav(props) {
   return (
     <div>
       <Button
-        onClick={e => {
+        onClick={(e) => {
           setState(e.target.value)
         }}
         value="PersonalInformation"
@@ -29,7 +29,7 @@ export default function MembershipNav(props) {
         Personal Info
       </Button>
       <Button
-        onClick={e => {
+        onClick={(e) => {
           setState(e.target.value)
         }}
         value="MembershipAndBilling"
@@ -37,7 +37,7 @@ export default function MembershipNav(props) {
         Membership and Billing
       </Button>
       <Button
-        onClick={e => {
+        onClick={(e) => {
           setState(e.target.value)
         }}
         value="Invoices"
@@ -45,7 +45,7 @@ export default function MembershipNav(props) {
         Invoices
       </Button>
       <Button
-        onClick={e => {
+        onClick={(e) => {
           setState(e.target.value)
         }}
         value="EmailPreferences"

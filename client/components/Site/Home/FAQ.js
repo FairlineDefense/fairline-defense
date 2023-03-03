@@ -89,19 +89,24 @@ export default function FAQ() {
       <Questions>
         <ul>
           <li>
-            Why do I need this?<img src="./images/cyandownarrow.png" />
+            Why do I need this?
+            <img src="./images/cyandownarrow.png" />
           </li>
           <li>
-            Why do I need this?<img src="./images/cyandownarrow.png" />
+            Why do I need this?
+            <img src="./images/cyandownarrow.png" />
           </li>
           <li>
-            Why do I need this?<img src="./images/cyandownarrow.png" />
+            Why do I need this?
+            <img src="./images/cyandownarrow.png" />
           </li>
           <li>
-            Why do I need this?<img src="./images/cyandownarrow.png" />
+            Why do I need this?
+            <img src="./images/cyandownarrow.png" />
           </li>
           <li>
-            Why do I need this?<img src="./images/cyandownarrow.png" />
+            Why do I need this?
+            <img src="./images/cyandownarrow.png" />
           </li>
         </ul>
       </Questions>

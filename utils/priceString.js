@@ -1,4 +1,4 @@
-const priceString = price => {
+const priceString = (price) => {
   let val = price / 100
   return `$ ${val}`
 }

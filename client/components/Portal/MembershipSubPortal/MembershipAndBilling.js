@@ -83,7 +83,7 @@ export default function MembershipAndBilling(props) {
   let {user, setState} = props
   let [portalUrl, setPortalUrl] = useState('')
 
-  const clickHandler = async e => {
+  const clickHandler = async (e) => {
     e.preventDefault()
     if (e.target.value === 'View Card') {
       setState('ViewCard')
@@ -94,7 +94,7 @@ export default function MembershipAndBilling(props) {
   const getPortalUrl = async () => {
     const res = await fetch('/api/users/create-customer-portal-session', {
       method: 'GET',
-      headers: {'Content-type': 'application/json'}
+      headers: {'Content-type': 'application/json'},
     })
     const {sessionUrl: sessionUrl} = await res.json()
     setPortalUrl(sessionUrl)
@@ -139,8 +139,8 @@ export default function MembershipAndBilling(props) {
         </InformationWrapper>
 
         <ButtonWrapper>
-          <Button onClick={e => clickHandler(e)}>View Card</Button>
-          <CyanButton onClick={e => clickHandler(e)} value="addASpouse">
+          <Button onClick={(e) => clickHandler(e)}>View Card</Button>
+          <CyanButton onClick={(e) => clickHandler(e)} value="addASpouse">
             Add a Spouse
           </CyanButton>
         </ButtonWrapper>

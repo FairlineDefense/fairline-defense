@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import Navbar from './Navbar'
 
 const Benefits = () => {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user)
 
   return (
     <div>

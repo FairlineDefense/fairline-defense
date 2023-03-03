@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-
 const Wrapper = styled.div.attrs((props) => ({
   display: props.display || 'none',
   backgroundColor: props.backgroundColor || 'none',

@@ -6,179 +6,179 @@ const Order = require('./order')
 const User = db.define('user', {
   membershipNumber: {
     type: Sequelize.STRING,
-    unique: true
+    unique: true,
     // allowNull: false
   },
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   security: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   military: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   veteran: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   lawEnforcement: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   phone: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
   },
   alternatePhone: {
     type: Sequelize.STRING,
-    unique: true
+    unique: true,
   },
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
   },
   streetAddress: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   line2: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   city: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   state: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   country: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   zipCode: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   shippingstreetaddress: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   shippingline2: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   shippingcity: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   shippingstate: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   shippingzipcode: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   emergencyContactName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   emergencyContactPhone: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   klaviyoProfileID: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   emailVerified: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   phoneVerified: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   phoneCode: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   planActive: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   addSpouse: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   spouseName: {
     type: Sequelize.STRING,
-    defaultValue: 'n/a'
+    defaultValue: 'n/a',
   },
   spouseEmail: {
     type: Sequelize.STRING,
-    defaultValue: 'n/a'
+    defaultValue: 'n/a',
   },
   spousePhone: {
     type: Sequelize.STRING,
-    defaultValue: 'n/a'
+    defaultValue: 'n/a',
   },
   customerId: {
     type: Sequelize.STRING,
-    unique: true
+    unique: true,
   },
   subscriptionId: {
     type: Sequelize.STRING,
     unique: true,
-    defaultValue: 'n/a'
+    defaultValue: 'n/a',
   },
   emailReminders: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    defaultValue: true,
   },
   emailInsider: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    defaultValue: true,
   },
   emailNews: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    defaultValue: true,
   },
   emailPromotions: {
     type: Sequelize.BOOLEAN,
-    defaultValue: true
+    defaultValue: true,
   },
   accountSuspended: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   accountFlagged: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   accountWatchList: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   promotion: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   staff: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   },
   brand: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   paymentMethod: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   last4: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   expMonth: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   expYear: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   password: {
     type: Sequelize.STRING,
@@ -186,7 +186,7 @@ const User = db.define('user', {
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('password')
-    }
+    },
   },
   salt: {
     type: Sequelize.STRING,
@@ -194,11 +194,11 @@ const User = db.define('user', {
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('salt')
-    }
+    },
   },
   googleId: {
-    type: Sequelize.STRING
-  }
+    type: Sequelize.STRING,
+  },
 })
 
 module.exports = User
@@ -206,17 +206,17 @@ module.exports = User
 /**
  * instanceMethods
  */
-User.prototype.correctPassword = function(candidatePwd) {
+User.prototype.correctPassword = function (candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 /**
  * classMethods
  */
-User.generateSalt = function() {
+User.generateSalt = function () {
   return crypto.randomBytes(16).toString('base64')
 }
 
-User.encryptPassword = function(plainText, salt) {
+User.encryptPassword = function (plainText, salt) {
   return crypto
     .createHash('RSA-SHA256')
     .update(plainText)
@@ -227,13 +227,13 @@ User.encryptPassword = function(plainText, salt) {
 /**
  * hooks
  */
-const setSaltAndPassword = user => {
+const setSaltAndPassword = (user) => {
   if (user.changed('password')) {
     user.salt = User.generateSalt()
     user.password = User.encryptPassword(user.password(), user.salt())
   }
 }
-const setMembershipNumber = async user => {
+const setMembershipNumber = async (user) => {
   const makeNumber = () => {
     return Math.floor(100000000 + Math.random() * 900000000)
   }
@@ -249,6 +249,6 @@ const setMembershipNumber = async user => {
 User.beforeCreate(setMembershipNumber)
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
-User.beforeBulkCreate(users => {
+User.beforeBulkCreate((users) => {
   users.forEach(setSaltAndPassword)
 })
