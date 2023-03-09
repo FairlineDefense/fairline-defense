@@ -12,34 +12,34 @@ import PlanSummary from './PlanSummary'
 import states from './states'
 
 const Gradient = styled.div`
-width: 100vw;
-min-height: 100vh;
-background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
-color: #fff;
-overflow-x: hidden;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  color: #fff;
+  overflow-x: hidden;
 
-a {
-  color: var(--blue);
-}
+  a {
+    color: var(--blue);
+  }
 
-a:visited {
-  color: var(--blue);
-}
+  a:visited {
+    color: var(--blue);
+  }
 
-a:hover {
-  color: var(--blue);
-}
+  a:hover {
+    color: var(--blue);
+  }
 `
 const BackgroundImage = styled.div`
-height: 100%;
-width: 100%;
-background-image: url('./images/background.png');
-background-repeat: no-repeat;
-background-position: -120px -100px;
+  height: 100%;
+  width: 100%;
+  background-image: url('./images/background.png');
+  background-repeat: no-repeat;
+  background-position: -120px -100px;
 
-@media (max-width: 800px) {
-background-image: none;
-}
+  @media (max-width: 800px) {
+    background-image: none;
+  }
 `
 const Wrapper = styled.div`
   width: 100%;
@@ -49,6 +49,13 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
 `
+
+const Line2Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`
+
 const Button = styled.button`
   background-color: var(--blue);
   color: #fff;
@@ -122,16 +129,16 @@ const BillingAddress = ({
     line2,
     city,
     state,
-    zipCode
+    zipCode,
   },
   order,
   setStep,
   changeHandler,
-  setOrder
+  setOrder,
 }) => {
   let [errorText, setErrorText] = useState('')
 
-  const clickHandler = e => {
+  const clickHandler = (e) => {
     e.preventDefault()
     function validateFields() {
       if (!/^\d{5}(-\d{4})?$/.test(zipCode)) {
@@ -148,99 +155,104 @@ const BillingAddress = ({
   }
 
   return (
-    <Gradient><BackgroundImage>
-      <RegisterHeader />
-      <Wrapper>
-        <PlanSummary
-          price={price}
-          priceId={priceId}
-          changeHandler={changeHandler}
-          protectionTypeString={protectionTypeString}
-          protectionType={protectionType}
-          billingInterval={billingInterval}
-          setStep={setStep}
-        />
-        <Header>Billing Address</Header>
-        <ThemeProvider theme={theme}>
-          <Form>
-            <FDTextField
-              label="Apt."
-              variant="filled"
-              type="text"
-              style={{margin: 8, maxWidth: 90}}
-              name="apt"
-              placeholder="Apt"
-              onChange={e => changeHandler(e)}
-              value={apt}
-            />
-            <FDTextField
-              name="streetAddress"
-              label="Street Address"
-              placeholder="Street Address"
-              type="text"
-              variant="filled"
-              style={{margin: 8, flexGrow: 1}}
-              onChange={e => changeHandler(e)}
-              value={streetAddress}
-              required
-            />
-            <FDTextField
-              fullWidth
-              name="line2"
-              label="Street Address Line 2"
-              placeholder="Street Address Line 2"
-              type="text"
-              variant="filled"
-              style={{margin: 8}}
-              onChange={e => changeHandler(e)}
-              value={line2}
-            />
-            <FDTextField
-              name="city"
-              placeholder="City"
-              label="City"
-              variant="filled"
-              style={{margin: 8, flexGrow: 1}}
-              onChange={e => changeHandler(e)}
-              value={city}
-              required
-            />
-            <Select
-              placeholder="State"
-              style={{
-                backgroundColor: '#FFF',
-                borderRadius: 4,
-                margin: 8,
-                width: 100,
-                paddingLeft: 20
-              }}
-              name="state"
-              value={state}
-              onChange={e => setOrder({...order, state: e.target.value})}
-              required
-            >
-              {states.map(state => (
-                <MenuItem key={state} value={state}>
-                  {state}
-                </MenuItem>
-              ))}
-            </Select>
-            <FDTextField
-              name="zipCode"
-              placeholder="Zip Code"
-              label="Zip Code"
-              variant="filled"
-              style={{margin: 8, flexGrow: 1}}
-              onChange={e => changeHandler(e)}
-              value={zipCode}
-              required
-            />
-          </Form>
-        </ThemeProvider>
-        <ContinueButton onClick={e => clickHandler(e)}>Continue</ContinueButton>
-        {errorText && <ErrorText>{errorText}</ErrorText>}
-      </Wrapper>
-    </BackgroundImage>
+    <Gradient>
+      <BackgroundImage>
+        <RegisterHeader />
+        <Wrapper>
+          <PlanSummary
+            price={price}
+            priceId={priceId}
+            changeHandler={changeHandler}
+            protectionTypeString={protectionTypeString}
+            protectionType={protectionType}
+            billingInterval={billingInterval}
+            setStep={setStep}
+          />
+          <Header>Billing Address</Header>
+          <ThemeProvider theme={theme}>
+            <Form>
+              <FDTextField
+                fullWidth
+                name="streetAddress"
+                label="Street Address"
+                placeholder="Street Address"
+                type="text"
+                variant="filled"
+                style={{margin: 8}}
+                onChange={(e) => changeHandler(e)}
+                value={streetAddress}
+                required
+              />
+              <Line2Wrapper>
+                <FDTextField
+                  name="line2"
+                  label="Street Address Line 2"
+                  placeholder="Street Address Line 2"
+                  type="text"
+                  variant="filled"
+                  style={{margin: 8, flexGrow: 1}}
+                  onChange={(e) => changeHandler(e)}
+                  value={line2}
+                />
+                <FDTextField
+                  label="Apt."
+                  variant="filled"
+                  type="text"
+                  style={{margin: 8, maxWidth: 90}}
+                  name="apt"
+                  placeholder="Apt"
+                  onChange={(e) => changeHandler(e)}
+                  value={apt}
+                />
+              </Line2Wrapper>
+              <FDTextField
+                name="city"
+                placeholder="City"
+                label="City"
+                variant="filled"
+                style={{margin: 8, flexGrow: 1}}
+                onChange={(e) => changeHandler(e)}
+                value={city}
+                required
+              />
+              <Select
+                placeholder="State"
+                style={{
+                  backgroundColor: '#FFF',
+                  borderRadius: 4,
+                  margin: 8,
+                  width: 100,
+                  paddingLeft: 20,
+                }}
+                name="state"
+                value={state}
+                onChange={(e) => setOrder({...order, state: e.target.value})}
+                required
+              >
+                {states.map((state) => (
+                  <MenuItem key={state} value={state}>
+                    {state}
+                  </MenuItem>
+                ))}
+              </Select>
+              <FDTextField
+                name="zipCode"
+                placeholder="Zip Code"
+                label="Zip Code"
+                variant="filled"
+                style={{margin: 8, flexGrow: 1}}
+                onChange={(e) => changeHandler(e)}
+                value={zipCode}
+                required
+              />
+            </Form>
+          </ThemeProvider>
+          <ContinueButton onClick={(e) => clickHandler(e)}>
+            Continue
+          </ContinueButton>
+          {errorText && <ErrorText>{errorText}</ErrorText>}
+        </Wrapper>
+      </BackgroundImage>
     </Gradient>
   )
 }
