@@ -15,6 +15,13 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
 `
+
+const Line2Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`
+
 const Header = styled.h1`
   font-size: 32px;
   font-weight: 500;
@@ -43,11 +50,11 @@ const ShippingAddress = ({
     shippingLine2,
     shippingCity,
     shippingState,
-    shippingZipCode
+    shippingZipCode,
   },
   order,
   setOrder,
-  changeHandler
+  changeHandler,
 }) => {
   if (!differentAddress) {
     return null
@@ -58,17 +65,7 @@ const ShippingAddress = ({
       <ThemeProvider theme={theme}>
         <Form>
           <FDTextField
-            label="Apt."
-            variant="filled"
-            type="text"
-            style={{margin: 8, maxWidth: 50}}
-            name="shippingApt"
-            placeholder="Apt"
-            autoComplete="apt"
-            onChange={e => changeHandler(e)}
-            value={shippingApt}
-          />
-          <FDTextField
+            fullWidth
             name="shippingStreetAddress"
             autoComplete="street-address"
             label="Street Address"
@@ -76,22 +73,34 @@ const ShippingAddress = ({
             type="text"
             variant="filled"
             style={{margin: 8, flexGrow: 1}}
-            onChange={e => changeHandler(e)}
+            onChange={(e) => changeHandler(e)}
             value={shippingStreetAddress}
             required
           />
-          <FDTextField
-            fullWidth
-            name="shippingLine2"
-            autoComplete="street-address line2"
-            label="Street Address Line 2"
-            placeholder="Street Address Line 2"
-            type="text"
-            variant="filled"
-            style={{margin: 8}}
-            onChange={e => changeHandler(e)}
-            value={shippingLine2}
-          />
+          <Line2Wrapper>
+            <FDTextField
+              name="shippingLine2"
+              autoComplete="street-address line2"
+              label="Street Address Line 2"
+              placeholder="Street Address Line 2"
+              type="text"
+              variant="filled"
+              style={{margin: 8, flexGrow: 1}}
+              onChange={(e) => changeHandler(e)}
+              value={shippingLine2}
+            />
+            <FDTextField
+              label="Apt."
+              variant="filled"
+              type="text"
+              style={{margin: 8, maxWidth: 90}}
+              name="shippingApt"
+              placeholder="Apt"
+              autoComplete="apt"
+              onChange={(e) => changeHandler(e)}
+              value={shippingApt}
+            />
+          </Line2Wrapper>
           <FDTextField
             name="shippingCity"
             autoComplete="city"
@@ -99,7 +108,7 @@ const ShippingAddress = ({
             label="City"
             variant="filled"
             style={{margin: 8, flexGrow: 1}}
-            onChange={e => changeHandler(e)}
+            onChange={(e) => changeHandler(e)}
             value={shippingCity}
             required
           />
@@ -111,14 +120,16 @@ const ShippingAddress = ({
               borderRadius: 4,
               margin: 8,
               width: 100,
-              paddingLeft: 20
+              paddingLeft: 20,
             }}
             name="shippingState"
             value={shippingState}
-            onChange={e => setOrder({...order, shippingState: e.target.value})}
+            onChange={(e) =>
+              setOrder({...order, shippingState: e.target.value})
+            }
             required
           >
-            {states.map(state => (
+            {states.map((state) => (
               <MenuItem key={state} value={state}>
                 {state}
               </MenuItem>
@@ -131,7 +142,7 @@ const ShippingAddress = ({
             label="Zip Code"
             variant="filled"
             style={{margin: 8, flexGrow: 1}}
-            onChange={e => changeHandler(e)}
+            onChange={(e) => changeHandler(e)}
             value={shippingZipCode}
             required
           />
