@@ -115,7 +115,6 @@ const ContinueButton = styled.button`
     cursor: default;
     background-color: #2a4c78;
     color: #5d789a;
-    margin: 1rem;
   }
 
   @media (max-width: 800px) {

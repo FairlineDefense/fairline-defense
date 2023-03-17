@@ -156,9 +156,7 @@ const Subheader = styled.h2`
   @media (max-width: 800px) {
     width: 100%;
     margin-bottom: 1rem;
-    @media (max-width: 800px) {
-      font-size: 22px;
-    }
+    font-size: 22px;
   }
 `
 const Blue = styled.span`
