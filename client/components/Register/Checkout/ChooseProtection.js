@@ -130,7 +130,7 @@ const SemiBold = styled.h1`
   margin-bottom: 1rem;
 
   @media (max-width: 800px) {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     font-size: 28px;
   }
 `
@@ -155,7 +155,7 @@ const Subheader = styled.h2`
   }
   @media (max-width: 800px) {
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     font-size: 22px;
   }
 `
