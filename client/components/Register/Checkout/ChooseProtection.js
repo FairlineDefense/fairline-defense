@@ -2,38 +2,38 @@ import React from 'react'
 import css from '../register.css'
 import styled from 'styled-components'
 import RegisterHeader from '../RegisterHeader'
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { me } from '../../../store/user'
+import {useEffect} from 'react'
+import {useDispatch} from 'react-redux'
+import {me} from '../../../store/user'
 const Gradient = styled.div`
-width: 100vw;
-min-height: 100vh;
-background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
-color: #fff;
-overflow-x: hidden;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  color: #fff;
+  overflow-x: hidden;
 
-a {
-  color: var(--blue);
-}
+  a {
+    color: var(--blue);
+  }
 
-a:visited {
-  color: var(--blue);
-}
+  a:visited {
+    color: var(--blue);
+  }
 
-a:hover {
-  color: var(--blue);
-}
+  a:hover {
+    color: var(--blue);
+  }
 `
 const BackgroundImage = styled.div`
-height: 100%;
-width: 100%;
-background-image: url('./images/background.png');
-background-repeat: no-repeat;
-background-position: -120px -100px;
+  height: 100%;
+  width: 100%;
+  background-image: url('./images/background.png');
+  background-repeat: no-repeat;
+  background-position: -120px -100px;
 
-@media (max-width: 800px) {
-background-image: none;
-}
+  @media (max-width: 800px) {
+    background-image: none;
+  }
 `
 const Wrapper = styled.div`
   width: 100%;
@@ -131,6 +131,7 @@ const SemiBold = styled.h1`
 
   @media (max-width: 800px) {
     margin-bottom: 1rem;
+    font-size: 28px;
   }
 `
 const H1 = styled.h1`
@@ -154,11 +155,19 @@ const Subheader = styled.h2`
   }
   @media (max-width: 800px) {
     width: 100%;
+    margin-bottom: 1rem;
+    @media (max-width: 800px) {
+      font-size: 22px;
+    }
   }
 `
 const Blue = styled.span`
   font-size: 24px;
   color: #00abe0;
+
+  @media (max-width: 800px) {
+    font-size: 22px;
+  }
 `
 const ContinueButton = styled.button`
   background-color: var(--blue);
@@ -178,77 +187,86 @@ const ContinueButton = styled.button`
     background-color: #2a4c78;
     color: #5d789a;
   }
+
+  @media (max-width: 800px) {
+    margin: 1rem;
+  }
 `
 
 const ChooseProtection = ({
   order: {protectionType},
   changeHandler,
-  setStep
+  setStep,
 }) => {
-  const dispatch = useDispatch()  
-    useEffect(() => {
-      const params = new URLSearchParams(window.location.search);
-      const token = params.get("token");
-      const email = params.get("to");
-    
-      // Twilio functions do not accept multipart/form-data
-      const data = new URLSearchParams();
-      data.append("email", email);
-      data.append("code", token);
-      data.append("channel", "email");
-      console.log('data',data)
-      token && fetch("twilio/check-verify", {
-          method: 'POST',
-          body: data
-        })
-        .then(response => response.json())
-        .then(json => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const token = params.get('token')
+    const email = params.get('to')
+
+    // Twilio functions do not accept multipart/form-data
+    const data = new URLSearchParams()
+    data.append('email', email)
+    data.append('code', token)
+    data.append('channel', 'email')
+    console.log('data', data)
+    token &&
+      fetch('twilio/check-verify', {
+        method: 'POST',
+        body: data,
+      })
+        .then((response) => response.json())
+        .then((json) => {
           console.log(json.success)
-        }).then(()=>{dispatch(me())})
-        .catch(err => {
-          console.log(err);
-        });
-     }, []);
+        })
+        .then(() => {
+          dispatch(me())
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+  }, [])
   return (
-    <Gradient><BackgroundImage>
-      <RegisterHeader />
-      <Wrapper>
-        <SemiBold>Congratulations!</SemiBold>
-        <Subheader>
-          <p>You are one step away from getting the protection you need.</p>
-          <p>
-            Starting from <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr</Blue>
-          </p>
-        </Subheader>
-        <SemiBold>Select Your Protection</SemiBold>
-        <ButtonWrapper>
-          <Button
-            onClick={e => changeHandler(e)}
-            value="armedCitizen"
-            name="protectionType"
-            disabled={protectionType === 'armedCitizen'}
+    <Gradient>
+      <BackgroundImage>
+        <RegisterHeader />
+        <Wrapper>
+          <SemiBold>Congratulations!</SemiBold>
+          <Subheader>
+            <p>You are one step away from getting the protection you need.</p>
+            <p>
+              Starting from <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr</Blue>
+            </p>
+          </Subheader>
+          <SemiBold>Select Your Protection</SemiBold>
+          <ButtonWrapper>
+            <Button
+              onClick={(e) => changeHandler(e)}
+              value="armedCitizen"
+              name="protectionType"
+              disabled={protectionType === 'armedCitizen'}
+            >
+              <Term>I am</Term>
+              <Price>Armed Citizen</Price>
+            </Button>
+            <Button
+              onClick={(e) => changeHandler(e)}
+              value="armedProfessional"
+              name="protectionType"
+              disabled={protectionType === 'armedProfessional'}
+            >
+              <Term>I am</Term>
+              <Price>Armed Professional</Price>
+            </Button>
+          </ButtonWrapper>
+          <ContinueButton
+            onClick={() => setStep('ChoosePlan')}
+            disabled={!protectionType.length}
           >
-            <Term>I am</Term>
-            <Price>Armed Citizen</Price>
-          </Button>
-          <Button
-            onClick={e => changeHandler(e)}
-            value="armedProfessional"
-            name="protectionType"
-            disabled={protectionType === 'armedProfessional'}
-          >
-            <Term>I am</Term>
-            <Price>Armed Professional</Price>
-          </Button>
-        </ButtonWrapper>
-        <ContinueButton
-          onClick={() => setStep('ChoosePlan')}
-          disabled={!protectionType.length}
-        >
-          Continue
-        </ContinueButton>
-      </Wrapper>
-    </BackgroundImage>
+            Continue
+          </ContinueButton>
+        </Wrapper>
+      </BackgroundImage>
     </Gradient>
   )
 }

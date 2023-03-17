@@ -76,7 +76,7 @@ const Header = styled.h1`
 
   @media (max-width: 800px) {
     font-size: 22px;
-    margin: 1rem;
+    margin: 0.5rem;
   }
 `
 const Form = styled.form`
@@ -115,6 +115,11 @@ const ContinueButton = styled.button`
     cursor: default;
     background-color: #2a4c78;
     color: #5d789a;
+    margin: 1rem;
+  }
+
+  @media (max-width: 800px) {
+    margin: 1rem;
   }
 `
 const BillingAddress = ({
