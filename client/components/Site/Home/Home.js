@@ -1,9 +1,8 @@
 import React from 'react'
 import Navbar from '../Navbar'
 import Landing from './Landing'
-import Card from './Card'
+import SolutionToProtectYou from './SolutionToProtectYou'
 import ProtectYourFuture from './SecurityWhyYouNeedIt'
-import HowItWorksSection from './HowItWorksSection'
 import WhatDoWeCover from './WhatDoWeCover'
 import WhatWeDontCover from './WhatWeDontCover'
 import Plans from './Plans'
@@ -11,28 +10,34 @@ import Protection from './Protection'
 import WhatDoYouGet from './WhatDoYouGet'
 import WhatDoYouGetMobile from './WhatDoYouGetMobile'
 import PlansMobile from './PlansMobile'
-import BePrepared from './BePrepared'
+import NoOneCanPredict from './NoOneCanPredict'
 import Stories from './Stories'
 import JoinNow from './JoinNow'
 import Footer from './Footer'
-import WhyYouNeedIt from './WhyYouNeedIt'
 import FAQ from './FAQ'
+import CriticalResponse from './CriticalResponse'
+import Why from './Why'
+import HowFairlineWorks from './HowFairlineWorks'
+import WhyDoYouNeedIt from './WhyDoYouNeedIt'
+
 const Home = () => {
   return (
     <>
       <Navbar />
       <Landing />
-      <Card />
+      <SolutionToProtectYou />
+      <CriticalResponse />
       {/* <ProtectYourFuture /> */}
-      <HowItWorksSection />
-      <WhyYouNeedIt />
-      <Plans />
+      <Why />
+      <HowFairlineWorks />
+      <WhyDoYouNeedIt />
       {/* <Protection /> */}
       <WhatDoYouGetMobile />
+      <Plans />
       {/* <PlansMobile /> */}
       <WhatDoWeCover />
       <WhatWeDontCover />
-      <BePrepared />
+      <NoOneCanPredict />
       {/* <Stories /> */}
       {/* <FAQ /> */}
       <JoinNow />

@@ -113,7 +113,7 @@ const Plan = styled.div`
   }
 `
 const Small = styled.div`
-  font-size: 32px;
+  font-size: 28px;
   line-height: 40px;
   color: var(--darkblue);
   width: 400px;
@@ -152,10 +152,7 @@ const Arrow = styled.img`
   width: 120px;
   height: 87px;
 `
-const Bold = styled.span`
-  font-weight: 600;
-  font-size: inherit;
-`
+
 export default function Plans() {
   return (
     <Section id="coverages">
@@ -170,9 +167,7 @@ export default function Plans() {
             <header>$19.99</header>
             <small>Billed Monthly</small>
           </Plan>
-          <Small>
-            Add a spouse or family member for <Bold>$5 Monthly</Bold>
-          </Small>
+          <Small>Add a spouse or family member for only $5 a month! </Small>
         </PlanWrapper>
         <PlanWrapper>
           <Plan>

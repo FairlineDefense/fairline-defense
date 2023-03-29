@@ -73,7 +73,9 @@ export default function WhatDoYouGet() {
         <Card>
           <header>$1.5M</header>
           <small>
-            In Legal<br />Fees
+            In Legal
+            <br />
+            Fees
           </small>
         </Card>
       </Wrapper>

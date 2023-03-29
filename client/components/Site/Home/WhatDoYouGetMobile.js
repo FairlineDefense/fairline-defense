@@ -3,15 +3,16 @@ import styled from 'styled-components'
 
 const Section = styled.div`
   max-width: 100vw;
-  height: 450px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 4rem 0rem 4rem 0rem;
+  padding: 8rem 1rem;
 
   @media (max-width: 800px) {
     display: block;
     height: fit-content;
+    padding: 4rem 0rem 4rem 0rem;
   }
 `
 const Header = styled.div`
@@ -21,7 +22,7 @@ const Header = styled.div`
   font-weight: 600;
   line-height: 55px;
   color: var(--darkblue);
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
   text-align: center;
 
   @media (max-width: 800px) {
@@ -30,7 +31,7 @@ const Header = styled.div`
 `
 const Wrapper = styled.div`
   width: 100vw;
-  margin: 4rem 0rem 4rem 0rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -38,33 +39,36 @@ const Wrapper = styled.div`
 
   @media (max-width: 800px) {
     flex-direction: column;
+    margin-top: 0;
   }
 `
 const Card = styled.div`
-  width: 284px;
-  height: 302px;
+  width: 320px;
+  height: 160px;
   border-radius: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   color: var(--darkblue);
-  padding: 2rem;
+  padding: 2rem 0.8rem 1rem 1.5rem;
   background-color: #f0f0f0;
-  margin: 0rem 2rem 0rem 2rem;
+  margin: 0rem 1rem;
 
   header {
-    font-size: 60px;
-    font-weight: 500;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
   }
+
   small {
-    font-size: 24px;
-    line-height: 30px;
+    font-size: 22px;
+    line-height: 26px;
     font-weight: 200;
   }
 
   img {
-    height: 100px;
-    width: 106px;
+    height: 60px;
+    width: 60px;
+    margin-right: 1.5rem;
   }
 
   @media (max-width: 800px) {
@@ -77,21 +81,52 @@ export default function WhatDoYouGetMobile() {
       <Header>What do you get?</Header>
       <Wrapper>
         <Card>
-          <img src="./images/7.png" />
-          <header>24/7</header>
-          <small>Critical Response Team</small>
+          <img src="./images/headset.svg" />
+          <div>
+            <header>24/7</header>
+            <small>Critical Response Team</small>
+          </div>
         </Card>
         <Card>
-          <img src="./images/8.png" />
-          <header>100%</header>
-          <small>Legal Defense Team</small>
+          <img src="./images/balance.svg" />
+          <div>
+            <header>Unlimited</header>
+            <small>Legal fees in Criminal Defense</small>
+          </div>
         </Card>
         <Card>
-          <img src="./images/9.png" />
-          <header>$1.5M</header>
-          <small>
-            In Legal<br />Fees
-          </small>
+          <img src="./images/gavel.svg" />
+          <div>
+            <header>$1.5M</header>
+            <small>
+              Legal fees in
+              <br />
+              Civil Defense
+            </small>
+          </div>
+        </Card>
+      </Wrapper>
+      <Wrapper>
+        <Card>
+          <img src="./images/handshake.svg" />
+          <div>
+            <header>Legal Team</header>
+            <small>Professionals and Experts</small>
+          </div>
+        </Card>
+        <Card>
+          <img src="./images/moneybags.svg" />
+          <div>
+            <header>$1000</header>
+            <small>Per Diem</small>
+          </div>
+        </Card>
+        <Card>
+          <img src="./images/payment.svg" />
+          <div>
+            <header>100%</header>
+            <small>Money up front</small>
+          </div>
         </Card>
       </Wrapper>
     </Section>
