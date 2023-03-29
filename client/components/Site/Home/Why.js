@@ -14,10 +14,10 @@ const Section = styled.div`
 
   @media (max-width: 800px) {
     height: 380px;
-    padding: 2rem;
+    padding: 4rem 2rem;
   }
 `
-const Header = styled.div`
+const Header = styled.h1`
   width: 520px;
   font-size: 42px;
   line-height: 50px;

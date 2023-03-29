@@ -7,7 +7,13 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   padding: 26rem 12rem 10rem;
-  background-image: url('./images/courtroom.svg');
+  background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0),
+      transparent
+    ),
+    url('./images/courtroom.svg');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -19,7 +25,7 @@ const Section = styled.div`
     padding: 11rem 2rem 1rem 2rem;
   }
 `
-const Heading = styled.div`
+const Heading = styled.h1`
   font-size: 48px;
   font-weight: 700;
   color: #fff;

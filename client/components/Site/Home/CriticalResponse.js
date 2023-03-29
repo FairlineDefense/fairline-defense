@@ -4,40 +4,46 @@ import styled from 'styled-components'
 const Section = styled.div`
   width: 100vw;
   height: 800px;
-  background-image: url('./images/woman-with-shotgun.svg');
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0),
+      transparent
+    ),
+    url('./images/woman-with-shotgun.svg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 20rem 0rem 0rem 12rem;
+  padding: 18rem 0rem 4rem 12rem;
 
   @media (max-width: 800px) {
+    background-image: url('./images/woman-with-shotgun.svg');
     height: auto;
-    background-size: 220% auto;
     padding: 2rem;
-    background-position: right bottom;
   }
 `
 const Wrapper = styled.div`
-  width: 600px;
+  width: 475px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
   @media (max-width: 800px) {
     width: 100%;
+    justify-content: flex-end;
   }
 `
-const Header = styled.div`
+const Header = styled.h1`
   font-size: 42px;
-  font-weight: 600;
-  line-height: 54px;
+  font-weight: 500;
+  line-height: 60px;
   color: #fff;
-  margin-bottom: 2rem;
   position: relative;
 
   @media (max-width: 800px) {
     font-size: 32px;
     line-height: 32px;
+    font-weight: 400;
   }
 `
 

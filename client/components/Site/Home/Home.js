@@ -12,13 +12,15 @@ import WhatDoYouGetMobile from './WhatDoYouGetMobile'
 import PlansMobile from './PlansMobile'
 import NoOneCanPredict from './NoOneCanPredict'
 import Stories from './Stories'
-import JoinNow from './JoinNow'
+import JoinNow from './BecomeAMember'
 import Footer from './Footer'
 import FAQ from './FAQ'
 import CriticalResponse from './CriticalResponse'
 import Why from './Why'
 import HowFairlineWorks from './HowFairlineWorks'
 import WhyDoYouNeedIt from './WhyDoYouNeedIt'
+import BePrepared from './BePrepared'
+import BecomeAMember from './BecomeAMember'
 
 const Home = () => {
   return (
@@ -38,9 +40,10 @@ const Home = () => {
       <WhatDoWeCover />
       <WhatWeDontCover />
       <NoOneCanPredict />
+      <BePrepared />
       {/* <Stories /> */}
       {/* <FAQ /> */}
-      <JoinNow />
+      <BecomeAMember />
       <Footer />
     </>
   )

@@ -15,7 +15,7 @@ const Section = styled.div`
     padding: 4rem 0rem 4rem 0rem;
   }
 `
-const Header = styled.div`
+const Header = styled.h1`
   font-size: 48px;
   width: 100%;
   text-align: center;

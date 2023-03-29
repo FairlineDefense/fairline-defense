@@ -7,12 +7,26 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   padding: 12rem;
-  background-image: url('./images/man-in-car.svg');
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0),
+      transparent
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), transparent),
+    url('./images/man-in-car.svg');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
 
   @media (max-width: 800px) {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0),
+        transparent
+      ),
+      url('./images/man-in-car.svg');
     margin-top: 60px;
     background-size: cover;
     background-position: 50% top;
@@ -21,12 +35,12 @@ const Section = styled.div`
     align-items: center;
   }
 `
-const Heading = styled.div`
+const Heading = styled.h1`
   font-size: 48px;
-  font-weight: 600;
   color: #fff;
   width: 400px;
   margin-bottom: 1rem;
+  line-height: 60px;
 
   @media (max-width: 800px) {
     width: 100%;
@@ -72,7 +86,7 @@ const DownArrow = styled.div`
   width: 100px;
   display: block;
   z-index: 50;
-  top: 720px;
+  top: 746px;
   left: 50%;
 
   @media (max-width: 800px) {

@@ -4,7 +4,14 @@ import styled from 'styled-components'
 const Section = styled.div`
   width: 100vw;
   height: 800px;
-  background-image: url('./images/predictbgimg.png');
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0),
+      transparent
+    ),
+    linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), transparent),
+    url('./images/predict.svg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -26,7 +33,7 @@ const Wrapper = styled.div`
     width: 100%;
   }
 `
-const Header = styled.div`
+const Header = styled.h1`
   font-size: 48px;
   font-weight: 600;
   line-height: 55px;

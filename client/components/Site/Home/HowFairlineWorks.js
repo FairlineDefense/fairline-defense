@@ -19,7 +19,7 @@ const Section = styled.div`
     background-position: -110px 80px;
   }
 `
-const Header = styled.div`
+const Header = styled.h1`
   width: 740px;
   font-size: 42px;
   line-height: 50px;

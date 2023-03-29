@@ -14,10 +14,11 @@ const Section = styled.div`
   background-size: contain;
 
   @media (max-width: 800px) {
-    min-height: 300px;
-    padding: 5rem 1rem 4rem 1rem;
+    height: 100%;
+    padding: 0;
     flex-direction: column;
     justify-content: center;
+    background-image: none;
   }
 `
 const Wrapper = styled.div`
@@ -29,7 +30,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 800px) {
     margin: 0;
-    padding: 2rem;
+    padding: 0;
     flex-direction: column-reverse;
     background-image: none;
   }
@@ -37,46 +38,51 @@ const Wrapper = styled.div`
 const Text = styled.div`
   width: 40%;
   color: var(--darkblue);
-  margin: 2rem;
+  margin-right: 4rem;
   display: flex;
   flex-direction: column;
 
   @media (max-width: 800px) {
     width: 100%;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    padding: 0rem;
+    text-align: left;
+    padding: 4rem 2rem;
   }
 `
-const Header = styled.div`
+const Header = styled.h1`
   font-size: 42px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 48px;
   color: var(--darkblue);
   @media (max-width: 800px) {
-    font-size: 30px;
-    line-height: 30px;
-    margin-top: 1rem;
+    font-size: 32px;
+    line-height: 40px;
   }
 `
 const Subtext = styled.div`
   font-size: 28px;
+  line-height: 36px;
   color: var(--darkblue);
-  margin: 1.5rem 0rem 1.5rem 0rem;
+  margin-top: 1.5rem;
+
+  @media (max-width: 800px) {
+    font-size: 20px;
+    line-height: 28px;
+  }
 `
 const Image = styled.div`
   width: 60%;
-  background-image: url('./images/girlwithgun.png');
+  background-image: url('./images/girl-with-gun.svg');
   background-position: center;
   background-repeat: no-repeat;
-  height: 400px;
+  height: 500px;
   border-radius: 20px;
+  background-size: contain;
 
   @media (max-width: 800px) {
     display: block;
+    height: 250px;
     width: 100%;
-    background-size: contain;
+    border-radius: 0;
   }
 `
 

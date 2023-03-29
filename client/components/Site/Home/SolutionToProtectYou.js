@@ -18,7 +18,7 @@ const Section = styled.div`
     padding: 2rem;
   }
 `
-const Header = styled.div`
+const Header = styled.h1`
   width: 520px;
   font-size: 42px;
   line-height: 50px;

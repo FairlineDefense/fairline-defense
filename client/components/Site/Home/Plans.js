@@ -11,8 +11,8 @@ const Section = styled.div`
   background-color: #e8f3f9;
 
   @media (max-width: 800px) {
-    height: 1150px;
-    padding: 2rem;
+    height: 100%;
+    padding: 4rem 2rem;
   }
 `
 const Wrapper = styled.div`
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
     flex-direction: column;
   }
 `
-const Header = styled.div`
+const Header = styled.h1`
   font-size: 48px;
   text-align: center;
   font-weight: 600;
@@ -50,20 +50,19 @@ const Subheader = styled.div`
     font-size: 22px;
   }
 `
-const Title = styled.div`
+const Title = styled.h3`
   font-size: 28px;
   line-height: 38px;
   text-align: center;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-weight: 500;
-
+  font-weight: 600;
   color: #132a4a;
   color: var(--darkblue);
-  margin-bottom: 2rem;
 
   @media (max-width: 800px) {
     font-size: 24px;
+    margin-bottom: 1rem;
   }
 `
 const Cyan = styled.span`
@@ -104,12 +103,25 @@ const Plan = styled.div`
     font-weight: 500;
     margin: 1.5rem;
   }
+
   small {
     font-size: 30px;
   }
 
   @media (max-width: 800px) {
+    min-height: 120px;
     min-width: 280px;
+    padding: 1rem 0.5rem;
+
+    header {
+      font-size: 36px;
+      margin: 0 0 0.25rem;
+    }
+
+    small {
+      font-size: 20px;
+      line-height: 24px;
+    }
   }
 `
 const Small = styled.div`
@@ -124,8 +136,8 @@ const Small = styled.div`
   @media (max-width: 800px) {
     width: 280px;
     height: fit-content;
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 20px;
+    line-height: 24px;
   }
 `
 
@@ -156,7 +168,7 @@ const Arrow = styled.img`
 export default function Plans() {
   return (
     <Section id="coverages">
-      <Header>No Complicated Plans & Options</Header>
+      <Header>No complicated Plans & Options</Header>
       <Subheader>
         Peace of mind at <Cyan>$19.99</Cyan>
       </Subheader>
@@ -172,7 +184,7 @@ export default function Plans() {
         <PlanWrapper>
           <Plan>
             <header>$199</header>
-            <small>Billed Annually</small>
+            <small>Billed Yearly</small>
           </Plan>
           <Savings>
             <Arrow src="./images/cyanarrow.png" />
