@@ -3,65 +3,85 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 const Section = styled.div`
   width: 100vw;
-  height: 670px;
+  height: 800px;
   display: flex;
   flex-direction: column;
-  padding: 15rem 0rem 0rem 8rem;
-  background-image: url('./images/AdobeStock_314672886 1.jpg');
+  padding: 12rem;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0),
+      transparent
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), transparent),
+    url('./images/security.svg');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
 
   @media (max-width: 800px) {
-    background-size: cover;
-    background-position: 70% top;
-    height: 80vh;
-    padding: 26rem 1rem 1rem 1rem;
-    text-align: center;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0),
+        transparent,
+        transparent
+      ),
+      url('./images/security.svg');
+    margin-top: 60px;
+    background-size: 160% auto;
+    background-position: right bottom;
+    height: 490px;
+    padding: 4rem 3rem;
     align-items: center;
+    justify-content: space-between;
   }
 `
-const Heading = styled.div`
-  font-size: 40px;
-  line-height: 48px;
-  font-weight: 500;
+const Heading = styled.h1`
+  font-size: 48px;
   color: #fff;
+  width: 400px;
+  margin-bottom: 1rem;
+  line-height: 60px;
 
   @media (max-width: 800px) {
-    line-height: 40px;
-    font-size: 32px;
-    width: 100%;
+    width: 90%;
+    font-size: 34px;
+    line-height: 42px;
   }
 `
 const SubHeading = styled.div`
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 200;
   color: #fff;
   width: 500px;
+  margin: 1rem 0rem 3rem 0rem;
 
   @media (max-width: 800px) {
-    width: 280px;
-    font-size: 16px;
-    margin: 1rem 0rem 1rem 0rem;
+    width: 90%;
+    font-size: 22px;
+    line-height: 32px;
+    margin: 0rem 0rem 1rem 0rem;
   }
 `
 const StartButton = styled.div`
-  background-color: var(--hotred);
-  opacity: 0.9;
+  background-color: var(--cyan);
   color: #fff;
   border-radius: 40px;
   width: 280px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0.75rem 2rem 0.75rem 2rem;
   font-size: 20px;
   font-weight: 400;
-  margin-top: 2rem;
+  margin-top: 1rem;
   outline: none;
   border: none;
   cursor: pointer;
+  text-align: center;
 `
+
 const DownArrow = styled.div`
   position: absolute;
   background-image: url('./images/doubleDownArrow.png');
@@ -69,23 +89,23 @@ const DownArrow = styled.div`
   height: 50px;
   width: 100px;
   display: block;
-  top: 600px;
+  z-index: 50;
+  top: 746px;
   left: 50%;
 
   @media (max-width: 800px) {
     display: none;
   }
 `
-export default function SecurityLanding() {
+export default function Landing() {
   return (
-    <Section>
-      <Heading>
-        Legal protection for
-        <br />
-        Armed professionals
-      </Heading>
+    <Section id="top">
+      <div>
+        <Heading>Protecting those who protect us.</Heading>
+        <SubHeading>Legal protection for Armed Professionals</SubHeading>
+      </div>
       <Link to="/signup">
-        <StartButton>Get Started</StartButton>
+        <StartButton>Become a Member</StartButton>
       </Link>
       <DownArrow />
     </Section>

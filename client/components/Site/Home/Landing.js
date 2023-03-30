@@ -52,7 +52,6 @@ const Heading = styled.h1`
     width: 100%;
     font-size: 34px;
     line-height: 42px;
-    margin-bottom: 2rem;
   }
 `
 const SubHeading = styled.div`
