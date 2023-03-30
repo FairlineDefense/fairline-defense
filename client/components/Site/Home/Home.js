@@ -12,11 +12,10 @@ import WhatDoYouGetMobile from './WhatDoYouGetMobile'
 import PlansMobile from './PlansMobile'
 import NoOneCanPredict from './NoOneCanPredict'
 import Stories from './Stories'
-import JoinNow from './BecomeAMember'
 import Footer from './Footer'
 import FAQ from './FAQ'
 import CriticalResponse from './CriticalResponse'
-import Why from './Why'
+import WhyAreWeDoingThis from './WhyAreWeDoingThis'
 import HowFairlineWorks from './HowFairlineWorks'
 import WhyDoYouNeedIt from './WhyDoYouNeedIt'
 import BePrepared from './BePrepared'
@@ -30,7 +29,7 @@ const Home = () => {
       <SolutionToProtectYou />
       <CriticalResponse />
       {/* <ProtectYourFuture /> */}
-      <Why />
+      <WhyAreWeDoingThis />
       <HowFairlineWorks />
       <WhyDoYouNeedIt />
       {/* <Protection /> */}

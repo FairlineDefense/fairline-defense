@@ -40,7 +40,7 @@ const Text = styled.div`
   }
 `
 
-export default function Why() {
+export default function WhyAreWeDoingThis() {
   return (
     <Section>
       <Header>Why are we doing this?</Header>
