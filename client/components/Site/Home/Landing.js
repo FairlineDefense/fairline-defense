@@ -23,15 +23,21 @@ const Section = styled.div`
     background-image: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
         rgba(0, 0, 0, 0),
+        transparent,
         transparent
       ),
-      url('./images/man-in-car.svg');
+      url('./images/man-in-car-mobile.svg');
     margin-top: 60px;
-    background-size: cover;
-    background-position: 50% top;
-    height: 500px;
-    padding: 3rem 2rem 1rem 2rem;
+    background-size: contain;
+    background-position: bottom;
+    height: 700px;
+    padding: 3rem 3rem 1rem 3rem;
     align-items: center;
   }
 `
@@ -68,7 +74,7 @@ const StartButton = styled.div`
   color: #fff;
   border-radius: 40px;
   width: 280px;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 0.75rem 2rem 0.75rem 2rem;
   font-size: 20px;
   font-weight: 400;
   margin-top: 1rem;

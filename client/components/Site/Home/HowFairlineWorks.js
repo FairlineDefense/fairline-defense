@@ -46,11 +46,11 @@ const Text = styled.div`
 
 export default function HowFairlineWorks() {
   return (
-    <Section>
+    <Section id="howitworks">
       <Header>How Fairline Defense Works?</Header>
       <Text>
-        If anything happens defending your life. Fairline Defense is here with a
-        legal and support team.{' '}
+        If anything happens defending your life, Fairline Defense is here with a
+        legal and support team.
       </Text>
     </Section>
   )

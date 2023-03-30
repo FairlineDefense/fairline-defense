@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Section = styled.div`
-  height: 369px;
+  height: 100%;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 2rem 25rem 2rem 25rem;
+  padding: 4rem 22rem;
   justify-content: center;
   background-color: #f0f0f0;
 

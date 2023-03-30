@@ -41,11 +41,13 @@ const Text = styled.div`
   margin-right: 4rem;
   display: flex;
   flex-direction: column;
+  align-self: center;
 
   @media (max-width: 800px) {
     width: 100%;
     text-align: left;
     padding: 4rem 2rem;
+    align-self: unset;
   }
 `
 const Header = styled.h1`
@@ -71,7 +73,7 @@ const Subtext = styled.div`
 `
 const Image = styled.div`
   width: 60%;
-  background-image: url('./images/girl-with-gun.svg');
+  background-image: url('./images/girl-with-gun-rounded.svg');
   background-position: center;
   background-repeat: no-repeat;
   height: 500px;
@@ -79,7 +81,8 @@ const Image = styled.div`
   background-size: contain;
 
   @media (max-width: 800px) {
-    display: block;
+    background-image: url('./images/girl-with-gun.svg');
+    background-size: cover;
     height: 250px;
     width: 100%;
     border-radius: 0;

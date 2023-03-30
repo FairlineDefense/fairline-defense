@@ -18,9 +18,24 @@ const Section = styled.div`
   padding: 27rem 0rem 0rem 12rem;
 
   @media (max-width: 800px) {
+    display: flex;
+    justify-content: flex-end;
     height: auto;
-    padding: 20rem 4rem 2rem 2rem;
-    background-position: right bottom;
+    padding: 4rem 2rem 3rem;
+    background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0),
+        transparent,
+        transparent
+      ),
+      url('./images/predict.svg');
+
+    background-position: center top;
+    background-size: contain;
+    height: 400px;
   }
 `
 const Wrapper = styled.div`
@@ -31,6 +46,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 800px) {
     width: 100%;
+    justify-content: flex-end;
   }
 `
 const Header = styled.h1`
@@ -45,6 +61,7 @@ const Header = styled.h1`
   @media (max-width: 800px) {
     font-size: 32px;
     line-height: 38px;
+    margin-bottom: 0;
     width: 100%;
   }
 `

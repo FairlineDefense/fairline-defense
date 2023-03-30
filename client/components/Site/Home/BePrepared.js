@@ -17,6 +17,7 @@ const Section = styled.div`
     height: 100%;
     padding: 4rem 2rem;
     background-image: none;
+    text-align: center;
   }
 `
 const Header = styled.h1`

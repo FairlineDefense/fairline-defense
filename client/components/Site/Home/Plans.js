@@ -62,6 +62,7 @@ const Title = styled.h3`
 
   @media (max-width: 800px) {
     font-size: 24px;
+    line-height: 34px;
     margin-bottom: 1rem;
   }
 `
@@ -134,6 +135,16 @@ const Small = styled.div`
   height: 200px;
 
   @media (max-width: 800px) {
+    display: none;
+  }
+`
+
+const SmallMobile = styled.div`
+  display: none;
+
+  @media (max-width: 800px) {
+    display: block;
+    text-align: center;
     width: 280px;
     height: fit-content;
     font-size: 20px;
@@ -141,28 +152,42 @@ const Small = styled.div`
   }
 `
 
-const Savings = styled.div`
-  font-size: 30px;
+const Savings = styled.h3`
+  position: relative;
+  font-size: 36px;
   width: 400px;
   display: block;
   min-height: 200px;
   color: var(--cyan);
-  text-align: center;
+  text-align: right;
   font-weight: bold;
+  top: -16px;
+  right: 64px;
 
   @media (max-width: 800px) {
+    top: -30px;
+    right: 0;
     width: 280px;
-    height: fit-content;
+    font-size: 24px;
+    min-height: unset;
+    height: 50px;
   }
 `
 const Arrow = styled.img`
   width: 100%;
   height: fit-content;
   position: relative;
-  top: -48px;
-  left: 88px;
-  width: 120px;
-  height: 87px;
+  top: -36px;
+  left: 100px;
+  width: 127px;
+  height: 92px;
+
+  @media (max-width: 800px) {
+    top: -20px;
+    left: 88px;
+    height: 66px;
+    width: 85px;
+  }
 `
 
 export default function Plans() {
@@ -188,10 +213,13 @@ export default function Plans() {
           </Plan>
           <Savings>
             <Arrow src="./images/cyanarrow.png" />
-            Save $40!
+            Save $40
           </Savings>
         </PlanWrapper>
       </Wrapper>
+      <SmallMobile>
+        Add a spouse or family member for only $5 a month!
+      </SmallMobile>
     </Section>
   )
 }

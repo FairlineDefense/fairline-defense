@@ -17,9 +17,25 @@ const Section = styled.div`
   padding: 18rem 0rem 4rem 12rem;
 
   @media (max-width: 800px) {
-    background-image: url('./images/woman-with-shotgun.svg');
-    height: auto;
-    padding: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0),
+        transparent,
+        transparent
+      ),
+      url('./images/woman-with-shotgun-mobile.svg');
+
+    background-position: center top;
+    background-size: contain;
+    height: 600px;
+    padding: 4rem 2rem;
   }
 `
 const Wrapper = styled.div`
@@ -42,7 +58,7 @@ const Header = styled.h1`
 
   @media (max-width: 800px) {
     font-size: 32px;
-    line-height: 32px;
+    line-height: 38px;
     font-weight: 400;
   }
 `

@@ -6,7 +6,7 @@ const Section = styled.div`
   height: 800px;
   display: flex;
   flex-direction: column;
-  padding: 26rem 12rem 10rem;
+  padding: 27rem 12rem 7rem;
   background-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 1),
@@ -19,10 +19,23 @@ const Section = styled.div`
   background-size: cover;
 
   @media (max-width: 800px) {
-    background-size: cover;
-    background-position: 50% top;
-    height: 500px;
-    padding: 11rem 2rem 1rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+    background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0),
+        transparent,
+        transparent
+      ),
+      url('./images/courtroom-mobile.svg');
+
+    background-position: center top;
+    background-size: contain;
+    height: 550px;
+    padding: 13rem 2rem 3rem 2rem;
   }
 `
 const Heading = styled.h1`
@@ -46,13 +59,13 @@ const Text = styled.div`
   font-weight: 400;
 
   p {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     font-size: 28px;
     line-height: 36px;
   }
 
   small {
-    font-size: 16px;
+    font-size: 28px;
     line-height: 48px;
     font-style: italic;
     color: #c73232;
@@ -60,12 +73,12 @@ const Text = styled.div`
 
   @media (max-width: 800px) {
     width: 100%;
-    height: 190px;
 
     p {
       width: 90%;
       font-size: 22px;
       line-height: 28px;
+      margin-bottom: 1rem;
     }
 
     small {
