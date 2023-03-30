@@ -55,12 +55,13 @@ const Header = styled.h1`
   }
 `
 const Small = styled.div`
-  font-size: 20px;
+  font-size: 28px;
   line-height: 30px;
   color: var(--darkblue);
   margin: 1.5rem 0rem 1.5rem 0rem;
 
   @media (max-width: 800px) {
+    font-size: 22px;
     margin: 1.5rem 0rem 0rem 0rem;
   }
 `
