@@ -8,6 +8,7 @@ const Section = styled.div`
   flex-direction: column;
   padding: 2rem 12rem;
   justify-content: center;
+  align-items: center;
   background-image: url('./images/lightredbg.png');
   background-position: -30px 50px;
   background-repeat: no-repeat;
@@ -17,7 +18,6 @@ const Section = styled.div`
     height: 100%;
     padding: 4rem 2rem;
     background-image: none;
-    text-align: center;
   }
 `
 const Header = styled.h1`
@@ -27,6 +27,7 @@ const Header = styled.h1`
   font-weight: 700;
   color: var(--darkblue);
   margin-bottom: 2rem;
+  text-align: center;
 
   @media (max-width: 800px) {
     width: 100%;
@@ -38,6 +39,7 @@ const Text = styled.div`
   font-size: 28px;
   width: 636px;
   color: var(--darkblue);
+  text-align: center;
 
   @media (max-width: 800px) {
     width: 100%;

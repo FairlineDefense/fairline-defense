@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {useState} from 'react'
 
-
 const Wrapper = styled.div.attrs((props) => ({
   display: props.display || 'none',
   backgroundColor: props.backgroundColor || 'none',
@@ -80,10 +79,9 @@ const FairlineLogo = styled.div`
 
   @media (max-width: 800px) {
     position: fixed;
-    left: 45%;
+    left: 33%;
     top: 10px;
-    background-image: url('favicon.ico');
-    width: 50px;
+    width: 110px;
   }
 `
 const Nav = styled.nav`
