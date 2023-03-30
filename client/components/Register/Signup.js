@@ -20,36 +20,36 @@ import SvgIcon from '@material-ui/core/SvgIcon'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 
 const Gradient = styled.div`
-width: 100vw;
-min-height: 100vh;
-background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
-color: #fff;
-overflow-x: hidden;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  color: #fff;
+  overflow-x: hidden;
 
-a {
-  color: var(--blue);
-}
+  a {
+    color: var(--blue);
+  }
 
-a:visited {
-  color: var(--blue);
-}
+  a:visited {
+    color: var(--blue);
+  }
 
-a:hover {
-  color: var(--blue);
-}
+  a:hover {
+    color: var(--blue);
+  }
 `
 const BackgroundImage = styled.div`
-height: 100%;
-width: 100%;
-background-image: url('./images/background.png');
-background-repeat: no-repeat;
-background-position: -120px -100px;
+  height: 100%;
+  width: 100%;
+  background-image: url('./images/background.png');
+  background-repeat: no-repeat;
+  background-position: -120px -100px;
 
-@media (max-width: 800px) {
-background-image: none;
-}
+  @media (max-width: 800px) {
+    background-image: none;
+  }
 `
-const H1 = styled.h1`
+const H3 = styled.h3`
   font-weight: 500;
   font-size: 30px;
   line-height: 30px;
@@ -170,7 +170,7 @@ const Flag = styled.img`
   margin-top: 4px;
 `
 const Signup = () => {
-  let user = useSelector(state => state.user)
+  let user = useSelector((state) => state.user)
   const dispatch = useDispatch()
   let [errorText, setErrorText] = useState('')
   let [passwordErrorText, setPasswordErrorText] = useState(' ')
@@ -178,7 +178,7 @@ const Signup = () => {
     email: false,
     phone: false,
     password: false,
-    confirmPassword: false
+    confirmPassword: false,
   })
   let [form, setForm] = useState({
     firstName: '',
@@ -190,10 +190,10 @@ const Signup = () => {
     password: '',
     confirmPassword: '',
     showPassword: false,
-    showConfirmPassword: false
+    showConfirmPassword: false,
   })
 
-  const changeHandler = e => {
+  const changeHandler = (e) => {
     if (e.target.name === 'phone') {
       let phone = e.target.value
       if (phone[0] !== '+') {
@@ -206,7 +206,7 @@ const Signup = () => {
     }
   }
 
-  const handleSubmit = evt => {
+  const handleSubmit = (evt) => {
     evt.preventDefault()
     const firstName = form.firstName
     const lastName = form.lastName
@@ -215,7 +215,7 @@ const Signup = () => {
       form.dialCode +
       form.phone
         .split('')
-        .filter(char => {
+        .filter((char) => {
           if (char !== ' ' && char !== '(' && char !== ')' && char !== '-') {
             return char
           }
@@ -247,7 +247,7 @@ const Signup = () => {
         setInvalidation({
           ...invalidation,
           password: true,
-          confirmPassword: true
+          confirmPassword: true,
         })
         setPasswordErrorText('Passwords must be min. 8 chars long')
         res = false
@@ -256,7 +256,7 @@ const Signup = () => {
         setInvalidation({
           ...invalidation,
           password: true,
-          confirmPassword: true
+          confirmPassword: true,
         })
         setPasswordErrorText('Passwords must contain at least one letter')
         res = false
@@ -265,7 +265,7 @@ const Signup = () => {
         setInvalidation({
           ...invalidation,
           password: true,
-          confirmPassword: true
+          confirmPassword: true,
         })
         setPasswordErrorText(
           'Passwords must contain at least one special character'
@@ -276,7 +276,7 @@ const Signup = () => {
         setInvalidation({
           ...invalidation,
           password: true,
-          confirmPassword: true
+          confirmPassword: true,
         })
         setPasswordErrorText('Passwords must contain at least one number')
         res = false
@@ -300,31 +300,28 @@ const Signup = () => {
       cc: '',
       phone: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
     })
     setOpen(false)
     user.error = ''
     history.push('/login')
   }
 
-  const handleClose = value => {
+  const handleClose = (value) => {
     setOpen(false)
     setSelectedValue(value)
   }
 
-  useEffect(
-    () => {
-      if (user.error) {
-        setOpen(true)
-      }
-    },
-    [user]
-  )
+  useEffect(() => {
+    if (user.error) {
+      setOpen(true)
+    }
+  }, [user])
 
   //Terms and Conditions modal props:
   let [openTerms, setOpenTerms] = useState(false)
 
-  const viewTerms = e => {
+  const viewTerms = (e) => {
     e.preventDefault()
     setOpenTerms(true)
   }
@@ -332,196 +329,195 @@ const Signup = () => {
   const handleClickShowPassword = () => {
     setForm({
       ...form,
-      showPassword: !form.showPassword
+      showPassword: !form.showPassword,
     })
   }
 
   const handleClickShowConfirmPassword = () => {
     setForm({
       ...form,
-      showConfirmPassword: !form.showConfirmPassword
+      showConfirmPassword: !form.showConfirmPassword,
     })
   }
 
   return (
     <Gradient>
       <BackgroundImage>
-      <RegisterHeader />
-      <SignupWrapper>
-        <H1>Get Started</H1>
-        <SignupForm onSubmit={handleSubmit} name="signup">
-          <InputGroup>
-            <FDTextField
-              fullWidth
-              label="First Name"
-              placeholder="First Name"
-              name="firstName"
-              variant="filled"
-              type="text"
-              onChange={e => changeHandler(e)}
-              value={form.firstName}
-              style={{margin: 8}}
-              required
-            />
-            <FDTextField
-              fullWidth
-              label="Last Name"
-              placeholder="Last Name"
-              name="lastName"
-              type="text"
-              onChange={e => changeHandler(e)}
-              value={form.lastName}
-              style={{margin: 8}}
-              variant="filled"
-              required
-            />
-          </InputGroup>
-          <InputGroup>
-            <FDTextField
-              fullWidth={window.innerWidth >= 768 ? false : true}
-              label={invalidation.email ? 'Invalid email address' : 'Email'}
-              name="email"
-              placeholder="name@email.com"
-              type="text"
-              onChange={e => changeHandler(e)}
-              value={form.email}
-              style={{margin: 8, flexGrow: 1}}
-              variant="filled"
-              required
-              error={invalidation.email ? true : false}
-            />
-            <Phone>
-              <ThemeProvider theme={theme}>
-                <Select
-                  disableUnderline={true}
-                  style={{
-                    backgroundColor: '#FFF',
-                    borderRadius: 4,
-                    width: 85
-                  }}
-                  onChange={e => changeHandler(e)}
-                  value={form.dialCode}
-                  name="dialCode"
-                  required
-                >
-                  {countries.map(country => (
-                    <MenuItem
-                      sx={{p: 5}}
-                      key={country.code}
-                      value={country.dial_code}
-                    >
-                      {form.dialCode === country.dial_code ? (
-                        <ListItemIcon>
-                          <Flag
-                            src={`https://www.countryflagicons.com/SHINY/64/${
-                              country.code
-                            }.png`}
-                          />
-                        </ListItemIcon>
-                      ) : (
-                        <>
-                          <ListItemIcon>
-                            <Flag
-                              src={`https://www.countryflagicons.com/SHINY/64/${
-                                country.code
-                              }.png`}
-                            />
-                          </ListItemIcon>{' '}
-                          {country.name + ' ' + country.dial_code}
-                        </>
-                      )}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </ThemeProvider>
+        <RegisterHeader />
+        <SignupWrapper>
+          <H3>Get Started</H3>
+          <SignupForm onSubmit={handleSubmit} name="signup">
+            <InputGroup>
               <FDTextField
-                fullWidth={window.innerWidth >= 768 ? false : true}
-                label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
-                name="phone"
-                placeholder="123 456 7890"
-                type="tel"
-                onChange={e => changeHandler(e)}
-                value={form.dialCode + ' ' + form.phone}
+                fullWidth
+                label="First Name"
+                placeholder="First Name"
+                name="firstName"
                 variant="filled"
-                error={invalidation.phone ? true : false}
+                type="text"
+                onChange={(e) => changeHandler(e)}
+                value={form.firstName}
+                style={{margin: 8}}
                 required
               />
-            </Phone>
-          </InputGroup>
-          <InputGroup>
-            <FDPasswordField
-              fullWidth
-              label="Password"
-              placeholder="Password"
-              name="password"
-              type={form.showPassword ? 'text' : 'password'}
-              onChange={e => changeHandler(e)}
-              value={form.password}
-              style={{margin: 8}}
-              variant="filled"
-              toggleVisibility={handleClickShowPassword}
-              error={invalidation.password ? true : false}
-              helperText={`Min 8 char. with at least one upper case letter, one number, and
+              <FDTextField
+                fullWidth
+                label="Last Name"
+                placeholder="Last Name"
+                name="lastName"
+                type="text"
+                onChange={(e) => changeHandler(e)}
+                value={form.lastName}
+                style={{margin: 8}}
+                variant="filled"
+                required
+              />
+            </InputGroup>
+            <InputGroup>
+              <FDTextField
+                fullWidth={window.innerWidth >= 768 ? false : true}
+                label={invalidation.email ? 'Invalid email address' : 'Email'}
+                name="email"
+                placeholder="name@email.com"
+                type="text"
+                onChange={(e) => changeHandler(e)}
+                value={form.email}
+                style={{margin: 8, flexGrow: 1}}
+                variant="filled"
+                required
+                error={invalidation.email ? true : false}
+              />
+              <Phone>
+                <ThemeProvider theme={theme}>
+                  <Select
+                    disableUnderline={true}
+                    style={{
+                      backgroundColor: '#FFF',
+                      borderRadius: 4,
+                      width: 85,
+                    }}
+                    onChange={(e) => changeHandler(e)}
+                    value={form.dialCode}
+                    name="dialCode"
+                    required
+                  >
+                    {countries.map((country) => (
+                      <MenuItem
+                        sx={{p: 5}}
+                        key={country.code}
+                        value={country.dial_code}
+                      >
+                        {form.dialCode === country.dial_code ? (
+                          <ListItemIcon>
+                            <Flag
+                              src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`}
+                            />
+                          </ListItemIcon>
+                        ) : (
+                          <>
+                            <ListItemIcon>
+                              <Flag
+                                src={`https://www.countryflagicons.com/SHINY/64/${country.code}.png`}
+                              />
+                            </ListItemIcon>{' '}
+                            {country.name + ' ' + country.dial_code}
+                          </>
+                        )}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </ThemeProvider>
+                <FDTextField
+                  fullWidth={window.innerWidth >= 768 ? false : true}
+                  label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
+                  name="phone"
+                  placeholder="123 456 7890"
+                  type="tel"
+                  onChange={(e) => changeHandler(e)}
+                  value={form.dialCode + ' ' + form.phone}
+                  variant="filled"
+                  error={invalidation.phone ? true : false}
+                  required
+                />
+              </Phone>
+            </InputGroup>
+            <InputGroup>
+              <FDPasswordField
+                fullWidth
+                label="Password"
+                placeholder="Password"
+                name="password"
+                type={form.showPassword ? 'text' : 'password'}
+                onChange={(e) => changeHandler(e)}
+                value={form.password}
+                style={{margin: 8}}
+                variant="filled"
+                toggleVisibility={handleClickShowPassword}
+                error={invalidation.password ? true : false}
+                helperText={`Min 8 char. with at least one upper case letter, one number, and
             one special char.: !, @, $, #, &, *.`}
-              required
-            />
-            <FDPasswordField
-              fullWidth
-              label="Confirm Password"
-              placeholder="Confirm Password"
-              name="confirmPassword"
-              type={form.showConfirmPassword ? 'text' : 'password'}
-              onChange={e => changeHandler(e)}
-              value={form.confirmPassword}
-              style={{margin: 8}}
-              variant="filled"
-              autocomplete="current-password"
-              toggleVisibility={handleClickShowConfirmPassword}
-              error={invalidation.confirmPassword ? true : false}
-              helperText={passwordErrorText}
-              required
-            />
-          </InputGroup>
-          <FinePrint>
-            <TermsAndConditionsDiv>
-              <ThemeProvider theme={theme}>
-                <Checkbox color="primary" required />I agree to the Fairline
-                Defense&nbsp;<OpenFinePrint
-                  onClick={e => {
-                    viewTerms(e)
-                  }}
-                >
-                  Terms & Conditions
-                </OpenFinePrint>
-              </ThemeProvider>
-            </TermsAndConditionsDiv>
-          </FinePrint>
+                required
+              />
+              <FDPasswordField
+                fullWidth
+                label="Confirm Password"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                type={form.showConfirmPassword ? 'text' : 'password'}
+                onChange={(e) => changeHandler(e)}
+                value={form.confirmPassword}
+                style={{margin: 8}}
+                variant="filled"
+                autocomplete="current-password"
+                toggleVisibility={handleClickShowConfirmPassword}
+                error={invalidation.confirmPassword ? true : false}
+                helperText={passwordErrorText}
+                required
+              />
+            </InputGroup>
+            <FinePrint>
+              <TermsAndConditionsDiv>
+                <ThemeProvider theme={theme}>
+                  <Checkbox color="primary" required />I agree to the Fairline
+                  Defense&nbsp;
+                  <OpenFinePrint
+                    onClick={(e) => {
+                      viewTerms(e)
+                    }}
+                  >
+                    Terms & Conditions
+                  </OpenFinePrint>
+                </ThemeProvider>
+              </TermsAndConditionsDiv>
+            </FinePrint>
 
-          <SignupButtonWrapper>
-            <SignupFormButton type="submit">Create an Account</SignupFormButton>
-          </SignupButtonWrapper>
-          <section className="signupFormBottom">
-            {errorText.length ? (
-              <ErrorText>{errorText}</ErrorText>
-            ) : (
-              <div>
-                <span>Already have an account?</span>
-                <span>
-                  <Link to="/login">Login</Link>
-                </span>
-              </div>
-            )}
-          </section>
-        </SignupForm>
-      </SignupWrapper>
+            <SignupButtonWrapper>
+              <SignupFormButton type="submit">
+                Create an Account
+              </SignupFormButton>
+            </SignupButtonWrapper>
+            <section className="signupFormBottom">
+              {errorText.length ? (
+                <ErrorText>{errorText}</ErrorText>
+              ) : (
+                <div>
+                  <span>Already have an account?</span>
+                  <span>
+                    <Link to="/login">Login</Link>
+                  </span>
+                </div>
+              )}
+            </section>
+          </SignupForm>
+        </SignupWrapper>
 
-      <AccountExistsModal
-        open={open}
-        handleClose={handleClose}
-        handleClick={handleClick}
-      />
-      <TermsAndConditions openTerms={openTerms} setOpenTerms={setOpenTerms} />
-    </BackgroundImage>
+        <AccountExistsModal
+          open={open}
+          handleClose={handleClose}
+          handleClick={handleClick}
+        />
+        <TermsAndConditions openTerms={openTerms} setOpenTerms={setOpenTerms} />
+      </BackgroundImage>
     </Gradient>
   )
 }

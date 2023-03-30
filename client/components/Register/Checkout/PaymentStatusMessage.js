@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   padding-top: 4rem;
   position: relative;
 `
-const H1 = styled.h1`
+const H3 = styled.h3`
   font-size: 30px;
   font-weight: 300;
   margin-bottom: 2rem;
@@ -58,52 +58,49 @@ const PaymentStatusMessage = () => {
   const stripe = useStripe()
   const [message, setMessage] = useState(null)
 
-  useEffect(
-    () => {
-      if (!stripe) {
-        return
+  useEffect(() => {
+    if (!stripe) {
+      return
+    }
+
+    // Retrieve the "payment_intent_client_secret" query parameter appended to
+    // your return_url by Stripe.js
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      'payment_intent_client_secret'
+    )
+
+    // Retrieve the PaymentIntent
+    stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
+      // Inspect the PaymentIntent `status` to indicate the status of the payment
+      // to your customer.
+      //
+      // Some payment methods will [immediately succeed or fail][0] upon
+      // confirmation, while others will first enter a `processing` state.
+      //
+      // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
+      switch (paymentIntent.status) {
+        case 'succeeded':
+          setMessage('Payment is Successful!')
+          break
+
+        case 'processing':
+          setMessage(
+            "Payment processing. We'll update you when payment is received."
+          )
+          break
+
+        case 'requires_payment_method':
+          // Redirect your user back to your payment page to attempt collecting
+          // payment again
+          setMessage('Payment failed. Please try another payment method.')
+          break
+
+        default:
+          setMessage('Something went wrong.')
+          break
       }
-
-      // Retrieve the "payment_intent_client_secret" query parameter appended to
-      // your return_url by Stripe.js
-      const clientSecret = new URLSearchParams(window.location.search).get(
-        'payment_intent_client_secret'
-      )
-
-      // Retrieve the PaymentIntent
-      stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
-        // Inspect the PaymentIntent `status` to indicate the status of the payment
-        // to your customer.
-        //
-        // Some payment methods will [immediately succeed or fail][0] upon
-        // confirmation, while others will first enter a `processing` state.
-        //
-        // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
-        switch (paymentIntent.status) {
-          case 'succeeded':
-            setMessage('Payment is Successful!')
-            break
-
-          case 'processing':
-            setMessage(
-              "Payment processing. We'll update you when payment is received."
-            )
-            break
-
-          case 'requires_payment_method':
-            // Redirect your user back to your payment page to attempt collecting
-            // payment again
-            setMessage('Payment failed. Please try another payment method.')
-            break
-
-          default:
-            setMessage('Something went wrong.')
-            break
-        }
-      })
-    },
-    [stripe]
-  )
+    })
+  }, [stripe])
 
   return (
     <Wrapper>
@@ -111,7 +108,7 @@ const PaymentStatusMessage = () => {
         <img src="./images/bluecheck.png" />
       ) : null}
 
-      <H1>{message}</H1>
+      <H3>{message}</H3>
       <Link to="/home">
         {message === 'Payment is Successful!' ? (
           <Header>Welcome to the Fairline Family</Header>

@@ -40,12 +40,12 @@
   font-weight: 600;
 }
 
-h1, h2, h4, h5, h6 {
+h1 {
   font-family:'Noe Display';
   font-style: normal;
 }
 
-h3 {
+h2 {
   font-family:'El Messiri';
   font-style: normal;
 }
