@@ -1,8 +1,8 @@
 import React from 'react'
 import Navbar from '../Navbar'
 import SecurityLanding from './SecurityLanding'
-import Card from './Card'
-import ProtectYourFuture from './SecurityWhyYouNeedIt'
+import SolutionToProtectYou from './SolutionToProtectYou'
+import SecurityWhyYouNeedIt from './SecurityWhyYouNeedIt'
 import HowItWorksSection from './HowItWorksSection'
 import SecurityWhatDoWeCover from './SecurityWhatDoWeCover'
 import SecurityWhatWeDontCover from './SecurityWhatWeDontCover'
@@ -11,14 +11,20 @@ import Protection from './Protection'
 import WhatDoYouGet from './WhatDoYouGet'
 import WhatDoYouGetMobile from './WhatDoYouGetMobile'
 import PlansMobile from './PlansMobile'
-import SecurityBePrepared from './SecurityBePrepared'
+import SecurityNoOneCanPredict from './SecurityNoOneCanPredict'
 import SecurityStories from './SecurityStories'
 import Footer from './Footer'
 import WhyYouNeedIt from './WhyYouNeedIt'
 import WhyWeStartedThis from './WhyWeStartedThis'
-import JoinNowSecurity from './JoinNowSecurity'
+import BecomeAMemberSecurity from './BecomeAMemberSecurity'
 import SecurityNeed from './SecurityNeed'
 import FAQ from './FAQ'
+import CriticalResponseSecurity from './CriticalResponseSecurity'
+import WhyAreWeDoingThis from './WhyAreWeDoingThis'
+import HowFairlineWorks from './HowFairlineWorks'
+import SecurityYouNeedExperiencedTeams from './SecurityYouNeedExperiencedTeams'
+import Plans from './Plans'
+import BePrepared from './BePrepared'
 
 const SecurityHome = () => {
   return (
@@ -26,20 +32,24 @@ const SecurityHome = () => {
       <Navbar />
       <SecurityLanding />
       {/* <WhyWeStartedThis /> */}
-      <Card />
-      <ProtectYourFuture />
-      <HowItWorksSection />
-      <SecurityNeed />
-      <SecurityPlans />
+      <SolutionToProtectYou />
+      <CriticalResponseSecurity />
+      <WhyAreWeDoingThis />
+      <HowFairlineWorks />
+      <SecurityWhyYouNeedIt />
+      {/* <HowItWorksSection /> */}
+      <SecurityYouNeedExperiencedTeams />
       <WhatDoYouGetMobile />
+      <Plans />
       <SecurityWhatDoWeCover />
       <SecurityWhatWeDontCover />
       {/* <Protection /> */}
       {/* <PlansMobile /> */}
-      <SecurityBePrepared />
+      <SecurityNoOneCanPredict />
+      <BePrepared />
       {/* <SecurityStories /> */}
       {/* <FAQ /> */}
-      <JoinNowSecurity />
+      <BecomeAMemberSecurity />
       <Footer />
     </>
   )

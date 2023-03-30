@@ -10,10 +10,9 @@ const Section = styled.div`
   padding: 4rem 6rem 4rem 6rem;
 
   @media (max-width: 800px) {
-    padding: 1rem;
+    padding: 0;
     flex-direction: column;
     height: 420px;
-    margin-bottom: 2rem;
   }
 `
 const Blue = styled.div`
@@ -31,6 +30,7 @@ const Blue = styled.div`
     margin: 1rem;
     flex-direction: column;
     height: 420px;
+    border-radius: 0;
   }
 `
 const Wrapper = styled.div`
@@ -63,7 +63,7 @@ const Text = styled.div`
     margin: 0rem;
   }
 `
-const Header = styled.div`
+const Header = styled.h1`
   font-size: 42px;
   font-weight: 500;
   line-height: 48px;
@@ -117,7 +117,7 @@ export default function SecurityWhatWeDontCover() {
           <Text>
             <Header>What we don't cover.</Header>
             <SubHeader>Any actions with criminal intent.</SubHeader>
-            <Small>Don't be a criminal, it never works out.</Small>
+            <Small>- Don't be a criminal, it never works out.</Small>
           </Text>
         </Wrapper>
       </Blue>
