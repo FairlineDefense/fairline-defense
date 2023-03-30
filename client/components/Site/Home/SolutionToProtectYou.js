@@ -30,6 +30,7 @@ const Header = styled.h1`
     width: 100%;
     font-size: 32px;
     line-height: 38px;
+    padding: 0 1rem;
   }
 `
 const Text = styled.div`

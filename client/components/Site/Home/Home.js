@@ -34,7 +34,7 @@ const Home = () => {
       <WhyDoYouNeedIt />
       {/* <Protection /> */}
       <WhatDoYouGetMobile />
-      <Plans />
+      <Plans isArmedCitizen />
       {/* <PlansMobile /> */}
       <WhatDoWeCover />
       <WhatWeDontCover />

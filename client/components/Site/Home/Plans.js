@@ -190,36 +190,43 @@ const Arrow = styled.img`
   }
 `
 
-export default function Plans() {
+export default function Plans({isArmedCitizen}) {
   return (
     <Section id="coverages">
       <Header>No complicated Plans & Options</Header>
       <Subheader>
-        Peace of mind at <Cyan>$19.99</Cyan>
+        Peace of mind at <Cyan>{isArmedCitizen ? '$19.99' : '$29.99'}</Cyan>
       </Subheader>
-      <Title>Armed Citizen Plan</Title>
+      <Title>
+        {isArmedCitizen ? 'Armed Citizen Plan' : 'Armed Professional Plan'}
+      </Title>
       <Wrapper>
         <PlanWrapper>
           <Plan>
-            <header>$19.99</header>
+            <header>{isArmedCitizen ? '$19.99' : '$29.99'}</header>
             <small>Billed Monthly</small>
           </Plan>
-          <Small>Add a spouse or family member for only $5 a month! </Small>
+          <Small>
+            {isArmedCitizen &&
+              'Add a spouse or family member for only $5 a month!'}
+          </Small>
         </PlanWrapper>
         <PlanWrapper>
           <Plan>
-            <header>$199</header>
+            <header>{isArmedCitizen ? '$199' : '$299'}</header>
             <small>Billed Yearly</small>
           </Plan>
           <Savings>
             <Arrow src="./images/cyanarrow.png" />
-            Save $40
+            {isArmedCitizen ? 'Save $40' : 'Save $60'}{' '}
           </Savings>
         </PlanWrapper>
       </Wrapper>
-      <SmallMobile>
-        Add a spouse or family member for only $5 a month!
-      </SmallMobile>
+      {isArmedCitizen && (
+        <SmallMobile>
+          Add a spouse or family member for only $5 a month!
+        </SmallMobile>
+      )}
     </Section>
   )
 }
