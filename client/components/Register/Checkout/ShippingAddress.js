@@ -22,7 +22,7 @@ const Line2Wrapper = styled.div`
   width: 100%;
 `
 
-const Header = styled.h1`
+const Header = styled.h3`
   font-size: 32px;
   font-weight: 500;
   margin: 0.5rem 0rem 2rem 0rem;

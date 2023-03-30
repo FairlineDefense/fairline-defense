@@ -25,7 +25,7 @@ justify-content: flex-start;
         width: 100%;
     }
 `
-const H1 = styled.h1`
+const H3 = styled.h3`
   font-size: 36px;
   font-weight: 600;
   color: var(--darkblue);
@@ -36,7 +36,7 @@ const H1 = styled.h1`
     font-size: 24px;
   }
 `
-const H2 = styled.h1`
+const H4 = styled.h4`
   font-size: 30px;
   font-weight: 200;
   color: var(--darkblue);
@@ -89,10 +89,10 @@ export default function ReferAFriend() {
   return (
     <Wrapper>
       <Left>
-        <H1>Fairline defense is awesome.</H1>
-        <H2>
+        <H3>Fairline defense is awesome.</H3>
+        <H4>
           Refer a Friend and <Cyan>make $20</Cyan>
-        </H2>
+        </H4>
         <CyanButton>Refer a Friend</CyanButton>
       </Left>
       <Right>

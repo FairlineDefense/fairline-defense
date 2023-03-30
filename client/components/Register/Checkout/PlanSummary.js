@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   position: relative;
   margin: 1rem 0rem 1rem 0rem;
 `
-const Header = styled.h1`
+const Header = styled.h3`
   font-size: 32px;
   font-weight: 300;
   margin: 0.5rem 0rem 1rem 0rem;

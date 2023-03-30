@@ -45,19 +45,14 @@ export default function Card() {
       }
     }
   `
-  const H1 = styled.h1`
+  const H3 = styled.h3`
     font-size: 42px;
     font-weight: 600;
     color: var(--darkblue);
     margin-bottom: 1.5rem;
     line-height: 42px;
   `
-  const H2 = styled.h1`
-    font-size: 30px;
-    font-weight: 200;
-    color: var(--darkblue);
-    margin-bottom: 1rem;
-  `
+
   const Button = styled.button`
     color: var(--primary);
     width: 220px;
@@ -116,7 +111,7 @@ export default function Card() {
           <img src="./images/card.png" />
         </Left>
         <Right>
-          <H1>Membership Card</H1>
+          <H3>Membership Card</H3>
           <Button>Download Digital</Button>
           <CyanButton>Ship a New Card</CyanButton>
         </Right>

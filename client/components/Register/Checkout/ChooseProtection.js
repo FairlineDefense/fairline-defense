@@ -124,7 +124,7 @@ const Billing = styled.p`
   font-weight: 500;
   text-align: center;
 `
-const SemiBold = styled.h1`
+const SemiBold = styled.h3`
   font-size: 32px;
   font-weight: 500;
   margin-bottom: 1rem;
@@ -134,16 +134,8 @@ const SemiBold = styled.h1`
     font-size: 28px;
   }
 `
-const H1 = styled.h1`
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 1rem;
 
-  @media (max-width: 800px) {
-    margin-bottom: 1rem;
-  }
-`
-const Subheader = styled.h2`
+const Subheader = styled.h4`
   font-size: 24px;
   margin: 1rem 0rem 2rem 0rem;
   text-align: center;

@@ -50,7 +50,7 @@ const Subheader = styled.div`
     font-size: 22px;
   }
 `
-const Title = styled.h3`
+const Title = styled.h2`
   font-size: 28px;
   line-height: 38px;
   text-align: center;
@@ -152,7 +152,7 @@ const SmallMobile = styled.div`
   }
 `
 
-const Savings = styled.h3`
+const Savings = styled.h2`
   position: relative;
   font-size: 36px;
   width: 400px;
