@@ -3,58 +3,78 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 const Section = styled.div`
   width: 100vw;
-  height: 670px;
+  height: 800px;
   display: flex;
   flex-direction: column;
-  padding: 17rem 0rem 0rem 8rem;
-  background-image: url('./images/AdobeStock_127045648 2.jpg');
+  padding: 12rem;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0),
+      transparent
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), transparent),
+    url('./images/man-in-car.svg');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
 
   @media (max-width: 800px) {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 0),
+        transparent,
+        transparent
+      ),
+      url('./images/man-in-car-mobile.svg');
     margin-top: 60px;
-    background-size: cover;
-    background-position: 50% top;
-    height: 500px;
-    padding: 0.5rem 1rem 1rem 1rem;
-    text-align: center;
+    background-size: contain;
+    background-position: bottom;
+    height: 700px;
+    padding: 3rem 3rem 1rem 3rem;
     align-items: center;
   }
 `
-const Heading = styled.div`
+const Heading = styled.h1`
   font-size: 48px;
-  font-weight: 600;
   color: #fff;
+  width: 400px;
+  margin-bottom: 1rem;
+  line-height: 60px;
 
   @media (max-width: 800px) {
-    width: 250px;
-    font-size: 44px;
-    line-height: 50px;
+    width: 100%;
+    font-size: 34px;
+    line-height: 42px;
     margin-bottom: 2rem;
   }
 `
 const SubHeading = styled.div`
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 200;
   color: #fff;
   width: 500px;
-  margin: 1rem 0rem 1rem 0rem;
+  margin: 1rem 0rem 3rem 0rem;
 
   @media (max-width: 800px) {
-    width: 280px;
+    width: 100%;
     font-size: 22px;
     line-height: 32px;
     margin: 0rem 0rem 1rem 0rem;
   }
 `
 const StartButton = styled.div`
-  background-color: #ff1e3e;
-  opacity: 0.9;
+  background-color: var(--cyan);
   color: #fff;
   border-radius: 40px;
   width: 280px;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 0.75rem 2rem 0.75rem 2rem;
   font-size: 20px;
   font-weight: 400;
   margin-top: 1rem;
@@ -72,7 +92,7 @@ const DownArrow = styled.div`
   width: 100px;
   display: block;
   z-index: 50;
-  top: 600px;
+  top: 746px;
   left: 50%;
 
   @media (max-width: 800px) {
@@ -82,12 +102,14 @@ const DownArrow = styled.div`
 export default function Landing() {
   return (
     <Section id="top">
-      <Heading>Protection Starts Here</Heading>
+      <Heading>
+        Are you prepared if you have to defend yourself & your family?
+      </Heading>
       <SubHeading>
         Fairline Defense protects your family in all defense situations.
       </SubHeading>
       <Link to="/signup">
-        <StartButton>Get Started</StartButton>
+        <StartButton>Become a Member</StartButton>
       </Link>
       <DownArrow />
     </Section>

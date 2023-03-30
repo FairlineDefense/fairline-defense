@@ -16,6 +16,40 @@
   font-weight: 500;
 }
 
+@font-face {
+  font-family: 'Noe Display';
+  src: url('./fonts/Noe\ Display\ Bold.otf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Noe Display';
+  src: url('./fonts/Noe\ Display\ Medium.otf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Noe Display';
+  src: url('./fonts/Noe\ Display\ Regular.otf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'El Messiri';
+  src: url('./fonts/ElMessiri-Regular.ttf');
+  font-weight: 600;
+}
+
+h1, h2, h4, h5, h6 {
+  font-family:'Noe Display';
+  font-style: normal;
+}
+
+h3 {
+  font-family:'El Messiri';
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

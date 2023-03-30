@@ -2,86 +2,57 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Section = styled.div`
+  height: 369px;
   width: 100vw;
-  height: 800px;
-  background-image: url('./images/predictbgimg.png');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 20rem 0rem 0rem 12rem;
-
-  @media (max-width: 800px) {
-    height: auto;
-    background-size: 220% auto;
-    padding: 22rem 0rem 0rem 1rem;
-    background-position: right bottom;
-  }
-`
-const Wrapper = styled.div`
-  width: 600px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-`
-const Header = styled.div`
-  font-size: 48px;
-  font-weight: 600;
-  line-height: 55px;
-  color: #fff;
-  margin-bottom: 2rem;
-  position: relative;
+  padding: 2rem 12rem;
+  justify-content: center;
+  background-image: url('./images/lightredbg.png');
+  background-position: -30px 50px;
+  background-repeat: no-repeat;
+  background-size: contain;
 
   @media (max-width: 800px) {
-    font-size: 32px;
-    line-height: 38px;
-    width: 420px;
+    height: 100%;
+    padding: 4rem 2rem;
+    background-image: none;
+    text-align: center;
   }
 `
-const Svg = styled.svg`
-  position: absolute;
-  left: 0px;
-  margin-top: 8rem;
-  width: 506px;
-  height: 530px;
+const Header = styled.h1`
+  width: 740px;
+  font-size: 42px;
+  line-height: 50px;
+  font-weight: 700;
+  color: var(--darkblue);
+  margin-bottom: 2rem;
+
   @media (max-width: 800px) {
     width: 100%;
-    height: auto;
-    left: -60px;
+    font-size: 32px;
+    line-height: 38px;
   }
 `
+const Text = styled.div`
+  font-size: 28px;
+  width: 636px;
+  color: var(--darkblue);
+
+  @media (max-width: 800px) {
+    width: 100%;
+    font-size: 22px;
+  }
+`
+
 export default function BePrepared() {
   return (
-    <>
-      <Svg viewBox="0 0 506 530" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clip-path="url(#clip0_673_27)">
-          <path
-            d="M31.2033 68.4848L0 187.72L474.797 119.38L506 0L31.2033 68.4848Z"
-            fill="#B32D2D"
-            fill-opacity="0.5"
-          />
-          <path
-            d="M31.2033 239.336L0 358.716L474.797 290.231L506 170.996L31.2033 239.336Z"
-            fill="#B32D2D"
-            fill-opacity="0.5"
-          />
-          <path
-            d="M31.2033 410.764L0 530L194.81 501.885L226.013 382.649L31.2033 410.764Z"
-            fill="#B32D2D"
-            fill-opacity="0.5"
-          />
-        </g>
-        <defs>
-          <clipPath id="clip0_673_27">
-            <rect width="506" height="530" fill="white" />
-          </clipPath>
-        </defs>
-      </Svg>
-      <Section>
-        <Wrapper>
-          <Header>No one can predict when something will happen.</Header>
-          <Header>Be prepared. Fairline Defense has a plan.</Header>
-        </Wrapper>
-      </Section>
-    </>
+    <Section>
+      <Header>Be prepared with Fairline Defense.</Header>
+      <Text>
+        Legal peace of mind for you and your loved ones - protection for all
+        your defense needs.
+      </Text>
+    </Section>
   )
 }

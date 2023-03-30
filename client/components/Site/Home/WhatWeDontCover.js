@@ -8,13 +8,12 @@ const Section = styled.div`
   flex-direction: column;
   padding: 4rem;
   align-items: center;
-  background-color: var(--bgblue);
+  background-color: var(--darkblue);
 
   @media (max-width: 800px) {
-    padding: 2rem 0rem 2rem 0rem;
-    margin: 1rem;
+    padding: 4rem 2rem;
     flex-direction: column;
-    height: 420px;
+    height: 100%;
   }
 `
 const Wrapper = styled.div`
@@ -31,7 +30,7 @@ const Wrapper = styled.div`
 `
 const Text = styled.div`
   width: 40%;
-  color: var(--darkblue);
+  color: #fff;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -47,12 +46,13 @@ const Text = styled.div`
     margin: 0rem;
   }
 `
-const Header = styled.div`
+const Header = styled.h1`
   font-size: 42px;
   font-weight: 500;
   line-height: 48px;
-  color: var(--darkblue);
+  color: #fff;
   font-weight: 600;
+  margin-bottom: 1rem;
 
   @media (max-width: 800px) {
     font-size: 30px;
@@ -60,33 +60,53 @@ const Header = styled.div`
     text-align: center;
   }
 `
+
+const Subtext = styled.div`
+  font-size: 28px;
+  margin-bottom: 1rem;
+`
+
 const Small = styled.div`
-  font-size: 18px;
+  font-size: 22px;
   color: #c73232;
-  margin: 1.5rem 0rem 1.5rem 0rem;
 `
 const CuffsIcon = styled.div`
   width: 246px;
-  background-image: url('./images/handcuffspng.png');
+  background-image: url('./images/handcuffs.svg');
   background-position: center;
   background-repeat: no-repeat;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+`
+
+const CuffsIconMobile = styled.div`
+  display: none;
 
   @media (max-width: 800px) {
     display: block;
     width: 100%;
     height: 200px;
     background-size: contain;
+    background-image: url('./images/handcuffs.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 `
+
 export default function WhatWeDontCover() {
   return (
     <Section>
-      <Header>What we don't cover.</Header>
       <Wrapper>
         <CuffsIcon />
         <Text>
-          <Header>Any actions with criminal intent.</Header>
-          <Small>Don't be a criminal, it never works out.</Small>
+          <Header>What we don't cover.</Header>
+          <Subtext>Any actions with criminal intent.</Subtext>
+          <CuffsIconMobile />
+          <Small>- Don't be a criminal, it never works out.</Small>
         </Text>
       </Wrapper>
     </Section>
