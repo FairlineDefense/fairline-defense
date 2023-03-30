@@ -11,7 +11,7 @@ const Section = styled.div`
       transparent
     ),
     linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), transparent),
-    url('./images/predict.svg');
+    url('./images/break-in.svg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -27,15 +27,16 @@ const Section = styled.div`
         rgba(0, 0, 0, 1),
         rgba(0, 0, 0, 1),
         rgba(0, 0, 0, 1),
+        rgba(0, 0, 0, 1),
         rgba(0, 0, 0, 0),
         transparent,
         transparent
       ),
-      url('./images/predict.svg');
+      url('./images/break-in.svg');
 
     background-position: center top;
     background-size: contain;
-    height: 400px;
+    height: 380px;
   }
 `
 const Wrapper = styled.div`
@@ -62,7 +63,7 @@ const Header = styled.h1`
     font-size: 32px;
     line-height: 38px;
     margin-bottom: 0;
-    width: 100%;
+    width: 80%;
   }
 `
 
