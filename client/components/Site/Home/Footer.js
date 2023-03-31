@@ -13,6 +13,7 @@ const Section = styled.div`
   @media (max-width: 800px) {
     height: 100%;
     flex-direction: column;
+    padding: 2rem;
   }
 `
 const Logo = styled.div`
@@ -34,29 +35,22 @@ const LinksWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-left: 2rem;
-
-  > :first-child {
-    margin-right: 3rem;
-  }
+  margin-left: 3rem;
 
   @media (max-width: 800px) {
     margin-left: 0;
-    margin-top: 4rem;
-    margin-bottom: 3rem;
+    margin-top: 2rem;
     flex-direction: column;
-
-    > :first-child {
-      display: none;
-    }
   }
 `
 
 const LinkGroup = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 4rem;
+
   header {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 20px;
     margin-bottom: 1.5rem;
   }
@@ -69,13 +63,33 @@ const LinkGroup = styled.div`
   a {
     color: #fff;
   }
+
+  @media (max-width: 800px) {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    border-bottom: 0.5px solid #fff;
+
+    header {
+      margin-bottom: 1rem;
+    }
+
+    ul li {
+      margin-bottom: 0.75rem;
+    }
+
+    > :last-child {
+      margin-bottom: 1rem;
+    }
+  }
 `
 const Support = styled.div`
   width: 25%;
   display: flex;
   flex-direction: column;
+  text-align: right;
+
   header {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 20px;
     margin-bottom: 1rem;
   }
@@ -90,11 +104,11 @@ const Support = styled.div`
   }
   @media (max-width: 800px) {
     width: 100%;
+    text-align: left;
   }
 `
 const Phone = styled.span`
-  font-size: 25px;
-  color: #ffd600;
+  font-weight: 400;
 `
 const Copyright = styled.div`
   width: 100%;
@@ -126,10 +140,7 @@ export default function Footer() {
                 <a href="#">Our Story</a>
               </li>
               <li>
-                <a href="#">Testimonials</a>
-              </li>
-              <li>
-                <a href="#">Fairline Defense Reviews</a>
+                <a href="#">Reviews & Testimonials</a>
               </li>
               <li>
                 <a href="#">FAQs</a>
@@ -144,9 +155,6 @@ export default function Footer() {
               </li>
               <li>
                 <a href="/armedprofessionals">Armed Professional</a>
-              </li>
-              <li>
-                <a href="#">Reviews & Testimonials</a>
               </li>
             </ul>
           </LinkGroup>
