@@ -1,6 +1,6 @@
-# fly.toml file generated for fairline on 2023-01-15T15:51:28-05:00
+# fly.toml file generated for fairlinedefense-alternate on 2023-01-15T15:51:28-05:00
 
-app = "fairline"
+app = "fairlinedefense-alternate"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
