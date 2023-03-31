@@ -20,6 +20,7 @@ module.exports = app
 if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions())
 }
+
 app.use('/webhooks/stripe', require('./webhooks/stripe'))
 app.use('/webhooks/klaviyo', require('./webhooks/klaviyo'))
 

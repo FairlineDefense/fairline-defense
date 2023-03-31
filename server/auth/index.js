@@ -32,16 +32,18 @@ router.post('/signup', async (req, res, next) => {
   }
 })
 
-router.post('/logout', function(req, res, next) {
-  req.logout(function(err) {
-    if (err) { return next(err); }
-    res.redirect('/');
-  });
-});
-
 router.get('/me', async (req, res) => {
   console.log('req.user', req.user)
   res.json(req.user)
 })
+
+router.post('/logout', function(req, res, next) {
+  console.log('req.logout')
+  req.logout(function(err) {
+    console.log('logout err', err)
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+});
 
 router.use('/google', require('./google'))

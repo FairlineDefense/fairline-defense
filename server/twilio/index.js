@@ -13,9 +13,7 @@ router.post('/start-verify', async (req, res, next) => {
     response.headers = {'Content-Type': 'application/json'};
     const channel = req.body.channel
     const to = channel === 'sms' ? req.body.phone : req.body.email
-    const callbackUrl = process.env.NODE_ENV === 'production' ? 
-    'https://fairlinedefense.com/chooseprotection' : 
-    'http://localhost:8080/chooseprotection'
+    const callbackUrl = process.env.TWILIO_CALLBACK_URL
     const channelConfig = channel === 'sms' ? {} : {
       substitutions: {
         email: to,
