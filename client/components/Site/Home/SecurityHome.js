@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../Navbar'
 import SecurityLanding from './SecurityLanding'
-import SolutionToProtectYou from './SolutionToProtectYou'
+import SecuritySolutionToProtectYou from './SecuritySolutionToProtectYou'
 import SecurityWhyYouNeedIt from './SecurityWhyYouNeedIt'
 import HowItWorksSection from './HowItWorksSection'
 import SecurityWhatDoWeCover from './SecurityWhatDoWeCover'
@@ -20,7 +20,7 @@ import BecomeAMemberSecurity from './BecomeAMemberSecurity'
 import SecurityNeed from './SecurityNeed'
 import FAQ from './FAQ'
 import CriticalResponseSecurity from './CriticalResponseSecurity'
-import WhyAreWeDoingThis from './WhyAreWeDoingThis'
+import WhatIsAnArmedProfessional from './WhatIsAnArmedProfessional'
 import HowFairlineWorks from './HowFairlineWorks'
 import SecurityYouNeedExperiencedTeams from './SecurityYouNeedExperiencedTeams'
 import Plans from './Plans'
@@ -32,14 +32,14 @@ const SecurityHome = () => {
       <Navbar />
       <SecurityLanding />
       {/* <WhyWeStartedThis /> */}
-      <SolutionToProtectYou />
+      <SecuritySolutionToProtectYou />
       <CriticalResponseSecurity />
-      <WhyAreWeDoingThis />
+      <WhatIsAnArmedProfessional />
       <HowFairlineWorks />
       <SecurityWhyYouNeedIt />
+      <WhatDoYouGetMobile />
       {/* <HowItWorksSection /> */}
       <SecurityYouNeedExperiencedTeams />
-      <WhatDoYouGetMobile />
       <Plans />
       <SecurityWhatDoWeCover />
       <SecurityWhatWeDontCover />

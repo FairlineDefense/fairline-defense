@@ -63,14 +63,14 @@ const Header = styled.h1`
   }
 `
 
-export default function CriticalResponse() {
+export default function SelfDefense() {
   return (
     <Section>
       <Wrapper>
         <Header>
-          If you use your firearm in a defensive situation, Fairline Defense
-          will have a Critical Response team ready to help, guide, and be there
-          for you.
+          If you use a firearm or other defensive tool in a self-defense
+          situation, Fairline Defense will be there to protect you for what
+          comes next.
         </Header>
       </Wrapper>
     </Section>

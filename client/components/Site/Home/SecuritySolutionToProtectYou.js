@@ -2,19 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Section = styled.div`
-  height: 100%;
+  height: 369px;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 4rem 22rem;
+  padding: 2rem 4rem 2rem 4rem;
   justify-content: center;
-  background-color: #f0f0f0;
+  margin: 2rem;
 
   @media (max-width: 800px) {
-    height: 380px;
-    padding: 4rem 2rem;
+    height: 260px;
+    margin: 2rem 0rem 2rem 0rem;
+    padding: 2rem;
   }
 `
 const Header = styled.h1`
@@ -29,6 +30,7 @@ const Header = styled.h1`
     width: 100%;
     font-size: 32px;
     line-height: 38px;
+    padding: 0 1rem;
   }
 `
 const Text = styled.div`
@@ -40,14 +42,19 @@ const Text = styled.div`
   }
 `
 
-export default function WhyAreWeDoingThis() {
+const Bold = styled.div`
+  display: inline-block;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 600;
+`
+
+export default function SecuritySolutionToProtectYou() {
   return (
     <Section>
-      <Header>Why are we doing this?</Header>
+      <Header>Fairline Defense is the solution to protect you. </Header>
       <Text>
-        Fairline Defense was founded by Security Professionals, First
-        Responders, and Veterans who found a need for quality legal protection
-        when you protect yourself.
+        Fairline defense is a <Bold>subscription based legal team</Bold>
       </Text>
     </Section>
   )

@@ -91,9 +91,15 @@ const SubHeader = styled.div`
   }
 `
 const Small = styled.div`
-  font-size: 18px;
-  color: #c73232;
+  font-size: 22px;
+  color: var(--darkblue);
+  font-style: italic;
+  font-weight: 600;
   margin: 1.5rem 0rem 1.5rem 0rem;
+
+  @media (max-width: 800px) {
+    font-size: 18px;
+  }
 `
 const CuffsIcon = styled.div`
   width: 246px;

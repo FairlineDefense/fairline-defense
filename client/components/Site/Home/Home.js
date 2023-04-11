@@ -14,9 +14,9 @@ import NoOneCanPredict from './NoOneCanPredict'
 import Stories from './Stories'
 import Footer from './Footer'
 import FAQ from './FAQ'
-import CriticalResponse from './CriticalResponse'
-import WhyAreWeDoingThis from './WhyAreWeDoingThis'
+import SelfDefense from './SelfDefense'
 import HowFairlineWorks from './HowFairlineWorks'
+import OurMission from './OurMission'
 import WhyDoYouNeedIt from './WhyDoYouNeedIt'
 import BePrepared from './BePrepared'
 import BecomeAMember from './BecomeAMember'
@@ -27,10 +27,10 @@ const Home = () => {
       <Navbar />
       <Landing />
       <SolutionToProtectYou />
-      <CriticalResponse />
+      <SelfDefense />
       {/* <ProtectYourFuture /> */}
-      <WhyAreWeDoingThis />
       <HowFairlineWorks />
+      <OurMission />
       <WhyDoYouNeedIt />
       {/* <Protection /> */}
       <WhatDoYouGetMobile />

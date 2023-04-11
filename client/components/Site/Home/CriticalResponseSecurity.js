@@ -7,7 +7,7 @@ const Section = styled.div`
   width: 100vw;
   height: 800px;
   background-image: linear-gradient(
-      to right,
+      to left,
       rgba(0, 0, 0, 1),
       rgba(0, 0, 0, 0),
       transparent
