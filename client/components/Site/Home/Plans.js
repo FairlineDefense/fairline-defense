@@ -193,7 +193,7 @@ const Arrow = styled.img`
 export default function Plans({isArmedCitizen}) {
   return (
     <Section id="coverages">
-      <Header>No complicated Plans & Options</Header>
+      <Header>Protection made simple</Header>
       <Subheader>
         Peace of mind at <Cyan>{isArmedCitizen ? '$19.99' : '$29.99'}</Cyan>
       </Subheader>

@@ -68,7 +68,7 @@ const Text = styled.div`
     font-size: 28px;
     line-height: 48px;
     font-style: italic;
-    color: #c73232;
+    color: var(--cyan);
   }
 
   @media (max-width: 800px) {
@@ -84,8 +84,6 @@ const Text = styled.div`
     small {
       font-size: 16px;
       line-height: 16px;
-      font-style: italic;
-      color: #c73232;
     }
   }
 `

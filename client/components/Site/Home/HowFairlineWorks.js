@@ -12,11 +12,15 @@ const Section = styled.div`
   background-position: -30px 50px;
   background-repeat: no-repeat;
   background-size: contain;
+  align-items: center;
+  text-align: center;
 
   @media (max-width: 800px) {
     height: 100%;
     padding: 4rem 2rem;
     background-position: -110px 80px;
+    align-items: left;
+    text-align: left;
   }
 `
 const Header = styled.h1`
@@ -35,7 +39,7 @@ const Header = styled.h1`
 `
 const Text = styled.div`
   font-size: 28px;
-  width: 636px;
+  width: 800px;
   color: var(--darkblue);
 
   @media (max-width: 800px) {
@@ -49,8 +53,9 @@ export default function HowFairlineWorks() {
     <Section id="howitworks">
       <Header>How Fairline Defense Works?</Header>
       <Text>
-        If anything happens defending your life, Fairline Defense is here with a
-        legal and support team.
+        In a defensive situation, trust Fairline Defense to provide a prompt and
+        expert critical response team, dedicated legal support, and unwavering
+        assistance for you and your family.
       </Text>
     </Section>
   )

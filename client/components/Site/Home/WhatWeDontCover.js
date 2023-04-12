@@ -69,6 +69,7 @@ const Subtext = styled.div`
 const Small = styled.div`
   font-size: 22px;
   color: #c73232;
+  font-style: italic;
 `
 const CuffsIcon = styled.div`
   width: 246px;

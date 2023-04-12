@@ -44,7 +44,7 @@ const Section = styled.div`
 const Heading = styled.h1`
   font-size: 48px;
   color: #fff;
-  width: 400px;
+  width: 600px;
   margin-bottom: 1rem;
   line-height: 60px;
 
@@ -68,6 +68,13 @@ const SubHeading = styled.div`
     margin: 0rem 0rem 1rem 0rem;
   }
 `
+const Bold = styled.div`
+  display: inline-block;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 600;
+`
+
 const StartButton = styled.div`
   background-color: var(--cyan);
   color: #fff;
@@ -101,11 +108,11 @@ const DownArrow = styled.div`
 export default function Landing() {
   return (
     <Section id="top">
-      <Heading>
-        Are you prepared if you have to defend yourself & your family?
-      </Heading>
+      <Heading>Be prepared to defend yourself & your family.</Heading>
       <SubHeading>
-        Fairline Defense protects your family in all defense situations.
+        Peace of mind at <Bold>$19.99</Bold>
+        <br />
+        <Bold>Subscription based legal defense</Bold>
       </SubHeading>
       <Link to="/signup">
         <StartButton>Become a Member</StartButton>

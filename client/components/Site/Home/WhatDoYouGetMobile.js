@@ -125,7 +125,10 @@ export default function WhatDoYouGetMobile() {
           <img src="./images/payment.svg" />
           <div>
             <header>100%</header>
-            <small>Money up front</small>
+            <small>
+              No pay back if <br />
+              you lose
+            </small>
           </div>
         </Card>
       </Wrapper>
