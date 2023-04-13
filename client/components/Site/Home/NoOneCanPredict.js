@@ -3,15 +3,8 @@ import styled from 'styled-components'
 
 const Section = styled.div`
   width: 100vw;
-  height: 800px;
-  background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 1),
-      rgba(0, 0, 0, 0),
-      transparent
-    ),
-    linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), transparent),
-    url('./images/break-in.svg');
+  height: 840px;
+  background-image: url('./images/break-in.png');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -22,21 +15,7 @@ const Section = styled.div`
     justify-content: flex-end;
     height: auto;
     padding: 4rem 2rem 3rem;
-    background-image: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 0),
-        transparent,
-        transparent
-      ),
-      url('./images/break-in.svg');
-
-    background-position: center top;
-    background-size: contain;
-    height: 380px;
+    height: 270px;
   }
 `
 const Wrapper = styled.div`
@@ -60,10 +39,7 @@ const Header = styled.h1`
   width: 451px;
 
   @media (max-width: 800px) {
-    font-size: 32px;
-    line-height: 38px;
-    margin-bottom: 0;
-    width: 80%;
+    display: none;
   }
 `
 

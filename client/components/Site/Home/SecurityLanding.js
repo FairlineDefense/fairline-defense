@@ -7,34 +7,15 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   padding: 12rem;
-  background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 1),
-      rgba(0, 0, 0, 0),
-      transparent
-    ),
-    linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), transparent),
-    url('./images/security.svg');
+  background-image: url('./images/security.png');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
 
   @media (max-width: 800px) {
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 0),
-        transparent,
-        transparent
-      ),
-      url('./images/security.svg');
+    background-image: url('./images/security-mobile.png');
     margin-top: 60px;
-    background-size: 160% auto;
-    background-position: right bottom;
-    height: 490px;
+    height: 811px;
     padding: 4rem 3rem;
     align-items: center;
     justify-content: space-between;
@@ -48,7 +29,7 @@ const Heading = styled.h1`
   line-height: 60px;
 
   @media (max-width: 800px) {
-    width: 90%;
+    width: 100%;
     font-size: 34px;
     line-height: 42px;
   }
