@@ -8,7 +8,7 @@ const Section = styled.div`
   align-items: center;
   justify-content: center;
   background-image: url('./images/AdobeStock_481396404 1.jpg');
-  background-position: center bottom;
+  background-position: center top;
   background-repeat: no-repeat;
   background-size: 100%;
   text-align: center;
@@ -24,7 +24,7 @@ const Heading = styled.h1`
   line-height: 52px;
   font-weight: 600;
   color: #fff;
-  width: 750px;
+  width: 400px;
   margin-top: 8rem;
   @media (max-width: 800px) {
     line-height: 38px;

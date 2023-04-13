@@ -6,35 +6,17 @@ const Section = styled.div`
   justify-content: flex-end;
   width: 100vw;
   height: 800px;
-  background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 1),
-      rgba(0, 0, 0, 0),
-      transparent
-    ),
-    url('./images/security-patrol.svg');
-  background-position: center;
+  background-image: url('./images/security-patrol.png');
+  background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
   padding: 18rem 12rem 12rem;
 
   @media (max-width: 800px) {
     justify-content: flex-start;
-    background-image: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 0),
-        transparent,
-        transparent
-      ),
-      url('./images/security-patrol.svg');
+    background-image: url('./images/security-patrol-mobile.png');
 
-    background-position: left top;
-    background-size: 140% auto;
-    height: 400px;
+    height: 498px;
     padding: 4rem 2rem;
   }
 `
