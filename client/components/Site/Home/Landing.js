@@ -7,36 +7,16 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   padding: 12rem;
-  background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 1),
-      rgba(0, 0, 0, 0),
-      transparent
-    ),
-    linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0), transparent),
-    url('./images/man-in-car.svg');
+  background-image: url('./images/man-in-car.png');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
 
   @media (max-width: 800px) {
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 0),
-        transparent,
-        transparent
-      ),
-      url('./images/man-in-car-mobile.svg');
+    background-image: url('./images/man-in-car-mobile.png');
     margin-top: 60px;
-    background-size: contain;
-    background-position: bottom;
-    height: 700px;
+    width: 100%;
+    height: 680px;
     padding: 3rem 3rem 1rem 3rem;
     align-items: center;
   }

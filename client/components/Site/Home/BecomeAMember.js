@@ -7,15 +7,17 @@ const Section = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('./images/21centuryimage.jpg');
+  background-image: url('./images/family-cooking.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
 
   @media (max-width: 800px) {
+    height: 523px;
+
     justify-content: flex-end;
-    padding-bottom: 10rem;
+    padding-bottom: 5rem;
   }
 `
 const Heading = styled.h1`
@@ -23,11 +25,12 @@ const Heading = styled.h1`
   line-height: 52px;
   font-weight: 600;
   color: #fff;
-  width: 750px;
+  width: 500px;
 
   @media (max-width: 800px) {
     line-height: 48px;
-    font-size: 36px;
+    font-size: 32px;
+    font-weight: 500;
     width: 290px;
   }
 `
@@ -51,7 +54,7 @@ const StartButton = styled.div`
 export default function BecomeAMember() {
   return (
     <Section>
-      <Heading>Protection for the 21st Century starts here</Heading>
+      <Heading>Protection for you starts here.</Heading>
       <a href="/signup">
         <StartButton>Become a Member</StartButton>
       </a>

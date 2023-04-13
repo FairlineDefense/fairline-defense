@@ -49,7 +49,7 @@ const StartButton = styled.div`
 export default function BecomeAMemberSecurity() {
   return (
     <Section>
-      <Heading>Protection for the 21st Century starts here</Heading>
+      <Heading>Protection for you starts here.</Heading>
       <a href="/signup">
         <StartButton>Become a Member</StartButton>
       </a>

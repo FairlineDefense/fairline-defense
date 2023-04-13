@@ -4,13 +4,7 @@ import styled from 'styled-components'
 const Section = styled.div`
   width: 100vw;
   height: 800px;
-  background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 1),
-      rgba(0, 0, 0, 0),
-      transparent
-    ),
-    url('./images/woman-with-shotgun.svg');
+  background-image: url('./images/woman-with-shotgun.png');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -19,22 +13,8 @@ const Section = styled.div`
   @media (max-width: 800px) {
     display: flex;
     justify-content: flex-end;
-    background-image: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 0),
-        transparent,
-        transparent
-      ),
-      url('./images/woman-with-shotgun-mobile.svg');
-
-    background-position: center top;
-    background-size: contain;
-    height: 600px;
+    background-image: url('./images/woman-with-shotgun-mobile.png');
+    height: 636px;
     padding: 4rem 2rem;
   }
 `

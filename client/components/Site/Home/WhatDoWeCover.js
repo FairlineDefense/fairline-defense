@@ -73,17 +73,16 @@ const Subtext = styled.div`
 `
 const Image = styled.div`
   width: 60%;
-  background-image: url('./images/girl-with-gun-rounded.svg');
+  background-image: url('./images/girl-with-gun-rounded.png');
   background-position: center;
   background-repeat: no-repeat;
-  height: 500px;
-  border-radius: 20px;
+  height: 479px;
   background-size: contain;
 
   @media (max-width: 800px) {
-    background-image: url('./images/girl-with-gun.svg');
+    background-image: url('./images/girl-with-gun.png');
     background-size: cover;
-    height: 250px;
+    height: 260px;
     width: 100%;
     border-radius: 0;
   }
