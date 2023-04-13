@@ -6,15 +6,9 @@ const Section = styled.div`
   height: 800px;
   display: flex;
   flex-direction: column;
-  padding: 27rem 12rem 7rem;
+  padding: 27rem 12rem 5rem;
   justify-content: flex-end;
-  background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 1),
-      rgba(0, 0, 0, 0),
-      transparent
-    ),
-    url('./images/courtroom.svg');
+  background-image: url('./images/courtroom.png');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -22,19 +16,9 @@ const Section = styled.div`
   @media (max-width: 800px) {
     display: flex;
     justify-content: flex-end;
-    background-image: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 0),
-        transparent,
-        transparent
-      ),
-      url('./images/courtroom-mobile.svg');
+    background-image: url('./images/courtroom-mobile.png');
 
-    background-position: center top;
-    background-size: contain;
-    height: 450px;
+    height: 556px;
     padding: 13rem 2rem 3rem 2rem;
   }
 `
