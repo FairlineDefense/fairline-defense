@@ -54,6 +54,10 @@ const Button = styled.div`
   cursor: pointer;
   text-align: center;
   margin-top: 2rem;
+
+  @media (max-width: 800px) {
+    margin-top: 0;
+  }
 `
 
 export default function WhatIsAnArmedProfessional() {
