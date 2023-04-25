@@ -84,6 +84,20 @@ router.post('/create-customer', async (req, res) => {
     }
   })
 
+  router.post('/promo-code', async (req, res) => {
+    try {
+    const subscription = await stripe.subscriptions.update(
+      req.user.subscriptionId,
+      {metadata: {promotion_code: req.body.promoCode}}
+    );
+    console.log('PROMO CODE RES', subscription)
+    return res.json(subscription)
+    } catch (error) {
+      console.log('update subscription error =>', error.message)
+      return res.status(400).send({error: {message: error.message}})
+    }
+  })
+
 router.post('/add-a-spouse', async (req, res) => {
   const priceIds = {
     month: process.env.MONTH_SPOUSE_PRICE_ID,
