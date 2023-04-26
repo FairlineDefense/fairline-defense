@@ -98,6 +98,24 @@ router.post('/create-customer', async (req, res) => {
     }
   })
 
+  router.post('/coupon', async (req, res) => {
+    try {
+      // Retrive the coupon object from Stripe
+      const coupon = await stripe.coupons.retrieve(req.body.promoCode);
+      
+      //If the coupon is valid, update the subscription
+      console.log(req.user.subscriptionId, req.body.promoCode);
+      await stripe.subscriptions.update(req.user.subscriptionId, {
+        coupon: req.body.promoCode,
+      })
+
+      res.status(200).json({ success: 'Subscription updated successfully!' });
+    } catch (error) {
+      console.log('promo code validation error =>', error.message)
+      res.status(404).json({ error: error.message });
+    }
+  })
+
 router.post('/add-a-spouse', async (req, res) => {
   const priceIds = {
     month: process.env.MONTH_SPOUSE_PRICE_ID,
