@@ -118,7 +118,7 @@ router.post('/create-customer', async (req, res) => {
 
       if(promoCode.coupon.amount_off == 1999 || promoCode.coupon.amount_off == 2999)
         res.status(200).json({ message: 'Promo Code applied successfully: You get 1 month free!' })
-      else if(promoCode.coupon.amount_off == 4975 || promoCode.coupon.amount_off == 7475)
+      else if(promoCode.coupon.amount_off == 5997 || promoCode.coupon.amount_off == 8987)
         res.status(200).json({ message: 'Promo Code applied successfully: You get 3 months free!' })
     } catch (error) {
       console.log('promo code validation error =>', error.message)
