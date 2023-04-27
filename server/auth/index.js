@@ -38,12 +38,8 @@ router.get('/me', async (req, res) => {
 })
 
 router.post('/logout', function(req, res, next) {
-  console.log('req.logout')
-  req.logout(function(err) {
-    console.log('logout err', err)
-    if (err) { return next(err); }
-    res.redirect('/');
-  });
+  req.logout()
+  req.session.destroy()
 });
 
 router.use('/google', require('./google'))

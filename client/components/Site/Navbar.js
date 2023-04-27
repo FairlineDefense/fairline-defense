@@ -4,6 +4,7 @@ import {logout} from '../../store'
 import {useDispatch, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {useState} from 'react'
+import history from '../../history'
 
 const Wrapper = styled.div.attrs((props) => ({
   display: props.display || 'none',
@@ -169,8 +170,10 @@ const Navbar = ({shouldShowBackground}) => {
 
   const dispatch = useDispatch()
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault()
     dispatch(logout())
+    history.go('/login')
   }
 
   let [display, setDisplay] = useState('none')
@@ -232,7 +235,7 @@ const Navbar = ({shouldShowBackground}) => {
                 </Link>
               </li>
               <li>
-                <a href="#" onClick={handleClick}>
+                <a href="/login" onClick={(e)=> handleClick(e)}>
                   Logout
                 </a>
               </li>
