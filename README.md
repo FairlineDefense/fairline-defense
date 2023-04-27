@@ -5,39 +5,40 @@
 ## Run locally
 
 ```
-docker-compose up --build
+npm install
+```
+
+```
+npm start
 ```
 
 ## Download the Stripe CLI, authenticate, and run following in a separate terminal:
-
 ```
-stripe --api-key <STRIPE SECRET API KEY> listen --forward-to=localhost:8080/webhooks/stripe --skip-verify
-```
-
-## Push to AWS using AWS CLI:
-
-### Authenticate:
-
-```
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 609103538808.dkr.ecr.us-east-1.amazonaws.com
+stripe --api-key <STRIPE TEST SECRET API KEY> listen --forward-to=localhost:8080/webhooks/stripe --skip-verify
 ```
 
-### Push:
+# Deployment
+
+## Deploy to Fly.io:
+
+## Paste in production env variables to .env
+
+## Run webpack
+```
+npm start
+```
+## Wait for webpack notification the app has rebundled with new env variables:
 
 ```
-./script/push
+webpack 5.74.0 compiled successfully in 16998 ms
 ```
 
-## Or:
-
+### Then authenticate:
 ```
-docker build -t .
-```
-
-```
-docker tag fairline-service-1:latest 609103538808.dkr.ecr.us-east-1.amazonaws.com/fairline-service-1:latest
+flyctl login
 ```
 
+### Then deploy:
 ```
-docker push 609103538808.dkr.ecr.us-east-1.amazonaws.com/fairline-service-1:latest
+flyctl deploy
 ```
