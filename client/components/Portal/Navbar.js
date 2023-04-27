@@ -76,8 +76,10 @@ const Navbar = () => {
 
   const dispatch = useDispatch()
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault()
     dispatch(logout())
+    history.go('/login')
   }
 
   const [anchorEl, setAnchorEl] = useState(null)
@@ -182,7 +184,7 @@ const Navbar = () => {
                 <MenuItem onClick={() => history.push('/feed')}>Feed</MenuItem>
               </li>
             </MobileMenu>
-            <MenuItem onClick={handleLogout}>
+            <MenuItem onClick={(e) => handleLogout(e)}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
