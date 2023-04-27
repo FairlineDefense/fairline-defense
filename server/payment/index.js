@@ -84,35 +84,45 @@ router.post('/create-customer', async (req, res) => {
     }
   })
 
+  // router.post('/promo-code', async (req, res) => {
+  //   try {
+  //   const subscription = await stripe.subscriptions.update(
+  //     req.user.subscriptionId,
+  //     {metadata: {promotion_code: req.body.promoCode}}
+  //   );
+  //   console.log('PROMO CODE RES', subscription)
+  //   return res.json(subscription)
+  //   } catch (error) {
+  //     console.log('update subscription error =>', error.message)
+  //     return res.status(400).send({error: {message: error.message}})
+  //   }
+  // })
+
   router.post('/promo-code', async (req, res) => {
     try {
-    const subscription = await stripe.subscriptions.update(
-      req.user.subscriptionId,
-      {metadata: {promotion_code: req.body.promoCode}}
-    );
-    console.log('PROMO CODE RES', subscription)
-    return res.json(subscription)
-    } catch (error) {
-      console.log('update subscription error =>', error.message)
-      return res.status(400).send({error: {message: error.message}})
-    }
-  })
+      //Get all available promo codes
+      const promoCodes = await stripe.promotionCodes.list();
 
-  router.post('/coupon', async (req, res) => {
-    try {
-      // Retrive the coupon object from Stripe
-      const coupon = await stripe.coupons.retrieve(req.body.promoCode);
+      //Retrieve the promo object by its code
+      const promoCode = promoCodes.data.find((promo) => promo.code === req.body.promoCode);
+      console.log(promoCode);
+
+      // Retrieve the coupon ID associated with the promo code
+      const couponId = promoCode.coupon.id;
       
       //If the coupon is valid, update the subscription
-      console.log(req.user.subscriptionId, req.body.promoCode);
+      console.log(req.user.subscriptionId, couponId);
       await stripe.subscriptions.update(req.user.subscriptionId, {
-        coupon: req.body.promoCode,
+        coupon: couponId,
       })
 
-      res.status(200).json({ success: 'Subscription updated successfully!' });
+      if(promoCode.coupon.amount_off == 1999)
+        res.status(200).json({ message: 'Promo Code applied successfully: You get 1 month free!' })
+      else if(promoCode.coupon.amount_off == 5997)
+        res.status(200).json({ message: 'Promo Code applied successfully: You get 3 months free!' })
     } catch (error) {
       console.log('promo code validation error =>', error.message)
-      res.status(404).json({ error: error.message });
+      res.status(404).json({ message: 'Promo Code entered is valid.' });
     }
   })
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components';
 import FDTextField from '../../FDTextField'
-import {ThemeProvider} from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/core'
 import theme from '../../theme'
-import {useState} from 'react'
+import { useState } from 'react'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   position: relative;
 `
 const Form = styled.div`
-  max-width: 100%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: .5rem;
@@ -23,13 +23,32 @@ const Form = styled.div`
     margin-right: 0.5rem;
   }
 `
-const RowContainer = styled.div`
+const PromoFormContainer = styled.div`
   display: flex;
   align-items: center;
+  width: 50%;
+  padding-right: 10px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding-right: 0px;
+  }
 `;
 
-const SuccessMessage = styled.div`
+const PromoContainer = styled.div`
   width: 100%;
+  display: flex;
+  align-items: center;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+  }
+`;
+
+
+const SuccessMessage = styled.div`
+  width: 50%;
   padding: 1rem;
   background-color: #4BB543;
   color: #fff;
@@ -40,11 +59,17 @@ const SuccessMessage = styled.div`
   border-radius: 4px;
   position: relative;
   margin-top: 10px;
+  height: 58px;
+  font-size: 16px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 
 const ErrorMessage = styled.div`
-  width: 100%;
+  width: 50%;
   padding: 1rem;
   background-color: #F44336;
   color: #fff;
@@ -55,6 +80,12 @@ const ErrorMessage = styled.div`
   border-radius: 4px;
   position: relative;
   margin-top: 10px;
+  height: 58px;
+  font-size: 16px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const spin = keyframes`
@@ -86,32 +117,41 @@ const Button = styled.button`
 `
 
 const PromoCode = () => {
-    const [promoCode, setPromoCode] = useState('')
-    const [checking, setChecking] = useState(false)
-    const [valid, setValid] = useState(-1)
+  const [promoCode, setPromoCode] = useState('')
+  const [checking, setChecking] = useState(false)
+  const [valid, setValid] = useState(-1)
+  const [message, setMessage] = useState('')
 
-    const applyHandler = (e) => {
-        setChecking(true)
-        fetch('payment/coupon', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({promoCode}),
-        }).then((res) => {
-            setChecking(false)
-            if(res.status === 200) {
-                setValid(1)
-            } else {
-                setValid(0)
-            }
-        })
-    }
+  const applyHandler = (e) => {
+    setChecking(true)
+    fetch('payment/promo-code', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ promoCode }),
+    })
+    .then(res => {
+      if(res.status == 200)
+        setValid(1);
+      else
+        setValid(0);
+      setChecking(false);
+      return res.json()
+    })
+    .then(data => {
+      setMessage(data.message);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
 
   return (
     <Wrapper>
-        <Form>
-          <RowContainer>
+      <Form>
+        <PromoContainer>
+          <PromoFormContainer>
             <FDTextField
               fullWidth
               name="promoCode"
@@ -120,36 +160,37 @@ const PromoCode = () => {
               placeholder="PromoCode"
               type="text"
               variant="filled"
-              style={{marginTop: 8, flexGrow: 1}}
+              style={{ marginTop: 8, flexGrow: 1, paddingRight: 5 }}
               onChange={(e) => setPromoCode(e.target.value)}
               value={promoCode}
               required
             />
-            { checking ? (
-                <Button 
-                  onClick={applyHandler}
-                  style={{marginTop: 8}}>
-                    <Loader/>
-                </Button>
-            ) : (
-              <Button 
+            {checking ? (
+              <Button
                 onClick={applyHandler}
-                style={{marginTop: 8}}>
-                  Apply
+                style={{ marginTop: 8 }}>
+                <Loader />
+              </Button>
+            ) : (
+              <Button
+                onClick={applyHandler}
+                style={{ marginTop: 8, cursor: 'pointer' }}>
+                Apply
               </Button>
             )}
-          </RowContainer>
-          { valid == 1 ? (
+          </PromoFormContainer>
+          {valid == 1 ? (
             <SuccessMessage>
-              <span>The coupon code was successfully applied.</span>
-            </SuccessMessage>            
+              <span>{message}</span>
+            </SuccessMessage>
           ) : ''}
-          { valid == 0 ? (
+          {valid == 0 ? (
             <ErrorMessage>
-              <span>The coupon code entered is not valid.</span>
+              <span>{message}</span>
             </ErrorMessage>
           ) : ''}
-        </Form>
+        </PromoContainer>
+      </Form>
     </Wrapper>
   )
 }
