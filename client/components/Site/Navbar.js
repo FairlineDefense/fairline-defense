@@ -213,7 +213,7 @@ const Navbar = ({shouldShowBackground}) => {
           <>
             <ul>
               {/* The navbar will show these links after you log in */}
-              <li>
+              {/* <li>
                 <a href="#howitworks" onClick={() => setDisplay('none')}>
                   How It Works
                 </a>
@@ -222,7 +222,7 @@ const Navbar = ({shouldShowBackground}) => {
                 <a href="#coverages" onClick={() => setDisplay('none')}>
                   Coverages
                 </a>
-              </li>
+              </li> */}
               {/* <li>
               <a href="#testimonials" onClick={() => setDisplay('none')}>
                 Testimonials
@@ -248,7 +248,7 @@ const Navbar = ({shouldShowBackground}) => {
           <>
             <ul>
               {/* The navbar will show these links before you log in */}
-              <li>
+              {/* <li>
                 <a href="#howitworks" onClick={() => setDisplay('none')}>
                   How It Works
                 </a>
@@ -257,7 +257,7 @@ const Navbar = ({shouldShowBackground}) => {
                 <a href="#coverages" onClick={() => setDisplay('none')}>
                   Coverages
                 </a>
-              </li>
+              </li> */}
               {/* <li>
               <a href="#testimonials" onClick={() => setDisplay('none')}>
                 Testimonials

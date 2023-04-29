@@ -1,10 +1,14 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+const {ResetKey} = require('../db/models')
 require('dotenv').config()
 const accountSid = process.env.ACCOUNT_SID
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const verifySid = process.env.VERIFY_SID
 const client = require("twilio")(accountSid, authToken);
+const jwt = require('jsonwebtoken');
+const sgMail = require('@sendgrid/mail');
+const crypto = require('crypto');
 
 module.exports = router
 
@@ -69,3 +73,39 @@ router.post('/check-verify', async (req, res, next) => {
     return res.status(statusCode).send()
     }
 })
+
+router.post('/forgot-password', async (req, res) => {
+
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const { email } = req.body;
+  const user = await User.findOne({where: {email: req.body.email}})
+
+  if (!user) {
+    return res.status(400).json({ message: 'User not found' });
+  }
+
+  const token = crypto.randomBytes(32).toString('hex');
+  const resetKey = await ResetKey.create({
+    email: email,
+    key: token,
+    expiresAt: new Date(Date.now() + 60 * 60 * 1000) // set expiration to 1 hour from now
+  });
+  const resetLink = `http://localhost:8080/resetpassword/${token}`;
+
+  console.log(token);
+
+  const message = {
+    to: email,
+    from: 'support@fairlinedefense.com',
+    subject: 'Password Reset',
+    html: `Click <a href="${resetLink}">here</a> to reset your password.`
+  }
+
+  try {
+    await sgMail.send(message);
+    return res.status(200).json({ message: 'Email Sent' });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: 'Failed' });
+  }
+});

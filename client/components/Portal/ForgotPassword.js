@@ -1,19 +1,11 @@
 import React from 'react'
-import {auth} from '../../store'
-import {useDispatch, useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {useState, useEffect} from 'react'
-import styled from 'styled-components'
+import { auth } from '../../store'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import styled, { keyframes } from 'styled-components';
 import css from './style.css'
 import FDTextField from '../FDTextField'
-import FDPasswordField from '../FDTextField/password'
-
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Button from '@material-ui/core/Button'
 
 const Gradient = styled.div`
   width: 100vw;
@@ -56,17 +48,23 @@ const H3 = styled.h3`
   line-height: 30px;
   margin-bottom: 2rem;
 `
-const LoginWrapper = styled.div`
+const H6 = styled.h6`
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 15px;
+  margin-bottom: 1rem;
+`
+const ResetWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 10rem;
   position: relative;
   @media (max-width: 768px) {
-    padding: 4rem 2rem 0rem 1rem;
+    padding: 4rem 1rem 0rem 1rem;
   }
 `
-const LoginForm = styled.form`
+const ResetForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 340px;
@@ -75,7 +73,7 @@ const LoginForm = styled.form`
     max-width: 100%;
   }
 `
-const LoginInput = styled.input`
+const ResetInput = styled.input`
   outline: none;
   border: none;
   width: 100%;
@@ -90,7 +88,7 @@ const CenteredWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `
-const LoginFormButton = styled.button`
+const ResetFormButton = styled.button`
   width: 340px;
   font-weight: 200;
   padding: 1rem 2rem 1rem 2rem;
@@ -102,6 +100,19 @@ const LoginFormButton = styled.button`
   background-color: var(--blue);
   margin: 2rem 0rem 2rem 0rem;
   cursor: pointer;
+`
+const SentFormButton = styled.button`
+  width: 340px;
+  font-weight: 200;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  background-color: var(--darkblue);
+  margin: 2rem 0rem 2rem 0rem;
+  cursor: ban;
 `
 const BottomText = styled.div`
   width: 340px;
@@ -119,29 +130,71 @@ const ForgotPassword = styled.span`
   }
 `
 const ErrorText = styled.span`
-  height: 4rem;
-  border: 1px solid red;
-  border-radius: 5px;
-  padding: 0.5rem;
-  background-color: #fff;
-  color: #000;
+  color: red;
+  margin-top: 2px;
 `
+const spin = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
-const Login = () => {
+const Loader = styled.div`
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin: auto;
+  animation: ${spin} 2s linear infinite;
+`;
+
+const Reset = () => {
   let user = useSelector((state) => state.user)
   const dispatch = useDispatch()
   let [errorText, setErrorText] = useState('')
-  let [form, setForm] = useState({email: '', password: '', showPassword: false})
+  let [form, setForm] = useState({ email: '' })
+  let [sent, setSent] = useState(false);
+  let [checking, setChecking] = useState(false);
+  let [error, setError] = useState('')
 
   const changeHandler = (e) => {
     e.preventDefault()
-    setForm({...form, [e.target.name]: e.target.value})
+    setForm({ ...form, [e.target.name]: e.target.value })
   }
   const handleSubmit = (evt) => {
     evt.preventDefault()
+    
+    setChecking(true);
+    setError("");
+
     const email = form.email
-    const password = form.password
-    dispatch(auth(email, password, 'login'))
+    console.log(email);
+
+    fetch('twilio/forgot-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then(res => {
+        setChecking(false);
+        if(res.status == 200) {
+          setSent(true);
+        } else {
+          setError('User Not Found!');
+          setSent(false);
+        }
+        return res.json()
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        setSent(false);
+        setError(error);
+      })
   }
 
   const [open, setOpen] = useState(false)
@@ -163,90 +216,55 @@ const Login = () => {
     }
   }, [user])
 
-  const handleClickShowPassword = () => {
-    setForm({
-      ...form,
-      showPassword: !form.showPassword,
-    })
-  }
-
   return (
     <Gradient>
       <BackgroundImage>
-        <LoginWrapper>
+        <ResetWrapper>
           <CenteredWrapper>
             <Link to="/">
               <Logo src="./images/fdlogo.png" />
             </Link>
           </CenteredWrapper>
           <CenteredWrapper>
-            <H3>Login</H3>
+            <H3>Forgot your password?</H3>
           </CenteredWrapper>
           <CenteredWrapper>
-            <LoginForm onSubmit={handleSubmit} name="login">
+            <H6>Enter your email and we'll send you a link to reset your password.</H6>
+          </CenteredWrapper>
+          <CenteredWrapper>
+            <ResetForm onSubmit={handleSubmit} name="reset">
               <div>
                 <FDTextField
                   fullWidth
                   label="Email"
                   name="email"
                   variant="filled"
-                  type="text"
+                  type="email"
                   value={form.email}
                   onChange={(e) => changeHandler(e)}
-                  style={{margin: 8}}
+                  style={{ marginTop: 30 }}
                   required
                 />
               </div>
+              {error && <ErrorText>{error}</ErrorText>}
               <div>
-                <FDPasswordField
-                  fullWidth
-                  label="Password"
-                  placeholder="Password"
-                  name="password"
-                  type={form.showPassword ? 'text' : 'password'}
-                  onChange={(e) => changeHandler(e)}
-                  value={form.password}
-                  style={{margin: 8}}
-                  variant="filled"
-                  toggleVisibility={handleClickShowPassword}
-                  required
-                />
+                {sent ?
+                  <SentFormButton type="submit" disabled>Email Sent</SentFormButton> :
+                  ( checking ? <ResetFormButton type="button"><Loader/></ResetFormButton> : <ResetFormButton type="submit">Reset Password</ResetFormButton>)}
               </div>
-              <ForgotPassword>
-                <Link to="/forgotpassword">Forgot your password?</Link>
-              </ForgotPassword>
-              <div>
-                <LoginFormButton type="submit">Log In</LoginFormButton>
-              </div>
-            </LoginForm>
+            </ResetForm>
           </CenteredWrapper>
           <CenteredWrapper>
-            <BottomText>
-              <span>Don't have an account?</span>
-              <Link to="/signup">Register</Link>
+            <BottomText style={{ justifyContent: 'right' }}>
+              <Link to="/login">Back to Sign in</Link>
             </BottomText>
           </CenteredWrapper>
           <CenteredWrapper>
             {errorText && <ErrorText>{errorText}</ErrorText>}
           </CenteredWrapper>
-        </LoginWrapper>
-
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Invalid Login Credentials</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Account not found. Did you forget your password?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClick}>Sign up instead</Button>
-            <Button onClick={handleClose} autoFocus>
-              Go back
-            </Button>
-          </DialogActions>
-        </Dialog>
+        </ResetWrapper>
       </BackgroundImage>
     </Gradient>
   )
 }
-export default Login
+export default Reset

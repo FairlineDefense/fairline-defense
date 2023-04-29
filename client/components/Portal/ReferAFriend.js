@@ -91,7 +91,7 @@ export default function ReferAFriend() {
       <Left>
         <H3>Fairline defense is awesome.</H3>
         <H4>
-          Refer a Friend and <Cyan>make $20</Cyan>
+          Refer a Friend
         </H4>
         <CyanButton>Refer a Friend</CyanButton>
       </Left>
