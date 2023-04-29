@@ -59,6 +59,7 @@ const Checkout = () => {
   }
 
   const [step, setStep] = useState('ChooseProtection')
+  // const [step, setStep] = useState('PaymentInfo');
 
   const changeHandler = e => {
     e.preventDefault()
