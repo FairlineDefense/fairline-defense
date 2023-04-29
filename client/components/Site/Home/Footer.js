@@ -1,9 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const Container = styled.div`
+  background-color: var(--darkblue);
+`;
+
 const Section = styled.div`
   height: 280px;
   padding: 4rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -14,6 +19,60 @@ const Section = styled.div`
     height: 100%;
     flex-direction: column;
     padding: 2rem;
+    margin-bottom: 0rem;
+  }
+`
+const TermsSection = styled.div`
+  margin-left: 4rem;
+  margin-right: 4rem;
+  padding-top: 1rem;
+  padding-bottom: 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #fff;
+  background-color: var(--darkblue);
+  border-top: 0.2px solid #fff;
+  justify-content: left;
+
+  @media (max-width: 800px) {
+    height: 100%;
+    flex-direction: column;
+    padding: 0rem 2rem 2rem 2rem;
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
+`
+
+const TermsLink = styled.a`
+  padding-right: 30px;
+  color: white;
+  border-right: 0.2px solid #fff;
+  @media (max-width: 800px) {
+    margin-left: 0;
+    margin-top: 2rem;
+    flex-direction: column;
+    border-right: none;
+  }
+`
+const PrivacyLink = styled.a`
+  padding-left: 30px;
+  color: white;
+  @media (max-width: 800px) {
+    margin-left: 0;
+    margin-top: 2rem;
+    flex-direction: column;
+    padding-left: 0px;
+  }
+`
+const CopyrightLink = styled.a`
+  padding-left: 30px;
+  margin-left: auto;
+  @media (max-width: 800px) {
+    margin-left: 0;
+    margin-top: 2rem;
+    flex-direction: column;
+    padding-left: 0px;
   }
 `
 const Logo = styled.div`
@@ -110,24 +169,9 @@ const Support = styled.div`
 const Phone = styled.span`
   font-weight: 400;
 `
-const Copyright = styled.div`
-  width: 100%;
-  height: 120px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 2rem;
-  background-color: var(--darkblue);
-  color: #fff;
-  font-size: 15px;
-
-  @media (max-width: 800px) {
-    text-align: center;
-  }
-`
 export default function Footer() {
   return (
-    <>
+    <Container>
       <Section>
         <Logo>
           <img src="./images/fdlogo.png" />
@@ -171,9 +215,13 @@ export default function Footer() {
           </ul>
         </Support>
       </Section>
-      <Copyright>
-        <span>Ⓒ 2023, Fairline Defense LLC, All Rights Reserved.</span>
-      </Copyright>
-    </>
+      <TermsSection>
+        <TermsLink href='/termsofservice'>Terms & Service</TermsLink>
+        <PrivacyLink href='/privacypolicy'>Privacy Policy</PrivacyLink>
+        <CopyrightLink>
+          <span>Ⓒ 2023, Fairline Defense LLC, All Rights Reserved.</span>
+        </CopyrightLink>
+      </TermsSection>
+    </Container>
   )
 }

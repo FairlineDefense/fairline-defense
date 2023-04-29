@@ -9,6 +9,7 @@ import history from '../../history'
 import styled from 'styled-components'
 import AccountExistsModal from './AccountExistsModal'
 import TermsAndConditions from './TermsAndConditions'
+import PrivacyPolicy from './PrivacyPolicy'
 import Checkbox from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -320,10 +321,16 @@ const Signup = () => {
 
   //Terms and Conditions modal props:
   let [openTerms, setOpenTerms] = useState(false)
+  let [openPolicy, setOpenPolicy] = useState(false)
 
   const viewTerms = (e) => {
     e.preventDefault()
     setOpenTerms(true)
+  }
+
+  const viewPolicy = (e) => {
+    e.preventDefault()
+    setOpenPolicy(true)
   }
 
   const handleClickShowPassword = () => {
@@ -485,7 +492,14 @@ const Signup = () => {
                       viewTerms(e)
                     }}
                   >
-                    Terms & Conditions
+                    Terms & Service
+                  </OpenFinePrint> &nbsp;and&nbsp; 
+                  <OpenFinePrint
+                    onClick={(e) => {
+                      viewPolicy(e)
+                    }}
+                  >
+                    Privacy Plicy
                   </OpenFinePrint>
                 </ThemeProvider>
               </TermsAndConditionsDiv>
@@ -517,6 +531,7 @@ const Signup = () => {
           handleClick={handleClick}
         />
         <TermsAndConditions openTerms={openTerms} setOpenTerms={setOpenTerms} />
+        <PrivacyPolicy openPolicy={openPolicy} setOpenPolicy={setOpenPolicy} />
       </BackgroundImage>
     </Gradient>
   )

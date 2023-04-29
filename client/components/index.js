@@ -4,6 +4,7 @@ export {default as SiteHome} from './Site/Home/Home'
 export {default as SecurityHome} from './Site/Home/SecurityHome'
 export {default as Testimonials} from './Site/Testimonials'
 export {default as TermsOfService} from './Site/TermsOfService'
+export {default as PrivacyPolicy} from './Site/PrivacyPolicy'
 export {default as ContactUs} from './Site/ContactUs'
 export {default as Coverages} from './Site/Coverages'
 export {default as HowItWorks} from './Site/HowItWorks'
@@ -30,6 +31,8 @@ export {default as UserHome} from './Portal/UserHome'
 export {default as Membership} from './Portal/Membership'
 export {default as Benefits} from './Portal/Benefits'
 export {default as Feed} from './Portal/Feed'
+export {default as ForgotPassword} from './Portal/ForgotPassword'
+export {default as ResetPassword} from './Portal/ResetPassword'
 
 /**
  * `components/index.js` exists simply as a 'central export' for our components.
