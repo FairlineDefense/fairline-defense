@@ -8,6 +8,7 @@ import {
   SiteHome,
   Testimonials,
   TermsOfService,
+  PrivacyPolicy,
   ContactUs,
   Coverages,
   HowItWorks,
@@ -19,6 +20,8 @@ import {
   VerifyPhone,
   SecurityHome,
   MembershipAndBilling,
+  ResetPassword,
+  ForgotPassword,
   VerifiedEmail,
   Checkout
 } from './components'
@@ -47,7 +50,7 @@ const Routes = (props) => {
             <Route exact path="/coverages" component={Coverages} />
             <Route exact path="/testimonials" component={Testimonials} />
             <Route exact path="/termsofservice" component={TermsOfService} />
-            <Route exact path="/privacypolicy" component={TermsOfService} />
+            <Route exact path="/privacypolicy" component={PrivacyPolicy} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route path="/home" component={UserHome} />
             <Route path="/membership" component={Membership} />
@@ -70,9 +73,11 @@ const Routes = (props) => {
             <Route exact path="/coverages" component={Coverages} />
             <Route exact path="/testimonials" component={Testimonials} />
             <Route exact path="/termsofservice" component={TermsOfService} />
-            <Route exact path="/privacypolicy" component={TermsOfService} />
+            <Route exact path="/privacypolicy" component={PrivacyPolicy} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/forgotpassword" component={ForgotPassword} />
+            <Route path="/resetpassword/:token" component={ResetPassword} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/success" component={VerifiedEmail} />
             <Route exact path="/chooseprotection" component={Checkout} />

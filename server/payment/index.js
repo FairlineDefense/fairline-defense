@@ -123,7 +123,7 @@ router.post('/create-customer', async (req, res) => {
         res.status(200).json({ message: 'Promo Code applied successfully: You get 3 months free!' })
     } catch (error) {
       console.log('promo code validation error =>', error.message)
-      res.status(404).json({ message: 'Promo Code entered is valid.' });
+      res.status(404).json({ message: 'Promo Code entered is invalid.' });
     }
   })
 
