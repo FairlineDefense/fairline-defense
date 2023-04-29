@@ -90,7 +90,7 @@ router.post('/forgot-password', async (req, res) => {
     key: token,
     expiresAt: new Date(Date.now() + 60 * 60 * 1000) // set expiration to 1 hour from now
   });
-  const resetLink = `http://localhost:8080/resetpassword/${token}`;
+  const resetLink = process.env.NODE_ENV === 'production' ? `https://fairlinedefense.com/resetpassword/${token}` :`http://localhost:8080/resetpassword/${token}`;
 
   console.log(token);
 
