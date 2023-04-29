@@ -100,9 +100,10 @@ router.post('/create-customer', async (req, res) => {
 
   router.post('/promo-code', async (req, res) => {
     try {
+      console.log('req.body =>', req.body)
       //Get all available promo codes
       const promoCodes = await stripe.promotionCodes.list();
-
+      console.log(promoCodes)
       //Retrieve the promo object by its code
       const promoCode = promoCodes.data.find((promo) => promo.code === req.body.promoCode);
       console.log(promoCode);

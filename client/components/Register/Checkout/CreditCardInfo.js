@@ -7,6 +7,7 @@ import {ThemeProvider} from '@material-ui/core'
 import theme from '../../theme'
 import {update} from '../../../store'
 import styled from 'styled-components'
+import PromoCode from './PromoCode'
 
 const FormWrapper = styled.div`
   width: 800px;
@@ -141,6 +142,7 @@ const CreditCardInfo = ({
         <Span>
           {/* PaymentElement is the Stripe component that renders a credit card info form */}
           <PaymentElement />
+          <PromoCode />
         </Span>
 
         <LeftWrapper>
