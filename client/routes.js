@@ -20,6 +20,7 @@ import {
   VerifyPhone,
   SecurityHome,
   MembershipAndBilling,
+  CardPaymentStatus,
   ResetPassword,
   ForgotPassword,
   VerifiedEmail,
@@ -57,6 +58,7 @@ const Routes = (props) => {
             <Route path="/benefits" component={Benefits} />
             <Route path="/feed" component={Feed} />
             <Route path="/paymentstatus" component={PaymentStatus} />
+            <Route path="/cardpaymentstatus" component={CardPaymentStatus} />
             <Route path="/verifyemail" component={VerifyEmail} />
             <Route path="/verifyphone" component={VerifyPhone} />
             <Route exact path="/success" component={VerifiedEmail} />

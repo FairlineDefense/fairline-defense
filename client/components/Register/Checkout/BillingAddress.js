@@ -198,7 +198,7 @@ const BillingAddress = ({
                   onChange={(e) => changeHandler(e)}
                   value={line2}
                 />
-                <FDTextField
+                {/* <FDTextField
                   label="Apt."
                   variant="filled"
                   type="text"
@@ -207,7 +207,7 @@ const BillingAddress = ({
                   placeholder="Apt"
                   onChange={(e) => changeHandler(e)}
                   value={apt}
-                />
+                /> */}
               </Line2Wrapper>
               <FDTextField
                 name="city"
