@@ -37,7 +37,10 @@ const Checkout = () => {
   })
 
   const options = {
-    clientSecret: order.clientSecret,
+    // clientSecret: order.clientSecret,
+    mode: 'subscription',
+    amount: 1099,
+    currency: 'usd',
     // Appearance of Stripe form:
     appearance: {
       theme: 'stripe',
@@ -122,6 +125,7 @@ const Checkout = () => {
       })
       const {customerId: customerId} = await response.json()
       setOrder({...order, customerId: customerId})
+      console.log('go to payment info???');
       setStep('PaymentInfo')
     } catch (error) {
       console.log('create customer error', error)
@@ -157,13 +161,13 @@ const Checkout = () => {
   }
   useEffect(
     () => {
-      if (order.customerId !== '' && order.customerId !== 'createCustomer') {
-        try {
-          fetchClientSecret()
-        } catch (error) {
-          console.log('error getting client secret,', error)
-        }
-      }
+      // if (order.customerId !== '' && order.customerId !== 'createCustomer') {
+      //   try {
+      //     fetchClientSecret()
+      //   } catch (error) {
+      //     console.log('error getting client secret,', error)
+      //   }
+      // }
     },
     [order.customerId]
   )

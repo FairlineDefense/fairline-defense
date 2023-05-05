@@ -85,22 +85,22 @@ const PaymentInfo = ({
   changeHandler,
   setStep,
 }) => {
-  if (!clientSecret || clientSecret === '' || !stripePromise) {
-    return (
-      <Gradient>
-        <BackgroundImage>
-          <RegisterHeader />
-          <Wrapper>
-            <CenteredWrapper>
-              <ThemeProvider theme={theme}>
-                <CircularProgress color={theme.palette.primary.main} />
-              </ThemeProvider>
-            </CenteredWrapper>
-          </Wrapper>
-        </BackgroundImage>
-      </Gradient>
-    )
-  }
+  // if (!clientSecret || clientSecret === '' || !stripePromise) {
+  //   return (
+  //     <Gradient>
+  //       <BackgroundImage>
+  //         <RegisterHeader />
+  //         <Wrapper>
+  //           <CenteredWrapper>
+  //             <ThemeProvider theme={theme}>
+  //               <CircularProgress color={theme.palette.primary.main} />
+  //             </ThemeProvider>
+  //           </CenteredWrapper>
+  //         </Wrapper>
+  //       </BackgroundImage>
+  //     </Gradient>
+  //   )
+  // }
 
   return (
     <Gradient>

@@ -18,7 +18,9 @@ export {default as ChooseProtection} from './Register/Checkout/ChooseProtection'
 export {
   default as PaymentStatusMessage
 } from './Register/Checkout/PaymentStatusMessage'
+
 export {default as PaymentStatus} from './Register/Checkout/PaymentStatus'
+export {default as CardPaymentStatus} from './Register/Checkout/CardPaymentStatus'
 export {default as VerifyEmail} from './Register/VerifyEmail'
 export {default as VerifyPhone} from './Register/VerifyPhone'
 export {default as RegisterHeader} from './Register/RegisterHeader'

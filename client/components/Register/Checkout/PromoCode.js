@@ -116,7 +116,7 @@ const Button = styled.button`
   border-radius: 3px;
 `
 
-const PromoCode = () => {
+const PromoCode = ({setValidCoupon, setValidDiscount}) => {
   const [promoCode, setPromoCode] = useState('')
   const [checking, setChecking] = useState(false)
   const [valid, setValid] = useState(-1)
@@ -133,13 +133,17 @@ const PromoCode = () => {
     })
     .then(res => {
       if(res.status == 200)
+      {
         setValid(1);
+      }  
       else
         setValid(0);
       setChecking(false);
       return res.json()
     })
     .then(data => {
+      setValidCoupon(data.coupon);
+      setValidDiscount(data.amount);
       setMessage(data.message);
     })
     .catch(error => {
@@ -163,7 +167,6 @@ const PromoCode = () => {
               style={{ marginTop: 8, flexGrow: 1, paddingRight: 5 }}
               onChange={(e) => setPromoCode(e.target.value)}
               value={promoCode}
-              required
             />
             {checking ? (
               <Button
