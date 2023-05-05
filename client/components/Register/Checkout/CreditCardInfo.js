@@ -7,7 +7,6 @@ import { ThemeProvider } from '@material-ui/core'
 import theme from '../../theme'
 import { update } from '../../../store'
 import styled, { keyframes } from 'styled-components';
-import PromoCode from './PromoCode'
 import history from '../../../history';
 
 import { WindowSharp } from '@mui/icons-material'
