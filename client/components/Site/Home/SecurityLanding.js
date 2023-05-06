@@ -7,13 +7,13 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   padding: 12rem;
-  background-image: url('./images/security.png');
+  background-image: url('./images/security.jpg');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
 
   @media (max-width: 800px) {
-    background-image: url('./images/security-mobile.png');
+    background-image: url('./images/security-mobile.jpg');
     margin-top: 60px;
     height: 811px;
     padding: 4rem 3rem;

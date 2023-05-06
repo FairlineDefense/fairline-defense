@@ -25,9 +25,9 @@ const Gradient = styled.div`
 const BackgroundImage = styled.div`
   height: 100%;
   width: 100%;
-  background-image: url('./images/background.png');
+  background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
-  background-position: -120px -100px;
+  background-position: 0px 30px;
 
   @media (max-width: 800px) {
     background-image: none;
@@ -63,11 +63,11 @@ const ButtonWrapper = styled.div`
   }
 `
 const Button = styled.button`
-  border: 1px solid #fff;
-  border-radius: 5px;
   outline: none;
   background: transparent;
-  color: #fff;
+  border: 2px solid #5D789A;
+  border-radius: 10px;
+  color: #5D789A;
   height: 12rem;
   width: 18rem;
   margin: 2rem 1rem 2rem 1rem;
@@ -82,24 +82,25 @@ const Button = styled.button`
 
   &:hover {
     background: rgba(0, 171, 224, 0.2);
-    border-color: var(--blue);
+    border: 2px solid #00ABE0;
+    color: #fff;
   }
 
   &:disabled {
     background: rgba(0, 171, 224, 0.2);
-    border-color: var(--blue);
+    border: 2px solid #00ABE0;
+    color: #fff;
   }
 
   @media (max-width: 800px) {
-    width: 100%;
     height: auto;
+    width: 100%;
     margin: 0.5rem;
     padding: 0.5rem;
   }
 `
 const Price = styled.p`
   font-size: 40px;
-  color: var(--blue);
   margin-bottom: 1rem;
   text-align: center;
 

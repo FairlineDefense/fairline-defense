@@ -26,9 +26,9 @@ const Gradient = styled.div`
 const BackgroundImage = styled.div`
   height: 100%;
   width: 100%;
-  background-image: url('./images/background.png');
+  background-image: url('./images/redFlogo.png');
   background-repeat: no-repeat;
-  background-position: -120px -100px;
+  background-position: 0px 30px;
 
   @media (max-width: 800px) {
     background-image: url('./images/backgroundimagered.png');

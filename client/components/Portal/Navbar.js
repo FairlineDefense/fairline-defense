@@ -94,10 +94,10 @@ const Navbar = () => {
   return (
     <Nav>
       <DesktopMenu>
-        <Link to="/membership">Membership</Link>
+        {/* <Link to="/membership">Membership</Link>
         <Link to="/home">Account</Link>
         <Link to="/benefits">Benefits</Link>
-        <Link to="/feed">Feed</Link>
+        <Link to="/feed">Feed</Link> */}
       </DesktopMenu>
       <Wrapper>
         <Link to="/home">

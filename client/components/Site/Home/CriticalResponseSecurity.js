@@ -12,7 +12,7 @@ const Section = styled.div`
       rgba(0, 0, 0, 0),
       transparent
     ),
-    url('./images/man-with-flashlight.svg');
+    url('./images/man-with-flashlight.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -30,7 +30,7 @@ const Section = styled.div`
         transparent,
         transparent
       ),
-      url('./images/man-with-flashlight-mobile.svg');
+      url('./images/man-with-flashlight-mobile.jpg');
 
     background-position: center top;
     background-size: 120% auto;

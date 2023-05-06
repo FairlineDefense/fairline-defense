@@ -80,12 +80,12 @@ export default function SecurityWhyYouNeedIt() {
   return (
     <Section>
       <Image>
-        <img src="./images/arrestingman.png" />
+        <img src="./images/arrestingman.jpg" />
       </Image>
       <Text>
         <h1>Why do you need it?</h1>
         <ImageMobile>
-          <img src="./images/arrestingman.png" />
+          <img src="./images/arrestingman.jpg" />
         </ImageMobile>
         <p>After a self-defense situation, you need to protect yourself.</p>
         <p>

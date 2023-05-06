@@ -125,7 +125,6 @@ const Checkout = () => {
       })
       const {customerId: customerId} = await response.json()
       setOrder({...order, customerId: customerId})
-      console.log('go to payment info???');
       setStep('PaymentInfo')
     } catch (error) {
       console.log('create customer error', error)

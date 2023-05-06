@@ -95,6 +95,13 @@ const MemberID = styled.span`
   color: #fff;
   margin-bottom: 1rem;
 `
+const MemberSince = styled.span`
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 1rem;
+`
+
 const Button = styled.button`
   color: #fff;
   width: 220px;
@@ -165,13 +172,15 @@ const UserHome = () => {
         <Navbar />
         <Main>
           <Left>
-            <H3>Hi, {user.firstName}</H3>
             <MemberID>#{user.membershipNumber}</MemberID>
-            <Button>Membership Card</Button>
+            <H3>Hi, {user.firstName}</H3>
+            <MemberSince>Member Since</MemberSince>
+            <MemberID>{user.periodStart}</MemberID>
+            {/* <Button>Membership Card</Button>
             <Link to="/membership/addaspouse">
               <Button>Add a spouse</Button>
             </Link>
-            <BlueButton>Emergency Help</BlueButton>
+            <BlueButton>Emergency Help</BlueButton> */}
           </Left>
           <PlanStatus user={user} />
         </Main>
