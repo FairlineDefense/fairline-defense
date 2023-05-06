@@ -2,6 +2,7 @@ const router = require('express').Router()
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const User = require('../db/models/user')
+require('dotenv').config()
 const ResetKey = require('../db/models/resetkey')
 module.exports = router
 
@@ -27,6 +28,7 @@ router.post('/signup', async (req, res, next) => {
     const user = await User.create(req.body)
     req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
+    console.log('err', err)
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists')
     } else {

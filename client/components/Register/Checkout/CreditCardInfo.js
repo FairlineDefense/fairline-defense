@@ -12,6 +12,7 @@ import history from '../../../history';
 
 import { WindowSharp } from '@mui/icons-material'
 
+
 const FormWrapper = styled.div`
   width: 700px;
   text-align: center;
@@ -231,6 +232,7 @@ const CreditCardInfo = ({
           {/* PaymentElement is the Stripe component that renders a credit card info form */}
           <StyledCardElement style={{ paddingTop: '10px' }} />
           <PromoCode setValidCoupon={setValidCoupon} setValidDiscount={setValidDiscount}/>
+
         </Span>
 
         <LeftWrapper>

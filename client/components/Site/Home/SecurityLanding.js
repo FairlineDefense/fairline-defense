@@ -15,7 +15,7 @@ const Section = styled.div`
   @media (max-width: 800px) {
     background-image: url('./images/security-mobile.jpg');
     margin-top: 60px;
-    height: 811px;
+    height: 573px;
     padding: 4rem 3rem;
     align-items: center;
     justify-content: space-between;
