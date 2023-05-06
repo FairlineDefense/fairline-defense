@@ -67,7 +67,7 @@ const Small = styled.div`
 `
 const Image = styled.div`
   width: 60%;
-  background-image: url('./images/coparrest.png');
+  background-image: url('./images/coparrest.jpg');
   background-position: center;
   background-repeat: no-repeat;
   height: 400px;
@@ -85,7 +85,7 @@ const ImageMobile = styled.div`
     display: block;
     width: 100%;
     height: 220px;
-    background-image: url('./images/coparrest.png');
+    background-image: url('./images/coparrest.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
