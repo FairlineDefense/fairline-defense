@@ -30,7 +30,7 @@ const Section = styled.div`
         transparent,
         transparent
       ),
-      url('./images/man-with-flashlight-mobile.jpg');
+      url('./images/man-with-flashlight-mobile.svg');
 
     background-position: center top;
     background-size: 120% auto;

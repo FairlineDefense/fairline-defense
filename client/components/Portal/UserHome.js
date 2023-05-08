@@ -186,7 +186,7 @@ const UserHome = () => {
         </Main>
       </Wrapper>
       <ReferAFriend />
-      <Card />
+      {/* <Card /> */}
       <Footer />
     </>
   )
