@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import {useState, useEffect} from 'react'
-import {useSelector} from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import MembershipNav from './MembershipNav'
 import PersonalInformation from './PersonalInformation'
 import EditPersonalInformation from './EditPersonalInformation'
@@ -20,12 +20,38 @@ const WhiteBackground = styled.div`
   border-radius: 4px;
 
   @media (max-width: 800px) {
-    padding: 1rem;
   }
 `
+const DropdownMenu = styled.select`
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 4px;
+
+  option {
+    background-color: #132A4A;
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+`;
+
 export default function MembershipSubPortal(props) {
   const user = useSelector(state => state.user)
   let [state, setState] = useState('')
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 800)
+
+  useEffect(() => {
+    function handleResize() {
+      setIsDesktop(window.innerWidth > 800)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     if (window.location.pathname.split('/')[2] === 'membershipandbilling') {
@@ -35,6 +61,11 @@ export default function MembershipSubPortal(props) {
       setState('AddASpouse')
     }
   }, [])
+
+  const handleStateChange = (event) => {
+    setState(event.target.value);
+  };
+
   const switcher = () => {
     switch (state) {
       case 'PersonalInformation':
@@ -57,7 +88,20 @@ export default function MembershipSubPortal(props) {
   }
   return (
     <>
-      <MembershipNav state={state} setState={setState} />
+      {isDesktop ? (
+        <MembershipNav state={state} setState={setState} />
+      ) : (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginBottom: '2rem' }}>
+        <DropdownMenu value={state} onChange={handleStateChange}>
+          <option value="PersonalInformation">Personal Information</option>
+          <option value="EditPersonalInformation">Edit Personal Information</option>
+          <option value="MembershipAndBilling">Membership & Billing</option>
+          <option value="Invoices">Invoices</option>
+          <option value="EmailPreferences">Email Preferences</option>
+          <option value="AddASpouse">Add a Spouse</option>
+          <option value="EditSpouse">Edit a Spouse</option>
+        </DropdownMenu>
+      </div>)}
       <WhiteBackground>{switcher()}</WhiteBackground>
     </>
   )

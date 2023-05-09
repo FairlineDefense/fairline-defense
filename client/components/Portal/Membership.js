@@ -8,11 +8,11 @@ import VerifyPhone from '../Register/VerifyPhone'
 const Background = styled.div`
   width: 100vw;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 0rem 5rem 0rem 5rem;
   background: linear-gradient(102.57deg, #2a4c78 0%, #0b182d 100%);
 
   @media (max-width: 800px) {
-    padding: 1rem;
+    padding: 0rem;
   }
 `
 const Wrapper = styled.div`
