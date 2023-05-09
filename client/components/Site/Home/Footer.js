@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  background-color: var(--darkblue);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
 `;
 
 const Section = styled.div`
@@ -13,7 +13,7 @@ const Section = styled.div`
   flex-direction: row;
   justify-content: space-between;
   color: #fff;
-  background-color: var(--darkblue);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
 
   @media (max-width: 800px) {
     height: 100%;
@@ -31,7 +31,7 @@ const TermsSection = styled.div`
   flex-direction: row;
   justify-content: space-between;
   color: #fff;
-  background-color: var(--darkblue);
+  background: transparent;
   border-top: 0.2px solid #fff;
   justify-content: left;
 

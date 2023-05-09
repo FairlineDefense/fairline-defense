@@ -97,11 +97,11 @@ const ButtonWrapper = styled.div`
   }
 `
 const Button = styled.button`
-  border: 1px solid var(--blue);
-  border-radius: 5px;
   outline: none;
   background: transparent;
-  color: #fff;
+  border: 2px solid #5D789A;
+  border-radius: 10px;
+  color: #5D789A;
   height: 115px;
   width: 200px;
   margin: 1rem;
@@ -116,24 +116,25 @@ const Button = styled.button`
 
   &:hover {
     background: rgba(0, 171, 224, 0.2);
-    border-color: var(--blue);
+    border: 2px solid #00ABE0;
+    color: #fff;
   }
 
   &:disabled {
     background: rgba(0, 171, 224, 0.2);
-    border-color: var(--blue);
+    border: 2px solid #00ABE0;
+    color: #fff;
   }
 
   @media (max-width: 800px) {
-    width: 100%;
     height: auto;
+    width: 100%;
     margin: 0.5rem;
     padding: 0.5rem;
   }
 `
 const Price = styled.p`
   font-size: 40px;
-  color: var(--blue);
   margin-bottom: 0.2rem;
   text-align: center;
 

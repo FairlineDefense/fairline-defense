@@ -8,7 +8,7 @@ const Section = styled.div`
   flex-direction: column;
   padding: 27rem 12rem 5rem;
   justify-content: flex-end;
-  background-image: url('./images/courtroom.png');
+  background-image: url('./images/courtroom.jpg');
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,7 +16,7 @@ const Section = styled.div`
   @media (max-width: 800px) {
     display: flex;
     justify-content: flex-end;
-    background-image: url('./images/courtroom-mobile.png');
+    background-image: url('./images/courtroom-mobile.jpg');
 
     height: 556px;
     padding: 13rem 2rem 3rem 2rem;

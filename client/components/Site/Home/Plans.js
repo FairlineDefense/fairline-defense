@@ -91,7 +91,9 @@ const PlanWrapper = styled.div`
 const Plan = styled.div`
   min-height: 232px;
   min-width: 400px;
-  background: #223f67;
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
   color: #fff;
   display: block;
   text-align: center;

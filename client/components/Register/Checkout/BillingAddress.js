@@ -33,9 +33,9 @@ const Gradient = styled.div`
 const BackgroundImage = styled.div`
   height: 100%;
   width: 100%;
-  background-image: url('./images/background.png');
+  background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
-  background-position: -120px -100px;
+  background-position: 0px 30px;
 
   @media (max-width: 800px) {
     background-image: none;
@@ -198,7 +198,7 @@ const BillingAddress = ({
                   onChange={(e) => changeHandler(e)}
                   value={line2}
                 />
-                <FDTextField
+                {/* <FDTextField
                   label="Apt."
                   variant="filled"
                   type="text"
@@ -207,7 +207,7 @@ const BillingAddress = ({
                   placeholder="Apt"
                   onChange={(e) => changeHandler(e)}
                   value={apt}
-                />
+                /> */}
               </Line2Wrapper>
               <FDTextField
                 name="city"

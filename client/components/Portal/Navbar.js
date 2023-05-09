@@ -96,9 +96,10 @@ const Navbar = () => {
       <DesktopMenu>
         <Link to="/membership">Membership</Link>
         <Link to="/home">Account</Link>
-        <Link to="/benefits">Benefits</Link>
-        <Link to="/feed">Feed</Link>
+        {/* <Link to="/benefits">Benefits</Link>
+        <Link to="/feed">Feed</Link> */}
       </DesktopMenu>
+      
       <Wrapper>
         <Link to="/home">
           <Logo src="./images/fdlogo.png" />
