@@ -207,6 +207,15 @@ const Signup = () => {
     }
   }
 
+  const handleEmailChange = (e) => {
+    const { value } = e.target
+    setForm((prevState) => ({
+      ...prevState,
+      email: value.toLowerCase() // Convert input to lowercase
+    }))
+  }
+  
+
   const handleSubmit = (evt) => {
     evt.preventDefault()
     const firstName = form.firstName
@@ -387,7 +396,7 @@ const Signup = () => {
                 name="email"
                 placeholder="name@email.com"
                 type="text"
-                onChange={(e) => changeHandler(e)}
+                onChange={handleEmailChange}
                 value={form.email}
                 style={{margin: 8, flexGrow: 1}}
                 variant="filled"

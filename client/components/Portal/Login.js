@@ -137,6 +137,15 @@ const Login = () => {
     e.preventDefault()
     setForm({...form, [e.target.name]: e.target.value})
   }
+
+  const handleEmailChange = (e) => {
+    const { value } = e.target
+    setForm((prevState) => ({
+      ...prevState,
+      email: value.toLowerCase() // Convert input to lowercase
+    }))
+  }
+
   const handleSubmit = (evt) => {
     evt.preventDefault()
     const email = form.email
@@ -192,7 +201,7 @@ const Login = () => {
                   variant="filled"
                   type="text"
                   value={form.email}
-                  onChange={(e) => changeHandler(e)}
+                  onChange={handleEmailChange}
                   style={{margin: 8}}
                   required
                 />
