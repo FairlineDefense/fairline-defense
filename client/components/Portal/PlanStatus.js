@@ -17,6 +17,8 @@ const Wrapper = styled.div`
     justify-content: center;
     width: 100%;
     height: 70px;
+    text-align: center;
+    align-items: center;
   }
 `
 const TextBlock = styled.div`

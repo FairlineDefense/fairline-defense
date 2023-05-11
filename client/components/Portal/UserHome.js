@@ -47,8 +47,12 @@ const BackgroundImage = styled.div`
 `
 const Wrapper = styled.div`
   width: 100vw;
-  padding: 2rem;
   background: linear-gradient(102.57deg, #2a4c78 0%, #0b182d 100%);
+  padding: 0rem 5rem 0rem 5rem;
+
+  @media (max-width: 800px) {
+    padding: 0rem;
+  }
 `
 const CenteredWrapper = styled.div`
   width: 100%;
@@ -66,11 +70,12 @@ const Main = styled.div`
   display: flex;
   padding: 5rem;
   flex-direction: row;
+  padding: 4rem 7rem 4rem 7rem;
 
   @media (max-width: 768px) {
     height: 110vh;
     flex-direction: column;
-    padding: 1rem 0rem 0rem 0rem;
+    padding: 1rem;
   }
 `
 const Left = styled.div`
