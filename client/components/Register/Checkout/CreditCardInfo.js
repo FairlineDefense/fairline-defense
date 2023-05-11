@@ -17,7 +17,7 @@ const FormWrapper = styled.div`
   text-align: center;
 
   @media (max-width: 700px) {
-    width: 90%;
+    width: 100%;
   }
 `
 const Form = styled.form`
@@ -129,6 +129,8 @@ const CreditCardInfo = ({
   setOrder,
   changeHandler,
   setStep,
+  setValidCoupon,
+  setValidDiscount,
 }) => {
   const user = useSelector(state => state.user)
 
@@ -137,193 +139,15 @@ const CreditCardInfo = ({
   const dispatch = useDispatch()
 
   const [errorMessage, setErrorMessage] = useState(null)
-  const [validCoupon, setValidCoupon] = useState('');
-  const [validDiscount, setValidDiscount] = useState('');
   const [loading, setLoading] = useState(0);
-
-  const handleSubmit = async event => {
-    console.log(event);
-    event.preventDefault()
-    if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
-      return
-    }
-
-    setLoading(1);
-    // Update user's shipping address in our db
-    dispatch(update({ id: user.id, ...order }))
-
-    // Trigger form validation and wallet collection
-    const { error: submitError } = await elements.submit();
-    if (submitError) {
-      setErrorMessage(submitError);
-      return;
-    }
-
-    const cardElement = elements.getElement(CardElement);
-
-    const paymentMethod = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-    });
-
-    const res = await fetch('payment/attach-payment', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        paymentMethodId: paymentMethod.paymentMethod.id,
-        customerId: order.customerId,
-      })
-    });
-
-    const response = await fetch('payment/create-subscription', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        priceId: order.priceId,
-        customerId: order.customerId,
-        coupon: validCoupon,
-      })
-    })
-
-    const { clientSecretRes: clientSecret } = await response.json();
-    console.log(clientSecret);
-    console.log(validCoupon);
-
-    if (!clientSecret) {   
-        history.push('/cardpaymentstatus');
-    }
-
-    const { error } = await stripe.confirmCardPayment(
-      clientSecret,
-      {
-        payment_method: {
-          card: cardElement,
-          billing_details: {
-            name: 'John Doe'
-          }
-        },
-      })
-
-    if (error) {
-      // This point will only be reached if there is an immediate error when
-      // confirming the payment. Show error to your customer (for example, payment
-      // details incomplete)
-      setErrorMessage(error.message)
-      setLoading(0);
-    } else {
-      // Your customer will be redirected to your `return_url`. For some payment
-      // methods like iDEAL, your customer will be redirected to an intermediate
-      // site first to authorize the payment, then redirected to the `return_url`.
-      history.push('/cardpaymentstatus');
-    }
-  }
 
   return (
     <FormWrapper>
-      <Form onSubmit={handleSubmit}>
         <Span >
           {/* PaymentElement is the Stripe component that renders a credit card info form */}
           <StyledCardElement style={{ paddingTop: '10px' }} />
           <PromoCode setValidCoupon={setValidCoupon} setValidDiscount={setValidDiscount}/>
         </Span>
-
-        <LeftWrapper>
-          <div>
-                Total 
-          </div>
-          <div>
-                {parseFloat(order.price.replace("$", ""))}
-          </div>
-        </LeftWrapper>
-        <LeftWrapper>
-          <div>
-                Discount
-          </div>
-          <div>
-                {validDiscount / 100.0}
-          </div>
-        </LeftWrapper>
-        <LeftWrapper>
-          <div>
-                Amount Due
-          </div>
-          <div>
-                {parseFloat(order.price.replace("$", "")) - validDiscount / 100.0}
-          </div>
-        </LeftWrapper>
-
-        <LeftWrapper>
-          <div>
-            <ThemeProvider theme={theme}>
-              <Checkbox
-                color="primary"
-                onChange={() =>
-                  setOrder({ ...order, differentAddress: !differentAddress })
-                }
-                name="differentAddress"
-                checked={!differentAddress}
-              />
-            </ThemeProvider>
-          </div>
-          <div>
-            My shipping address is the same as my billing address.
-            <p>
-              {apt} {streetAddress} {line2} <br />
-              {city}, {state} {zipCode}
-            </p>
-          </div>
-        </LeftWrapper>
-
-        <ShippingAddress
-          order={order}
-          changeHandler={changeHandler}
-          setOrder={setOrder}
-        />
-
-        <LeftWrapper>
-          <div>
-            <ThemeProvider theme={theme}>
-              <Checkbox
-                color="primary"
-                onChange={() =>
-                  setOrder({ ...order, termsAndConditions: !termsAndConditions })
-                }
-                name="termsAndConditions"
-                checked={termsAndConditions}
-                required
-              />
-            </ThemeProvider>
-          </div>
-          <div>
-            By starting my Membership, I confirm that I have read and agree to
-            the Fairline Defense Terms & Conditions. I understand that my
-            Membership will automatically renew monthly at the then-current
-            subscription rate, which will be charged to my payment method on
-            file. I understand that I can update my payment method or pause or
-            cancel my Membership at any time in accordance with the Membership
-            Terms by going to my Account Settings at
-            www.fairlinedefense.com/mymembership, and that these changes will
-            take effect at the end of my current billing cycle.
-          </div>
-        </LeftWrapper>
-
-        <CenteredWrapper>
-          {loading ? <Button
-            style={{ marginTop: 8, textAlign: '-webkit-center' }}>
-            <Loader />
-          </Button> :
-            <Button disabled={!stripe}>Start my Membership</Button>
-          }
-        </CenteredWrapper>
-        {/* Show error message to your customers */}
-        {errorMessage && <div>{errorMessage}</div>}
-      </Form>
     </FormWrapper>
   )
 }

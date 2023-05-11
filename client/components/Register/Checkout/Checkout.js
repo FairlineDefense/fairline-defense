@@ -6,6 +6,7 @@ import BillingAddress from './BillingAddress'
 import PaymentInfo from './PaymentInfo'
 import PaymentStatus from './PaymentStatus'
 import {loadStripe} from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 import {useSelector} from 'react-redux'
 
 const Checkout = () => {
@@ -202,14 +203,15 @@ const Checkout = () => {
       )
     case 'PaymentInfo':
       return (
-        <PaymentInfo
-          setStep={setStep}
-          changeHandler={changeHandler}
-          order={order}
-          setOrder={setOrder}
-          stripePromise={stripePromise}
-          options={options}
-        />
+        <Elements stripe={stripePromise} options={options}>
+          <PaymentInfo
+            setStep={setStep}
+            changeHandler={changeHandler}
+            order={order}
+            setOrder={setOrder}
+            options={options}
+          />
+        </Elements>
       )
     case 'PaymentStatus':
       return (
