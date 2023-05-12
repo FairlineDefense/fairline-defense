@@ -8,7 +8,9 @@ export {default as PrivacyPolicy} from './Site/PrivacyPolicy'
 export {default as ContactUs} from './Site/ContactUs'
 export {default as Coverages} from './Site/Coverages'
 export {default as HowItWorks} from './Site/HowItWorks'
+export {default as CRT} from './Site/CRT'
 export {default as Footer} from './Site/Home/Footer'
+export {default as SolidFooter} from './Site/Home/SolidFooter'
 
 // Register
 export {default as Signup} from './Register/Signup'
