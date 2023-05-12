@@ -18,7 +18,7 @@ import RegisterHeader from '../Register/RegisterHeader'
 const Gradient = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
   color: #fff;
   overflow-x: hidden;
 
@@ -47,7 +47,7 @@ const BackgroundImage = styled.div`
 `
 const Wrapper = styled.div`
   width: 100vw;
-  background: linear-gradient(102.57deg, #2a4c78 0%, #0b182d 100%);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
   padding: 0rem 5rem 0rem 5rem;
 
   @media (max-width: 800px) {
@@ -87,6 +87,8 @@ const Left = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
+    height: 400px;
+    margin-top: 100px;
   }
 `
 const H3 = styled.h3`

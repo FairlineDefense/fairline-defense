@@ -8,7 +8,7 @@ import {useEffect} from 'react'
 const Gradient = styled.div`
 width: 100vw;
 min-height: 100vh;
-background: linear-gradient(102.57deg, #21488A 0%, #0B182D 100%);
+background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
 color: #fff;
 overflow-x: hidden;
 

@@ -218,14 +218,14 @@ const Navbar = () => {
                   Account
                 </MenuItem>
               </li>
-              <li>
+              {/* <li>
                 <MenuItem onClick={() => history.push('/benefits')}>
                   Benefits
                 </MenuItem>
               </li>
               <li>
                 <MenuItem onClick={() => history.push('/feed')}>Feed</MenuItem>
-              </li>
+              </li> */}
             </MobileMenu>
             <MenuItem onClick={(e) => handleLogout(e)}>
               <ListItemIcon>
