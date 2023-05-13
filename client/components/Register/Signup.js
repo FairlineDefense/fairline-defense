@@ -499,7 +499,7 @@ const Signup = () => {
                       viewPolicy(e)
                     }}
                   >
-                    Privacy Plicy
+                    Privacy Policy
                   </OpenFinePrint>
                 </ThemeProvider>
               </TermsAndConditionsDiv>

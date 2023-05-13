@@ -50,18 +50,22 @@ const Wrapper = styled.div.attrs((props) => ({
       position: fixed;
       left: 0;
       top: 0;
-      padding: 6rem 0rem 0rem 0rem;
+      margin-top: 64px;
+      padding-top: 40px;
       width: 375px;
       height: 100vh;
       background-color: #000;
       align-items: flex-start;
       flex-direction: column;
     }
+    .joinLink {
+      display: none;
+    }
     ul li {
       margin-bottom: 1rem;
     }
     li a {
-      font-size: 32px;
+      font-size: 24px;
       font-weight: 400;
     }
   }
@@ -139,6 +143,17 @@ const Cyan = styled.span`
   font-size: inherit;
   font-weight: inherit;
   cursor: pointer;
+  img {
+    display: none;
+  }
+
+  @media (max-width: 800px) {
+    color: white;
+    img {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
 `
 const HamburgerMenu = styled.div`
   width: 30px;
@@ -181,14 +196,14 @@ const Navbar = ({shouldShowBackground}) => {
   const [backgroundColor, setBackgroundColor] = useState(
     navbarDefaultBackground
   )
-  const changeNavbarColor = () => {
+  const changeByScroll = () => {
     if (shouldShowBackground || window.scrollY >= 80) {
       setBackgroundColor('#132A4A')
     } else {
       setBackgroundColor('none')
     }
   }
-  window.addEventListener('scroll', changeNavbarColor)
+  window.addEventListener('scroll', changeByScroll)
   const citizenOrProfessional =
     window.location.pathname === '/armedprofessionals' ? (
       <a href="/">Armed Citizens</a>
@@ -266,17 +281,29 @@ const Navbar = ({shouldShowBackground}) => {
               <li>{citizenOrProfessional}</li>
               <li>
                 <Link to="/login">
-                  <Cyan>Login</Cyan>
+                  <Cyan><img src="./images/loginIcon.svg" />Login</Cyan>
+                </Link>
+              </li>
+              <li>
+                <Link to="/signup" className='joinLink'>
+                  <LoginButton>Join Now</LoginButton>
+                  <MobileCTA>Join Now</MobileCTA>
                 </Link>
               </li>
               <li>
                 <Link to="/signup">
-                  <LoginButton>Join Now</LoginButton>
+                  <MobileCTA
+                    style={{
+                      width: 150,
+                      height: 30,
+                      marginTop: 50,
+                    }}
+                  >Join Now</MobileCTA>
                 </Link>
               </li>
             </ul>
             <Link to="/signup">
-              <MobileCTA>Join Now</MobileCTA>
+              <MobileCTA>Join</MobileCTA>
             </Link>
           </>
         )}
