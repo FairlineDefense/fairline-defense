@@ -116,7 +116,7 @@ const Button = styled.button`
   border-radius: 3px;
 `
 
-const PromoCode = ({setValidCoupon, setValidDiscount}) => {
+const PromoCode = ({ setValidCoupon, setValidDiscount }) => {
   const [promoCode, setPromoCode] = useState('')
   const [checking, setChecking] = useState(false)
   const [valid, setValid] = useState(-1)
@@ -131,67 +131,68 @@ const PromoCode = ({setValidCoupon, setValidDiscount}) => {
       },
       body: JSON.stringify({ promoCode }),
     })
-    .then(res => {
-      if(res.status == 200)
-      {
-        setValid(1);
-      }  
-      else
-        setValid(0);
-      setChecking(false);
-      return res.json()
-    })
-    .then(data => {
-      setValidCoupon(data.coupon);
-      setValidDiscount(data.amount);
-      setMessage(data.message);
-    })
-    .catch(error => {
-      console.log(error);
-    })
+      .then(res => {
+        if (res.status == 200) {
+          setValid(1);
+        }
+        else
+          setValid(0);
+        setChecking(false);
+        console.log(res);
+        return res.json()
+      })
+      .then(data => {
+        setValidCoupon(data.coupon);
+        setValidDiscount(data.amount);
+        setMessage(data.message);
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
 
   return (
     <Wrapper>
       <Form>
         <PromoContainer>
-          <PromoFormContainer>
-            <FDTextField
-              fullWidth
-              name="promoCode"
-              autoComplete=""
-              label="PromoCode"
-              placeholder="PromoCode"
-              type="text"
-              variant="filled"
-              style={{ marginTop: 8, flexGrow: 1, paddingRight: 5 }}
-              onChange={(e) => setPromoCode(e.target.value)}
-              value={promoCode}
-            />
-            {checking ? (
+          <FDTextField
+            fullWidth
+            name="promoCode"
+            autoComplete=""
+            label="PromoCode"
+            placeholder="PromoCode"
+            type="text"
+            variant="filled"
+            style={{ marginTop: 15, marginRight: 20, width: 'calc(50% - 10px)' }}
+            onChange={(e) => setPromoCode(e.target.value)}
+            value={promoCode}
+          />
+          {checking ? (
+            <Button
+              onClick={applyHandler}
+              style={{ marginTop: 15, width: 'calc(25% - 15px)' }}>
+              <Loader />
+            </Button>
+          ) : (
+            <div>asdf</div>,
+            valid == 1 ? (
+              <SuccessMessage>
+                <span>{message}</span>
+              </SuccessMessage>
+            ) : '',
+            valid == 0 ? (
+              <ErrorMessage>
+                <span>{message}</span>
+              </ErrorMessage>
+            ) : '',
+            valid == -1 ? (
               <Button
                 onClick={applyHandler}
-                style={{ marginTop: 8 }}>
-                <Loader />
-              </Button>
-            ) : (
-              <Button
-                onClick={applyHandler}
-                style={{ marginTop: 8, cursor: 'pointer' }}>
+                style={{ marginTop: 15, width: 'calc(25% - 15px)', cursor: 'pointer' }}>
                 Apply
               </Button>
-            )}
-          </PromoFormContainer>
-          {valid == 1 ? (
-            <SuccessMessage>
-              <span>{message}</span>
-            </SuccessMessage>
-          ) : ''}
-          {valid == 0 ? (
-            <ErrorMessage>
-              <span>{message}</span>
-            </ErrorMessage>
-          ) : ''}
+            ) : ''
+          )}
         </PromoContainer>
       </Form>
     </Wrapper>

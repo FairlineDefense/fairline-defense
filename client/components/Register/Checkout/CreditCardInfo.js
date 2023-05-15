@@ -10,7 +10,6 @@ import styled, { keyframes } from 'styled-components';
 import history from '../../../history';
 
 import { WindowSharp } from '@mui/icons-material'
-import PromoCode from './PromoCode'
 
 const FormWrapper = styled.div`
   width: 700px;
@@ -83,7 +82,7 @@ const Loader = styled.div`
 const StyledCardElement = styled(CardElement)`
   height: 60px;
   padding: 21px 12px;
-  border-radius: 4px;
+  border-radius: 5px;
   border: 1px solid #ced4da;
   background-color: #fff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
@@ -146,7 +145,6 @@ const CreditCardInfo = ({
         <Span >
           {/* PaymentElement is the Stripe component that renders a credit card info form */}
           <StyledCardElement style={{ paddingTop: '10px' }} />
-          <PromoCode setValidCoupon={setValidCoupon} setValidDiscount={setValidDiscount}/>
         </Span>
     </FormWrapper>
   )

@@ -17,6 +17,7 @@ import states from './states'
 import { update } from '../../../store'
 import { useDispatch, useSelector } from 'react-redux'
 import history from '../../../history';
+import PromoCode from './PromoCode'
 
 const Gradient = styled.div`
   width: 100vw;
@@ -224,8 +225,7 @@ const PaymentInfo = ({
           state: order.state,
           zipCode: order.zipCode
         }
-        if(order.customerId)
-        {
+        if (order.customerId) {
           customerId = order.customerId;
         } else {
           const response = await fetch('/payment/create-customer', {
@@ -352,61 +352,46 @@ const PaymentInfo = ({
               zipCode={zipCode}
               changeHandler={changeHandler}
               setOrder={setOrder}
-              setValidCoupon={setValidCoupon}
-              setValidDiscount={setValidDiscount}
             />
-            <Header>Billing Address</Header>
             <FDTextField
-              fullWidth
-              name="streetAddress"
-              label="Street Address"
-              placeholder="Street Address"
+              name="cardHolder"
+              placeholder="Cardholder Name"
+              label="Cardholder Name"
+              variant="filled"
+              style={{ marginTop: 15, marginRight: 20, width: 'calc(50% - 10px)' }}
+              onChange={(e) => changeHandler(e)}
+              value={city}
+              required
+            />
+            <FDTextField
+              name="address"
+              label="Address"
+              placeholder="Address"
               type="text"
               variant="filled"
+              style={{ marginTop: 15, width: 'calc(50% - 10px)' }}
               onChange={(e) => changeHandler(e)}
               value={streetAddress}
               required
             />
-            <Line2Wrapper>
-              <FDTextField
-                name="line2"
-                label="Street Address Line 2"
-                placeholder="Street Address Line 2"
-                type="text"
-                variant="filled"
-                style={{ marginTop: 8, flexGrow: 1 }}
-                onChange={(e) => changeHandler(e)}
-                value={line2}
-              />
-              {/* <FDTextField
-                  label="Apt."
-                  variant="filled"
-                  type="text"
-                  style={{margin: 8, maxWidth: 90}}
-                  name="apt"
-                  placeholder="Apt"
-                  onChange={(e) => changeHandler(e)}
-                  value={apt}
-                /> */}
-            </Line2Wrapper>
             <FDTextField
-              name="city"
-              placeholder="City"
-              label="City"
+              name="line2"
+              label="Address 2 (Optional)"
+              placeholder="Address 2 (Optional)"
+              type="text"
               variant="filled"
-              style={{ marginTop: 8, marginRight: 4, flexGrow: 1 }}
+              style={{ marginTop: 15, marginRight: 20, width: 'calc(50% - 10px)' }}
               onChange={(e) => changeHandler(e)}
-              value={city}
-              required
+              value={line2}
             />
             <Select
               placeholder="State"
               style={{
                 backgroundColor: '#FFF',
                 borderRadius: 4,
-                width: 100,
-                marginTop: 8, 
-                marginRight: 4, 
+                width: 'calc(25% - 15px)',
+                marginTop: 15,
+                marginRight: 20,
                 paddingLeft: 20,
               }}
               name="state"
@@ -425,13 +410,14 @@ const PaymentInfo = ({
               placeholder="Zip Code"
               label="Zip Code"
               variant="filled"
-              style={{ marginTop: 8, flexGrow: 1 }}
+              style={{ marginTop: 15, width: 'calc(25% - 15px)'}}
               onChange={(e) => changeHandler(e)}
               value={zipCode}
               required
             />
+            <PromoCode setValidCoupon={setValidCoupon} setValidDiscount={setValidDiscount} style={{marginTop: 20}}/>
             <LeftWrapper
-              style={{marginTop: 10}}>
+              style={{ marginTop: 10 }}>
               <div>
                 Total
               </div>
