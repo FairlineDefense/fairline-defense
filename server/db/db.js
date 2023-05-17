@@ -3,7 +3,7 @@ const {Sequelize} = require('sequelize')
 const dbUrl =
   process.env.DATABASE_URL ||
   process.env.DOCKER_DATABASE_URL ||
-  'postgres://localhost:5432/postgres'
+  'postgres://localhost:5432/fairline'
 
 const config = process.env.DATABASE_URL
   ? {
@@ -16,15 +16,9 @@ const config = process.env.DATABASE_URL
       }
     }
   : {
-    "username": "postgres",
-    "password": "fabricio0!",
-    "database": "postgres",
-    "host": "127.0.0.1",
-    "port": "5432",
-    "dialect": "postgres",
-    
+      logging: false
     }
 
-const db = new Sequelize(config)
+const db = new Sequelize(dbUrl, config)
 
 module.exports = db
