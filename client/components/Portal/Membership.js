@@ -9,7 +9,7 @@ const Background = styled.div`
   width: 100vw;
   min-height: 100vh;
   padding: 0rem 5rem 0rem 5rem;
-  background: linear-gradient(102.57deg, #2a4c78 0%, #0b182d 100%);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
 
   @media (max-width: 800px) {
     padding: 0rem;

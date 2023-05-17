@@ -184,11 +184,14 @@ export default function Footer() {
                 <a href="#">Our Story</a>
               </li>
               <li>
+                <a href="/CRT">CRT</a>
+              </li>
+              {/* <li>
                 <a href="#">Reviews & Testimonials</a>
               </li>
               <li>
                 <a href="#">FAQs</a>
-              </li>
+              </li> */}
             </ul>
           </LinkGroup>
           <LinkGroup>
