@@ -163,6 +163,15 @@ const Reset = () => {
     e.preventDefault()
     setForm({ ...form, [e.target.name]: e.target.value })
   }
+
+  const handleEmailChange = (e) => {
+    const { value } = e.target
+    setForm((prevState) => ({
+      ...prevState,
+      email: value.toLowerCase() // Convert input to lowercase
+    }))
+  }
+
   const handleSubmit = (evt) => {
     evt.preventDefault()
 
@@ -242,7 +251,7 @@ const Reset = () => {
                   variant="filled"
                   type="email"
                   value={form.email}
-                  onChange={(e) => changeHandler(e)}
+                  onChange={handleEmailChange}
                   style={{ marginTop: 30 }}
                   required
                 />
