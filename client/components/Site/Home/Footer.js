@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
-`;
+  background: linear-gradient(105.01deg, #21488a -28.31%, #0b182d 67.65%);
+`
 
 const Section = styled.div`
   height: 280px;
@@ -13,7 +13,7 @@ const Section = styled.div`
   flex-direction: row;
   justify-content: space-between;
   color: #fff;
-  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
+  background: linear-gradient(105.01deg, #21488a -28.31%, #0b182d 67.65%);
 
   @media (max-width: 800px) {
     height: 100%;
@@ -22,7 +22,7 @@ const Section = styled.div`
     margin-bottom: 0rem;
   }
 `
-const TermsSection = styled.div`
+const FooterBottom = styled.div`
   margin-left: 4rem;
   margin-right: 4rem;
   padding-top: 1rem;
@@ -38,7 +38,20 @@ const TermsSection = styled.div`
   @media (max-width: 800px) {
     height: 100%;
     flex-direction: column;
-    padding: 0rem 2rem 2rem 2rem;
+    padding: 0rem 2rem 3rem 2rem;
+    justify-content: flex-end;
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
+`
+
+const TermsSection = styled.div`
+  @media (max-width: 800px) {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2rem 0rem;
     margin-left: 0rem;
     margin-right: 0rem;
   }
@@ -50,9 +63,9 @@ const TermsLink = styled.a`
   border-right: 0.2px solid #fff;
   @media (max-width: 800px) {
     margin-left: 0;
-    margin-top: 2rem;
+    padding-right: 1.5rem;
     flex-direction: column;
-    border-right: none;
+    border-right: 0.5px solid #fff;
   }
 `
 const PrivacyLink = styled.a`
@@ -60,9 +73,8 @@ const PrivacyLink = styled.a`
   color: white;
   @media (max-width: 800px) {
     margin-left: 0;
-    margin-top: 2rem;
     flex-direction: column;
-    padding-left: 0px;
+    padding-left: 1.5rem;
   }
 `
 const CopyrightLink = styled.a`
@@ -70,7 +82,8 @@ const CopyrightLink = styled.a`
   margin-left: auto;
   @media (max-width: 800px) {
     margin-left: 0;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    text-align: center;
     flex-direction: column;
     padding-left: 0px;
   }
@@ -166,6 +179,15 @@ const Support = styled.div`
     text-align: left;
   }
 `
+
+const MobileLineBreak = styled.br`
+  display: none;
+
+  @media (max-width: 800px) {
+    display: block;
+  }
+`
+
 const Phone = styled.span`
   font-weight: 400;
 `
@@ -213,18 +235,23 @@ export default function Footer() {
               <Phone>1-833-201-1463</Phone>
             </li>
             <li>
-              <a href="/contactus">Email Us</a>
+              <a href="/contactus">Contact Us</a>
             </li>
           </ul>
         </Support>
       </Section>
-      <TermsSection>
-        <TermsLink href='/termsofservice'>Terms & Service</TermsLink>
-        <PrivacyLink href='/privacypolicy'>Privacy Policy</PrivacyLink>
+      <FooterBottom>
+        <TermsSection>
+          <TermsLink href="/termsofservice">Terms & Service</TermsLink>
+          <PrivacyLink href="/privacypolicy">Privacy Policy</PrivacyLink>
+        </TermsSection>
         <CopyrightLink>
-          <span>Ⓒ 2023, Fairline Defense LLC, All Rights Reserved.</span>
+          <span>
+            Ⓒ 2023, Fairline Defense LLC, <MobileLineBreak />
+            All Rights Reserved.
+          </span>
         </CopyrightLink>
-      </TermsSection>
+      </FooterBottom>
     </Container>
   )
 }
