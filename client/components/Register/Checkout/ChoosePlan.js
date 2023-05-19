@@ -68,8 +68,8 @@ const Button = styled.button`
   border: 2px solid #5D789A;
   border-radius: 10px;
   color: #5D789A;
-  height: 12rem;
-  width: 18rem;
+  height: 180px;
+  min-width: 240px;
   margin: 2rem 1rem 2rem 1rem;
   padding: 2rem;
   display: flex;
@@ -100,9 +100,14 @@ const Button = styled.button`
   }
 `
 const Price = styled.p`
-  font-size: 40px;
-  margin-bottom: 1rem;
+  font-size: 50px;
   text-align: center;
+  font-weight: 600;
+  font-family: Eina;
+
+  span{
+    font-size: 25px;
+  }
 
   @media (max-width: 800px) {
     margin-bottom: 0;
@@ -111,7 +116,6 @@ const Price = styled.p`
 const Term = styled.p`
   font-size: 22px;
   font-weight: 200;
-  margin-bottom: 3rem;
   text-align: center;
 
   @media (max-width: 800px) {
@@ -122,6 +126,7 @@ const Billing = styled.p`
   font-size: 18px;
   font-weight: 500;
   text-align: center;
+  margin-top: 25px;
 `
 const H3 = styled.h3`
   font-size: 32px;
@@ -142,6 +147,7 @@ const Blue = styled.button`
   background: transparent;
   outline: none;
   border: none;
+  margin-bottom: 20px;
 `
 const ContinueButton = styled.button`
   background-color: var(--blue);
@@ -194,7 +200,10 @@ const ChoosePlan = ({
               name="priceId"
               disabled={priceId === `${protectionType}Month`}
             >
-              <Price>{prices[`${protectionType}Month`]}</Price>
+              <Price>
+                {prices[`${protectionType}Month`].split(".")[0] + "."}
+                <span>{prices[`${protectionType}Month`].split(".")[1]}</span>
+              </Price>
               <Term>Per Month</Term>
               <Billing>Billed Monthly</Billing>
             </Button>

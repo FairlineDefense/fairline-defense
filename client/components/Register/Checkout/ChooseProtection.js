@@ -70,7 +70,9 @@ const Button = styled.button`
   border-radius: 10px;
   color: #5D789A;
   height: 140px;
-  width: 240px;
+  min-width: 240px;
+  font-family: Eina;
+  font-weight: 600;
   margin: 2rem 1rem 2rem 1rem;
   padding: 2rem;
   display: flex;

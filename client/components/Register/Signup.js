@@ -1,8 +1,8 @@
 import React from 'react'
-import {signup} from '../../store'
-import {useDispatch, useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {useState, useEffect} from 'react'
+import { signup } from '../../store'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import RegisterHeader from './RegisterHeader'
 import FDTextField from '../FDTextField'
 import history from '../../history'
@@ -14,7 +14,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import countries from './phonecodes'
-import {ThemeProvider} from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/core'
 import theme from '../theme'
 import FDPasswordField from '../FDTextField/password'
 import SvgIcon from '@material-ui/core/SvgIcon'
@@ -132,7 +132,6 @@ const Phone = styled.span`
     width: 60px;
   }
   div:nth-child(2) {
-    width: 100%;
     margin-left: 4px;
   }
 
@@ -142,7 +141,7 @@ const Phone = styled.span`
     padding: 8px 0px 8px 8px;
 
     div:nth-child(2) {
-      width: 100%;
+      width: calc(100% + 4px);
     }
   }
 `
@@ -200,10 +199,10 @@ const Signup = () => {
       if (phone[0] !== '+') {
         phone = form.dialCode + ' ' + phone
       }
-      setForm({...form, phone: phone.slice(form.dialCode.length + 1)})
+      setForm({ ...form, phone: phone.slice(form.dialCode.length + 1) })
     } else {
-      setInvalidation({...invalidation, [e.target.name]: false})
-      setForm({...form, [e.target.name]: e.target.value})
+      setInvalidation({ ...invalidation, [e.target.name]: false })
+      setForm({ ...form, [e.target.name]: e.target.value })
     }
   }
 
@@ -232,15 +231,15 @@ const Signup = () => {
           email
         )
       ) {
-        setInvalidation({...invalidation, email: true})
+        setInvalidation({ ...invalidation, email: true })
         res = false
       }
       if (!/^[0-9()-+]+$/.test(phone)) {
-        setInvalidation({...invalidation, phone: true})
+        setInvalidation({ ...invalidation, phone: true })
         res = false
       }
       if (password !== confirmPassword) {
-        setInvalidation({...invalidation, confirmPassword: true})
+        setInvalidation({ ...invalidation, confirmPassword: true })
         setPasswordErrorText('Passwords do not match')
         res = false
       }
@@ -364,7 +363,7 @@ const Signup = () => {
                 type="text"
                 onChange={(e) => changeHandler(e)}
                 value={form.firstName}
-                style={{margin: 8}}
+                style={{ margin: 8 }}
                 required
               />
               <FDTextField
@@ -375,25 +374,41 @@ const Signup = () => {
                 type="text"
                 onChange={(e) => changeHandler(e)}
                 value={form.lastName}
-                style={{margin: 8}}
+                style={{ margin: 8 }}
                 variant="filled"
                 required
               />
             </InputGroup>
             <InputGroup>
-              <FDTextField
-                fullWidth={window.innerWidth >= 768 ? false : true}
-                label={invalidation.email ? 'Invalid email address' : 'Email'}
-                name="email"
-                placeholder="name@email.com"
-                type="text"
-                onChange={(e) => changeHandler(e)}
-                value={form.email}
-                style={{margin: 8, flexGrow: 1}}
-                variant="filled"
-                required
-                error={invalidation.email ? true : false}
-              />
+              {window.innerWidth >= 768 ? (
+                <FDTextField
+                  label={invalidation.email ? 'Invalid email address' : 'Email'}
+                  name="email"
+                  placeholder="name@email.com"
+                  type="text"
+                  onChange={(e) => changeHandler(e)}
+                  value={form.email}
+                  style={{ margin: 8, flexGrow: 1 }}
+                  variant="filled"
+                  required
+                  error={invalidation.email ? true : false}
+                />
+              ) : (
+                <FDTextField
+                  fullWidth
+                  label={invalidation.email ? 'Invalid email address' : 'Email'}
+                  name="email"
+                  placeholder="name@email.com"
+                  type="text"
+                  onChange={(e) => changeHandler(e)}
+                  value={form.email}
+                  style={{ margin: 8, flexGrow: 1 }}
+                  variant="filled"
+                  required
+                  error={invalidation.email ? true : false}
+                />
+              )}
+
               <Phone>
                 <ThemeProvider theme={theme}>
                   <Select
@@ -410,7 +425,7 @@ const Signup = () => {
                   >
                     {countries.map((country) => (
                       <MenuItem
-                        sx={{p: 5}}
+                        sx={{ p: 5 }}
                         key={country.code}
                         value={country.dial_code}
                       >
@@ -434,18 +449,32 @@ const Signup = () => {
                     ))}
                   </Select>
                 </ThemeProvider>
-                <FDTextField
-                  fullWidth={window.innerWidth >= 768 ? false : true}
-                  label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
-                  name="phone"
-                  placeholder="123 456 7890"
-                  type="tel"
-                  onChange={(e) => changeHandler(e)}
-                  value={form.dialCode + ' ' + form.phone}
-                  variant="filled"
-                  error={invalidation.phone ? true : false}
-                  required
-                />
+                {window.innerWidth >= 768 ? (
+                  <FDTextField
+                    label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
+                    style={{ width: 'calc(100% - 4px)' }}
+                    name="phone"
+                    placeholder="123 456 7890"
+                    type="tel"
+                    onChange={(e) => changeHandler(e)}
+                    value={form.dialCode + ' ' + form.phone}
+                    variant="filled"
+                    error={invalidation.phone ? true : false}
+                    required
+                  />) : (
+                  <FDTextField
+                    fullWidth
+                    label={invalidation.phone ? 'Invalid Phone Number' : 'Phone'}
+                    name="phone"
+                    placeholder="123 456 7890"
+                    type="tel"
+                    onChange={(e) => changeHandler(e)}
+                    value={form.dialCode + ' ' + form.phone}
+                    variant="filled"
+                    error={invalidation.phone ? true : false}
+                    required
+                  />
+                )}
               </Phone>
             </InputGroup>
             <InputGroup>
@@ -457,7 +486,7 @@ const Signup = () => {
                 type={form.showPassword ? 'text' : 'password'}
                 onChange={(e) => changeHandler(e)}
                 value={form.password}
-                style={{margin: 8}}
+                style={{ margin: 8 }}
                 variant="filled"
                 toggleVisibility={handleClickShowPassword}
                 error={invalidation.password ? true : false}
@@ -473,7 +502,7 @@ const Signup = () => {
                 type={form.showConfirmPassword ? 'text' : 'password'}
                 onChange={(e) => changeHandler(e)}
                 value={form.confirmPassword}
-                style={{margin: 8}}
+                style={{ margin: 8 }}
                 variant="filled"
                 autocomplete="current-password"
                 toggleVisibility={handleClickShowConfirmPassword}
@@ -493,7 +522,7 @@ const Signup = () => {
                     }}
                   >
                     Terms & Service
-                  </OpenFinePrint> &nbsp;and&nbsp; 
+                  </OpenFinePrint> &nbsp;and&nbsp;
                   <OpenFinePrint
                     onClick={(e) => {
                       viewPolicy(e)
