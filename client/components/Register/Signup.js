@@ -195,14 +195,29 @@ const Signup = () => {
 
   const changeHandler = (e) => {
     if (e.target.name === 'phone') {
-      let phone = e.target.value
+      let phone = e.target.value;
+      
       if (phone[0] !== '+') {
         phone = form.dialCode + ' ' + phone
       }
-      setForm({ ...form, phone: phone.slice(form.dialCode.length + 1) })
+      phone = phone.slice(form.dialCode.length + 1);
+
+      const strippedValue = phone.replace(/-|\D/g, '');
+      
+      let formattedValue = '';
+
+      if(strippedValue.length > 6) {
+        formattedValue = strippedValue.slice(0,3)+"-"+strippedValue.slice(3,6)+"-"+strippedValue.slice(6, 10);
+      } else if (strippedValue.length > 3) {
+        formattedValue = strippedValue.slice(0,3)+"-"+strippedValue.slice(3);        
+      } else {
+        formattedValue = strippedValue.slice(0,3);
+      }
+
+      setForm({...form, phone: formattedValue})
     } else {
-      setInvalidation({ ...invalidation, [e.target.name]: false })
-      setForm({ ...form, [e.target.name]: e.target.value })
+      setInvalidation({...invalidation, [e.target.name]: false})
+      setForm({...form, [e.target.name]: e.target.value})
     }
   }
 

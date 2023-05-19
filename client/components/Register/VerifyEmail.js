@@ -1,9 +1,9 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import history from '../../history'
 import RegisterHeader from './RegisterHeader'
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 
 const Gradient = styled.div`
 width: 100vw;
@@ -73,6 +73,16 @@ const SubHeading = styled.span`
   font-weight: 100;
   line-height: 22px;
 `
+const ResendLink = styled.span`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 22px;
+  text-decoration-line: underline;
+  color: #00ABE0;
+  margin-top: 3rem;
+  cursor: pointer;
+`
 const EmailIcon = styled.img`
   margin: 1.5rem;
 `
@@ -82,7 +92,7 @@ const SemiBold = styled.span`
   color: inherit;
 `
 const BottomWrapper = styled.span`
-  margin-top: 8rem;
+  margin-top: 5rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -116,48 +126,52 @@ const VerifyEmail = () => {
     const data = new URLSearchParams();
     data.append("channel", "email");
     data.append("email", user.email);
-        fetch("twilio/start-verify", {
-          method: "POST",
-          body: data
-        })
-          .then(response => {
-            return response.json()
-          })
-          .then(json => {
-            if (json.success) {
-              console.log("Successfully sent email.");
-            } else {
-              console.log(json.error);
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
-      useEffect(() => { 
-        sendVerifyEmail()
-      }, [])
+    fetch("twilio/start-verify", {
+      method: "POST",
+      body: data
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(json => {
+        console.log(json);
+        if (json.success) {
+          console.log("Successfully sent email.");
+        } else {
+          console.log(json.error);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  useEffect(() => {
+    sendVerifyEmail()
+  }, [])
   return (
     <Gradient>
       <BackgroundImage>
-      <RegisterHeader />
-      <Wrapper>
-        <Heading>Verify your email</Heading>
-        <CenteredWrapper>
-          <EmailIcon src="./images/confirmemail.png" />
-          <SubHeading>A confirmation link has been sent to</SubHeading>
-          <SubHeading>
-            <SemiBold>{user.email}</SemiBold>
-          </SubHeading>
-        </CenteredWrapper>
-        <BottomWrapper>
-          <SubHeading>
-            In order to proceed, please check your email and click the
-            confirmation link.
-          </SubHeading>
-          <Button onClick={e => clickHandler(e)}>Continue</Button>
-        </BottomWrapper>
-      </Wrapper>
+        <RegisterHeader />
+        <Wrapper>
+          <Heading>Verify your email</Heading>
+          <CenteredWrapper>
+            <EmailIcon src="./images/confirmemail.png" />
+            <SubHeading>A confirmation link has been sent to</SubHeading>
+            <SubHeading>
+              <SemiBold>{user.email}</SemiBold>
+            </SubHeading>
+            <ResendLink onClick={sendVerifyEmail}>
+              Resend the link
+            </ResendLink>
+          </CenteredWrapper>
+          <BottomWrapper>
+            <SubHeading>
+              In order to proceed, please check your email and click the
+              confirmation link.
+            </SubHeading>
+            <Button onClick={e => clickHandler(e)}>Continue</Button>
+          </BottomWrapper>
+        </Wrapper>
       </BackgroundImage>
     </Gradient>
   )
