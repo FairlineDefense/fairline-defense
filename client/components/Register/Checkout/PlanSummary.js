@@ -135,8 +135,13 @@ const Button = styled.button`
 `
 const Price = styled.p`
   font-size: 40px;
-  margin-bottom: 0.2rem;
   text-align: center;
+  font-weight: 600;
+  font-family: Eina;
+
+  span{
+    font-size: 18px;
+  }
 
   @media (max-width: 800px) {
     margin-bottom: 0;
@@ -146,6 +151,7 @@ const Billing = styled.p`
   font-size: 18px;
   font-weight: 500;
   text-align: center;
+  margin-top: 13px;
 `
 const PlanSummary = ({
   price,
@@ -189,7 +195,10 @@ const PlanSummary = ({
             name="priceId"
             disabled={priceId === `${protectionType}Month`}
           >
-            <Price>{prices[`${protectionType}Month`]}</Price>
+            <Price>
+              {prices[`${protectionType}Month`].split(".")[0] + "."}
+              <span>{prices[`${protectionType}Month`].split(".")[1]}</span>
+            </Price>
             <Billing>Billed Monthly</Billing>
           </Button>
           <Button
