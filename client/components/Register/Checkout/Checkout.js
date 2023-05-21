@@ -16,6 +16,7 @@ const Checkout = () => {
   const [order, setOrder] = useState({
     customerId: '',
     clientSecret: '',
+    holderName: '',
     protectionType: '',
     protectionTypeString: '',
     priceId: '',
@@ -67,6 +68,7 @@ const Checkout = () => {
 
   const changeHandler = e => {
     e.preventDefault()
+    console.log(e.currentTarget.name, e.currentTarget.value);
     setOrder({...order, [e.currentTarget.name]: e.currentTarget.value})
   }
 

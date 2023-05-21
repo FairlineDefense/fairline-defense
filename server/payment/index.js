@@ -118,9 +118,9 @@ router.post('/attach-payment', async (req, res) => {
       const couponId = promoCode.coupon.id;
 
       if (promoCode.coupon.amount_off == 1999 || promoCode.coupon.amount_off == 2999)
-        res.status(200).json({ message: 'Promo Code applied successfully: You get 1 month free!', coupon: couponId, amount: promoCode.coupon.amount_off })
+        res.status(200).json({ message: '1 Month Free promo applied', coupon: couponId, amount: promoCode.coupon.amount_off })
       else if (promoCode.coupon.amount_off == 5997 || promoCode.coupon.amount_off == 8987)
-        res.status(200).json({ message: 'Promo Code applied successfully: You get 3 months free!', coupon: couponId, amount: promoCode.coupon.amount_off})
+        res.status(200).json({ message: '3 Month Free promo applied', coupon: couponId, amount: promoCode.coupon.amount_off})
     } catch (error) {
       console.log('promo code validation error =>', error.message)
       res.status(404).json({ message: 'Promo Code entered is invalid.' });

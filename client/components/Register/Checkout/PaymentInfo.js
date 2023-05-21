@@ -59,7 +59,7 @@ const LeftWrapper = styled.div`
   align-items: flex-start;
   width: 700px;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 20px;
 
   p {
@@ -105,7 +105,9 @@ const Button = styled.button`
   width: 340px;
   padding: 1rem 2rem 1rem 2rem;
   font-size: 20px;
-  font-weight: 100;
+  font-weight: 400;
+  font-family: 'Eina';
+  line-height: 28px;
   margin: 2rem;
   outline: none;
   border: none;
@@ -136,25 +138,44 @@ const Wrapper = styled.div`
   position: relative;
 `
 const Header = styled.h6`
-  font-size: 14px;
-  font-weight: 400;
-  margin: 1.5rem 0rem 0.5rem 0rem;
-  color: bisque;
-
-  @media (max-width: 800px) {
-    margin: 0.5rem;
-  }
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+  font-family: 'Eina';
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  width: 100%;
 `
 const CenteredWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
 `
+const NormalText = styled.div`
+  font-family: Eina;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 1px !important;
+  margin-bottom: 1px !important;
+`;
+
+const BoldText = styled.div`
+  font-family: Eina;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 1px !important;
+  margin-bottom: 1px !important;
+`;
 const PaymentInfo = ({
   order: {
     priceId,
     customerId,
     clientSecret,
+    holderName,
     price,
     protectionType,
     billingInterval,
@@ -264,6 +285,9 @@ const PaymentInfo = ({
       const paymentMethod = await stripe.createPaymentMethod({
         type: 'card',
         card: cardElement,
+        billing_details: {
+          name: holderName,
+        }
       });
 
       const res = await fetch('payment/attach-payment', {
@@ -354,17 +378,17 @@ const PaymentInfo = ({
               setOrder={setOrder}
             />
             <FDTextField
-              name="cardHolder"
+              name="holderName"
               placeholder="Cardholder Name"
               label="Cardholder Name"
               variant="filled"
               style={{ marginTop: 15, marginRight: 20, width: 'calc(50% - 10px)' }}
               onChange={(e) => changeHandler(e)}
-              value={city}
+              value={holderName}
               required
             />
             <FDTextField
-              name="address"
+              name="streetAddress"
               label="Address"
               placeholder="Address"
               type="text"
@@ -410,45 +434,47 @@ const PaymentInfo = ({
               placeholder="Zip Code"
               label="Zip Code"
               variant="filled"
-              style={{ marginTop: 15, width: 'calc(25% - 15px)'}}
+              style={{ marginTop: 15, width: 'calc(25% - 15px)' }}
               onChange={(e) => changeHandler(e)}
               value={zipCode}
               required
             />
-            <PromoCode setValidCoupon={setValidCoupon} setValidDiscount={setValidDiscount} style={{marginTop: 20}}/>
-            <LeftWrapper
-              style={{ marginTop: 10 }}>
-              <div>
-                Total
-              </div>
-              <div>
-                {parseFloat(order.price.replace("$", ""))}
-              </div>
-            </LeftWrapper>
-            <LeftWrapper>
-              <div>
-                Discount
-              </div>
-              <div>
-                {validDiscount / 100.0}
-              </div>
-            </LeftWrapper>
-            <LeftWrapper>
-              <div>
-                Amount Due
-              </div>
-              <div>
-                {parseFloat(order.price.replace("$", "")) - validDiscount / 100.0}
-              </div>
-            </LeftWrapper>
+            <PromoCode setValidCoupon={setValidCoupon} setValidDiscount={setValidDiscount}/>
+            {setValidDiscount ? (<LeftWrapper>
+              <NormalText>
+                Discount:
+              </NormalText>
+              <BoldText>
+                {validDiscount / 1999} Month Free
+              </BoldText>
+            </LeftWrapper>) : ''}
 
             <LeftWrapper>
+              <NormalText>
+                Payment due now:
+              </NormalText>
+              <BoldText>
+                {parseFloat(order.price.replace("$", "")) - validDiscount / 100.0}
+              </BoldText>
+            </LeftWrapper>
+
+            {setValidDiscount ? (<LeftWrapper>
+              <NormalText>
+                After promo ends:
+              </NormalText>
+              <BoldText>
+                ${parseFloat(order.price.replace("$", ""))}/mo
+              </BoldText>
+            </LeftWrapper>) : ''}
+
+            <LeftWrapper style={{marginTop: 30}}>
               <div>
                 <Checkbox
                   color="primary"
                   onChange={() =>
                     setOrder({ ...order, differentAddress: !differentAddress })
                   }
+                  style={{ padding: 0 }}
                   name="differentAddress"
                   checked={!differentAddress}
                 />
@@ -457,7 +483,7 @@ const PaymentInfo = ({
                 My shipping address is the same as my billing address.
                 <p>
                   {apt} {streetAddress} {line2} <br />
-                  {city}, {state} {zipCode}
+                  {state} {zipCode}
                 </p>
               </div>
             </LeftWrapper>
@@ -476,6 +502,7 @@ const PaymentInfo = ({
                     onChange={() =>
                       setOrder({ ...order, termsAndConditions: !termsAndConditions })
                     }
+                    style={{ padding: 0 }}
                     name="termsAndConditions"
                     checked={termsAndConditions}
                     required
