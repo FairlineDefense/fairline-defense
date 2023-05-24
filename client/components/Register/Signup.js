@@ -40,11 +40,16 @@ const Gradient = styled.div`
   }
 `
 const BackgroundImage = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
   background-position: 0px 30px;
+  background-size: 37%;
+
+  @media (max-width: 1800px) {
+    background-size: 700px;
+  }
 
   @media (max-width: 800px) {
     background-image: none;
@@ -61,12 +66,13 @@ const H3 = styled.h3`
   }
 `
 const SignupWrapper = styled.div`
-  height: 100%;
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 4rem;
+  margin-top: -40px;
   @media (max-width: 768px) {
     padding: 2rem 2rem 0rem 1.5rem;
   }
@@ -486,7 +492,12 @@ const Signup = () => {
                 type={form.showPassword ? 'text' : 'password'}
                 onChange={(e) => changeHandler(e)}
                 value={form.password}
-                style={{ margin: 8 }}
+                style={{ 
+                  margin: 8,
+                  fontFamily: 'Eina',
+                  fontSize: 14,
+                  lineHeight: 16
+                }}
                 variant="filled"
                 toggleVisibility={handleClickShowPassword}
                 error={invalidation.password ? true : false}
@@ -536,7 +547,7 @@ const Signup = () => {
 
             <SignupButtonWrapper>
               <SignupFormButton type="submit">
-                Create an Account
+                Create Account
               </SignupFormButton>
             </SignupButtonWrapper>
             <section className="signupFormBottom">

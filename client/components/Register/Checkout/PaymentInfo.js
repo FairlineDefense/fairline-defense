@@ -28,11 +28,16 @@ const Gradient = styled.div`
   }
 `
 const BackgroundImage = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
   background-position: 0px 30px;
+  background-size: 37%;
+
+  @media (max-width: 1800px) {
+    background-size: 700px;
+  }
 
   @media (max-width: 800px) {
     background-image: none;
