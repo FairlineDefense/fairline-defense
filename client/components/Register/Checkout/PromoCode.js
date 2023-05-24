@@ -163,7 +163,6 @@ const PromoCode = () => {
               style={{ marginTop: 8, flexGrow: 1, paddingRight: 5 }}
               onChange={(e) => setPromoCode(e.target.value)}
               value={promoCode}
-              required
             />
             {checking ? (
               <Button

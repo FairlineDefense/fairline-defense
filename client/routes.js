@@ -23,7 +23,8 @@ import {
   ResetPassword,
   ForgotPassword,
   VerifiedEmail,
-  Checkout
+  Checkout,
+  CRT
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'
@@ -52,6 +53,7 @@ const Routes = (props) => {
             <Route exact path="/termsofservice" component={TermsOfService} />
             <Route exact path="/privacypolicy" component={PrivacyPolicy} />
             <Route exact path="/contactus" component={ContactUs} />
+            <Route exact path="/CRT" component={CRT} />
             <Route path="/home" component={UserHome} />
             <Route path="/membership" component={Membership} />
             <Route path="/benefits" component={Benefits} />
@@ -77,6 +79,7 @@ const Routes = (props) => {
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/forgotpassword" component={ForgotPassword} />
+            <Route exact path="/CRT" component={CRT} />
             <Route path="/resetpassword/:token" component={ResetPassword} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/success" component={VerifiedEmail} />
