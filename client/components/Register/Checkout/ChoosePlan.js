@@ -23,11 +23,16 @@ const Gradient = styled.div`
   }
 `
 const BackgroundImage = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
   background-position: 0px 30px;
+  background-size: 37%;
+
+  @media (max-width: 1800px) {
+    background-size: 700px;
+  }
 
   @media (max-width: 800px) {
     background-image: none;
@@ -35,12 +40,13 @@ const BackgroundImage = styled.div`
 `
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 4rem;
-  position: relative;
+  margin-top: -40px;
 
   @media (max-width: 800px) {
     text-align: center;
@@ -189,7 +195,7 @@ const ChoosePlan = ({
       <BackgroundImage>
         <RegisterHeader />
         <Wrapper>
-          <H3>Select your plan for {protectionTypeString}</H3>
+          <H3 style={{textAlign: 'center'}}>Select your plan for <br/>{protectionTypeString}</H3>
           <Blue onClick={() => setStep('ChooseProtection')}>
             Switch to {oppositeProtectionTypeString}
           </Blue>
