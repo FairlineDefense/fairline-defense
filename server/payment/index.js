@@ -77,7 +77,6 @@ router.post('/create-customer', async (req, res) => {
         },
         {where: {customerId: customerId}}
       )
-      console.log('subscription created', subscription.id, customerId)
       if(subscription.latest_invoice.payment_intent) {}
       return res.json({
         subscriptionId: subscription.id,
@@ -95,7 +94,15 @@ router.post('/attach-payment', async (req, res) => {
       req.body.paymentMethodId,
       {customer: req.body.customerId}
     );
-  console.log(paymentMethod);
+    await User.update(
+      {
+        brand: paymentMethod.card.brand,
+        last4: paymentMethod.card.last4,
+        expMonth: paymentMethod.card.exp_month,
+        expYear: paymentMethod.card.exp_year,
+      },
+      {where: {customerId: req.body.customerId}}
+    )
   return res.json(paymentMethod)
   } catch (error) {
     console.log('update subscription error =>', error.message)
