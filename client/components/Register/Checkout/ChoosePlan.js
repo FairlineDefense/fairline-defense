@@ -225,7 +225,7 @@ const ChoosePlan = ({
             </Button>
           </ButtonWrapper>
           <ContinueButton
-            onClick={() => setStep('BillingAddress')}
+            onClick={() => setStep('PaymentInfo')}
             disabled={!priceId.length}
           >
             Continue

@@ -1,4 +1,4 @@
-const {User} = require('../db/models')
+const { User } = require('../db/models')
 const router = require('express').Router()
 require('dotenv').config()
 const stripe = require('stripe')(process.env.SECRET_KEY)
@@ -40,7 +40,9 @@ router.post('/create-customer', async (req, res) => {
     res.status(500).send()
   }
 }),
+
   router.post('/create-subscription', async (req, res) => {
+
     const customerId = req.body.customerId
     const priceIds = {
       armedCitizenMonth: process.env.MONTH_PRICE_ID,
@@ -50,10 +52,12 @@ router.post('/create-customer', async (req, res) => {
       spouse: process.env.MONTH_SPOUSE_PRICE_ID
     }
     let priceId = priceIds[req.body.priceId]
+
     try {
       // Create the subscription. Note we're expanding the Subscription's
       // latest invoice and that invoice's payment_intent
       // so we can pass it to the front end to confirm the payment
+
       const subscription = await stripe.subscriptions.create({
         customer: customerId,
         items: [
@@ -63,7 +67,8 @@ router.post('/create-customer', async (req, res) => {
         ],
         payment_behavior: 'default_incomplete',
         payment_settings: {save_default_payment_method: 'on_subscription'},
-        expand: ['latest_invoice.payment_intent']
+        expand: ['latest_invoice.payment_intent'],
+        coupon: req.body.coupon
       })
 
       await User.update(
@@ -72,11 +77,10 @@ router.post('/create-customer', async (req, res) => {
         },
         {where: {customerId: customerId}}
       )
-        console.log('subscription created', subscription.id, customerId)
+      if(subscription.latest_invoice.payment_intent) {}
       return res.json({
         subscriptionId: subscription.id,
-        clientSecretRes:
-          subscription.latest_invoice.payment_intent.client_secret
+        clientSecretRes: ( subscription.latest_invoice.payment_intent ? subscription.latest_invoice.payment_intent.client_secret : null )
       })
     } catch (error) {
       console.log('create subscription error =>', error.message)
@@ -84,19 +88,27 @@ router.post('/create-customer', async (req, res) => {
     }
   })
 
-  // router.post('/promo-code', async (req, res) => {
-  //   try {
-  //   const subscription = await stripe.subscriptions.update(
-  //     req.user.subscriptionId,
-  //     {metadata: {promotion_code: req.body.promoCode}}
-  //   );
-  //   console.log('PROMO CODE RES', subscription)
-  //   return res.json(subscription)
-  //   } catch (error) {
-  //     console.log('update subscription error =>', error.message)
-  //     return res.status(400).send({error: {message: error.message}})
-  //   }
-  // })
+router.post('/attach-payment', async (req, res) => {
+  try {
+    const paymentMethod = await stripe.paymentMethods.attach(
+      req.body.paymentMethodId,
+      {customer: req.body.customerId}
+    );
+    await User.update(
+      {
+        brand: paymentMethod.card.brand,
+        last4: paymentMethod.card.last4,
+        expMonth: paymentMethod.card.exp_month,
+        expYear: paymentMethod.card.exp_year,
+      },
+      {where: {customerId: req.body.customerId}}
+    )
+  return res.json(paymentMethod)
+  } catch (error) {
+    console.log('update subscription error =>', error.message)
+    return res.status(400).send({error: {message: error.message}})
+  }
+})
 
   router.post('/promo-code', async (req, res) => {
     try {
@@ -106,21 +118,16 @@ router.post('/create-customer', async (req, res) => {
       console.log(promoCodes)
       //Retrieve the promo object by its code
       const promoCode = promoCodes.data.find((promo) => promo.code === req.body.promoCode);
-      console.log(promoCode);
 
-      // Retrieve the coupon ID associated with the promo code
+      // console.log(promoCode);
+
+      // // Retrieve the coupon ID associated with the promo code
       const couponId = promoCode.coupon.id;
-      
-      //If the coupon is valid, update the subscription
-      console.log(req.user.subscriptionId, couponId);
-      await stripe.subscriptions.update(req.user.subscriptionId, {
-        coupon: couponId,
-      })
 
-      if(promoCode.coupon.amount_off == 1999 || promoCode.coupon.amount_off == 2999)
-        res.status(200).json({ message: 'Promo Code applied successfully: You get 1 month free!' })
-      else if(promoCode.coupon.amount_off == 5997 || promoCode.coupon.amount_off == 8987)
-        res.status(200).json({ message: 'Promo Code applied successfully: You get 3 months free!' })
+      if (promoCode.coupon.amount_off == 1999 || promoCode.coupon.amount_off == 2999)
+        res.status(200).json({ message: '1 Month Free promo applied', coupon: couponId, amount: promoCode.coupon.amount_off })
+      else if (promoCode.coupon.amount_off == 5997 || promoCode.coupon.amount_off == 8987)
+        res.status(200).json({ message: '3 Month Free promo applied', coupon: couponId, amount: promoCode.coupon.amount_off})
     } catch (error) {
       console.log('promo code validation error =>', error.message)
       res.status(404).json({ message: 'Promo Code entered is invalid.' });
@@ -149,7 +156,7 @@ router.post('/add-a-spouse', async (req, res) => {
     })
   } catch (error) {
     console.log(error)
-    return res.status(400).send({error: {message: error.message}})
+    return res.status(400).send({ error: { message: error.message } })
   }
 })
 
@@ -176,11 +183,11 @@ router.put('/add-a-spouse', async (req, res) => {
         spouseEmail: req.body.spouseEmail,
         spousePhone: req.body.spousePhone
       },
-      {where: {id: req.body.id}}
+      { where: { id: req.body.id } }
     )
   } catch (error) {
     console.log(error)
-    return res.status(400).send({error: {message: error.message}})
+    return res.status(400).send({ error: { message: error.message } })
   }
 })
 
@@ -193,12 +200,12 @@ router.get('/invoices', async (req, res) => {
       const date = dateIntString(line.created)
       const amount = priceString(line.amount_due)
       const pdfUrl = line.hosted_invoice_url
-      return {date: date, amount: amount, pdf: pdfUrl}
+      return { date: date, amount: amount, pdf: pdfUrl }
     })
 
     return res.json(data)
   } catch (error) {
     console.log(error)
-    return res.status(400).send({error: {message: error.message}})
+    return res.status(400).send({ error: { message: error.message } })
   }
 })

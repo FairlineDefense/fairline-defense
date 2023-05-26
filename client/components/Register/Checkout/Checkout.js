@@ -6,6 +6,7 @@ import BillingAddress from './BillingAddress'
 import PaymentInfo from './PaymentInfo'
 import PaymentStatus from './PaymentStatus'
 import {loadStripe} from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 import {useSelector} from 'react-redux'
 
 const Checkout = () => {
@@ -15,6 +16,7 @@ const Checkout = () => {
   const [order, setOrder] = useState({
     customerId: '',
     clientSecret: '',
+    holderName: '',
     protectionType: '',
     protectionTypeString: '',
     priceId: '',
@@ -37,7 +39,10 @@ const Checkout = () => {
   })
 
   const options = {
-    clientSecret: order.clientSecret,
+    // clientSecret: order.clientSecret,
+    mode: 'subscription',
+    amount: 1099,
+    currency: 'usd',
     // Appearance of Stripe form:
     appearance: {
       theme: 'stripe',
@@ -63,6 +68,7 @@ const Checkout = () => {
 
   const changeHandler = e => {
     e.preventDefault()
+    console.log(e.currentTarget.name, e.currentTarget.value);
     setOrder({...order, [e.currentTarget.name]: e.currentTarget.value})
   }
 
@@ -122,6 +128,7 @@ const Checkout = () => {
       })
       const {customerId: customerId} = await response.json()
       setOrder({...order, customerId: customerId})
+      console.log('go to payment info???');
       setStep('PaymentInfo')
     } catch (error) {
       console.log('create customer error', error)
@@ -157,13 +164,13 @@ const Checkout = () => {
   }
   useEffect(
     () => {
-      if (order.customerId !== '' && order.customerId !== 'createCustomer') {
-        try {
-          fetchClientSecret()
-        } catch (error) {
-          console.log('error getting client secret,', error)
-        }
-      }
+      // if (order.customerId !== '' && order.customerId !== 'createCustomer') {
+      //   try {
+      //     fetchClientSecret()
+      //   } catch (error) {
+      //     console.log('error getting client secret,', error)
+      //   }
+      // }
     },
     [order.customerId]
   )
@@ -198,14 +205,15 @@ const Checkout = () => {
       )
     case 'PaymentInfo':
       return (
-        <PaymentInfo
-          setStep={setStep}
-          changeHandler={changeHandler}
-          order={order}
-          setOrder={setOrder}
-          stripePromise={stripePromise}
-          options={options}
-        />
+        <Elements stripe={stripePromise} options={options}>
+          <PaymentInfo
+            setStep={setStep}
+            changeHandler={changeHandler}
+            order={order}
+            setOrder={setOrder}
+            options={options}
+          />
+        </Elements>
       )
     case 'PaymentStatus':
       return (
