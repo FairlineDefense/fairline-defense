@@ -126,7 +126,6 @@ const User = db.define('user', {
   },
   subscriptionId: {
     type: Sequelize.STRING,
-    unique: true,
     defaultValue: 'n/a'
   },
   emailReminders: {

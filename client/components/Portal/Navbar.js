@@ -21,18 +21,12 @@ const Nav = styled.nav`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  height: 70px;
+  height: 65px;
   color: #fff;
   font-size: 14px;
   border-bottom: 1px solid #fff;
   align-items: center;
 
-  div:nth-child(2) {
-    justify-content: center;
-  }
-  div:nth-child(3) {
-    justify-content: flex-end;
-  }
   a {
     color: #fff;
     margin-right: 1rem;
@@ -40,7 +34,26 @@ const Nav = styled.nav`
   a:visited {
     color: #fff;
   }
+
+  @media (max-width: 800px) {
+    border: none;
+    background: #132A4A;
+    padding: 0rem 1rem 0rem 1rem;
+  }
+
 `
+const LogoWrapper = styled.div`
+  justify-content: center;
+  width: 33%;
+  text-align: center;
+`
+const ProfileWrapper = styled.div`
+  width: 33%;
+  div {
+    float: right;
+  }
+`
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -64,10 +77,33 @@ const Logo = styled.img`
 `
 const MobileMenu = styled.ul`
   display: none;
-
+  list-style-type: none;
+  
   @media (max-width: 800px) {
     display: block;
   }
+`
+const HamburgerMenu = styled.div`
+  width: 30%;
+  z-index: 20;
+  display: none;
+
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    left: 20px;
+    top: 25px;
+  }
+`
+const Bar = styled.div`
+  cursor: pointer;
+  background-color: #fff;
+  height: 4px;
+  width: 30px;
+  display: block;
+  margin-bottom: 5px;
+  border-radius: 2px;
 `
 
 const Navbar = () => {
@@ -96,15 +132,22 @@ const Navbar = () => {
       <DesktopMenu>
         <Link to="/membership">Membership</Link>
         <Link to="/home">Account</Link>
-        <Link to="/benefits">Benefits</Link>
-        <Link to="/feed">Feed</Link>
+        {/* <Link to="/benefits">Benefits</Link>
+        <Link to="/feed">Feed</Link> */}
       </DesktopMenu>
-      <Wrapper>
+      <HamburgerMenu
+          onClick={() => setDisplay(display === 'flex' ? 'none' : 'flex')}
+        >
+          <Bar />
+          <Bar />
+          <Bar />
+      </HamburgerMenu>
+      <LogoWrapper>
         <Link to="/home">
           <Logo src="./images/fdlogo.png" />
         </Link>
-      </Wrapper>
-      <Wrapper>
+      </LogoWrapper>
+      <ProfileWrapper>
         <ThemeProvider theme={theme}>
           <Box
             sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}
@@ -175,14 +218,14 @@ const Navbar = () => {
                   Account
                 </MenuItem>
               </li>
-              <li>
+              {/* <li>
                 <MenuItem onClick={() => history.push('/benefits')}>
                   Benefits
                 </MenuItem>
               </li>
               <li>
                 <MenuItem onClick={() => history.push('/feed')}>Feed</MenuItem>
-              </li>
+              </li> */}
             </MobileMenu>
             <MenuItem onClick={(e) => handleLogout(e)}>
               <ListItemIcon>
@@ -192,7 +235,7 @@ const Navbar = () => {
             </MenuItem>
           </Menu>
         </ThemeProvider>
-      </Wrapper>
+      </ProfileWrapper>
     </Nav>
   )
 }

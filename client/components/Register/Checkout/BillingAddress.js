@@ -14,7 +14,7 @@ import states from './states'
 const Gradient = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
   color: #fff;
   overflow-x: hidden;
 
@@ -33,9 +33,9 @@ const Gradient = styled.div`
 const BackgroundImage = styled.div`
   height: 100%;
   width: 100%;
-  background-image: url('./images/background.png');
+  background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
-  background-position: -120px -100px;
+  background-position: 0px 30px;
 
   @media (max-width: 800px) {
     background-image: none;

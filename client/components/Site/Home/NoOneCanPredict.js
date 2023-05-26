@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Section = styled.div`
   width: 100vw;
   height: 840px;
-  background-image: url('./images/break-in.png');
+  background-image: url('./images/break-in.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

@@ -6,7 +6,7 @@ import RegisterHeader from '../RegisterHeader'
 const Gradient = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
   color: #fff;
   overflow-x: hidden;
 
@@ -23,11 +23,16 @@ const Gradient = styled.div`
   }
 `
 const BackgroundImage = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  background-image: url('./images/background.png');
+  background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
-  background-position: -120px -100px;
+  background-position: 0px 30px;
+  background-size: 37%;
+
+  @media (max-width: 1800px) {
+    background-size: 700px;
+  }
 
   @media (max-width: 800px) {
     background-image: none;
@@ -35,12 +40,13 @@ const BackgroundImage = styled.div`
 `
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 4rem;
-  position: relative;
+  margin-top: -40px;
 
   @media (max-width: 800px) {
     text-align: center;
@@ -63,13 +69,13 @@ const ButtonWrapper = styled.div`
   }
 `
 const Button = styled.button`
-  border: 1px solid #fff;
-  border-radius: 5px;
   outline: none;
   background: transparent;
-  color: #fff;
-  height: 12rem;
-  width: 18rem;
+  border: 2px solid #5D789A;
+  border-radius: 10px;
+  color: #5D789A;
+  height: 180px;
+  min-width: 240px;
   margin: 2rem 1rem 2rem 1rem;
   padding: 2rem;
   display: flex;
@@ -82,26 +88,32 @@ const Button = styled.button`
 
   &:hover {
     background: rgba(0, 171, 224, 0.2);
-    border-color: var(--blue);
+    border: 2px solid #00ABE0;
+    color: #fff;
   }
 
   &:disabled {
     background: rgba(0, 171, 224, 0.2);
-    border-color: var(--blue);
+    border: 2px solid #00ABE0;
+    color: #fff;
   }
 
   @media (max-width: 800px) {
-    width: 100%;
     height: auto;
+    width: 100%;
     margin: 0.5rem;
     padding: 0.5rem;
   }
 `
 const Price = styled.p`
-  font-size: 40px;
-  color: var(--blue);
-  margin-bottom: 1rem;
+  font-size: 50px;
   text-align: center;
+  font-weight: 600;
+  font-family: Eina;
+
+  span{
+    font-size: 25px;
+  }
 
   @media (max-width: 800px) {
     margin-bottom: 0;
@@ -110,7 +122,6 @@ const Price = styled.p`
 const Term = styled.p`
   font-size: 22px;
   font-weight: 200;
-  margin-bottom: 3rem;
   text-align: center;
 
   @media (max-width: 800px) {
@@ -121,6 +132,7 @@ const Billing = styled.p`
   font-size: 18px;
   font-weight: 500;
   text-align: center;
+  margin-top: 25px;
 `
 const H3 = styled.h3`
   font-size: 32px;
@@ -141,6 +153,7 @@ const Blue = styled.button`
   background: transparent;
   outline: none;
   border: none;
+  margin-bottom: 20px;
 `
 const ContinueButton = styled.button`
   background-color: var(--blue);
@@ -182,7 +195,7 @@ const ChoosePlan = ({
       <BackgroundImage>
         <RegisterHeader />
         <Wrapper>
-          <H3>Select your plan for {protectionTypeString}</H3>
+          <H3 style={{textAlign: 'center'}}>Select your plan for <br/>{protectionTypeString}</H3>
           <Blue onClick={() => setStep('ChooseProtection')}>
             Switch to {oppositeProtectionTypeString}
           </Blue>
@@ -193,7 +206,10 @@ const ChoosePlan = ({
               name="priceId"
               disabled={priceId === `${protectionType}Month`}
             >
-              <Price>{prices[`${protectionType}Month`]}</Price>
+              <Price>
+                {prices[`${protectionType}Month`].split(".")[0] + "."}
+                <span>{prices[`${protectionType}Month`].split(".")[1]}</span>
+              </Price>
               <Term>Per Month</Term>
               <Billing>Billed Monthly</Billing>
             </Button>

@@ -8,7 +8,7 @@ import {me} from '../../../store/user'
 const Gradient = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
   color: #fff;
   overflow-x: hidden;
 
@@ -25,25 +25,29 @@ const Gradient = styled.div`
   }
 `
 const BackgroundImage = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  background-image: url('./images/background.png');
+  background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
-  background-position: -120px -100px;
+  background-position: 0px 30px;
+  background-size: 37%;
+
+  @media (max-width: 1800px) {
+    background-size: 700px;
+  }
 
   @media (max-width: 800px) {
     background-image: none;
   }
 `
 const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 2rem;
-  position: relative;
-
+  margin-top: -40px;
   @media (max-width: 800px) {
     text-align: center;
     padding: 1rem 1rem 0rem 1rem;
@@ -64,13 +68,15 @@ const ButtonWrapper = styled.div`
   }
 `
 const Button = styled.button`
-  border: 1px solid #fff;
-  border-radius: 5px;
   outline: none;
   background: transparent;
-  color: #fff;
+  border: 2px solid #5D789A;
+  border-radius: 10px;
+  color: #5D789A;
   height: 140px;
-  width: 240px;
+  min-width: 240px;
+  font-family: Eina;
+  font-weight: 600;
   margin: 2rem 1rem 2rem 1rem;
   padding: 2rem;
   display: flex;
@@ -83,12 +89,14 @@ const Button = styled.button`
 
   &:hover {
     background: rgba(0, 171, 224, 0.2);
-    border-color: var(--blue);
+    border: 2px solid #00ABE0;
+    color: #fff;
   }
 
   &:disabled {
     background: rgba(0, 171, 224, 0.2);
-    border-color: var(--blue);
+    border: 2px solid #00ABE0;
+    color: #fff;
   }
 
   @media (max-width: 800px) {
@@ -101,7 +109,6 @@ const Button = styled.button`
 const Price = styled.p`
   font-size: 28px;
   line-height: 34px;
-  color: var(--blue);
   text-align: center;
 
   @media (max-width: 800px) {
@@ -139,7 +146,7 @@ const Subheader = styled.h4`
   font-size: 24px;
   margin: 1rem 0rem 2rem 0rem;
   text-align: center;
-  width: 500px;
+  width: 550px;
   font-weight: 400;
 
   p {
@@ -225,7 +232,7 @@ const ChooseProtection = ({
           <Subheader>
             <p>You are one step away from getting the protection you need.</p>
             <p>
-              Starting from <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr</Blue>
+              Starting from <Blue>$19.99/Mo</Blue> or <Blue>$199/Yr (Save $40)</Blue>
             </p>
           </Subheader>
           <SemiBold>Select Your Protection</SemiBold>
@@ -236,7 +243,6 @@ const ChooseProtection = ({
               name="protectionType"
               disabled={protectionType === 'armedCitizen'}
             >
-              <Term>I am</Term>
               <Price>Armed Citizen</Price>
             </Button>
             <Button
@@ -245,7 +251,6 @@ const ChooseProtection = ({
               name="protectionType"
               disabled={protectionType === 'armedProfessional'}
             >
-              <Term>I am</Term>
               <Price>Armed Professional</Price>
             </Button>
           </ButtonWrapper>

@@ -10,7 +10,7 @@ import FDTextField from '../FDTextField'
 const Gradient = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
   color: #fff;
   overflow-x: hidden;
 
@@ -53,6 +53,7 @@ const H6 = styled.h6`
   font-size: 15px;
   line-height: 15px;
   margin-bottom: 1rem;
+  text-align: center;
 `
 const ResetWrapper = styled.div`
   height: 100%;
@@ -164,7 +165,7 @@ const Reset = () => {
   }
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    
+
     setChecking(true);
     setError("");
 
@@ -180,7 +181,7 @@ const Reset = () => {
     })
       .then(res => {
         setChecking(false);
-        if(res.status == 200) {
+        if (res.status == 200) {
           setSent(true);
         } else {
           setError('User Not Found!');
@@ -229,7 +230,7 @@ const Reset = () => {
             <H3>Forgot your password?</H3>
           </CenteredWrapper>
           <CenteredWrapper>
-            <H6>Enter your email and we'll send you a link to reset your password.</H6>
+            {sent ? <H6>We’ve sent an email to your email address. <br/>Follow the steps provided in the email to update your password or select Log In if you don’t want to change your password at this time.</H6> : <H6>Enter your email and we'll send you a link to reset your password.</H6>}
           </CenteredWrapper>
           <CenteredWrapper>
             <ResetForm onSubmit={handleSubmit} name="reset">
@@ -250,7 +251,7 @@ const Reset = () => {
               <div>
                 {sent ?
                   <SentFormButton type="submit" disabled>Email Sent</SentFormButton> :
-                  ( checking ? <ResetFormButton type="button"><Loader/></ResetFormButton> : <ResetFormButton type="submit">Reset Password</ResetFormButton>)}
+                  (checking ? <ResetFormButton type="button"><Loader /></ResetFormButton> : <ResetFormButton type="submit">Reset Password</ResetFormButton>)}
               </div>
             </ResetForm>
           </CenteredWrapper>

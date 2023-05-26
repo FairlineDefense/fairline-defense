@@ -146,6 +146,69 @@ const CreditCardInfo = ({
           {/* PaymentElement is the Stripe component that renders a credit card info form */}
           <StyledCardElement style={{ paddingTop: '10px' }} />
         </Span>
+
+        <LeftWrapper>
+          <div>
+            <ThemeProvider theme={theme}>
+              <Checkbox
+                color="primary"
+                onChange={() =>
+                  setOrder({...order, differentAddress: !differentAddress})
+                }
+                name="differentAddress"
+                checked={!differentAddress}
+              />
+            </ThemeProvider>
+          </div>
+          <div>
+            My shipping address is the same as my billing address.
+            <p>
+              {apt} {streetAddress} {line2} <br />
+              {city}, {state} {zipCode}
+            </p>
+          </div>
+        </LeftWrapper>
+
+        <ShippingAddress
+          order={order}
+          changeHandler={changeHandler}
+          setOrder={setOrder}
+        />
+
+        <LeftWrapper>
+          <div>
+            <ThemeProvider theme={theme}>
+              <Checkbox
+                color="primary"
+                onChange={() =>
+                  setOrder({...order, termsAndConditions: !termsAndConditions})
+                }
+                name="termsAndConditions"
+                checked={termsAndConditions}
+                required
+              />
+            </ThemeProvider>
+          </div>
+          <div>
+            By starting my Membership, I confirm that I have read and agree to
+            the Fairline Defense Terms of Service & Privacy Policy. I understand 
+            that my Membership will automatically renew monthly or yearly depending
+            on the selection made at the then-current subscription rate, which 
+            will be charged to my payment method on file. I understand that 
+            I can update my payment method or pause or cancel my Membership at any 
+            time in accordance with the Membership Terms by going to my Account 
+            Settings at www.fairlinedefense.com, and that these changes will take 
+            effect at the end of my current billing cycle.
+
+          </div>
+        </LeftWrapper>
+
+        <CenteredWrapper>
+          <Button disabled={!stripe}>Start my Membership</Button>
+        </CenteredWrapper>
+        {/* Show error message to your customers */}
+        {errorMessage && <div>{errorMessage}</div>}
+      </Form>
     </FormWrapper>
   )
 }

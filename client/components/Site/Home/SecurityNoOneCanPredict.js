@@ -6,7 +6,7 @@ const Section = styled.div`
   justify-content: flex-end;
   width: 100vw;
   height: 800px;
-  background-image: url('./images/security-patrol.png');
+  background-image: url('./images/security-patrol.jpg');
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -14,7 +14,7 @@ const Section = styled.div`
 
   @media (max-width: 800px) {
     justify-content: flex-start;
-    background-image: url('./images/security-patrol-mobile.png');
+    background-image: url('./images/security-patrol-mobile.jpg');
 
     height: 498px;
     padding: 4rem 2rem;
