@@ -24,7 +24,7 @@ const Gradient = styled.div`
   }
 `
 const BackgroundImage = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-image: url('./images/redFlogo.png');
   background-repeat: no-repeat;
@@ -38,7 +38,7 @@ const BackgroundImage = styled.div`
 `
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
