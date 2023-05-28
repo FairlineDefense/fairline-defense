@@ -144,7 +144,7 @@ const Navbar = () => {
       </HamburgerMenu>
       <LogoWrapper>
         <Link to="/home">
-          <Logo src="./images/fdlogo.png" />
+          <Logo src="/images/fdlogo.png" />
         </Link>
       </LogoWrapper>
       <ProfileWrapper>

@@ -31,7 +31,7 @@ export default function RegisterHeader() {
   return (
     <Wrapper>
       <Link to="/">
-        <Logo src="./images/fdlogo.png" />
+        <Logo src="/images/fdlogo.png" />
       </Link>
     </Wrapper>
   )

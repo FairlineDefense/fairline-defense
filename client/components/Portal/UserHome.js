@@ -141,6 +141,7 @@ const UserHome = () => {
   let [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
+    console.log(user);
     setTimeout(() => {
       dispatch(me())
       setLoaded(true)
@@ -193,7 +194,7 @@ const UserHome = () => {
         </Main>
       </Wrapper>
       <ReferAFriend />
-      {/* <Card /> */}
+      <Card user={user}/>
       <Footer />
     </>
   )

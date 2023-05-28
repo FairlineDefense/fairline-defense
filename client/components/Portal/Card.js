@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-export default function Card() {
+import CanvasImage from './CanvasImage';
+import CanvasDownload from './CanvasDownload';
+import user from '../../store/user';
+export default function Card({user}) {
   const Wrapper = styled.div`
     width: 100%;
     background-color: #fff;
@@ -108,11 +111,11 @@ export default function Card() {
     <Wrapper>
       <Container>
         <Left>
-          <img src="./images/card.png" />
+          <CanvasImage firstName={user.firstName} lastName={user.lastName} cardNo={user.membershipNumber}/>
         </Left>
         <Right>
           <H3>Membership Card</H3>
-          <Button>Download Digital</Button>
+          <CanvasDownload firstName={user.firstName} lastName={user.lastName} cardNo={user.membershipNumber}/>
           <CyanButton>Ship a New Card</CyanButton>
         </Right>
       </Container>
