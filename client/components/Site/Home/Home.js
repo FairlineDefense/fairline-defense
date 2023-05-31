@@ -13,7 +13,6 @@ import PlansMobile from './PlansMobile'
 import NoOneCanPredict from './NoOneCanPredict'
 import Stories from './Stories'
 import Footer from './Footer'
-import FAQ from './FAQ'
 import SelfDefense from './SelfDefense'
 import HowFairlineWorks from './HowFairlineWorks'
 import OurMission from './OurMission'
@@ -41,7 +40,6 @@ const Home = () => {
       <NoOneCanPredict />
       <BePrepared />
       {/* <Stories /> */}
-      {/* <FAQ /> */}
       <BecomeAMember />
       <Footer />
     </>
