@@ -86,7 +86,7 @@ export default function PlanStatus(props) {
     return (
       <Wrapper>
         <ProgressBarWrapper>
-          <CircularProgressbar
+          <CircularProgressbarWithChildren
             value={100}
             text={`Your account is inactive`}
             styles={buildStyles({
