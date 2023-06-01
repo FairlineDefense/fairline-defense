@@ -15,11 +15,17 @@ const Button = styled.button`
     margin: 0rem 0.5rem 0.5rem 0rem;
   }
 `
+const Wrapper = styled.div`
+  @media (max-width: 800px) {
+    margin: 0rem 0.5rem 0.5rem 0rem;
+  }
+`
+
 export default function MembershipNav(props) {
   let {state, setState} = props
 
   return (
-    <div>
+    <Wrapper>
       <Button
         onClick={e => {
           setState(e.target.value)
@@ -52,6 +58,6 @@ export default function MembershipNav(props) {
       >
         Email Preferences
       </Button>
-    </div>
+    </Wrapper>
   )
 }

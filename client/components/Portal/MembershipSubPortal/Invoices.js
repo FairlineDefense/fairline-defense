@@ -88,7 +88,7 @@ export default function Invoices() {
 
             <PDF>
               <a href={line.pdf} target="_blank">
-                View PDF
+                PDF
               </a>
             </PDF>
           </Line>

@@ -63,6 +63,10 @@ const Card = styled.div`
     font-size: 22px;
     line-height: 26px;
     font-weight: 200;
+    
+    bold {
+      font-weight: 500;
+    }
   }
 
   img {
@@ -91,7 +95,7 @@ export default function WhatDoYouGetMobile() {
           <img src="./images/balance.svg" />
           <div>
             <header>Unlimited</header>
-            <small>Legal fees in Criminal Defense</small>
+            <small>Legal fees in <bold>Criminal Defense</bold></small>
           </div>
         </Card>
         <Card>
@@ -101,7 +105,7 @@ export default function WhatDoYouGetMobile() {
             <small>
               Legal fees in
               <br />
-              Civil Defense
+              <bold>Civil Defense</bold>
             </small>
           </div>
         </Card>
@@ -118,7 +122,7 @@ export default function WhatDoYouGetMobile() {
           <img src="./images/moneybags.svg" />
           <div>
             <header>$1000</header>
-            <small>Per Diem</small>
+            <small>Per Diem <bold>Lost Wages</bold> from Court</small>
           </div>
         </Card>
         <Card>

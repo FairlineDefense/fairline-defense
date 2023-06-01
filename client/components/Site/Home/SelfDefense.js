@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Section = styled.div`
   width: 100vw;
   height: 800px;
-  background-image: url('./images/woman-with-shotgun.png');
+  background-image: url('./images/woman-with-shotgun.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -13,7 +13,7 @@ const Section = styled.div`
   @media (max-width: 800px) {
     display: flex;
     justify-content: flex-end;
-    background-image: url('./images/woman-with-shotgun-mobile.png');
+    background-image: url('./images/woman-with-shotgun-mobile.jpg');
     height: 636px;
     padding: 4rem 2rem;
   }

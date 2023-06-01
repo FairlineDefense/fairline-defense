@@ -8,7 +8,7 @@ const Section = styled.div`
   flex-direction: column;
   padding: 4rem;
   align-items: center;
-  background-color: var(--darkblue);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
 
   @media (max-width: 800px) {
     padding: 4rem 2rem;

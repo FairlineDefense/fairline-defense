@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import styled from 'styled-components'
 import {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
-import {CircularProgressbar, buildStyles} from 'react-circular-progressbar'
+import {CircularProgressbarWithChildren, buildStyles} from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 
 const Wrapper = styled.div`
@@ -17,6 +17,8 @@ const Wrapper = styled.div`
     justify-content: center;
     width: 100%;
     height: 70px;
+    text-align: center;
+    align-items: center;
   }
 `
 const TextBlock = styled.div`
@@ -73,6 +75,10 @@ const ProgressBarWrapper = styled.div`
     width: 200px;
   }
 `
+const LeftDay = styled.h3`
+  font-size: 20pt;
+`
+
 export default function PlanStatus(props) {
   const {user} = props
 
@@ -108,9 +114,9 @@ export default function PlanStatus(props) {
   return (
     <Wrapper>
       <ProgressBarWrapper>
-        <CircularProgressbar
+        <CircularProgressbarWithChildren
           value={user.percentageLeft}
-          text={`${user.daysLeft} days remaining`}
+          // text={`${user.daysLeft} <br/> Days`}
           styles={buildStyles({
             textColor: '#FFF',
             pathColor: '#D6AE21',
@@ -118,7 +124,14 @@ export default function PlanStatus(props) {
             textSize: '7px',
             strokeLinecap: 'butt'
           })}
-        />
+        >
+          <LeftDay>
+            {user.daysLeft}
+          </LeftDay>
+          <LeftDay>
+            Days
+          </LeftDay>
+        </CircularProgressbarWithChildren>
       </ProgressBarWrapper>
       <TextBlock>
         <bold>Auto Renew</bold>

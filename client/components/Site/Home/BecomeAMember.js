@@ -7,7 +7,7 @@ const Section = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('./images/family-cooking.png');
+  background-image: url('./images/family-cooking.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

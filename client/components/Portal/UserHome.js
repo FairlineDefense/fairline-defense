@@ -18,7 +18,7 @@ import RegisterHeader from '../Register/RegisterHeader'
 const Gradient = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background: linear-gradient(102.57deg, #21488a 0%, #0b182d 100%);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
   color: #fff;
   overflow-x: hidden;
 
@@ -47,8 +47,12 @@ const BackgroundImage = styled.div`
 `
 const Wrapper = styled.div`
   width: 100vw;
-  padding: 2rem;
-  background: linear-gradient(102.57deg, #2a4c78 0%, #0b182d 100%);
+  background: linear-gradient(105.01deg, #21488A -28.31%, #0B182D 67.65%);
+  padding: 0rem 5rem 0rem 5rem;
+
+  @media (max-width: 800px) {
+    padding: 0rem;
+  }
 `
 const CenteredWrapper = styled.div`
   width: 100%;
@@ -66,11 +70,12 @@ const Main = styled.div`
   display: flex;
   padding: 5rem;
   flex-direction: row;
+  padding: 4rem 7rem 4rem 7rem;
 
   @media (max-width: 768px) {
     height: 110vh;
     flex-direction: column;
-    padding: 1rem 0rem 0rem 0rem;
+    padding: 1rem;
   }
 `
 const Left = styled.div`
@@ -82,6 +87,8 @@ const Left = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
+    height: 400px;
+    margin-top: 100px;
   }
 `
 const H3 = styled.h3`
@@ -95,6 +102,13 @@ const MemberID = styled.span`
   color: #fff;
   margin-bottom: 1rem;
 `
+const MemberSince = styled.span`
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 1rem;
+`
+
 const Button = styled.button`
   color: #fff;
   width: 220px;
@@ -165,13 +179,15 @@ const UserHome = () => {
         <Navbar />
         <Main>
           <Left>
-            <H3>Hi, {user.firstName}</H3>
             <MemberID>#{user.membershipNumber}</MemberID>
-            <Button>Membership Card</Button>
+            <H3>Hi, {user.firstName}</H3>
+            <MemberSince>Member Since</MemberSince>
+            <MemberID>{user.periodStart}</MemberID>
+            {/* <Button>Membership Card</Button>
             <Link to="/membership/addaspouse">
               <Button>Add a spouse</Button>
             </Link>
-            <BlueButton>Emergency Help</BlueButton>
+            <BlueButton>Emergency Help</BlueButton> */}
           </Left>
           <PlanStatus user={user} />
         </Main>
