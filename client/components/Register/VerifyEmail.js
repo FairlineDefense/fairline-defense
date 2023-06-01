@@ -25,11 +25,16 @@ a:hover {
 }
 `
 const BackgroundImage = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
   background-position: 0px 30px;
+  background-size: 37%;
+
+  @media (max-width: 1800px) {
+    background-size: 700px;
+  }
 
   @media (max-width: 800px) {
     background-image: none;
@@ -37,7 +42,7 @@ const BackgroundImage = styled.div`
 `
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,6 +50,7 @@ const Wrapper = styled.div`
   align-content: space-between;
   padding: 4rem;
   position: relative;
+  margin-top: -40px;
 
   @media (max-width: 800px) {
     padding: 4rem 1rem 0rem 1rem;

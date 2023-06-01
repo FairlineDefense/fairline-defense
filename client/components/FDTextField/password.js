@@ -32,7 +32,12 @@ const FDPasswordField = styled(props => (
     color: '#AAB1B9'
   },
   '& .MuiFormHelperText-root': {
-    color: '#FFF'
+    color: '#FFF',
+    fontFamily: 'Eina',
+    fontSize: 14,
+    fontWeight: 400,
+    marginLeft: 0,
+    letterSpacing: `0.01rem`
   },
   '& .MuiFormHelperText-root.Mui-error': {
     color: '#f44336'
