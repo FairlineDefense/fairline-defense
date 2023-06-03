@@ -66,7 +66,7 @@ const H3 = styled.h3`
   }
 `
 const SignupWrapper = styled.div`
-  height: calc(100% - 80px);
+  min-height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -75,6 +75,7 @@ const SignupWrapper = styled.div`
   margin-top: -40px;
   @media (max-width: 768px) {
     padding: 2rem 2rem 0rem 1.5rem;
+    margin-top: 0px !important;
   }
 `
 const SignupForm = styled.form`
