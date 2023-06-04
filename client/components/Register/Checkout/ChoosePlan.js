@@ -40,7 +40,7 @@ const BackgroundImage = styled.div`
 `
 const Wrapper = styled.div`
   width: 100%;
-  height: calc(100% - 80px);
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,6 +51,7 @@ const Wrapper = styled.div`
   @media (max-width: 800px) {
     text-align: center;
     padding: 1rem 1rem 0rem 1rem;
+    margin-top: 0px !important;
   }
 `
 const ButtonWrapper = styled.div`
