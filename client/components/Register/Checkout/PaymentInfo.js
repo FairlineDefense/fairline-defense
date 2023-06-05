@@ -444,13 +444,13 @@ const PaymentInfo = ({
               value={zipCode}
               required
             />
-            <PromoCode setValidCoupon={setValidCoupon} setValidDiscount={setValidDiscount}/>
+            <PromoCode setValidCoupon={setValidCoupon} setValidDiscount={setValidDiscount} />
             {setValidDiscount ? (<LeftWrapper>
               <NormalText>
                 Discount:
               </NormalText>
               <BoldText>
-                {validDiscount / 1999} Month Free
+                {validDiscount / 1999 ? (validDiscount / 1999 + ' Month Free') : 'No promo code applied'}
               </BoldText>
             </LeftWrapper>) : ''}
 
@@ -459,7 +459,7 @@ const PaymentInfo = ({
                 Payment due now:
               </NormalText>
               <BoldText>
-                {(parseFloat(order.price.replace("$", "")) - validDiscount / 100.0) > 0? (parseFloat(order.price.replace("$", "")) - validDiscount / 100.0) : 0}
+                {(parseFloat(order.price.replace("$", "")) - validDiscount / 100.0) > 0 ? (parseFloat(order.price.replace("$", "")) - validDiscount / 100.0) : 0}
               </BoldText>
             </LeftWrapper>
 
@@ -472,7 +472,7 @@ const PaymentInfo = ({
               </BoldText>
             </LeftWrapper>) : ''}
 
-            <LeftWrapper style={{marginTop: 30}}>
+            <LeftWrapper style={{ marginTop: 30 }}>
               <div>
                 <Checkbox
                   color="primary"
