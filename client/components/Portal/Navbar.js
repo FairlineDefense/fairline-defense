@@ -135,13 +135,13 @@ const Navbar = () => {
         {/* <Link to="/benefits">Benefits</Link>
         <Link to="/feed">Feed</Link> */}
       </DesktopMenu>
-      <HamburgerMenu
+      {/* <HamburgerMenu
           onClick={() => setDisplay(display === 'flex' ? 'none' : 'flex')}
         >
           <Bar />
           <Bar />
           <Bar />
-      </HamburgerMenu>
+      </HamburgerMenu> */}
       <LogoWrapper>
         <Link to="/home">
           <Logo src="./images/fdlogo.png" />
