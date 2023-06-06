@@ -223,7 +223,7 @@ const Reset = () => {
         <ResetWrapper>
           <CenteredWrapper>
             <Link to="/">
-              <Logo src="./images/fdlogo.png" />
+              <Logo src="/images/fdlogo.png" />
             </Link>
           </CenteredWrapper>
           <CenteredWrapper>
