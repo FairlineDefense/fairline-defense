@@ -40,7 +40,7 @@ const BackgroundImage = styled.div`
 `
 const Wrapper = styled.div`
   width: 100%;
-  min-height: 100%;
+  min-height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -208,8 +208,8 @@ const ChoosePlan = ({
               disabled={priceId === `${protectionType}Month`}
             >
               <Price>
-                {prices[`${protectionType}Month`].split(".")[0] + "."}
-                <span>{prices[`${protectionType}Month`].split(".")[1]}</span>
+                {prices[`${protectionType}Month`].split(".")[0]}
+                <span>{"." + prices[`${protectionType}Month`].split(".")[1]}</span>
               </Price>
               <Term>Per Month</Term>
               <Billing>Billed Monthly</Billing>

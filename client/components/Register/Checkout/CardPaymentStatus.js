@@ -32,7 +32,7 @@ const BackgroundImage = styled.div`
 
   @media (max-width: 800px) {
     background-image: url('./images/backgroundimagered.png');
-    background-position: -120px bottom;
+    background-position: -120px top;
     position: fixed;
   }
 `
@@ -45,6 +45,8 @@ const Wrapper = styled.div`
   text-align: center;
   padding-top: 4rem;
   position: relative;
+  justify-content: center;
+  margin-top: -80px;
 `
 const H3 = styled.h3`
   font-size: 30px;
@@ -64,6 +66,7 @@ const Button = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  font-family: 'Eina';
 
   &::disabled {
     background-color: #2a4c78;
@@ -91,7 +94,7 @@ const CardPaymentStatus = () => {
       <BackgroundImage>
         <RegisterHeader />
         <Wrapper>
-          <img src="./images/bluecheck.png" />
+          <img src="./images/bluecheck.png" style={{width: 50, height: 50}}/>
           <H3>Payment is Successful!</H3>
           <Link to="/home">
             <Header>Welcome to the Fairline Family</Header>

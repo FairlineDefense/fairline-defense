@@ -313,16 +313,6 @@ const TermsOfServiceContent = () => {
           of others under state law. We reserve the right to deny services if we discover that you are promoting, 
           soliciting, or encouraging criminal activity.
         </P>
-      </Section>
-      <Section>
-        <h3>16. Agreement to Arrange Services</h3>
-        <P>
-          Fairline Defense agrees to provide unlimited criminal defense and up to $1.5 million in civil defense 
-          expenses and attorney's fees to protect your freedom and interests during a criminal prosecution, 
-          government inquiry, or civil litigation if you are entitled to a claim of self-defense or self-defense 
-          of others under state law. We reserve the right to deny services if we discover that you are promoting, 
-          soliciting, or encouraging criminal activity.
-        </P>
         <P>
           We will select an attorney for you who meets our necessary professional experience requirements to 
           defend your claim, operates within our litigation guidelines, and agrees to our customary billing rates. 
