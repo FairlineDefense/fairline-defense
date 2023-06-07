@@ -175,6 +175,15 @@ const BoldText = styled.div`
   margin-top: 1px !important;
   margin-bottom: 1px !important;
 `;
+
+const ErrorMessage = styled.div`
+  color: var(--hotred);
+  width: 100%;
+  margin-top: 10px;
+  font-size: 16px;
+  font-family: 'Eina';
+`;
+
 const PaymentInfo = ({
   order: {
     priceId,
@@ -251,6 +260,7 @@ const PaymentInfo = ({
           state: order.state,
           zipCode: order.zipCode
         }
+        console.log('order customerid', order.customerId);
         if (order.customerId) {
           customerId = order.customerId;
         } else {
@@ -260,7 +270,7 @@ const PaymentInfo = ({
             body: JSON.stringify(reqBody)
           })
           customerId = await response.json();
-          setOrder({ ...order, customerId: customerId.customerId })
+          setOrder({ ...order, customerId: customerId })
         }
       } catch (error) {
         console.log('create customer error', error)
@@ -349,8 +359,8 @@ const PaymentInfo = ({
         // site first to authorize the payment, then redirected to the `return_url`.
         history.push('/cardpaymentstatus');
       }
-    } catch {
-      console.log('error');
+    } catch(err) {
+      console.log('error', err);
       setLoading(0);
     }
   }
@@ -472,6 +482,8 @@ const PaymentInfo = ({
               </BoldText>
             </LeftWrapper>) : ''}
 
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
             <LeftWrapper style={{ marginTop: 30 }}>
               <div>
                 <Checkbox
@@ -537,7 +549,7 @@ const PaymentInfo = ({
             </CenteredWrapper>
 
             {/* Show error message to your customers */}
-            {errorMessage && <div>{errorMessage}</div>}
+            
           </Form>
 
         </Wrapper>
