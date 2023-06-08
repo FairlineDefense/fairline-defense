@@ -157,7 +157,10 @@ router.post('/send-card', async (req, res) => {
     to: user.email,
     from: 'support@fairlinedefense.com',
     subject: 'Membership Card',
-    html: `Attachments`,
+    templateId: `d-80c672cf58564fe18586274e01d0b15a`,
+    dynamicTemplateData: {
+      firstName: user.firstName
+    },
     attachments: [
       {
         content: canvasBuffer.toString('base64'),
