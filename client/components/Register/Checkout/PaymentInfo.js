@@ -261,6 +261,7 @@ const PaymentInfo = ({
           zipCode: order.zipCode
         }
         console.log('order customerid', order.customerId);
+
         if (order.customerId) {
           customerId = order.customerId;
         } else {
@@ -359,10 +360,10 @@ const PaymentInfo = ({
         // site first to authorize the payment, then redirected to the `return_url`.
         history.push('/cardpaymentstatus');
       }
+
     } catch(err) {
       console.log('error', err);
-      setLoading(0);
-    }
+    } 
   }
 
   return (
@@ -549,7 +550,8 @@ const PaymentInfo = ({
             </CenteredWrapper>
 
             {/* Show error message to your customers */}
-            
+
+            {errorMessage && <div>{errorMessage}</div>}
           </Form>
 
         </Wrapper>
