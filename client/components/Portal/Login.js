@@ -35,16 +35,11 @@ const Gradient = styled.div`
   }
 `
 const BackgroundImage = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  background-image: url('./images/darkblueFlogo.png');
+  background-image: url('./images/background.png');
   background-repeat: no-repeat;
-  background-position: 0px 30px;
-  background-size: 37%;
-
-  @media (max-width: 1800px) {
-    background-size: 700px;
-  }
+  background-position: -120px -100px;
 
   @media (max-width: 800px) {
     background-image: none;
@@ -62,7 +57,7 @@ const H3 = styled.h3`
   margin-bottom: 2rem;
 `
 const LoginWrapper = styled.div`
-  height: calc(100% - 80px);
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 10rem;

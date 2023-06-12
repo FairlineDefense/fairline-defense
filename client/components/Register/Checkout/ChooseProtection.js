@@ -25,29 +25,25 @@ const Gradient = styled.div`
   }
 `
 const BackgroundImage = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
   background-position: 0px 30px;
-  background-size: 37%;
-
-  @media (max-width: 1800px) {
-    background-size: 700px;
-  }
 
   @media (max-width: 800px) {
     background-image: none;
   }
 `
 const Wrapper = styled.div`
-  height: calc(100% - 80px);
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 2rem;
-  margin-top: -40px;
+  position: relative;
+
   @media (max-width: 800px) {
     text-align: center;
     padding: 1rem 1rem 0rem 1rem;
