@@ -480,11 +480,11 @@ const PaymentInfo = ({
                 />
               </div>
               <div>
-                My shipping address etc.
-                {/* <p>
+                My shipping address is the same as my billing address.
+                <p>
                   {apt} {streetAddress} {line2} <br />
                   {state} {zipCode}
-                </p> */}
+                </p>
               </div>
             </LeftWrapper>
 
