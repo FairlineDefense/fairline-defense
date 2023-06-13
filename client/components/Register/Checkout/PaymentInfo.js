@@ -568,8 +568,6 @@ const PaymentInfo = ({
             </CenteredWrapper>
 
             {/* Show error message to your customers */}
-
-            {errorMessage && <div>{errorMessage}</div>}
           </Form>
 
         </Wrapper>
