@@ -168,7 +168,7 @@ router.post('/send-card', async (req, res) => {
         type: "application/png",
         disposition: "attachment"
       },
-      {
+     {
         content: attachment,
         filename: "back.png",
         type: "application/png",
@@ -180,6 +180,55 @@ router.post('/send-card', async (req, res) => {
   try {
     await sgMail.send(message);
     return res.status(200).json({ message: 'Email Sent' });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: 'Failed' });
+  }
+});
+
+router.post('/create-card', async (req, res) => {
+
+  const { createCanvas, loadImage, registerFont } = require('canvas');
+  const fs = require("fs");
+
+  const { user } = req.body;
+
+  if (!user) {
+    return res.status(400).json({ message: 'User not found' });
+  }
+
+  registerFont(`${__dirname}/eina/Eina03-SemiBold.otf`, { family: 'Eina03-SemiBold' });
+
+  // Load the background image
+  const backgroundImage = await loadImage(`${__dirname}/front.png`);
+
+  // Create a canvas with desired dimensions
+  const canvasWidth = backgroundImage.width;
+  const canvasHeight = backgroundImage.height;
+  const canvas = createCanvas(canvasWidth, canvasHeight);
+  const context = canvas.getContext('2d');
+
+  // Set font properties
+  const fontSize = 66;
+  const fontFamily = 'Eina03-SemiBold';
+
+  context.font = `${fontSize}px ${fontFamily}`;
+
+  // Draw the background image
+  context.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
+
+  // Set fill color and draw the text
+  context.fillStyle = 'white';
+  context.fillText(user.firstName + ' ' + user.lastName, 82, 460);
+  context.fillText(user.membershipNumber, 82, 635);
+
+  const canvasBuffer = canvas.toBuffer('image/png');
+  //Load card back image
+  pathToAttachment = `${__dirname}/back.png`;
+  attachment = fs.readFileSync(pathToAttachment).toString("base64");
+
+  try {
+    return res.status(200).json({ card_image: canvasBuffer });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: 'Failed' });

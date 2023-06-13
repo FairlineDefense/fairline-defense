@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import CanvasImage from './CanvasImage';
-import CanvasDownload from './CanvasDownload';
 import user from '../../store/user';
-export default function Card({user}) {
+export default function Card({ user, imageData }) {
   const Wrapper = styled.div`
     width: 100%;
     background-color: #fff;
@@ -55,21 +53,6 @@ export default function Card({user}) {
     margin-bottom: 1.5rem;
     line-height: 42px;
   `
-
-  const Button = styled.button`
-    color: var(--primary);
-    width: 220px;
-    border-color: var(--primary);
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 0.75rem;
-    background: transparent;
-    outline: none;
-    margin: 0.5rem 0rem 0.5rem 0rem;
-    font-size: 18px;
-    font-weight: 200;
-    cursor: pointer;
-  `
   const CyanButton = styled.button`
     color: #fff;
     width: 220px;
@@ -107,15 +90,37 @@ export default function Card({user}) {
     font-weight: 500;
     color: var(--cyan);
   `
+  const Button = styled.button`
+    color: var(--primary);
+    width: 220px;
+    border-color: var(--primary);
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 0.75rem;
+    background: transparent;
+    outline: none;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    font-size: 18px;
+    font-weight: 200;
+    cursor: pointer;
+  `
+
+  const handleDownloadClick = () => {
+    const link = document.createElement('a');
+    link.href = imageData;
+    link.download = 'image.png';
+    link.click();
+  };
+
   return (
     <Wrapper>
       <Container>
         <Left>
-          <CanvasImage firstName={user.firstName} lastName={user.lastName} cardNo={user.membershipNumber}/>
+          <img src={imageData}></img>
         </Left>
         <Right>
           <H3>Membership Card</H3>
-          <CanvasDownload firstName={user.firstName} lastName={user.lastName} cardNo={user.membershipNumber}/>
+          <Button onClick={handleDownloadClick}>Download</Button>
           <CyanButton>Ship a New Card</CyanButton>
         </Right>
       </Container>
