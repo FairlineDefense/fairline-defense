@@ -196,7 +196,7 @@ export default function Footer() {
     <Container>
       <Section>
         <Logo>
-          <img src="./images/fdlogo.png" />
+          <img src="/images/fdlogo.png" />
         </Logo>
         <LinksWrapper>
           <LinkGroup>

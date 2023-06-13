@@ -332,6 +332,15 @@ const PaymentInfo = ({
       const { clientSecretRes: clientSecret } = await response.json();
 
       if (!clientSecret) {
+        await fetch('twilio/send-card', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            user: user,
+          })
+        })
         history.push('/cardpaymentstatus');
       }
       console.log(response);
@@ -354,6 +363,15 @@ const PaymentInfo = ({
         setErrorMessage(error.message)
         setLoading(0);
       } else {
+        await fetch('twilio/send-card', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            user: user,
+          })
+        })
         setLoading(0);
         // Your customer will be redirected to your `return_url`. For some payment
         // methods like iDEAL, your customer will be redirected to an intermediate

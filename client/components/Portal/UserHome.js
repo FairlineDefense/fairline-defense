@@ -1,16 +1,16 @@
 import React from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Navbar from './Navbar'
 import ReferAFriend from './ReferAFriend'
 import Card from './Card'
-import {VerifyEmail, Checkout, Footer} from '../'
+import { VerifyEmail, Checkout, Footer } from '../'
 import PlanStatus from './PlanStatus'
 import styled from 'styled-components'
-import {useEffect, useState} from 'react'
-import {me} from '../../store'
-import {Link} from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { me } from '../../store'
+import { Link } from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import {ThemeProvider} from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/core'
 import theme from '../theme'
 
 import RegisterHeader from '../Register/RegisterHeader'
@@ -139,8 +139,29 @@ const UserHome = () => {
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
   let [loaded, setLoaded] = useState(false)
+  const [imageData, setImageData] = useState(null);
+
+  const getCard = async () => {
+    console.log(user);
+    const res = await fetch('/twilio/create-card', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ user: user })
+    })
+    const body = await res.json()
+
+    const base64String = btoa(
+      new Uint8Array(body.card_image.data)
+        .reduce((data, byte) => data + String.fromCharCode(byte), '')
+    );
+
+    setImageData(`data:image/jpeg;base64,${base64String}`);
+  }
 
   useEffect(() => {
+    getCard();
     setTimeout(() => {
       dispatch(me())
       setLoaded(true)
@@ -173,6 +194,7 @@ const UserHome = () => {
   if (!user.planActive) {
     return <Checkout />
   }
+
   return (
     <>
       <Wrapper>
@@ -193,7 +215,7 @@ const UserHome = () => {
         </Main>
       </Wrapper>
       <ReferAFriend />
-      {/* <Card /> */}
+      {imageData && <Card user={user} imageData={imageData}/>}
       <Footer />
     </>
   )
