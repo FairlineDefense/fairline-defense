@@ -26,16 +26,11 @@ const Header = styled.h1`
 `
 
 const TermsOfService = () => {
-  const headerText =
-    window.location.pathname === '/privacypolicy'
-      ? 'Privacy Policy'
-      : 'Terms of Service'
-
   return (
     <div>
       <Navbar shouldShowBackground />
       <TermsOfServiceWrapper>
-        <Header>{headerText}</Header>
+        <Header>Terms of Service</Header>
         <TermsOfServiceContent />
       </TermsOfServiceWrapper>
       <Footer />

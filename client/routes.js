@@ -8,6 +8,7 @@ import {
   SiteHome,
   Testimonials,
   TermsOfService,
+  FAQ,
   PrivacyPolicy,
   ContactUs,
   Coverages,
@@ -25,7 +26,7 @@ import {
   ForgotPassword,
   VerifiedEmail,
   Checkout,
-  CRT
+  CRT,
 } from './components'
 import {me} from './store'
 import {useEffect} from 'react'
@@ -52,6 +53,7 @@ const Routes = (props) => {
             <Route exact path="/coverages" component={Coverages} />
             <Route exact path="/testimonials" component={Testimonials} />
             <Route exact path="/termsofservice" component={TermsOfService} />
+            {/* <Route exact path="/faq" component={FAQ} /> */}
             <Route exact path="/privacypolicy" component={PrivacyPolicy} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/CRT" component={CRT} />
@@ -77,6 +79,7 @@ const Routes = (props) => {
             <Route exact path="/coverages" component={Coverages} />
             <Route exact path="/testimonials" component={Testimonials} />
             <Route exact path="/termsofservice" component={TermsOfService} />
+            {/* <Route exact path="/faq" component={FAQ} /> */}
             <Route exact path="/privacypolicy" component={PrivacyPolicy} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/login" component={Login} />

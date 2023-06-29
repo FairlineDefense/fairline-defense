@@ -4,6 +4,7 @@ export {default as SiteHome} from './Site/Home/Home'
 export {default as SecurityHome} from './Site/Home/SecurityHome'
 export {default as Testimonials} from './Site/Testimonials'
 export {default as TermsOfService} from './Site/TermsOfService'
+export {default as FAQ} from './Site/FAQ'
 export {default as PrivacyPolicy} from './Site/PrivacyPolicy'
 export {default as ContactUs} from './Site/ContactUs'
 export {default as Coverages} from './Site/Coverages'
@@ -17,9 +18,7 @@ export {default as Signup} from './Register/Signup'
 export {default as Checkout} from './Register/Checkout/Checkout'
 export {default as ChoosePlan} from './Register/Checkout/ChoosePlan'
 export {default as ChooseProtection} from './Register/Checkout/ChooseProtection'
-export {
-  default as PaymentStatusMessage
-} from './Register/Checkout/PaymentStatusMessage'
+export {default as PaymentStatusMessage} from './Register/Checkout/PaymentStatusMessage'
 
 export {default as PaymentStatus} from './Register/Checkout/PaymentStatus'
 export {default as CardPaymentStatus} from './Register/Checkout/CardPaymentStatus'

@@ -18,7 +18,6 @@ import WhyYouNeedIt from './WhyYouNeedIt'
 import WhyWeStartedThis from './WhyWeStartedThis'
 import BecomeAMemberSecurity from './BecomeAMemberSecurity'
 import SecurityNeed from './SecurityNeed'
-import FAQ from './FAQ'
 import CriticalResponseSecurity from './CriticalResponseSecurity'
 import WhatIsAnArmedProfessional from './WhatIsAnArmedProfessional'
 import HowFairlineWorks from './HowFairlineWorks'
@@ -48,7 +47,6 @@ const SecurityHome = () => {
       <SecurityNoOneCanPredict />
       <BePrepared />
       {/* <SecurityStories /> */}
-      {/* <FAQ /> */}
       <BecomeAMemberSecurity />
       <Footer />
     </>
