@@ -53,15 +53,17 @@ passport.deserializeUser(async (id, done) => {
           console.log('at get status',error)
         }
       }
-      
+      if(!subscription) {
+        return;
+      }
         const date = Date.now() / 1000
         /*
         See https://stripe.com/docs/api/subscriptions/retrieve?lang=node for an example of what the subscription
         object looks like. The below subscription.<property> is just an example. 
         EG: subscription.periodStart should be subscription.current_period_start
         */
-        const startDate = subscription.current_period_start
-        const endDate = subscription.current_period_end
+        const startDate = subscription?.current_period_start
+        const endDate = subscription?.current_period_end
         /* The code below is from when we were getting the subscription info from our orders table
             That isn't a good solution. It is more accurate to get it directly from the Stripe API 
             based on the subscription id. So some of the below could be updated to reflect the new
