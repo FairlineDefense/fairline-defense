@@ -196,8 +196,8 @@ const PlanSummary = ({
             disabled={priceId === `${protectionType}Month`}
           >
             <Price>
-              {prices[`${protectionType}Month`].split(".")[0] + "."}
-              <span>{prices[`${protectionType}Month`].split(".")[1]}</span>
+              {prices[`${protectionType}Month`].split(".")[0]}
+              <span>{"." + prices[`${protectionType}Month`].split(".")[1]}</span>
             </Price>
             <Billing>Billed Monthly</Billing>
           </Button>

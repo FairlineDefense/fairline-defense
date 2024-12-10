@@ -7,7 +7,6 @@ import { useState } from 'react'
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -115,7 +114,8 @@ const Loader = styled.div`
 
 const Button = styled.button`
   width: calc(25% - 15px);
-  font-weight: 300;
+  font-weight: 400;
+  font-size: 20px;
   padding: 1rem;
   outline: none;
   border: none;

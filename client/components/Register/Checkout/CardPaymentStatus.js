@@ -24,7 +24,7 @@ const Gradient = styled.div`
   }
 `
 const BackgroundImage = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-image: url('./images/redFlogo.png');
   background-repeat: no-repeat;
@@ -32,19 +32,21 @@ const BackgroundImage = styled.div`
 
   @media (max-width: 800px) {
     background-image: url('./images/backgroundimagered.png');
-    background-position: -120px bottom;
+    background-position: -120px top;
     position: fixed;
   }
 `
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   padding-top: 4rem;
   position: relative;
+  justify-content: center;
+  margin-top: -80px;
 `
 const H3 = styled.h3`
   font-size: 30px;
@@ -64,6 +66,7 @@ const Button = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  font-family: 'Eina';
 
   &::disabled {
     background-color: #2a4c78;
@@ -91,7 +94,7 @@ const CardPaymentStatus = () => {
       <BackgroundImage>
         <RegisterHeader />
         <Wrapper>
-          <img src="./images/bluecheck.png" />
+          <img src="./images/bluecheck.png" style={{width: 50, height: 50}}/>
           <H3>Payment is Successful!</H3>
           <Link to="/home">
             <Header>Welcome to the Fairline Family</Header>

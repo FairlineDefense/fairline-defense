@@ -118,11 +118,16 @@ const Button = styled.button`
   }
 `
 const BackgroundImage = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-image: url('./images/darkblueFlogo.png');
   background-repeat: no-repeat;
   background-position: 0px 30px;
+  background-size: 37%;
+
+  @media (max-width: 1800px) {
+    background-size: 700px;
+  }
 
   @media (max-width: 800px) {
     background-image: none;
@@ -130,7 +135,7 @@ const BackgroundImage = styled.div`
 `
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -170,6 +175,15 @@ const BoldText = styled.div`
   margin-top: 1px !important;
   margin-bottom: 1px !important;
 `;
+
+const ErrorMessage = styled.div`
+  color: var(--hotred);
+  width: 100%;
+  margin-top: 10px;
+  font-size: 16px;
+  font-family: 'Eina';
+`;
+
 const PaymentInfo = ({
   order: {
     priceId,
@@ -246,6 +260,8 @@ const PaymentInfo = ({
           state: order.state,
           zipCode: order.zipCode
         }
+        console.log('order customerid', order.customerId);
+
         if (order.customerId) {
           customerId = order.customerId;
         } else {
@@ -255,7 +271,7 @@ const PaymentInfo = ({
             body: JSON.stringify(reqBody)
           })
           customerId = await response.json();
-          setOrder({ ...order, customerId: customerId.customerId })
+          setOrder({ ...order, customerId: customerId })
         }
       } catch (error) {
         console.log('create customer error', error)
@@ -316,6 +332,15 @@ const PaymentInfo = ({
       const { clientSecretRes: clientSecret } = await response.json();
 
       if (!clientSecret) {
+        await fetch('twilio/send-card', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            user: user,
+          })
+        })
         history.push('/cardpaymentstatus');
       }
       console.log(response);
@@ -338,16 +363,25 @@ const PaymentInfo = ({
         setErrorMessage(error.message)
         setLoading(0);
       } else {
+        await fetch('twilio/send-card', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            user: user,
+          })
+        })
         setLoading(0);
         // Your customer will be redirected to your `return_url`. For some payment
         // methods like iDEAL, your customer will be redirected to an intermediate
         // site first to authorize the payment, then redirected to the `return_url`.
         history.push('/cardpaymentstatus');
       }
-    } catch {
-      console.log('error');
-      setLoading(0);
-    }
+
+    } catch(err) {
+      console.log('error', err);
+    } 
   }
 
   return (
@@ -439,13 +473,13 @@ const PaymentInfo = ({
               value={zipCode}
               required
             />
-            <PromoCode setValidCoupon={setValidCoupon} setValidDiscount={setValidDiscount}/>
+            <PromoCode setValidCoupon={setValidCoupon} setValidDiscount={setValidDiscount} />
             {setValidDiscount ? (<LeftWrapper>
               <NormalText>
                 Discount:
               </NormalText>
               <BoldText>
-                {validDiscount / 1999} Month Free
+                {validDiscount / 1999 ? (validDiscount / 1999 + ' Month Free') : 'No promo code applied'}
               </BoldText>
             </LeftWrapper>) : ''}
 
@@ -454,7 +488,7 @@ const PaymentInfo = ({
                 Payment due now:
               </NormalText>
               <BoldText>
-                {parseFloat(order.price.replace("$", "")) - validDiscount / 100.0}
+                {(parseFloat(order.price.replace("$", "")) - validDiscount / 100.0) > 0 ? (parseFloat(order.price.replace("$", "")) - validDiscount / 100.0) : 0}
               </BoldText>
             </LeftWrapper>
 
@@ -467,7 +501,9 @@ const PaymentInfo = ({
               </BoldText>
             </LeftWrapper>) : ''}
 
-            <LeftWrapper style={{marginTop: 30}}>
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
+            <LeftWrapper style={{ marginTop: 30 }}>
               <div>
                 <Checkbox
                   color="primary"
@@ -532,7 +568,6 @@ const PaymentInfo = ({
             </CenteredWrapper>
 
             {/* Show error message to your customers */}
-            {errorMessage && <div>{errorMessage}</div>}
           </Form>
 
         </Wrapper>

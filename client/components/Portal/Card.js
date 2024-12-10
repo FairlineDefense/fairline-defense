@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-export default function Card() {
+import user from '../../store/user';
+export default function Card({ user, imageData }) {
   const Wrapper = styled.div`
     width: 100%;
     background-color: #fff;
@@ -52,21 +53,6 @@ export default function Card() {
     margin-bottom: 1.5rem;
     line-height: 42px;
   `
-
-  const Button = styled.button`
-    color: var(--primary);
-    width: 220px;
-    border-color: var(--primary);
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 0.75rem;
-    background: transparent;
-    outline: none;
-    margin: 0.5rem 0rem 0.5rem 0rem;
-    font-size: 18px;
-    font-weight: 200;
-    cursor: pointer;
-  `
   const CyanButton = styled.button`
     color: #fff;
     width: 220px;
@@ -104,15 +90,37 @@ export default function Card() {
     font-weight: 500;
     color: var(--cyan);
   `
+  const Button = styled.button`
+    color: var(--primary);
+    width: 220px;
+    border-color: var(--primary);
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 0.75rem;
+    background: transparent;
+    outline: none;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    font-size: 18px;
+    font-weight: 200;
+    cursor: pointer;
+  `
+
+  const handleDownloadClick = () => {
+    const link = document.createElement('a');
+    link.href = imageData;
+    link.download = 'image.png';
+    link.click();
+  };
+
   return (
     <Wrapper>
       <Container>
         <Left>
-          <img src="./images/card.png" />
+          <img src={imageData}></img>
         </Left>
         <Right>
           <H3>Membership Card</H3>
-          <Button>Download Digital</Button>
+          <Button onClick={handleDownloadClick}>Download</Button>
           <CyanButton>Ship a New Card</CyanButton>
         </Right>
       </Container>
